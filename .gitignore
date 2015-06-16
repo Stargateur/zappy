@@ -1,3 +1,7 @@
 *.o
 *~
-zappy
+*.dpd
+\#*#
+/server
+/client_ai
+/client_gui

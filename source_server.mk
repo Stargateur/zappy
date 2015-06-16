@@ -5,9 +5,10 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Tue Jun 16 17:14:26 2015 Antoine Plaskowski
+## Last update Tue Jun 16 17:14:52 2015 Antoine Plaskowski
 ##
 
 PATH_SRC	=	source/
+PATH_SERVER	=	$(PATH_SRC)server/
 
-SRC		+=
+SRC_SERVER	+=	$(PATH_SERVER)main.c
