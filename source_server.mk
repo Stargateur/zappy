@@ -5,11 +5,12 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Thu Jun 18 22:54:49 2015 Antoine Plaskowski
+## Last update Thu Jun 18 23:38:16 2015 zwertv_e
 ##
 
 PATH_SRC	=	source/
 PATH_SERVER	=	$(PATH_SRC)server/
+PATH_MAP	=	$(PATH_SERVER)map/
 PATH_NODE	=	$(PATH_SERVER)node/
 
 SRC_SERVER	+=	$(PATH_SERVER)main.c
@@ -20,6 +21,9 @@ SRC_SERVER	+=	$(PATH_SERVER)opt.c
 SRC_SERVER	+=	$(PATH_SERVER)cbuf.c
 SRC_SERVER	+=	$(PATH_SERVER)manage_select.c
 SRC_SERVER	+=	$(PATH_SERVER)client.c
+
+SRC_SERVER	+=	$(PATH_MAP)map.c
+
 SRC_SERVER	+=	$(PATH_NODE)first_node.c
 SRC_SERVER	+=	$(PATH_NODE)free_node.c
 SRC_SERVER	+=	$(PATH_NODE)last_node.c

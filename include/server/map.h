@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 17:34:34 2015 zwertv_e
-** Last update Thu Jun 18 22:48:46 2015 zwertv_e
+** Last update Thu Jun 18 23:40:55 2015 zwertv_e
 */
 
 #ifndef		MAP_H__
@@ -15,7 +15,7 @@
 # include	"node.h"
 
 typedef	struct	s_map		t_map;
-typedef	struct	s_item		t_item;
+typedef	struct	s_squarre	t_squarre;
 typedef	struct	s_player	t_player;
 typedef	struct	s_inv		t_inv;
 
@@ -39,7 +39,7 @@ struct		s_inv
   size_t	phiras;
   size_t	thystame;
   size_t	food;
-}
+};
 
 struct		s_squarre
 {
@@ -47,7 +47,7 @@ struct		s_squarre
   size_t	x;
   size_t	y;
   t_inv		ressources;
-}
+};
 
 struct		s_player
 {
@@ -56,14 +56,13 @@ struct		s_player
   size_t	y;
   char		*team;
   t_inv		inv;
-}
+};
 
 struct		s_map
 {
   size_t	height;
   size_t	width;
   t_squarre	*items;
-  t_player	*players;
-}
+};
 
 #endif		/* MAP_H__ */
