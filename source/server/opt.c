@@ -1,18 +1,18 @@
 /*
-** parse_opt.c for parse_opt in /home/plasko_a/projet/epitech/elcrypt
+** opt.c for opt in /home/plasko_a/projet/epitech/elcrypt
 ** 
 ** Made by Antoine Plaskowski
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Thu Jun 18 17:57:27 2015 Antoine Plaskowski
+** Last update Thu Jun 18 23:17:07 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
 #include	<unistd.h>
 #include	<string.h>
 #include	<stdio.h>
-#include	"parse_opt.h"
+#include	"opt.h"
 
 static t_opt	*init_opt(t_opt * const opt)
 {
@@ -68,8 +68,8 @@ static char	*ana_opt(t_opt * const opt, int const c)
   return (NULL);
 }
 
-bool		parse_opt(char * const * const argv, int const argc,
-			  t_opt * const opt)
+bool		get_opt(char * const * const argv, int const argc,
+			t_opt * const opt)
 {
   int		c;
   bool		ret;
