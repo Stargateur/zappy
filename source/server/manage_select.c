@@ -5,75 +5,78 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Thu Jun 18 18:40:04 2015 Antoine Plaskowski
+** Last update Thu Jun 18 22:52:40 2015 Antoine Plaskowski
 */
 
+#include	<stdio.h>
+#include	"client.h"
 #include	"manage_select.h"
+#include	"opt.h"
+#include	"main.h"
 
-static int	read_client(fd_set const * const set_read, int client,
-			    int const client_max, t_client **clients)
-{
-  t_client	*tmp;
-  int		res;
-
-  res = 1;
-  while (client <= client_max)
-    {
-      if (FD_ISSET(client, set_read))
-	{
-	  res = 0;
-	  if ((tmp = find_client((*clients), client)) != NULL)
-	    if (writeCbuf(tmp->client, &tmp->cbuf) <= 0)
-	      (*clients) = sup_node(&tmp->node);
-	}
-      client++;
-    }
-  return (res);
-}
-
-static void	write_client(fd_set const * const set_write,
-			     t_client **clients, t_chan **chans)
+static t_client	*read_client(fd_set const * const set_read, t_client *client)
 {
   t_client	*tmp;
 
-  tmp = *clients;
-  tmp = first_node(&tmp->node);
+  tmp = first_node(&client->node);
   while (tmp != NULL)
     {
-      if (FD_ISSET(tmp->client, set_write))
+      if (FD_ISSET(tmp->ca.cfd, set_read))
 	{
-	  exec_client(*clients, chans);
-	  *clients = clean_client(tmp);
-	  tmp = *clients;
+	  /* if ((tmp = find_client((*client), client)) != NULL) */
+	  /*   if (writeCbuf(tmp->client, &tmp->cbuf) <= 0) */
+	  /*     (*client) = sup_node(&tmp->node); */
+	}
+      tmp = tmp->node.next;
+    }
+  return (client);
+}
+
+static t_client	*write_client(fd_set const * const set_write, t_client *client)
+{
+  t_client	*tmp;
+
+  tmp = first_node(&client->node);
+  while (tmp != NULL)
+   {
+      if (FD_ISSET(tmp->ca.cfd, set_write))
+	{
+	  /* exec_client(*client, chans); */
+	  /* *client = clean_client(tmp); */
+	  /* tmp = *client; */
 	}
       if (tmp != NULL)
 	tmp = tmp->node.next;
     }
+  return (client);
 }
 
-int	manage_select(fd_set *set_read, int const sfd)
+bool	manage_select(t_opt const * const opt, int const sfd)
 {
+  fd_set	set_read;
   fd_set	set_write;
-  t_clientaddr	ca;
   int		client_max;
+  t_client	*client;
+  t_clientaddr	ca;
 
+  client = NULL;
   while (g_keep_running == true)
     {
-      client_max = fd_set_rclient(set_read, clients, sfd);
-      fd_set_wclient(&set_write, clients);
-      if (select(client_max + 1, set_read, &set_write, NULL, NULL) == -1)
+      client_max = fd_set_rclient(&set_read, client, sfd);
+      fd_set_wclient(&set_write, client);
+      if (select(client_max + 1, &set_read, &set_write, NULL, NULL) == -1)
 	{
 	  perror("select()");
-	  return (1);
+	  return (true);
 	}
-      if (FD_ISSET(sfd, set_read))
+      if (FD_ISSET(sfd, &set_read))
 	{
 	  if (accept_client(sfd, &ca) == -1)
-	    return (1);
-	  clients = add_client(clients, ca.cfd);
+	    return (true);
+	  client = add_client(client, &ca);
 	}
-      read_client(set_read, sfd + 1, client_max, &clients);
-      write_client(&set_write, &clients, &chans);
+      read_client(&set_read, client);
+      write_client(&set_write, client);
     }
-  return (0);
+  return (false);
 }

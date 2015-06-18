@@ -5,13 +5,17 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jul 28 17:09:12 2014 Antoine Plaskowski
-** Last update Fri Mar 27 03:49:40 2015 Antoine Plaskowski
+** Last update Thu Jun 18 22:54:39 2015 Antoine Plaskowski
 */
 
+/* #include	<sys/time.h> */
+/* #include	<sys/types.h> */
+/* #include	<unistd.h> */
 #include	<sys/select.h>
 #include	<stdlib.h>
 #include	<unistd.h>
 #include	"fd_set.h"
+#include	"client.h"
 
 int		fd_set_cpy(fd_set * const dest, fd_set const * const cpy)
 {
@@ -45,4 +49,38 @@ int		fd_set_close(fd_set const * const fd_set)
       i++;
     }
   return (0);
+}
+
+bool		fd_set_wclient(fd_set *fdset, t_client *client)
+{
+  if (fdset == NULL)
+    return (false);
+  FD_ZERO(fdset);
+  client = first_node(&client->node);
+  while (client != NULL)
+    {
+      /* FD_SET(client->ca.cfd, fdset); */
+      client = client->node.next;
+    }
+  return (true);
+}
+
+int		fd_set_rclient(fd_set *fdset, t_client *client, int sfd)
+{
+  int		max_fd;
+
+  if (fdset == NULL)
+    return (-1);
+  max_fd = sfd;
+  FD_ZERO(fdset);
+  FD_SET(sfd, fdset);
+  client = first_node(&client->node);
+  while (client != NULL)
+    {
+      if (client->ca.cfd > max_fd)
+	max_fd = client->ca.cfd;
+      FD_SET(client->ca.cfd, fdset);
+      client = client->node.next;
+    }
+  return (max_fd);
 }
