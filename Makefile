@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Thu Jun 18 23:24:24 2015 Antoine Plaskowski
+## Last update Thu Jun 18 23:25:05 2015 Antoine Plaskowski
 ##
 
 SERVER		=	server
@@ -91,7 +91,7 @@ fclean		:	clean
 			$(RM) -f $(CLIENT_AI)
 
 re		:	fclean
-			make -C . all
+			${MAKE} -C . all
 
 %.dpd		:	%.c
 			$(CC) -MM $(<) -o $(@) $(CFLAGS) -MT $(<:.c=.o)
