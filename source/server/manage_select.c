@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Thu Jun 18 22:52:40 2015 Antoine Plaskowski
+** Last update Thu Jun 18 23:10:05 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -13,6 +13,7 @@
 #include	"manage_select.h"
 #include	"opt.h"
 #include	"main.h"
+#include	"fd_set.h"
 
 static t_client	*read_client(fd_set const * const set_read, t_client *client)
 {
