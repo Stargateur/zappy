@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 19:39:37 2015 zwertv_e
-** Last update Thu Jun 18 21:22:28 2015 Antoine Plaskowski
+** Last update Thu Jun 18 21:32:01 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -13,24 +13,19 @@
 #include	<stdlib.h>
 #include	"cbuf.h"
 
-static size_t	add_one_cbuf_len(size_t const a)
-{
-  if (a + 1 >= CBUF_LEN)
-    return (0);
-  return (a + 1);
-}
+#define		add_one_cbuf_len(x) (x + 1 >= CBUF_LEN ? 0 : x + 1)
 
-bool		set_cbuf(t_cbuf *cbuf)
+t_cbuf		*init_cbuf(t_cbuf * const cbuf)
 {
   if (cbuf == NULL)
-    return (true);
+    return (NULL);
   cbuf->r = 0;
   cbuf->w = 0;
   cbuf->has_read = true;
-  return (0);
+  return (cbuf);
 }
 
-static size_t	find_len(t_cbuf *cbuf)
+static size_t	find_len(t_cbuf const * const cbuf)
 {
   size_t	len;
   size_t	i;
@@ -49,7 +44,7 @@ static size_t	find_len(t_cbuf *cbuf)
   return (0);
 }
 
-bool		is_cbuf_ready(t_cbuf *cbuf)
+bool		is_cbuf_ready(t_cbuf const * const cbuf)
 {
   if (cbuf == NULL)
     return (true);
@@ -58,7 +53,7 @@ bool		is_cbuf_ready(t_cbuf *cbuf)
   return (false);
 }
 
-char		*read_cbuf(t_cbuf *cbuf)
+char		*read_cbuf(t_cbuf * const cbuf)
 {
   char		*str;
   size_t	len;
@@ -82,7 +77,7 @@ char		*read_cbuf(t_cbuf *cbuf)
   return (str);
 }
 
-ssize_t		write_cbuf(int fd, t_cbuf *cbuf)
+ssize_t		write_cbuf(t_cbuf * const cbuf, int const fd)
 {
   static char	buffer[CBUF_LEN];
   ssize_t	i;

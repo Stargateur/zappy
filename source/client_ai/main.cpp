@@ -5,7 +5,7 @@
 // Login   <alix amoureux@epitech.net>
 // 
 // Started on  Wed Jun  3 22:08:07 2015 amoure_a
-// Last update Mon Jun 15 12:46:53 2015 amoure_a
+// Last update Thu Jun 18 21:33:09 2015 Antoine Plaskowski
 //
 
 #include		"Client.h"
@@ -50,8 +50,8 @@ void			parse_arguments(int ac, char **av)
   int		i;
   std::string	value;
   std::string	team;
-  int		port;
-  std::string	ip;
+  int		port = 4242;
+  std::string	ip("localhost");
 
   i = 1;
   while (i < ac)

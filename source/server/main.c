@@ -5,7 +5,7 @@
 ** Login   <plasko_a@epitech.eu>
 ** 
 ** Started on  Tue Jun 16 16:38:42 2015 Antoine Plaskowski
-** Last update Thu Jun 18 18:07:15 2015 Antoine Plaskowski
+** Last update Thu Jun 18 21:34:27 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -14,6 +14,8 @@
 #include	<sys/socket.h>
 #include	"parse_opt.h"
 #include	"create_binded_socket.h"
+
+extern bool	g_keep_running;
 
 bool    g_keep_running = true;
 

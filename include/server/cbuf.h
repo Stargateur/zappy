@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 21:18:19 2015 Antoine Plaskowski
-** Last update Thu Jun 18 21:20:41 2015 Antoine Plaskowski
+** Last update Thu Jun 18 21:35:27 2015 Antoine Plaskowski
 */
 
 #ifndef		CBUF_H_
@@ -24,5 +24,10 @@ struct		s_cbuf
   size_t	w;
   bool		has_read;
 };
+
+t_cbuf		*init_cbuf(t_cbuf * const cbuf);
+bool		is_cbuf_ready(t_cbuf const * const cbuf);
+char		*read_cbuf(t_cbuf * const cbuf);
+ssize_t		write_cbuf(t_cbuf * const cbuf, int const fd);
 
 #endif		/* !CBUF_H_ */
