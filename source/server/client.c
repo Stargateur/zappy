@@ -5,14 +5,15 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Thu Jun 18 22:43:38 2015 Antoine Plaskowski
+** Last update Thu Jun 18 23:17:17 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
 #include	"client.h"
 #include	"cbuf.h"
 
-t_client	*add_client(t_client * const list, t_clientaddr const * const ca)
+t_client	*add_client(t_client * const list,
+			    t_clientaddr const * const ca)
 {
   t_client	*new;
 

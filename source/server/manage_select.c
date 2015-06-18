@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Thu Jun 18 23:10:05 2015 Antoine Plaskowski
+** Last update Thu Jun 18 23:16:09 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -52,13 +52,21 @@ static t_client	*write_client(fd_set const * const set_write, t_client *client)
   return (client);
 }
 
+static t_client	*manage_accept_client(t_client *client, int const sfd)
+{
+  t_clientaddr	ca;
+
+  if (accept_client(sfd, &ca) == -1)
+    return (NULL);
+  return (add_client(client, &ca));
+}
+
 bool	manage_select(t_opt const * const opt, int const sfd)
 {
   fd_set	set_read;
   fd_set	set_write;
   int		client_max;
   t_client	*client;
-  t_clientaddr	ca;
 
   client = NULL;
   while (g_keep_running == true)
@@ -71,11 +79,8 @@ bool	manage_select(t_opt const * const opt, int const sfd)
 	  return (true);
 	}
       if (FD_ISSET(sfd, &set_read))
-	{
-	  if (accept_client(sfd, &ca) == -1)
-	    return (true);
-	  client = add_client(client, &ca);
-	}
+	if ((client = manage_accept_client(client, sfd)) == NULL)
+	  return (true);
       read_client(&set_read, client);
       write_client(&set_write, client);
     }
