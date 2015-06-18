@@ -5,13 +5,12 @@
 ** Login   <plasko_a@epitech.eu>
 ** 
 ** Started on  Wed Mar 11 06:26:00 2015 Antoine Plaskowski
-** Last update Wed Apr  8 18:13:19 2015 Antoine Plaskowski
+** Last update Thu Jun 18 17:43:14 2015 Antoine Plaskowski
 */
 
 #ifndef		CREATE_BINDED_SOCKET_H_
 # define	CREATE_BINDED_SOCKET_H_
 
-int		create_binded_socket(char const * const host,
-					char const * const port);
+int		create_binded_socket(char const * const port);
 
 #endif		/* !CREATE_BINDED_SOCKET_H_ */

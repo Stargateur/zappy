@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:44:00 2015 Antoine Plaskowski
-** Last update Thu Jun 18 17:15:19 2015 Antoine Plaskowski
+** Last update Thu Jun 18 17:58:30 2015 Antoine Plaskowski
 */
 
 #ifndef		PARSE_OPT_H_
@@ -15,11 +15,12 @@
 
 typedef	struct	s_opt
 {
-  char		*p;
-  char		*x;
-  char		*y;
-  char		*c;
-  char		*t;
+  char const	*p;
+  char const	*x;
+  char const	*y;
+  char const	*c;
+  char const	*t;
+  char * const	*team;
 }		t_opt;
 
 bool		parse_opt(char * const * const argv, int const argc,

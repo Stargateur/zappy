@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Thu Jun 18 16:30:46 2015 Antoine Plaskowski
+## Last update Thu Jun 18 17:44:35 2015 Antoine Plaskowski
 ##
 
 SERVER		=	server
@@ -31,14 +31,17 @@ INCLUDE		=	-I include -I include/server -I include/client_ai
 CFLAGS		+=	-Wall -Wextra -O$(LEVEL)
 CFLAGS		+=	-ansi -pedantic
 CFLAGS		+=	$(INCLUDE)
+CFLAGS          +=      -D _POSIX_SOURCE -D _GNU_SOURCE -D _XOPEN_SOURCE
 
-CXXFLAGS	=	$(CFLAGS)
+CXXFLAGS	+=	-Wall -Wextra -O$(LEVEL)
+CXXFLAGS	+=	-ansi -pedantic
+CXXFLAGS	+=	$(INCLUDE)
 
 ifeq ($(CC), clang)
 CFLAGS		+=	-Weverything -Wno-padded
 endif
 
-ifeq ($(CXX), clang)
+ifeq ($(CXX), clang++)
 CXXFLAGS	+=	-Weverything -Wno-padded
 endif
 
@@ -98,7 +101,7 @@ re		:	fclean all
 %.dpd		:	%.cpp
 			$(CXX) -MM $(<) -o $(@) $(CXXFLAGS) -MT $(<:.cpp=.o)
 
-%.o		:	%.c
+%.o		:	%.cpp
 			$(CXX) -c $(<) -o $(@) $(CXXFLAGS)
 
 .PHONY		:	all clean fclean re %.dpd %.o

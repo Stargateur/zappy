@@ -5,29 +5,67 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Thu Jun 18 17:14:37 2015 Antoine Plaskowski
+** Last update Thu Jun 18 17:57:27 2015 Antoine Plaskowski
 */
 
-#define		_XOPEN_SOURCE
 #include	<stdbool.h>
 #include	<unistd.h>
 #include	<string.h>
 #include	<stdio.h>
 #include	"parse_opt.h"
 
-static bool	check_opt(t_opt const * const opt, bool	ret)
+static t_opt	*init_opt(t_opt * const opt)
 {
-  return (ret);
+  opt->p = "4242";
+  opt->x = "42";
+  opt->y = "42";
+  opt->c = "1";
+  opt->t = "100";
+  opt->team = NULL;
+  return (opt);
 }
 
 bool		show_opt(t_opt const * const opt)
 {
+  int		i;
+
+  if (opt == NULL)
+    return (false);
   printf("port : %s\n", opt->p);
   printf("x : %s\n", opt->x);
   printf("y : %s\n", opt->y);
   printf("population : %s\n", opt->c);
   printf("t : %s\n", opt->t);
+  if (opt->team != NULL)
+    {
+      i = 0;
+      while (opt->team[i] != NULL)
+	printf("%s\n", opt->team[i++]);
+    }
   return (false);
+}
+
+static char	*ana_opt(t_opt * const opt, int const c)
+{
+  switch (c)
+    {
+    case 'p':
+      opt->p = optarg;
+      return (optarg);
+    case 'x':
+      opt->x = optarg;
+      return (optarg);
+    case 'y':
+      opt->y = optarg;
+      return (optarg);
+    case 'c':
+      opt->c = optarg;
+      return (optarg);
+    case 't':
+      opt->t = optarg;
+      return (optarg);
+    }
+  return (NULL);
 }
 
 bool		parse_opt(char * const * const argv, int const argc,
@@ -39,32 +77,10 @@ bool		parse_opt(char * const * const argv, int const argc,
   if (opt == NULL)
     return (true);
   ret = false;
-  memset(opt, 0, sizeof(*opt));
+  init_opt(opt);
   while ((c = getopt(argc, argv, "p:x:y:c:t:")) != -1)
-    {
-      switch (c)
-	{
-	case 'p':
-	  opt->p = optarg;
-	  break;
-	case 'x':
-	  opt->x = optarg;
-	  break;
-	case 'y':
-	  opt->y = optarg;
-	  break;
-	case 'c':
-	  opt->c = optarg;
-	  break;
-	case 't':
-	  opt->t = optarg;
-	  break;
-	default:
-	  ret = true;
-	  break;
-    	}
-    }
-  for (c = optind; c < argc; c++)
-    printf ("Non-option argument %s\n", argv[c]);
-  return (check_opt(opt, ret));
+    if (ana_opt(opt, c) == NULL)
+      ret = true;
+  opt->team = argv + optind;
+  return (ret);
 }
