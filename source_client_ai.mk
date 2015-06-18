@@ -12,3 +12,4 @@ PATH_SRC	=	source/
 PATH_CLIENT_AI	=	$(PATH_SRC)client_ai/
 
 SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)main.cpp
+SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Client.cpp

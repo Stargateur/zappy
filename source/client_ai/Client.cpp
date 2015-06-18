@@ -8,7 +8,7 @@
 // Last update Thu Jun 18 14:49:32 2015 amoure_a
 //
 
-#include		"../Client.h"
+#include		"Client.h"
 
 Client::Client(std::string team, int port, std::string ip)
 {
