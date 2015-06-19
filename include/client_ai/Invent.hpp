@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:54:29 2015 Jérémy MATHON
-** Last update Fri Jun 19 18:55:37 2015 Jérémy MATHON
+** Last update Fri Jun 19 19:31:04 2015 Jérémy MATHON
 */
 
 #ifndef INVENT_HPP_
@@ -13,6 +13,7 @@
 
 class	Invent
 {
+public:
   int	_nourriture;
   int	_linemate;
   int	_deraumere;
@@ -20,7 +21,6 @@ class	Invent
   int	_mendiane;
   int	_phiras;
   int	_thystame;
-public:
   Invent();
   ~Invent();
 };

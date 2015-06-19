@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-** Last update Fri Jun 19 19:13:59 2015 Jérémy MATHON
+** Last update Fri Jun 19 19:31:47 2015 Jérémy MATHON
 */
 
 #include	"Perso.hpp"
@@ -46,11 +46,13 @@ void	Perso::inventaire()
 
 void	Perso::prend(std::string const &obj)
 {
+  (void)obj;
   this->_time += 7;
 }
 
 void	Perso::pose(std::string const &obj)
 {
+  (void)obj;
   this->_time += 7;
 }
 
@@ -61,6 +63,7 @@ void	Perso::expulse()
 
 void	Perso::broadcast(std::string const &txt)
 {
+  (void)txt;
   this->_time += 7;
 }
 
@@ -87,5 +90,4 @@ void	Perso::connect_nbr()
 void	Perso::dead()
 {
   std::cout << "I'm dead.." << std::endl;
-  ~Perso();
 }
