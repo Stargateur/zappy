@@ -5,7 +5,7 @@
 ** Login   <plasko_a@epitech.eu>
 ** 
 ** Started on  Tue Jun 16 16:38:42 2015 Antoine Plaskowski
-** Last update Fri Jun 19 15:45:35 2015 Antoine Plaskowski
+** Last update Fri Jun 19 16:16:07 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -38,7 +38,8 @@ int		main(int argc, char **argv)
 {
   int		sfd;
 
-  get_opt(argv, argc);
+  if (get_opt(argv, argc) == true)
+    return (1);
   show_opt();
   if ((sfd = init_socket(opt.p)) == -1)
     return (1);

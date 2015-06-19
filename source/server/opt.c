@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Fri Jun 19 15:36:35 2015 Antoine Plaskowski
+** Last update Fri Jun 19 16:19:13 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -43,8 +43,7 @@ bool		show_opt(void)
     }
   return (false);
 }
-
-static char	*ana_opt(int const c)
+static char	*ana_opt(char * const * const argv, int const c)
 {
   switch (c)
     {
@@ -63,6 +62,9 @@ static char	*ana_opt(int const c)
     case 't':
       opt.t = optarg;
       return (optarg);
+    case 'h':
+      fprintf(stderr, "%s: [-p 4242] [-x 42] [-y 42] [-c 1] [-t 100]\n", *argv);
+      return (NULL);
     }
   return (NULL);
 }
@@ -74,8 +76,8 @@ bool		get_opt(char * const * const argv, int const argc)
 
   ret = false;
   init_opt();
-  while ((c = getopt(argc, argv, "p:x:y:c:t:")) != -1)
-    if (ana_opt(c) == NULL)
+  while ((c = getopt(argc, argv, "hp:x:y:c:t:")) != -1)
+    if (ana_opt(argv, c) == NULL)
       ret = true;
   opt.team = argv + optind;
   return (ret);
