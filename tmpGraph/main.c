@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 15:58:26 2015 Alaric
-** Last update Fri Jun 19 19:13:09 2015 Alaric
+** Last update Fri Jun 19 19:31:04 2015 Alaric
 */
 
 //#include	<SDL/SDL_ttf.h>
@@ -36,7 +36,7 @@ int		main()
 
   //fenetre = init_video();
   //SDL_CreateWindowAndRenderer(0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP, &fenetre, &renderer);
-  fenetre = SDL_CreateWindow("SDL_RenderCopy Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 580, 0);
+  fenetre = SDL_CreateWindow("SDL_RenderCopy Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1000, 1000, 0);
   renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
   //SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
   //SDL_RenderSetLogicalSize(renderer, 640, 580);
