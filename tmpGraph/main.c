@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 15:58:26 2015 Alaric
-** Last update Fri Jun 19 19:31:04 2015 Alaric
+** Last update Fri Jun 19 19:35:30 2015 Alaric
 */
 
 //#include	<SDL/SDL_ttf.h>
@@ -29,8 +29,8 @@ int		main()
   SrcR.w = SHAPE_SIZE;
   SrcR.h = SHAPE_SIZE;
 
-  DestR.x = 24;
-  DestR.y = 24;
+  DestR.x = 0;
+  DestR.y = 0;
   DestR.w = SHAPE_SIZE;
   DestR.h = SHAPE_SIZE;
 
@@ -43,10 +43,12 @@ int		main()
   linemate = Bmp_Loader("BMP/Linemate.bmp");
   Linemate = SDL_CreateTextureFromSurface(renderer, linemate);
   //grid = init_grid();
-  //SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
   SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, Linemate, &SrcR, &DestR);
-  //SDL_RenderDrawLine(renderer, 25, 25, 25, 50);
+
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  SDL_RenderDrawLine(renderer, 25, 0, 25, 1000);
+  SDL_RenderDrawLine(renderer, 0, 25, 1000, 25);
   //SDL_RenderCopy(renderer, Linemate, NULL, NULL);
   SDL_RenderPresent(renderer);
 
