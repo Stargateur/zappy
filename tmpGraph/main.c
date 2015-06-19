@@ -5,72 +5,53 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 15:58:26 2015 Alaric
-** Last update Fri Jun 19 15:24:48 2015 Alaric
+** Last update Fri Jun 19 19:13:09 2015 Alaric
 */
 
-#include	<SDL/SDL_ttf.h>
-#include	<SDL/SDL.h>
-#include	<SDL/SDL_image.h>
+//#include	<SDL/SDL_ttf.h>
+#include	<SDL2/SDL.h>
+//#include	<SDL/SDL_image.h>
 #include	<unistd.h>
-#include	"color.h"
-
-SDL_Surface	*init_grid()
-{
-  SDL_Surface	*grid;
-  RGBcolor	white;
-
-  grid = SDL_CreateRGBSurface(SDL_HWSURFACE, 1001, 1001, 32, 0, 0, 0, 0);
-  white.r = 255;
-  white.g = 255;
-  white.b = 255;
-  white.x = 0;
-  while (white.x <= 1000)
-    {
-      white.y = 0;
-      while (++white.y < 1000)
-        colorPixel(grid, white);
-      white.x += 1000 / 40;
-    }
-  white.y = 0;
-  while (white.y <= 1000)
-    {
-      white.x = 0;
-      while (++white.x < 1000)
-        colorPixel(grid, white);
-      white.y += 1000 / 40;
-    }
-  return (grid);
-}
+#define		SHAPE_SIZE 24
 
 int		main()
 {
-  SDL_Surface	*ecran;
-  SDL_Surface	*grid;
+  SDL_Window	*fenetre;
+  SDL_Renderer	*renderer;
+  SDL_Texture	*Linemate;
+  //SDL_Surface	*grid;
   SDL_Surface	*linemate;
-  SDL_Rect	pos;
+  SDL_Rect	SrcR;
+  SDL_Rect	DestR;
 
-  if (SDL_Init(SDL_INIT_VIDEO) == -1)
-    {
-      printf("Init Fail\n");
-      return (-1);
-    }
-  ecran = SDL_SetVideoMode(1001, 1001, 32, SDL_HWSURFACE);
-  if (ecran == NULL)
-    {
-      printf("Set Fail\n");
-      return (-1);
-    }
+  SrcR.x = 0;
+  SrcR.y = 0;
+  SrcR.w = SHAPE_SIZE;
+  SrcR.h = SHAPE_SIZE;
+
+  DestR.x = 24;
+  DestR.y = 24;
+  DestR.w = SHAPE_SIZE;
+  DestR.h = SHAPE_SIZE;
+
+  //fenetre = init_video();
+  //SDL_CreateWindowAndRenderer(0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP, &fenetre, &renderer);
+  fenetre = SDL_CreateWindow("SDL_RenderCopy Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 580, 0);
+  renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+  //SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+  //SDL_RenderSetLogicalSize(renderer, 640, 580);
   linemate = Bmp_Loader("BMP/Linemate.bmp");
-  SDL_WM_SetCaption("zappy", NULL);
-  grid = init_grid();
-  pos.x = 0;
-  pos.y = 0;
-  SDL_BlitSurface(grid, NULL, ecran, &pos);
-  pos.x = 1;
-  pos.y = 1;
-  SDL_BlitSurface(linemate, NULL, ecran, &pos);
-  SDL_Flip(ecran);
-  sleep(5);
+  Linemate = SDL_CreateTextureFromSurface(renderer, linemate);
+  //grid = init_grid();
+  //SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+  SDL_RenderClear(renderer);
+  SDL_RenderCopy(renderer, Linemate, &SrcR, &DestR);
+  //SDL_RenderDrawLine(renderer, 25, 25, 25, 50);
+  //SDL_RenderCopy(renderer, Linemate, NULL, NULL);
+  SDL_RenderPresent(renderer);
+
+  sleep(2);
+
   SDL_Quit();
   return (0);
 }

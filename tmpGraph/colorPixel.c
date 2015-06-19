@@ -5,13 +5,13 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 16:44:37 2015 Alaric
-** Last update Thu Jun 18 17:09:02 2015 Alaric
+** Last update Fri Jun 19 17:31:52 2015 Alaric
 */
 
 #include	<SDL/SDL_ttf.h>
 #include	<SDL/SDL.h>
 #include	<SDL/SDL_image.h>
-#include	"color.h"
+#include	"include/color.h"
 
 void            colorPixel(SDL_Surface *grid, RGBcolor col)
 {

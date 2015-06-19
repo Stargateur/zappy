@@ -5,7 +5,7 @@
 ## Login   <degand@epitech.net>
 ## 
 ## Started on  Thu Jun 18 16:31:54 2015 Alaric
-## Last update Fri Jun 19 15:22:33 2015 Alaric
+## Last update Fri Jun 19 16:52:32 2015 Alaric
 ##
 
 CC=		gcc
@@ -13,6 +13,7 @@ CC=		gcc
 SRC=		main.c		\
 		colorPixel.c	\
 		BmpLoader.c	\
+		init.c		\
 
 NAME=		zappy
 
@@ -21,7 +22,7 @@ OBJ=		$(SRC:.c=.o)
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-		$(CC) $(SRC) -o $(NAME) `sdl-config --cflags --libs` -lSDLmain -lSDL -lSDL_ttf -Wall -Wextra
+		$(CC) $(SRC) -o $(NAME) -lSDL2-2.0 -Wall -Wextra
 
 clean:
 		rm -f $(OBJ)
