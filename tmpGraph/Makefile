@@ -5,13 +5,14 @@
 ## Login   <degand@epitech.net>
 ## 
 ## Started on  Thu Jun 18 16:31:54 2015 Alaric
-## Last update Thu Jun 18 17:07:23 2015 Alaric
+## Last update Fri Jun 19 15:22:33 2015 Alaric
 ##
 
 CC=		gcc
 
 SRC=		main.c		\
 		colorPixel.c	\
+		BmpLoader.c	\
 
 NAME=		zappy
 
