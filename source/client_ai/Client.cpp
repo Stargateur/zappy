@@ -5,7 +5,7 @@
 // Login   <alix amoureux@epitech.net>
 // 
 // Started on  Mon Jun 15 12:25:45 2015 amoure_a
-// Last update Thu Jun 18 14:49:32 2015 amoure_a
+// Last update Fri Jun 19 13:58:56 2015 amoure_a
 //
 
 #include		"Client.h"

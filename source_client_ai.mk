@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Fri Jun 19 19:00:50 2015 Jérémy MATHON
+## Last update Fri Jun 19 19:53:25 2015 amoure_a
 ##
 
 PATH_SRC	=	source/
@@ -15,3 +15,5 @@ SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)main.cpp
 SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Client.cpp
 SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Perso.cpp
 SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Invent.cpp
+SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Mouv.cpp
+SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Save.cpp
