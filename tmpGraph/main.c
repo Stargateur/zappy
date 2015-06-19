@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 15:58:26 2015 Alaric
-** Last update Thu Jun 18 17:33:14 2015 Alaric
+** Last update Fri Jun 19 15:24:48 2015 Alaric
 */
 
 #include	<SDL/SDL_ttf.h>
@@ -46,6 +46,7 @@ int		main()
 {
   SDL_Surface	*ecran;
   SDL_Surface	*grid;
+  SDL_Surface	*linemate;
   SDL_Rect	pos;
 
   if (SDL_Init(SDL_INIT_VIDEO) == -1)
@@ -59,11 +60,15 @@ int		main()
       printf("Set Fail\n");
       return (-1);
     }
+  linemate = Bmp_Loader("BMP/Linemate.bmp");
   SDL_WM_SetCaption("zappy", NULL);
+  grid = init_grid();
   pos.x = 0;
   pos.y = 0;
-  grid = init_grid();
   SDL_BlitSurface(grid, NULL, ecran, &pos);
+  pos.x = 1;
+  pos.y = 1;
+  SDL_BlitSurface(linemate, NULL, ecran, &pos);
   SDL_Flip(ecran);
   sleep(5);
   SDL_Quit();
