@@ -5,15 +5,15 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Thu Jun 18 23:16:09 2015 Antoine Plaskowski
+** Last update Fri Jun 19 15:48:11 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
 #include	"client.h"
 #include	"manage_select.h"
 #include	"opt.h"
-#include	"main.h"
 #include	"fd_set.h"
+#include	"int_handler.h"
 
 static t_client	*read_client(fd_set const * const set_read, t_client *client)
 {
@@ -61,7 +61,7 @@ static t_client	*manage_accept_client(t_client *client, int const sfd)
   return (add_client(client, &ca));
 }
 
-bool	manage_select(t_opt const * const opt, int const sfd)
+bool	manage_select(int const sfd)
 {
   fd_set	set_read;
   fd_set	set_write;

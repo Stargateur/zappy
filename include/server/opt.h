@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:44:00 2015 Antoine Plaskowski
-** Last update Thu Jun 18 22:51:14 2015 Antoine Plaskowski
+** Last update Fri Jun 19 15:34:56 2015 Antoine Plaskowski
 */
 
 #ifndef		OPT_H_
@@ -23,7 +23,9 @@ typedef	struct	s_opt
   char * const	*team;
 }		t_opt;
 
-bool		get_opt(char * const * const argv, int const argc, t_opt *opt);
-bool		show_opt(t_opt const * const opt);
+extern t_opt	opt;
+
+bool		get_opt(char * const * const argv, int const argc);
+bool		show_opt(void);
 
 #endif		/* !OPT_H_ */
