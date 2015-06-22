@@ -5,16 +5,14 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 15:58:26 2015 Alaric
-** Last update Fri Jun 19 19:54:13 2015 Alaric
+** Last update Mon Jun 22 09:54:31 2015 Alaric
 */
 
 //#include	<SDL/SDL_ttf.h>
 #include	<SDL2/SDL.h>
 //#include	<SDL/SDL_image.h>
 #include	<unistd.h>
-#define		SHAPE_SIZE 24
-#define		SIZE_X 1000
-#define		SIZE_Y 1000
+#include	"include/graphic.h"
 
 void		draw_grid(SDL_Renderer *renderer)
 {
@@ -47,12 +45,11 @@ int		main()
   DestR.w = SHAPE_SIZE;
   DestR.h = SHAPE_SIZE;
 
-  //SDL_CreateWindowAndRenderer(0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP, &fenetre, &renderer);
-  fenetre = SDL_CreateWindow("SDL_RenderCopy Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SIZE_X + 1, SIZE_Y + 1, 0);
-  renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+  fenetre = init_video();
+  renderer = init_renderer(fenetre);
   //load image -> tranfert texture -> free image
-  loader = Bmp_Loader("BMP/Linemate.bmp");
-  Linemate = SDL_CreateTextureFromSurface(renderer, linemate);
+  loader = Bmp_Loader("BMP/Phiras.bmp");
+  Linemate = SDL_CreateTextureFromSurface(renderer, loader);
   SDL_FreeSurface(loader);
   //clear de la fenetre
   SDL_RenderClear(renderer);

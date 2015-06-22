@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Fri Jun 19 17:43:19 2015 Alaric
+** Last update Mon Jun 22 09:54:12 2015 Alaric
 */
 
 //#include	<SDL/SDL_ttf.h>
@@ -13,25 +13,32 @@
 //#include	<SDL/SDL_image.h>
 #include	<unistd.h>
 #include	"include/color.h"
+#include	"include/graphic.h"
 
 SDL_Window	*init_video()
 {
-  //SDL_Surface	*ecran;
   SDL_Window	*fenetre;
 
-  if (SDL_Init(SDL_INIT_VIDEO) == -1)
-    {
-      printf("SDL_Init Fail\n");
-      exit(-1);
-    }
-  fenetre = SDL_CreateWindow("zappy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1001, 1001, SDL_WINDOW_RESIZABLE);
-  //ecran = SDL_SetVideoMode(1001, 1001, 32, SDL_HWSURFACE);
+  fenetre = SDL_CreateWindow("zappy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SIZE_X + 1, SIZE_Y + 1, SDL_WINDOW_RESIZABLE);
   if (fenetre == NULL)
     {
-      printf("CreateWindow Fail\n");
+      printf("%s\n", SDL_GetError());
       exit(-1);
     }
   return (fenetre);
+}
+
+SDL_Renderer	*init_renderer(SDL_Window *fenetre)
+{
+  SDL_Renderer	*renderer;
+
+  renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+  if (renderer == NULL)
+    {
+      printf("%s\n", SDL_GetError());
+      exit(-1);
+    }
+  return (renderer);
 }
 
 /*SDL_Surface	*init_grid()
