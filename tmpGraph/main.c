@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 15:58:26 2015 Alaric
-** Last update Mon Jun 22 09:54:31 2015 Alaric
+** Last update Mon Jun 22 10:49:06 2015 Alaric
 */
 
 //#include	<SDL/SDL_ttf.h>
@@ -39,22 +39,30 @@ int		main()
   SDL_Texture	*Linemate;
   SDL_Surface	*loader;
   SDL_Rect	DestR;
+  SDL_Rect	srcR;
 
+  //position dans la fenetre
   DestR.x = 1;
   DestR.y = 1;
   DestR.w = SHAPE_SIZE;
   DestR.h = SHAPE_SIZE;
 
+  //position dans l'image
+  srcR.x = 24;
+  srcR.y = 0;
+  srcR.w = SHAPE_SIZE;
+  srcR.h = SHAPE_SIZE;
+
   fenetre = init_video();
   renderer = init_renderer(fenetre);
   //load image -> tranfert texture -> free image
-  loader = Bmp_Loader("BMP/Phiras.bmp");
+  loader = Bmp_Loader("BMP/Cursor.bmp");
   Linemate = SDL_CreateTextureFromSurface(renderer, loader);
   SDL_FreeSurface(loader);
   //clear de la fenetre
   SDL_RenderClear(renderer);
   //affichage BMP => a modif pour toutes les images
-  SDL_RenderCopy(renderer, Linemate, NULL, &DestR);
+  SDL_RenderCopy(renderer, Linemate, &srcR, &DestR);
   //Changement couleur pour la grille
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   draw_grid(renderer);
