@@ -1,0 +1,62 @@
+/*
+** map_generate.c for  in /home/zwertv_e/rendu/PSU_2014_zappy/source/server/map
+** 
+** Made by zwertv_e
+** Login   <zwertv_e@epitech.net>
+** 
+** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
+** Last update Tue Jun 23 19:59:58 2015 zwertv_e
+*/
+
+#include	<time.h>
+#include	<stdlib.h>
+#include	"inv.h"
+#include	"map.h"
+
+static void	generate_ressources(t_map * const map, size_t const to_generate)
+{
+  srand(time(NULL));
+  size_t	x;
+  size_t	y;
+  int		type;
+
+  if (to_generate > 0)
+    {
+      x = rand() % map.width;
+      y = rand() % map.height;
+      type = rand() % 39;
+      //if (type < 9)
+      add_item(map, x, y, type);
+      generate_ressources(map, to_generate--);
+    }
+}
+
+static size_t	need_to_generate(t_map const * const map)
+{
+  size_t	total_ressources;
+  size_t	available_size;
+  t_squarre	*tmp;
+
+  total_ressources = 0;
+  tmp = first_node(&map->items->node);
+  while (tmp != NULL)
+    {
+      total_ressources += count_ressources(&tmp->ressources);
+      tmp = tmp->node.next;
+    }
+  available_size = (map->height * map->width) / 8;
+  available_size *= nb_max_players * DENSITY;
+  if (total_ressources > available_size)
+    return (0);
+  return (available_size - total_ressources);
+}
+
+void		map_regenerate(t_map * const map)
+{
+  size_t	to_generate;
+
+  if ((to_generate = need_to_generate(map)) > 0)
+    generate_ressources(map, to_generate)
+    else
+      printf("Max ressources reached !\n");
+}

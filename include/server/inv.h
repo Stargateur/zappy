@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:43:00 2015 zwertv_e
-** Last update Tue Jun 23 15:00:27 2015 zwertv_e
+** Last update Tue Jun 23 17:54:31 2015 zwertv_e
 */
 
 #ifndef		INV_H__
@@ -14,6 +14,8 @@
 # include	"node.h"
 
 typedef	struct	s_inv		t_inv;
+
+# define        RESC_COUNT	(7)
 
 enum
   {

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 17:34:34 2015 zwertv_e
-** Last update Tue Jun 23 15:02:46 2015 zwertv_e
+** Last update Tue Jun 23 18:13:51 2015 zwertv_e
 */
 
 #ifndef		MAP_H__
@@ -18,6 +18,14 @@
 
 typedef	struct	s_map		t_map;
 typedef	struct	s_squarre	t_squarre;
+
+# define        DENSITY		(1)
+# define	RARITY_LIN	(9)
+# define	RARITY_DER	(8)
+# define	RARITY_SIB	(10)
+# define	RARITY_MEN	(5)
+# define	RARITY_PHI	(6)
+# define	RARITY_THY	(1)
 
 struct		s_squarre
 {
