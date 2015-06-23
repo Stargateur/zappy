@@ -5,10 +5,10 @@
 // Login   <alix amoureux@epitech.net>
 // 
 // Started on  Wed Jun  3 22:08:07 2015 amoure_a
-// Last update Thu Jun 18 21:33:09 2015 Antoine Plaskowski
+// Last update Tue Jun 23 14:13:20 2015 amoure_a
 //
 
-#include		"Client.h"
+#include		"Perso.hpp"
 
 int			get_port(std::string port)
 {
@@ -40,9 +40,12 @@ std::string		get_ip(std::string ip)
 
 void			connect_to_server(std::string team, int port, std::string ip)
 {
-  Client		client(team, port, ip);
+  Perso			perso(team, port, ip);
+  //  Client		client(team, port, ip);
 
-  client.connect_client();
+  perso.init_client();
+  perso.main_loop();
+  close(perso.getClient());
 }
 
 void			parse_arguments(int ac, char **av)

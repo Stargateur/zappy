@@ -5,7 +5,7 @@
 ** Login   <alix amoureux@epitech.net>
 ** 
 ** Started on  Fri Jun 19 19:01:23 2015 amoure_a
-** Last update Tue Jun 23 09:58:33 2015 Jérémy MATHON
+** Last update Tue Jun 23 14:19:39 2015 amoure_a
 */
 
 #ifndef			SAVE_H
@@ -30,7 +30,7 @@ typedef enum		s_case
 
 class			Save
 {
- protected:
+ public:
   std::list<std::string>				mouv;
   int							cpt;
   std::vector<std::vector<t_case> >			map;
