@@ -5,64 +5,43 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 15:58:26 2015 Alaric
-** Last update Mon Jun 22 10:49:06 2015 Alaric
+** Last update Mon Jun 22 17:08:12 2015 Alaric
 */
 
-//#include	<SDL/SDL_ttf.h>
 #include	<SDL2/SDL.h>
-//#include	<SDL/SDL_image.h>
 #include	<unistd.h>
 #include	"include/graphic.h"
-
-void		draw_grid(SDL_Renderer *renderer)
-{
-  int		a;
-
-  a = 0;
-  while (a <= 1000)
-    {
-      SDL_RenderDrawLine(renderer, a, 0, a, 1000);
-      a += SIZE_X / 40;
-    }
-  a = 0;
-  while (a <= 1000)
-    {
-      SDL_RenderDrawLine(renderer, 0, a, 1000, a);
-      a += SIZE_Y / 40;
-    }
-}
+#include	"../include/server/map.h"
 
 int		main()
 {
-  SDL_Window	*fenetre;
+  t_texture	text;
   SDL_Renderer	*renderer;
-  SDL_Texture	*Linemate;
-  SDL_Surface	*loader;
+  SDL_Window	*fenetre;
   SDL_Rect	DestR;
-  SDL_Rect	srcR;
+
+  t_map		map;
+  t_squarre	*item;
+
+  item = malloc(sizeof(t_squarre));
+  item->x = 5;
+  item->y = 5;
+  map.items = item;
 
   //position dans la fenetre
-  DestR.x = 1;
-  DestR.y = 1;
+  DestR.x = map.items->x * (SIZE_X / 40) + 1;
+  DestR.y = map.items->y * (SIZE_Y / 40) + 1;
   DestR.w = SHAPE_SIZE;
   DestR.h = SHAPE_SIZE;
 
-  //position dans l'image
-  srcR.x = 24;
-  srcR.y = 0;
-  srcR.w = SHAPE_SIZE;
-  srcR.h = SHAPE_SIZE;
-
   fenetre = init_video();
   renderer = init_renderer(fenetre);
-  //load image -> tranfert texture -> free image
-  loader = Bmp_Loader("BMP/Cursor.bmp");
-  Linemate = SDL_CreateTextureFromSurface(renderer, loader);
-  SDL_FreeSurface(loader);
+  init_texture(&text, renderer);
   //clear de la fenetre
   SDL_RenderClear(renderer);
   //affichage BMP => a modif pour toutes les images
-  SDL_RenderCopy(renderer, Linemate, &srcR, &DestR);
+  draw_stone(&map, &text, renderer);
+  //SDL_RenderCopy(renderer, text.phiras, NULL, &DestR);
   //Changement couleur pour la grille
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   draw_grid(renderer);
