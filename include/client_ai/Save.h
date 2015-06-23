@@ -5,7 +5,7 @@
 ** Login   <alix amoureux@epitech.net>
 ** 
 ** Started on  Fri Jun 19 19:01:23 2015 amoure_a
-** Last update Fri Jun 19 19:31:37 2015 amoure_a
+** Last update Tue Jun 23 09:58:33 2015 Jérémy MATHON
 */
 
 #ifndef			SAVE_H
@@ -13,22 +13,35 @@
 
 # include		<list>
 # include		<iostream>
+# include		<string>
+# include		<vector>
 # include		"Mouv.h"
+
+typedef enum		s_case
+  {
+    LINEMATE = 0,
+    DERAUMERE = 1,
+    SIBUR = 2,
+    MENDIANE = 3,
+    PHIRAS = 4,
+    THYSTAME = 5,
+    PLAYER = 6
+  }			t_case;
 
 class			Save
 {
- private:
-  std::list<Mouv>	mouv;
-  int			cpt;
-
+ protected:
+  std::list<std::string>				mouv;
+  int							cpt;
+  std::vector<std::vector<t_case> >			map;
  public:
   Save();
   ~Save();
 
  public:
-  void		addItem(std::string action, int sens);
-  void		removeItem();
-  void		seeList();
+  // void		addItem(std::string action, int sens);
+  // void		removeItem();
+  // void		seeList();
 };
 
 #endif

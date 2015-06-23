@@ -5,20 +5,23 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:53:31 2015 Jérémy MATHON
-** Last update Fri Jun 19 19:30:30 2015 Jérémy MATHON
+** Last update Tue Jun 23 09:51:25 2015 Jérémy MATHON
 */
 
 #ifndef PERSO_HPP_
 # define PERSO_HPP_
 
-#include	<iostream>
-#include	<string>
-#include	"Invent.hpp"
+# include	<iostream>
+# include	<string>
+# include	<list>
+# include	"Invent.hpp"
+# include	"Save.h"
 
-class	Perso
+class	Perso : public Save
 {
-  int		_time;
-  Invent	_invent;
+  int				_time;
+  Invent			_invent;
+  std::list<std::string>	_action;
 public:
   Perso();
   ~Perso();
@@ -35,6 +38,7 @@ public:
   void	fork();
   void	connect_nbr();
   void	dead();
+  void	main_loop();
 };
 
 #endif /* !PERSO_HPP_ */
