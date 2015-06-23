@@ -5,12 +5,10 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Mon Jun 22 09:54:12 2015 Alaric
+** Last update Mon Jun 22 15:42:05 2015 Alaric
 */
 
-//#include	<SDL/SDL_ttf.h>
 #include	<SDL2/SDL.h>
-//#include	<SDL/SDL_image.h>
 #include	<unistd.h>
 #include	"include/color.h"
 #include	"include/graphic.h"
@@ -41,30 +39,29 @@ SDL_Renderer	*init_renderer(SDL_Window *fenetre)
   return (renderer);
 }
 
-/*SDL_Surface	*init_grid()
+void      	init_texture(t_texture *text, SDL_Renderer *renderer)
 {
-  SDL_Surface	*grid;
-  RGBcolor	white;
+  SDL_Surface	*loader;
 
-  grid = SDL_CreateRGBSurface(SDL_HWSURFACE, 1001, 1001, 32, 0, 0, 0, 0);
-  white.r = 255;
-  white.g = 255;
-  white.b = 255;
-  white.x = 0;
-  while (white.x <= 1000)
-    {
-      white.y = 0;
-      while (++white.y < 1000)
-        colorPixel(grid, white);
-      white.x += 1000 / 40;
-    }
-  white.y = 0;
-  while (white.y <= 1000)
-    {
-      white.x = 0;
-      while (++white.x < 1000)
-        colorPixel(grid, white);
-      white.y += 1000 / 40;
-    }
-  return (grid);
-  }*/
+  loader = Bmp_Loader("BMP/Linemate.bmp");
+  text->linemate = SDL_CreateTextureFromSurface(renderer, loader);
+  SDL_FreeSurface(loader);
+  loader = Bmp_Loader("BMP/Deraumere.bmp");
+  text->deraumere = SDL_CreateTextureFromSurface(renderer, loader);
+  SDL_FreeSurface(loader);
+  loader = Bmp_Loader("BMP/Sibur.bmp");
+  text->sibur = SDL_CreateTextureFromSurface(renderer, loader);
+  SDL_FreeSurface(loader);
+  loader = Bmp_Loader("BMP/Mendiane.bmp");
+  text->mendiane = SDL_CreateTextureFromSurface(renderer, loader);
+  SDL_FreeSurface(loader);
+  loader = Bmp_Loader("BMP/Phiras.bmp");
+  text->phiras = SDL_CreateTextureFromSurface(renderer, loader);
+  SDL_FreeSurface(loader);
+  loader = Bmp_Loader("BMP/Thystame.bmp");
+  text->thystame = SDL_CreateTextureFromSurface(renderer, loader);
+  SDL_FreeSurface(loader);
+  loader = Bmp_Loader("BMP/Cursor.bmp");
+  text->cursor = SDL_CreateTextureFromSurface(renderer, loader);
+  SDL_FreeSurface(loader);
+}
