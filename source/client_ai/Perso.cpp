@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Tue Jun 23 15:12:10 2015 amoure_a
+// Last update Wed Jun 24 13:08:28 2015 amoure_a
 */
 
 #include	"Perso.hpp"
@@ -13,7 +13,7 @@
 Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip)
 {
   this->_sav = new Save();
-  this->_time = 1260;
+  this->_time = 0;
 }
 
 Perso::~Perso()
@@ -132,10 +132,6 @@ std::string	Perso::do_action()
   usleep(500);
   return (action);
 }
-
-/* on a 1260 de temps au début du jeu.
-On décrémente de 1 à chaque tour de boucle.
- */
 void	Perso::main_loop()
 {
   std::string	mouv;
@@ -144,7 +140,7 @@ void	Perso::main_loop()
     {
       if ((this->_time % 126) == 0)
 	{
-	  this->_time = 126;
+	  this->_time = 0;
 	  this->_invent._nourriture--;
 	}
       mouv = do_action();
@@ -159,6 +155,6 @@ void	Perso::main_loop()
 	{
 	  this->_sav->mouv.pop_front();
 	}
-      this->_time--;
+      this->_time++;
     }
 }

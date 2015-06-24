@@ -1,11 +1,11 @@
 //
 // main.cpp for main in /home/alix/unix/new_year/zappy
-// 
+//
 // Made by amoure_a
 // Login   <alix amoureux@epitech.net>
-// 
+//
 // Started on  Wed Jun  3 22:08:07 2015 amoure_a
-// Last update Tue Jun 23 16:34:34 2015 amoure_a
+// Last update Wed Jun 24 13:05:55 2015 amoure_a
 //
 
 #include		"Perso.hpp"
@@ -41,8 +41,7 @@ std::string		get_ip(std::string ip)
 void			connect_to_server(std::string team, int port, std::string ip)
 {
   Perso			perso(team, port, ip);
-
-  perso.init_client();
+ perso.init_client();
   perso.main_loop();
   close(perso.getClient());
 }
