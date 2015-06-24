@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Wed Jun 24 13:08:28 2015 amoure_a
+// Last update Wed Jun 24 13:23:30 2015 amoure_a
 */
 
 #include	"Perso.hpp"
@@ -132,6 +132,7 @@ std::string	Perso::do_action()
   usleep(500);
   return (action);
 }
+
 void	Perso::main_loop()
 {
   std::string	mouv;
@@ -155,6 +156,5 @@ void	Perso::main_loop()
 	{
 	  this->_sav->mouv.pop_front();
 	}
-      this->_time++;
     }
 }
