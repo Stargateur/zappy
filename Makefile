@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Thu Jun 18 23:25:05 2015 Antoine Plaskowski
+## Last update Thu Jun 25 16:26:37 2015 Alaric
 ##
 
 SERVER		=	server
@@ -55,7 +55,7 @@ CFLAGS		+=	-fdiagnostics-color
 CXXFLAGS	+=	-fdiagnostics-color
 endif
 
-LDFLAGS		=	$(LIB)
+LDFLAGS		=	-lSDL2-2.0 $(LIB)
 
 ifeq ($(DEBUG), no)
 LDFLAGS		+=	-s

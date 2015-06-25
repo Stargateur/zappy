@@ -5,7 +5,7 @@
 ## Login   <degand@epitech.net>
 ## 
 ## Started on  Thu Jun 18 16:31:54 2015 Alaric
-## Last update Mon Jun 22 14:52:39 2015 Alaric
+## Last update Thu Jun 25 16:28:14 2015 Alaric
 ##
 
 CC=		gcc
@@ -15,6 +15,12 @@ SRC=		main.c		\
 		BmpLoader.c	\
 		init.c		\
 		draw.c		\
+		../source/server/map/map.c	\
+		../source/server/map/map_generate.c	\
+
+INCLUDE         =       -I include -I ../include/server
+
+CFLAGS          +=      $(INCLUDE)
 
 NAME=		zappy
 
