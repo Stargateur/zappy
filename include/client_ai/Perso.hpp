@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:53:31 2015 Jérémy MATHON
-// Last update Tue Jun 23 14:06:47 2015 amoure_a
+// Last update Wed Jun 24 15:28:08 2015 amoure_a
 */
 
 #ifndef PERSO_HPP_
@@ -43,6 +43,8 @@ public:
   void	dead();
   void	main_loop();
   std::string	do_action();
+  std::string	server_answer(std::string &action);
+  void		execute_commands(std::string &answer, bool *death);
 };
 
 #endif /* !PERSO_HPP_ */

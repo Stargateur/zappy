@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Tue Jun 23 15:12:10 2015 amoure_a
+// Last update Wed Jun 24 16:27:48 2015 amoure_a
 */
 
 #include	"Perso.hpp"
@@ -13,7 +13,7 @@
 Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip)
 {
   this->_sav = new Save();
-  this->_time = 1260;
+  this->_time = 0;
 }
 
 Perso::~Perso()
@@ -118,36 +118,84 @@ void	Perso::dead()
 // machine à état ici
 std::string	Perso::do_action()
 {
-  std::string	action;
+  std::string	action("voir");
 
   std::cout << "time = " << this->_time << std::endl;
   std::cout << "nourriture = " << this->_invent._nourriture << std::endl;
   std::cout << "client = " << this->getClient() << std::endl;
 
-  for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
+  std::cout << "Action = " << action << std::endl;
+  /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
     {
-      std::cout << "Action = " << *tmpAction << std::endl;
-    }
+    std::cout << "Action = " << *tmpAction << std::endl;
+    }*/
   std::cout << std::endl;
   usleep(500);
   return (action);
 }
 
-/* on a 1260 de temps au début du jeu.
-On décrémente de 1 à chaque tour de boucle.
- */
+std::string	Perso::server_answer(std::string &mouv)
+{
+  std::string	answer;
+  ssize_t	ret;
+
+  std::cout << "En attente d'une réponse du serveur ..." << std::endl;
+  answer.reserve(2048);
+  if (write(this->getClient(), (const void *)mouv.c_str(), (size_t)mouv.size()) != -1)
+    {
+      ret = -1;
+      while (ret == -1 || ret == 0)
+	{
+	  answer.reserve();
+	  ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
+	  if (ret != -1 && ret != 0)
+	    {
+	      std::cout << "Réponse du serveur = " << answer << std::endl;
+	      std::cout << "nombre de caractères = " << answer.size() << std::endl;
+	    }
+	}
+    }
+  return (answer);
+}
+
+void	Perso::execute_commands(std::string &answer, bool *death)
+{
+  if (answer.compare("OK") == 0)
+    {
+      // éxécuter commandes avance, droite, gauche, prend objet, pose objet, expulse, broadcast text, fork
+    }
+  else if (answer.compare("KO") == 0)
+    {
+      // continuer le jeu
+    }
+  else if (answer.compare("mort") == 0)
+    {
+      std::cerr << "Le joueur est mort" << std::endl;
+      *death = true;
+    }
+  else
+    {
+      // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
+    }
+}
+
 void	Perso::main_loop()
 {
-  std::string	mouv;
+  std::string	action;
+  std::string	answer;
+  bool		death;
 
-  while (this->_invent._nourriture > 0)
+  death = false;
+  while (this->_invent._nourriture > 0 && death == false)
     {
       if ((this->_time % 126) == 0)
 	{
-	  this->_time = 126;
+	  this->_time = 0;
 	  this->_invent._nourriture--;
 	}
-      mouv = do_action();
+      action = do_action(); // on fait la machine à état ici
+      answer = this->server_answer(action); // envoi de la cmd au serveur et attente de la réponse (faudra faire jusque 10 envois possibles)
+      this->execute_commands(answer, &death);
       if (this->_action.size() < 10)
 	{
 	  //this->_action.push_back(mouv);
@@ -159,6 +207,5 @@ void	Perso::main_loop()
 	{
 	  this->_sav->mouv.pop_front();
 	}
-      this->_time--;
     }
 }
