@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Thu Jun 25 15:47:19 2015 zwertv_e
+** Last update Thu Jun 25 22:37:39 2015 zwertv_e
 */
 
 #include	<time.h>
@@ -50,6 +50,7 @@ static void	generate_ressources(t_map * const map, size_t const to_generate)
     {
       x = rand() % map->width;
       y = rand() % map->height;
+      printf("%lu - %lu => %lu\n", x, y, to_generate);
       type = get_ressource_type();
       add_item(map, x, y, type);
       generate_ressources(map, to_generate - 1);

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 17:34:34 2015 zwertv_e
-** Last update Thu Jun 25 22:07:46 2015 zwertv_e
+** Last update Thu Jun 25 22:52:23 2015 zwertv_e
 */
 
 #ifndef		MAP_H__
@@ -14,7 +14,7 @@
 typedef	struct	s_map		t_map;
 typedef	struct	s_squarre	t_squarre;
 
-# define        DENSITY		(1.0)
+# define        DENSITY		(2.0)
 # define	DENSITY_LIN	(1.0)
 # define	DENSITY_DER	(1.0)
 # define	DENSITY_SIB	(1.0)
