@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Fri Jun 19 15:48:11 2015 Antoine Plaskowski
+** Last update Fri Jun 19 22:36:21 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -61,7 +61,7 @@ static t_client	*manage_accept_client(t_client *client, int const sfd)
   return (add_client(client, &ca));
 }
 
-bool	manage_select(int const sfd)
+bool		manage_select(int const sfd)
 {
   fd_set	set_read;
   fd_set	set_write;
