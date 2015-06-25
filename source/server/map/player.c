@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Thu Jun 25 17:26:16 2015 zwertv_e
+** Last update Thu Jun 25 18:46:35 2015 zwertv_e
 */
 
 #include	<string.h>
@@ -55,10 +55,14 @@ void		rotate_right(t_player * const player)
     }
 }
 
-void		move(t_player * const player)
+void		move(t_map const * const map, t_player * const player)
 {
   if (player != NULL)
     {
+      if (player->y == 0)
+	player->y += map->width;
+      if (player->x < 0)
+	player->x += map->width;
       switch(player->dir)
 	{
 	case NORTH:
@@ -74,6 +78,8 @@ void		move(t_player * const player)
 	  player->x++;
 	  break;
 	};
+      player->y = player->y % map->height;
+      player->x = player->x % map->width;
     }
 }
 

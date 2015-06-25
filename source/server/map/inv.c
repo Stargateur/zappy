@@ -5,9 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:36:45 2015 zwertv_e
-** Last update Tue Jun 23 15:01:03 2015 zwertv_e
+** Last update Thu Jun 25 22:00:32 2015 zwertv_e
 */
 
+#include	<stdlib.h>
+#include	<stdio.h>
 #include	"inv.h"
 
 void		init_inv(t_inv *inv)
@@ -62,5 +64,22 @@ size_t		count_ressources(t_inv const * const inv)
   res += inv->phiras;
   res += inv->thystame;
   res += inv->food;
+  return (res);
+}
+
+char		*get_inventory(t_inv const * const inv)
+{
+  char		*res;
+  int		to_malloc;
+
+  to_malloc = snprintf(NULL, 0, "linemlate %lu, deraumere %lu, \
+sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu", inv->linemlate,
+		       inv->deraumere, inv->sibur, inv->mendiane, inv->phiras,
+		       inv->thystame, inv->food);
+  res = malloc(to_malloc + 1);
+  snprintf(res, to_malloc + 1, "linemlate %lu, deraumere %lu, \
+sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu", inv->linemlate,
+		       inv->deraumere, inv->sibur, inv->mendiane, inv->phiras,
+		       inv->thystame, inv->food);
   return (res);
 }

@@ -5,16 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 17:34:34 2015 zwertv_e
-** Last update Tue Jun 23 22:38:20 2015 zwertv_e
+** Last update Thu Jun 25 22:07:46 2015 zwertv_e
 */
 
 #ifndef		MAP_H__
 # define	MAP_H__
-
-# include	<stdbool.h>
-# include	"inv.h"
-# include	"player.h"
-# include	"node.h"
 
 typedef	struct	s_map		t_map;
 typedef	struct	s_squarre	t_squarre;
@@ -27,6 +22,11 @@ typedef	struct	s_squarre	t_squarre;
 # define	DENSITY_PHI	(1.0)
 # define	DENSITY_THY	(1.0)
 # define	DENSITY_FOOD	(5.0)
+
+# include	<stdbool.h>
+# include	"inv.h"
+# include	"player.h"
+# include	"node.h"
 
 struct		s_squarre
 {
