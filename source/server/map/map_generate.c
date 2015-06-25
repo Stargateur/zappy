@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Thu Jun 25 15:28:12 2015 zwertv_e
+** Last update Thu Jun 25 15:47:19 2015 zwertv_e
 */
 
 #include	<time.h>
@@ -18,10 +18,11 @@ static int	get_ressource_type(void)
   int		type;
   int		repart;
 
-  srand(time(NULL));
   repart = DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN;
   repart += DENSITY_PHI + DENSITY_THY + DENSITY_FOOD;
-  type = rand() % repart;
+  int tmp = rand();
+  type = tmp % repart;
+  printf("report: %d [%d] -> %d\n", repart, tmp, type);
   if (type < DENSITY_LIN)
     return (linemlate);
   else if (type < DENSITY_LIN + DENSITY_DER)
@@ -79,6 +80,7 @@ bool		map_generate(t_map * const map)
 {
   size_t	to_generate;
 
+  srand(time(NULL));
   if ((to_generate = need_to_generate(map)) > 0)
     {
       generate_ressources(map, to_generate);
