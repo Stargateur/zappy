@@ -5,7 +5,7 @@
 ** Login   <plasko_a@epitech.eu>
 ** 
 ** Started on  Tue Jun 16 16:38:42 2015 Antoine Plaskowski
-** Last update Thu Jun 25 22:00:18 2015 Antoine Plaskowski
+** Last update Thu Jun 25 23:09:10 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -21,6 +21,8 @@
 #include	"int_handler.h"
 #include	"map.h"
 #include	"node.h"
+#include	"player.h"
+#include	"inv.h"
 
 static int	init_socket(char const * const port)
 {
@@ -52,7 +54,7 @@ int		main(int argc, char **argv)
   init_texture(&text, renderer);
 
   init_map(&map, 50, 50);
-  while (map_generate(&map));
+  map_generate(&map);
   disp = first_node(&map.items->node);
   while (disp != NULL)
     {
@@ -66,6 +68,25 @@ int		main(int argc, char **argv)
   SDL_RenderPresent(renderer);
 
   sleep(5);
+  t_player		test;
+
+  init_player(&test, 0, 0, "Razmoket");
+  test.inv.linemlate += 2;
+  test.inv.food += 5;
+  printf("Inventory: %s\n", get_inventory(&test.inv));
+  move(&map, &test);
+  rotate_left(&test);
+  move(&map, &test);
+  rotate_left(&test);
+  move(&map, &test);
+  rotate_right(&test);
+  rotate_right(&test);
+  rotate_right(&test);
+  move(&map, &test);
+  rotate_left(&test);
+  if (test.dir == NORTH)
+    printf("Player has rotated correctly\n");
+
   /* int		sfd; */
 
   /* if (get_opt(argv, argc) == true) */
