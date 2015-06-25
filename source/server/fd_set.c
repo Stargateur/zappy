@@ -5,12 +5,9 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jul 28 17:09:12 2014 Antoine Plaskowski
-** Last update Thu Jun 18 22:54:39 2015 Antoine Plaskowski
+** Last update Thu Jun 25 22:21:12 2015 Antoine Plaskowski
 */
 
-/* #include	<sys/time.h> */
-/* #include	<sys/types.h> */
-/* #include	<unistd.h> */
 #include	<sys/select.h>
 #include	<stdlib.h>
 #include	<unistd.h>
@@ -51,36 +48,26 @@ int		fd_set_close(fd_set const * const fd_set)
   return (0);
 }
 
-bool		fd_set_wclient(fd_set *fdset, t_client *client)
+int		fd_set_client(fd_set * const fd_read, fd_set * const fd_write,
+			      t_client *client, int const sfd)
 {
-  if (fdset == NULL)
-    return (false);
-  FD_ZERO(fdset);
-  client = first_node(&client->node);
-  while (client != NULL)
-    {
-      /* FD_SET(client->ca.cfd, fdset); */
-      client = client->node.next;
-    }
-  return (true);
-}
+  int		fd_max;
 
-int		fd_set_rclient(fd_set *fdset, t_client *client, int sfd)
-{
-  int		max_fd;
-
-  if (fdset == NULL)
+  if (fd_read == NULL || fd_write == NULL)
     return (-1);
-  max_fd = sfd;
-  FD_ZERO(fdset);
-  FD_SET(sfd, fdset);
+  fd_max = sfd;
+  FD_ZERO(fd_read);
+  FD_ZERO(fd_write);
+  FD_SET(sfd, fd_read);
   client = first_node(&client->node);
   while (client != NULL)
     {
-      if (client->ca.cfd > max_fd)
-	max_fd = client->ca.cfd;
-      FD_SET(client->ca.cfd, fdset);
+      if (client->ca.cfd > fd_max)
+	fd_max = client->ca.cfd;
+      if (client->to_write != NULL)
+	FD_SET(client->ca.cfd, fd_write);
+      FD_SET(client->ca.cfd, fd_read);
       client = client->node.next;
     }
-  return (max_fd);
+  return (fd_max);
 }

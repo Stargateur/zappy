@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 21:18:19 2015 Antoine Plaskowski
-** Last update Thu Jun 18 21:35:27 2015 Antoine Plaskowski
+** Last update Thu Jun 25 21:55:06 2015 Antoine Plaskowski
 */
 
 #ifndef		CBUF_H_
@@ -13,7 +13,7 @@
 
 # include	<stdbool.h>
 
-# define	CBUF_LEN	512
+# define	CBUF_LEN	4096
 
 typedef	struct	s_cbuf	t_cbuf;
 

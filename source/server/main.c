@@ -5,7 +5,7 @@
 ** Login   <plasko_a@epitech.eu>
 ** 
 ** Started on  Tue Jun 16 16:38:42 2015 Antoine Plaskowski
-** Last update Thu Jun 25 16:49:05 2015 Alaric
+** Last update Thu Jun 25 22:00:18 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -56,7 +56,7 @@ int		main(int argc, char **argv)
   disp = first_node(&map.items->node);
   while (disp != NULL)
     {
-      printf("[%zu - %zu] %zu %zu %zu %zu %zu %zu %zu\n", disp->x, disp->y, disp->ressources.linemlate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
+      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->x, disp->y, disp->ressources.linemlate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
       disp = disp->node.next;
     }
 
