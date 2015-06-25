@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Tue Jun 23 22:38:13 2015 zwertv_e
+** Last update Thu Jun 25 15:28:12 2015 zwertv_e
 */
 
 #include	<time.h>
@@ -16,7 +16,7 @@
 static int	get_ressource_type(void)
 {
   int		type;
-  double	repart;
+  int		repart;
 
   srand(time(NULL));
   repart = DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN;
@@ -47,18 +47,18 @@ static void	generate_ressources(t_map * const map, size_t const to_generate)
 
   if (to_generate > 0)
     {
-      x = rand() % map.width;
-      y = rand() % map.height;
+      x = rand() % map->width;
+      y = rand() % map->height;
       type = get_ressource_type();
       add_item(map, x, y, type);
-      generate_ressources(map, to_generate--);
+      generate_ressources(map, to_generate - 1);
     }
 }
 
 static size_t	need_to_generate(t_map const * const map)
 {
-  size_t	total_ressources;
-  size_t	available_size;
+  double	total_ressources;
+  double	available_size;
   t_squarre	*tmp;
 
   total_ressources = 0;
@@ -69,18 +69,21 @@ static size_t	need_to_generate(t_map const * const map)
       tmp = tmp->node.next;
     }
   available_size = (map->height * map->width) / 8;
-  available_size *= nb_max_players * DENSITY;
+  available_size *= DENSITY;
   if (total_ressources > available_size)
     return (0);
-  return (available_size - total_ressources);
+  return ((size_t)(available_size - total_ressources));
 }
 
-void		map_generate(t_map * const map)
+bool		map_generate(t_map * const map)
 {
   size_t	to_generate;
 
   if ((to_generate = need_to_generate(map)) > 0)
-    generate_ressources(map, to_generate)
-    else
-      printf("Max ressources reached !\n");
+    {
+      generate_ressources(map, to_generate);
+      return (true);
+    }
+  printf("Max ressources reached !\n");
+  return (false);
 }

@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Tue Jun 23 14:42:35 2015 zwertv_e
+## Last update Thu Jun 25 15:24:10 2015 zwertv_e
 ##
 
 PATH_SRC	=	source/
@@ -35,3 +35,4 @@ SRC_SERVER	+=	$(PATH_NODE)sup_node.c
 SRC_SERVER	+=	$(PATH_MAP)map.c
 SRC_SERVER	+=	$(PATH_MAP)inv.c
 SRC_SERVER	+=	$(PATH_MAP)player.c
+SRC_SERVER	+=	$(PATH_MAP)map_generate.c
