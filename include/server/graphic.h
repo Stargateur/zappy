@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Thu Jun 25 16:35:33 2015 Alaric
+** Last update Thu Jun 25 17:07:19 2015 Alaric
 */
 
 #ifndef		GRAPHIC_H_
@@ -27,6 +27,8 @@ typedef	struct	s_texture
   SDL_Texture	*phiras;
   SDL_Texture	*thystame;
   SDL_Texture	*cursor;
+  SDL_Texture	*mine;
+  SDL_Surface	*loader;
 }		t_texture;
 
 void		draw_grid(SDL_Renderer *, t_map *);

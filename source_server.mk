@@ -5,11 +5,12 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Thu Jun 25 15:24:10 2015 zwertv_e
+## Last update Thu Jun 25 16:19:55 2015 Alaric
 ##
 
 PATH_SRC	=	source/
 PATH_SERVER	=	$(PATH_SRC)server/
+PATH_GRAPHIC	=	tmpGraph/
 PATH_MAP	=	$(PATH_SERVER)map/
 PATH_NODE	=	$(PATH_SERVER)node/
 
@@ -36,3 +37,7 @@ SRC_SERVER	+=	$(PATH_MAP)map.c
 SRC_SERVER	+=	$(PATH_MAP)inv.c
 SRC_SERVER	+=	$(PATH_MAP)player.c
 SRC_SERVER	+=	$(PATH_MAP)map_generate.c
+
+SRC_SERVER	+=	$(PATH_GRAPHIC)BmpLoader.c
+SRC_SERVER	+=	$(PATH_GRAPHIC)draw.c
+SRC_SERVER	+=	$(PATH_GRAPHIC)init.c
