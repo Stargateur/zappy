@@ -5,12 +5,12 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Mon Jun 22 16:49:00 2015 Kevin Costa
+** Last update Thu Jun 25 16:44:33 2015 Kevin Costa
 */
 
-//#include	
+#include	<SDL2/SDL.h>
 
-void update(Input *input)
+void input(void)
 {
   SDL_Event event;
   int a;
@@ -19,17 +19,20 @@ void update(Input *input)
     {
       if (event.type == SDL_QUIT)
 	a = 0; /* QUITTER */
-      if (event.type == SDLK_ESCAPE)
-	a = 0; /* QUITTER */
-      if (event.type == SDLK_UP)
-	a = 0; /* ZOOM +*/
-      if (event.type == SDLK_DOWN)
-	a = 0; /* ZOOM -*/
-      if (event.type == SDLK_RIGHT)
-	a = 0; /* decaler sur la gauche */
-      if (event.type == SDLK_LEFT)
-	a = 0; /* decaler sur la droite */
-      if (event.type == SDLK_SPACE)
-	a = 0; /* check la case actuel */
+      if (event.type == SDL_KEYDOWN)
+	{
+	  if (event.key.keysym.sym == SDLK_ESCAPE)
+	    a = 0; /* QUITTER */
+	  if (event.key.keysym.sym == SDLK_UP)
+	    a = 0; /* ZOOM + */
+	  if (event.key.keysym.sym == SDLK_DOWN)
+	    a = 0; /* ZOOM - */
+	  if (event.key.keysym.sym == SDLK_LEFT)
+	    a = 0; /* DROITE */
+	  if (event.key.keysym.sym == SDLK_RIGHT)
+	    a = 0; /* GAUCHE */
+	  if (event.key.keysym.sym == SDLK_SPACE)
+	    a = 0; /* CHECK CASE */
+	}
     }
 }
