@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Thu Jun 25 23:08:05 2015 Antoine Plaskowski
+** Last update Fri Jun 26 14:26:37 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -36,6 +36,7 @@ static t_client	*read_client(fd_set const * const fd_read, t_client *client)
 
 static t_string	*write_to_write(t_string *to_write, int const cfd)
 {
+  to_write = first_node(&to_write->node);
   if (to_write == NULL)
     return (NULL);
   if (to_write->str != NULL)
@@ -68,6 +69,23 @@ static t_client	*manage_accept_client(t_client *client, int const sfd)
   return (add_client(client, &ca));
 }
 
+static void	get_cmd(t_client *client)
+{
+  char		*str;
+
+  client = first_node(&client->node);
+  while (client != NULL)
+    {
+      if (ready_cbuf(&client->cbuf) == true)
+	{
+	  str = read_cbuf(&client->cbuf);
+	  if (str == NULL)
+	    return;
+	}
+      client = client->node.next;
+    }
+}
+
 bool		manage_select(int const sfd)
 {
   fd_set	fd_read;
@@ -89,6 +107,7 @@ bool		manage_select(int const sfd)
 	  return (true);
       client = read_client(&fd_read, client);
       client = write_client(&fd_write, client);
+      getcmd(client);
     }
   return (false);
 }

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 19:39:37 2015 zwertv_e
-** Last update Thu Jun 18 21:32:01 2015 Antoine Plaskowski
+** Last update Fri Jun 26 14:24:23 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -37,20 +37,20 @@ static size_t	find_len(t_cbuf const * const cbuf)
       if (cbuf->buf[i] == '\0')
 	return (0);
       if (cbuf->buf[i] == '\n')
-	return (len);
+	return (len + 1);
       i = add_one_cbuf_len(i);
       len++;
     }
   return (0);
 }
 
-bool		is_cbuf_ready(t_cbuf const * const cbuf)
+bool		ready_cbuf(t_cbuf const * const cbuf)
 {
   if (cbuf == NULL)
-    return (true);
+    return (false);
   if (find_len(cbuf) == 0)
-    return (true);
-  return (false);
+    return (false);
+  return (true);
 }
 
 char		*read_cbuf(t_cbuf * const cbuf)

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:20 2015 zwertv_e
-** Last update Thu Jun 25 22:24:01 2015 Antoine Plaskowski
+** Last update Fri Jun 26 14:25:46 2015 Antoine Plaskowski
 */
 
 #ifndef		CLIENT_H_
@@ -30,9 +30,8 @@ struct		s_client
   t_node	node;
   t_clientaddr	ca;
   t_cbuf	cbuf;
-  t_player	player;
   t_string	*to_write;
-  char		*team;
+  t_player	*player;
 };
 
 t_client	*add_client(t_client *list, t_clientaddr const * const ca);

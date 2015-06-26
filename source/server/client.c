@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Thu Jun 25 22:25:05 2015 Antoine Plaskowski
+** Last update Fri Jun 26 14:26:02 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -33,7 +33,7 @@ t_client	*add_client(t_client * const list,
     return (NULL);
   new->ca = *ca;
   new->to_write = add_string(NULL, "BIENVENUE\n");
-  new->team = NULL;
+  new->player = NULL;
   init_cbuf(&new->cbuf);
   return (put_node(&list->node, &new->node));
 }
