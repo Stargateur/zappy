@@ -5,7 +5,7 @@
 // Login   <alix amoureux@epitech.net>
 //
 // Started on  Wed Jun  3 22:08:07 2015 amoure_a
-// Last update Wed Jun 24 13:05:55 2015 amoure_a
+// Last update Mon Jun 29 15:21:09 2015 amoure_a
 //
 
 #include		"Perso.hpp"
@@ -41,7 +41,9 @@ std::string		get_ip(std::string ip)
 void			connect_to_server(std::string team, int port, std::string ip)
 {
   Perso			perso(team, port, ip);
- perso.init_client();
+
+  perso.init_client();
+  perso.welcome();
   perso.main_loop();
   close(perso.getClient());
 }

@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Thu Jun 25 17:07:19 2015 Alaric
+** Last update Mon Jun 29 12:41:37 2015 amoure_a
 */
 
 #ifndef		GRAPHIC_H_
