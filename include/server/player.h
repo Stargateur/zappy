@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Thu Jun 25 22:07:57 2015 zwertv_e
+** Last update Mon Jun 29 19:26:55 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -21,9 +21,11 @@ typedef	enum
     EAST
   }		t_dir;
 
+# include	"utils.h"
 # include	"inv.h"
 # include	"node.h"
 # include	"map.h"
+# include	"action.h"
 
 struct		s_player
 {
@@ -33,6 +35,8 @@ struct		s_player
   t_dir		dir;
   char		*team;
   t_inv		inv;
+  t_time	time;
+  t_action	*action;
 };
 
 void		init_player(t_player * const player, size_t const x,

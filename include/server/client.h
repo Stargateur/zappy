@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:20 2015 zwertv_e
-** Last update Fri Jun 26 14:25:46 2015 Antoine Plaskowski
+** Last update Mon Jun 29 17:15:26 2015 Antoine Plaskowski
 */
 
 #ifndef		CLIENT_H_
