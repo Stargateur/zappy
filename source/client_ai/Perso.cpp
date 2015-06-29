@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Wed Jun 24 16:27:48 2015 amoure_a
+// Last update Mon Jun 29 16:52:20 2015 amoure_a
 */
 
 #include	"Perso.hpp"
@@ -144,15 +144,16 @@ std::string	Perso::server_answer(std::string &mouv)
   if (write(this->getClient(), (const void *)mouv.c_str(), (size_t)mouv.size()) != -1)
     {
       ret = -1;
-      while (ret == -1 || ret == 0)
+      answer.reserve();
+      ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
+      if (ret == -1 || ret == 0)
 	{
-	  answer.reserve();
-	  ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
-	  if (ret != -1 && ret != 0)
-	    {
-	      std::cout << "Réponse du serveur = " << answer << std::endl;
-	      std::cout << "nombre de caractères = " << answer.size() << std::endl;
-	    }
+	  std::cerr << "Error on read " << answer << std::endl;
+	}
+      else
+	{
+	  std::cout << "Réponse du serveur = " << answer << std::endl;
+	  std::cout << "nombre de caractères = " << answer.size() << std::endl;
 	}
     }
   return (answer);
@@ -177,6 +178,54 @@ void	Perso::execute_commands(std::string &answer, bool *death)
     {
       // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
+}
+
+const void	*Perso::getTeamName()
+{
+  std::string	team_name;
+
+  team_name = this->getTeam() + "\n";
+  return ((const void *)team_name.c_str());
+}
+
+void	Perso::welcome()
+{
+  ssize_t	res;
+  char		welcome[100];
+  char		num_client[20];
+  char		coords[100];
+
+  res = read(this->getClient(), (void *)welcome, 100);
+  if (res != -1)
+    {
+      welcome[res] = '\0';
+      std::cout << welcome;
+      res = write(this->getClient(), this->getTeamName(), (size_t)this->getTeam().size() + 1);
+      if (res != -1)
+	{
+	  res = read(this->getClient(), (void *)num_client, 20);
+	  if (res != -1)
+	    {
+	      num_client[res] = '\0';
+	      std::cout << "NUM_CLIENT = " << num_client;
+	      res = read(this->getClient(), (void *)coords, 100);
+	      if (res != -1)
+		{
+		  coords[res] = '\0';
+		  std::cout << "X Y = " << coords;
+		}
+	      else
+		std::cerr << "Error son X Y" << std::endl;
+	    }
+	  else
+	    std::cerr << "Error on NUM_CLIENT" << std::endl;
+	}
+      else
+	std::cerr << "Error on TEAL_NAME" << std::endl;
+    }
+  else
+    std::cerr << "Error on BIENVENUE" << std::endl;
+  std::cout << std::endl;
 }
 
 void	Perso::main_loop()

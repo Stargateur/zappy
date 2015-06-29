@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 21:15:02 2015 zwertv_e
-** Last update Mon Jun 29 16:51:42 2015 zwertv_e
+** Last update Mon Jun 29 22:51:01 2015 zwertv_e
 */
 
 #include		<stdlib.h>
@@ -23,7 +23,7 @@ void			free_map(t_map *map)
   free_all_node(&map->items->node);
 }
 
-static t_squarre	*find_squarre(t_squarre const * const squarre,
+t_squarre	*find_squarre(t_squarre const * const squarre,
 				      size_t const x, size_t const y)
 {
   if (squarre == NULL)

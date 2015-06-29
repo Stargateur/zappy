@@ -1,11 +1,11 @@
 /*
-** main.c for main in /home/plasko_a/projet/epitech/PSU_2014_zappy
+** main.c for  in /home/zwertv_e/rendu/PSU_2014_zappy
 ** 
-** Made by Antoine Plaskowski
-** Login   <plasko_a@epitech.eu>
+** Made by zwertv_e
+** Login   <zwertv_e@epitech.net>
 ** 
-** Started on  Tue Jun 16 16:38:42 2015 Antoine Plaskowski
-** Last update Mon Jun 29 17:22:41 2015 zwertv_e
+** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
+** Last update Mon Jun 29 22:47:14 2015 zwertv_e
 */
 
 #include        <unistd.h>
