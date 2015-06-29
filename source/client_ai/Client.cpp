@@ -5,7 +5,7 @@
 // Login   <alix amoureux@epitech.net>
 // 
 // Started on  Mon Jun 15 12:25:45 2015 amoure_a
-// Last update Tue Jun 23 14:14:19 2015 amoure_a
+// Last update Mon Jun 29 15:28:37 2015 amoure_a
 //
 
 #include		"Client.h"
@@ -39,14 +39,12 @@ int			Client::init_client()
   return (1);
 }
 
-/*void			Client::connect_client()
-{
-  this->init_client();
-  
-  close(this->client);
-  }*/
-
 int			Client::getClient() const
 {
   return (this->client);
+}
+
+std::string		Client::getTeam() const
+{
+  return (this->team_name);
 }

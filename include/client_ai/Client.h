@@ -5,7 +5,7 @@
 ** Login   <alix amoureux@epitech.net>
 ** 
 ** Started on  Mon Jun 15 12:15:16 2015 amoure_a
-** Last update Tue Jun 23 14:14:13 2015 amoure_a
+** Last update Mon Jun 29 15:28:44 2015 amoure_a
 */
 
 #ifndef		CLIENT_H
@@ -35,6 +35,7 @@ class		Client
   int		init_client();
   void		do_client();
   int		getClient() const;
+  std::string	getTeam() const;
 };
 
 #endif

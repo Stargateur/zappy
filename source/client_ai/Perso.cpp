@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Wed Jun 24 16:27:48 2015 amoure_a
+// Last update Mon Jun 29 15:52:36 2015 amoure_a
 */
 
 #include	"Perso.hpp"
@@ -144,15 +144,16 @@ std::string	Perso::server_answer(std::string &mouv)
   if (write(this->getClient(), (const void *)mouv.c_str(), (size_t)mouv.size()) != -1)
     {
       ret = -1;
-      while (ret == -1 || ret == 0)
+      answer.reserve();
+      ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
+      if (ret == -1 || ret == 0)
 	{
-	  answer.reserve();
-	  ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
-	  if (ret != -1 && ret != 0)
-	    {
-	      std::cout << "Réponse du serveur = " << answer << std::endl;
-	      std::cout << "nombre de caractères = " << answer.size() << std::endl;
-	    }
+	  std::cerr << "Error on read " << answer << std::endl;
+	}
+      else
+	{
+	  std::cout << "Réponse du serveur = " << answer << std::endl;
+	  std::cout << "nombre de caractères = " << answer.size() << std::endl;
 	}
     }
   return (answer);
@@ -177,6 +178,42 @@ void	Perso::execute_commands(std::string &answer, bool *death)
     {
       // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
+}
+
+void	Perso::welcome()
+{
+  std::string	num_client;
+  std::string	coords;
+  std::string	welcome;
+  ssize_t	res;
+
+  welcome.reserve(100);
+  res = read(this->getClient(), (void *)welcome.c_str(), (size_t)welcome.size()); // BIENVENUE
+  if (res != -1)
+    {
+      res = write(this->getClient(), (const void *)this->getTeam().c_str(), (size_t)this->getTeam().size()); // NOM_EQUIPE
+      if (res != -1)
+	{
+	  num_client.reserve(100);
+	  res = read(this->getClient(), (void *)num_client.c_str(), (size_t)num_client.size()); // NUM-CLIENT
+	  if (res != -1)
+	    {
+	      std::cout << "NUM_CLIENT = " << num_client.size() << std::endl;
+	      coords.reserve(100);
+	      res = read(0, (void *)coords.c_str(), (size_t)coords.size()); // X Y
+	      if (res != -1)
+		std::cout << "X Y = " << coords << std::endl;
+	      else
+		std::cerr << "Error son X Y" << std::endl;
+	    }
+	  else
+	    std::cerr << "Error on NUM_CLIENT" << std::endl;
+	}
+      else
+	std::cerr << "Error on TEAL_NAME" << std::endl;
+    }
+  else
+    std::cerr << "Error on BIENVENUE" << std::endl;
 }
 
 void	Perso::main_loop()

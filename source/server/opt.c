@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Mon Jun 29 16:12:00 2015 Antoine Plaskowski
+** Last update Mon Jun 29 16:32:56 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -20,6 +20,7 @@ t_opt		opt;
 static void	init_opt(void)
 {
   static char	*team[] = {"team1", "team2"};
+
   opt.p = "4242";
   opt.x = 42;
   opt.y = 42;
