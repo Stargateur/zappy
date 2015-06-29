@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Mon Jun 29 15:52:36 2015 amoure_a
+// Last update Mon Jun 29 16:52:20 2015 amoure_a
 */
 
 #include	"Perso.hpp"
@@ -180,29 +180,40 @@ void	Perso::execute_commands(std::string &answer, bool *death)
     }
 }
 
+const void	*Perso::getTeamName()
+{
+  std::string	team_name;
+
+  team_name = this->getTeam() + "\n";
+  return ((const void *)team_name.c_str());
+}
+
 void	Perso::welcome()
 {
-  std::string	num_client;
-  std::string	coords;
-  std::string	welcome;
   ssize_t	res;
+  char		welcome[100];
+  char		num_client[20];
+  char		coords[100];
 
-  welcome.reserve(100);
-  res = read(this->getClient(), (void *)welcome.c_str(), (size_t)welcome.size()); // BIENVENUE
+  res = read(this->getClient(), (void *)welcome, 100);
   if (res != -1)
     {
-      res = write(this->getClient(), (const void *)this->getTeam().c_str(), (size_t)this->getTeam().size()); // NOM_EQUIPE
+      welcome[res] = '\0';
+      std::cout << welcome;
+      res = write(this->getClient(), this->getTeamName(), (size_t)this->getTeam().size() + 1);
       if (res != -1)
 	{
-	  num_client.reserve(100);
-	  res = read(this->getClient(), (void *)num_client.c_str(), (size_t)num_client.size()); // NUM-CLIENT
+	  res = read(this->getClient(), (void *)num_client, 20);
 	  if (res != -1)
 	    {
-	      std::cout << "NUM_CLIENT = " << num_client.size() << std::endl;
-	      coords.reserve(100);
-	      res = read(0, (void *)coords.c_str(), (size_t)coords.size()); // X Y
+	      num_client[res] = '\0';
+	      std::cout << "NUM_CLIENT = " << num_client;
+	      res = read(this->getClient(), (void *)coords, 100);
 	      if (res != -1)
-		std::cout << "X Y = " << coords << std::endl;
+		{
+		  coords[res] = '\0';
+		  std::cout << "X Y = " << coords;
+		}
 	      else
 		std::cerr << "Error son X Y" << std::endl;
 	    }
@@ -214,6 +225,7 @@ void	Perso::welcome()
     }
   else
     std::cerr << "Error on BIENVENUE" << std::endl;
+  std::cout << std::endl;
 }
 
 void	Perso::main_loop()
