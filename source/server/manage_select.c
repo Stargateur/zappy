@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Fri Jun 26 14:26:37 2015 Antoine Plaskowski
+** Last update Mon Jun 29 16:18:31 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -107,7 +107,7 @@ bool		manage_select(int const sfd)
 	  return (true);
       client = read_client(&fd_read, client);
       client = write_client(&fd_write, client);
-      getcmd(client);
+      get_cmd(client);
     }
   return (false);
 }

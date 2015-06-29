@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Thu Jun 25 16:19:55 2015 Alaric
+## Last update Mon Jun 29 15:44:05 2015 Antoine Plaskowski
 ##
 
 PATH_SRC	=	source/
@@ -24,6 +24,8 @@ SRC_SERVER	+=	$(PATH_SERVER)cbuf.c
 SRC_SERVER	+=	$(PATH_SERVER)manage_select.c
 SRC_SERVER	+=	$(PATH_SERVER)client.c
 SRC_SERVER	+=	$(PATH_SERVER)parser.c
+SRC_SERVER	+=	$(PATH_SERVER)game.c
+SRC_SERVER	+=	$(PATH_SERVER)utils.c
 
 SRC_SERVER	+=	$(PATH_NODE)first_node.c
 SRC_SERVER	+=	$(PATH_NODE)free_node.c

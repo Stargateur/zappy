@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Thu Jun 18 23:55:04 2015 Antoine Plaskowski
+** Last update Fri Jun 26 15:16:24 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -32,13 +32,19 @@ static const size_t	g_size = sizeof(g_fct) / sizeof(*g_fct);
 
 void		parser(char *str)
 {
-  char const	*cmd;
   size_t	i;
-  
-  cmd = strtok(str, " \t\n");
+  size_t	j;
+
+  if (str == NULL)
+    return;
+  while (*str == ' ')
+    str++;
+  j = 0;
+  while (str[j] != ' ' || str[j] != '\0')
+    j++;
   for (i = 0; i < g_size; i++)
     {
-      if (strcmp(cmd, g_fct[i].cmd) == 0)
+      if (strncmp(str, g_fct[i].cmd, j) == 0)
 	return;
     }
 }

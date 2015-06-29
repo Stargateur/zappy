@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:44:00 2015 Antoine Plaskowski
-** Last update Fri Jun 19 15:34:56 2015 Antoine Plaskowski
+** Last update Mon Jun 29 16:04:43 2015 Antoine Plaskowski
 */
 
 #ifndef		OPT_H_
@@ -16,10 +16,10 @@
 typedef	struct	s_opt
 {
   char const	*p;
-  char const	*x;
-  char const	*y;
-  char const	*c;
-  char const	*t;
+  size_t	x;
+  size_t	y;
+  size_t	c;
+  size_t	t;
   char * const	*team;
 }		t_opt;
 
