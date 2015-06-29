@@ -5,12 +5,13 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Fri Jun 26 14:26:02 2015 Antoine Plaskowski
+** Last update Mon Jun 29 22:34:10 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
 #include	"client.h"
 #include	"cbuf.h"
+#include	"game.h"
 
 t_string	*add_string(t_string * const list, char *str)
 {
@@ -36,4 +37,9 @@ t_client	*add_client(t_client * const list,
   new->player = NULL;
   init_cbuf(&new->cbuf);
   return (put_node(&list->node, &new->node));
+}
+
+bool		set_team(t_client * const list, t_game * const game)
+{
+  
 }

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:20 2015 zwertv_e
-** Last update Mon Jun 29 17:15:26 2015 Antoine Plaskowski
+** Last update Mon Jun 29 22:47:51 2015 Antoine Plaskowski
 */
 
 #ifndef		CLIENT_H_
@@ -16,6 +16,7 @@ typedef	struct	s_client	t_client;
 # include	"accept_client.h"
 # include	"cbuf.h"
 # include	"node.h"
+# include	"game.h"
 # include	"player.h"
 
 typedef	struct	s_string	t_string;
@@ -36,5 +37,6 @@ struct		s_client
 
 t_client	*add_client(t_client *list, t_clientaddr const * const ca);
 t_client	*remove_client(t_client *list, t_client *to_rem);
+bool		set_team(t_client * const list, t_game * const game);
 
 #endif		/* !CLIENT_H_ */

@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Mon Jun 29 18:32:51 2015 Antoine Plaskowski
+** Last update Mon Jun 29 20:19:21 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -13,7 +13,7 @@
 #include	"game.h"
 #include	"opt.h"
 
-t_game		*init_game(t_game *game)
+t_game		*init_game(t_game * const game)
 {
   size_t	len;
   size_t	i;

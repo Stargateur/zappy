@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Mon Jun 29 16:18:31 2015 Antoine Plaskowski
+** Last update Mon Jun 29 22:24:06 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -51,63 +51,62 @@ static t_client	*write_client(fd_set const * const fd_write, t_client *client)
 
   tmp = first_node(&client->node);
   while (tmp != NULL)
-   {
-     tmp2 = tmp->node.next;
-     if (FD_ISSET(tmp->ca.cfd, fd_write))
-       tmp->to_write = write_to_write(tmp->to_write, tmp->ca.cfd);
-     tmp = tmp2;
+    {
+      tmp2 = tmp->node.next;
+      if (FD_ISSET(tmp->ca.cfd, fd_write))
+	tmp->to_write = write_to_write(tmp->to_write, tmp->ca.cfd);
+      tmp = tmp2;
     }
   return (client);
 }
 
-static t_client	*manage_accept_client(t_client *client, int const sfd)
-{
-  t_clientaddr	ca;
-
-  if (accept_client(sfd, &ca) == -1)
-    return (NULL);
-  return (add_client(client, &ca));
-}
-
-static void	get_cmd(t_client *client)
+static t_client	*get_cmd(t_game *game, t_client *client)
 {
   char		*str;
+  t_action	*action;
 
   client = first_node(&client->node);
   while (client != NULL)
     {
       if (ready_cbuf(&client->cbuf) == true)
 	{
-	  str = read_cbuf(&client->cbuf);
-	  if (str == NULL)
-	    return;
+	  if ((str = read_cbuf(&client->cbuf)) == NULL)
+	    return (client);
+	  if ((action = parser(str)) == NULL)
+	    {
+	      free(str);
+	      return (NULL);
+	    }
 	}
       client = client->node.next;
     }
 }
 
-bool		manage_select(int const sfd)
+bool		manage_select(t_game * const game, int const sfd)
 {
+  t_clientaddr	ca;
   fd_set	fd_read;
   fd_set	fd_write;
   int		fd_max;
   t_client	*client;
 
+  if (game == NULL)
+    return (true);
   client = NULL;
   while (g_keep_running == true)
     {
       fd_max = fd_set_client(&fd_read, &fd_write, client, sfd);
-      if (select(fd_max + 1, &fd_read, &fd_write, NULL, NULL) == -1)
+      if (pselect(fd_max + 1, &fd_read, &fd_write, NULL, NULL, NULL) == -1)
 	{
 	  perror("select()");
 	  return (true);
 	}
       if (FD_ISSET(sfd, &fd_read))
-	if ((client = manage_accept_client(client, sfd)) == NULL)
-	  return (true);
-      client = read_client(&fd_read, client);
-      client = write_client(&fd_write, client);
-      get_cmd(client);
+	if (accept_client(sfd, &ca) == -1 ||
+	    (client = add_client(client, &ca)) == NULL)
+	  return (NULL);
+      client = write_client(&fd_write, read_client(&fd_read, client));
+      get_cmd(game, client);
     }
   return (false);
 }

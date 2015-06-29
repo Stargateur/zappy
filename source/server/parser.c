@@ -5,32 +5,46 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Mon Jun 29 19:18:06 2015 Antoine Plaskowski
+** Last update Mon Jun 29 22:13:27 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
 #include	<stddef.h>
+#include	<stdlib.h>
 #include	"parser.h"
+#include	"action.h"
 
 static t_cmd	g_cmd[] =
   {
-    {"avance", NULL, 7},
-    {"droite", NULL, 7},
-    {"gauche", NULL, 7},
-    {"voir", NULL, 7},
-    {"inventaire", NULL, 1},
-    {"prend", NULL, 7},
-    {"pose", NULL, 7},
-    {"expulse", NULL, 7},
-    {"broadcast", NULL, 7},
-    {"incantation", NULL, 300},
-    {"fork", NULL, 42},
-    {"connect_nbr", NULL, 0}
+    {"avance", AVANCE, 7},
+    {"droite", DROITE, 7},
+    {"gauche", GAUCHE, 7},
+    {"voir", VOIR, 7},
+    {"inventaire", INVENTAIRE, 1},
+    {"prend", PREND, 7},
+    {"pose", POSE, 7},
+    {"expulse", EXPULSE, 7},
+    {"broadcast", BROADCAST, 7},
+    {"incantation", INCANTATION, 300},
+    {"fork", FORK, 42},
+    {"connect_nbr", CONNECT_NBR, 0}
   };
 
 static const size_t	g_size = sizeof(g_cmd) / sizeof(*g_cmd);
 
-t_cmd		*parser(char *str)
+static t_action	*create_action(char *str, char *arg, t_cmd *cmd)
+{
+  t_action	*action;
+
+  if ((action = malloc(sizeof(*action))) == NULL)
+    return (NULL);
+  action->str = str;
+  action->arg = arg;
+  action->cmd = cmd;
+  return (action);
+}
+
+t_action	*parser(char *str)
 {
   size_t	i;
   size_t	j;
@@ -44,6 +58,6 @@ t_cmd		*parser(char *str)
     j++;
   for (i = 0; i < g_size; i++)
     if (strncmp(str, g_cmd[i].cmd, j) == 0)
-      return (g_cmd + i);
+      return (create_action(str, str + j, g_cmd + i));
   return (NULL);
 }

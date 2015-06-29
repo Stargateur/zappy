@@ -5,14 +5,8 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Mon Jun 29 19:31:04 2015 Antoine Plaskowski
+** Last update Mon Jun 29 19:32:05 2015 Antoine Plaskowski
 */
 
 #include	"action.h"
 
-typedef	struct	s_action	t_action;
-struct		s_action
-{
-  t_node	node;
-  t_cmd		*cmd;
-};

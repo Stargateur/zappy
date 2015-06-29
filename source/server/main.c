@@ -5,7 +5,7 @@
 ** Login   <plasko_a@epitech.eu>
 ** 
 ** Started on  Tue Jun 16 16:38:42 2015 Antoine Plaskowski
-** Last update Mon Jun 29 16:19:48 2015 Antoine Plaskowski
+** Last update Mon Jun 29 20:20:24 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -19,6 +19,7 @@
 #include	"manage_select.h"
 #include	"opt.h"
 #include	"int_handler.h"
+#include	"game.h"
 #include	"map.h"
 #include	"node.h"
 #include	"player.h"
@@ -42,14 +43,18 @@ static int	init_socket(char const * const port)
 
 int		main(int argc, char **argv)
 {
+  t_game	game;
   int		sfd;
 
   if (get_opt(argv, argc) == true)
     return (1);
+  if (init_game(&game) == NULL)
+    return (1);
   show_opt();
   if ((sfd = init_socket(opt.p)) == -1)
     return (1);
-  manage_select(sfd);
+  if (manage_select(&game, sfd) == true)
+    return (1);
   close(sfd);
   return (0);
 }
