@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Thu Jun 25 22:07:57 2015 zwertv_e
+** Last update Mon Jun 29 15:48:35 2015 zwertv_e
 */
 
 #ifndef		PLAYER_H__
@@ -31,6 +31,7 @@ struct		s_player
   size_t	x;
   size_t	y;
   t_dir		dir;
+  size_t	range;
   char		*team;
   t_inv		inv;
 };

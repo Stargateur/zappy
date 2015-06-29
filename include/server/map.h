@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 17:34:34 2015 zwertv_e
-** Last update Thu Jun 25 22:52:23 2015 zwertv_e
+** Last update Mon Jun 29 16:06:01 2015 zwertv_e
 */
 
 #ifndef		MAP_H__
@@ -49,5 +49,10 @@ bool		add_item(t_map *map, size_t const x, size_t const y,
 			 int const type);
 bool		delete_item(t_map *map, size_t const x, size_t const y,
 			    int const type);
+size_t		prev_x(t_map const * const map, size_t x);
+size_t	        next_x(t_map const * const map, size_t x);
+size_t		prev_y(t_map const * const map, size_t y);
+size_t	        next_y(t_map const * const map, size_t y);
+
 
 #endif		/* MAP_H__ */

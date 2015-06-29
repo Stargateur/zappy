@@ -5,7 +5,7 @@
 ** Login   <plasko_a@epitech.eu>
 ** 
 ** Started on  Tue Jun 16 16:38:42 2015 Antoine Plaskowski
-** Last update Thu Jun 25 23:09:10 2015 Antoine Plaskowski
+** Last update Mon Jun 29 17:22:41 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -86,6 +86,8 @@ int		main(int argc, char **argv)
   rotate_left(&test);
   if (test.dir == NORTH)
     printf("Player has rotated correctly\n");
+
+  player_view(&map, &test);
 
   /* int		sfd; */
 
