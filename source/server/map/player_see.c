@@ -5,9 +5,10 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 15:43:01 2015 zwertv_e
-** Last update Mon Jun 29 22:50:11 2015 zwertv_e
+** Last update Tue Jun 30 19:57:23 2015 Antoine Plaskowski
 */
 
+#include	<stdlib.h>
 #include	"player.h"
 #include	"map.h"
 

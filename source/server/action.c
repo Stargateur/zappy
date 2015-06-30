@@ -5,8 +5,18 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Mon Jun 29 19:32:05 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:53:04 2015 Antoine Plaskowski
 */
 
 #include	"action.h"
 
+bool		show_action(t_action *action)
+{
+  action = first_node(&action->node);
+  while (action != NULL)
+    {
+      printf("%s\n", action->str);
+      action = action->node.next;
+    }
+  return (false);
+}

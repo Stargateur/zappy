@@ -5,9 +5,10 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Tue Jun 30 18:33:03 2015 Antoine Plaskowski
+** Last update Tue Jun 30 20:03:19 2015 Antoine Plaskowski
 */
 
+#include	<string.h>
 #include	"player.h"
 
 t_player	*find_free_player(t_player *player, char * const team)
@@ -33,6 +34,7 @@ bool            add_action(t_player * const player, char * const str)
     return (true);
   if ((action = parser(str)) == NULL)
     return (true);
+  printf("ok ok ?");
   player->action = put_node(&player->action->node, &action->node);
   if (player->action == NULL)
     return (true);

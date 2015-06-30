@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:37:14 2015 Antoine Plaskowski
-** Last update Tue Jun 30 17:21:55 2015 Antoine Plaskowski
+** Last update Tue Jun 30 20:09:28 2015 Antoine Plaskowski
 */
 
 #ifndef		PARSER_H_
@@ -37,6 +37,7 @@ struct		s_cmd
   char const	*cmd;
   t_tcmd	type;
   size_t	time;
+  size_t	len_cmd;
 };
 
 t_action	*parser(char *str);

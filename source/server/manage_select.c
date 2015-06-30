@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Tue Jun 30 19:41:41 2015 Antoine Plaskowski
+** Last update Tue Jun 30 20:01:57 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -79,10 +79,16 @@ static bool	get_cmd(t_game *game, t_client *client)
 		return (true);
 	    }
 	  else
-	    if (add_action(client->player, str) == true)
-	      return (true);
+	    {
+	      printf("ok ?\n");
+	      if (add_action(client->player, str) == true)
+		return (true);
+	      printf("ok\n");
+	    }
 	  free(str);	  
 	}
+      if (client->player != NULL)
+	show_action(client->player->action);
       client = client->node.next;
     }
   return (false);

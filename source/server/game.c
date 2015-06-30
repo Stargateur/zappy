@@ -5,10 +5,11 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Tue Jun 30 19:21:36 2015 Antoine Plaskowski
+** Last update Tue Jun 30 20:12:21 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
+#include	<string.h>
 #include	"utils.h"
 #include	"game.h"
 #include	"opt.h"

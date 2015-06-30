@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Tue Jun 30 19:17:36 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:51:20 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -87,6 +87,7 @@ bool		set_team(t_client * const client, t_game * const game,
 	      player = init_player(malloc(sizeof(*player)), rand(), rand(), game->team[team].team);
 	    if (player == NULL)
 	      return (true);
+	    game->player = put_node(&game->player->node, &player->node);
 	    client->player = player;
 	    player->client = client;
 	    return (anwser_team(client, game->team[team].connect_max - game->team[team].connect));

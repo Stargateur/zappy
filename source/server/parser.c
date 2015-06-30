@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Tue Jun 30 19:38:03 2015 Antoine Plaskowski
+** Last update Tue Jun 30 20:11:46 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -16,18 +16,18 @@
 
 static t_cmd	g_cmd[] =
   {
-    {"avance", AVANCE, 7},
-    {"droite", DROITE, 7},
-    {"gauche", GAUCHE, 7},
-    {"voir", VOIR, 7},
-    {"inventaire", INVENTAIRE, 1},
-    {"prend", PREND, 7},
-    {"pose", POSE, 7},
-    {"expulse", EXPULSE, 7},
-    {"broadcast", BROADCAST, 7},
-    {"incantation", INCANTATION, 300},
-    {"fork", FORK, 42},
-    {"connect_nbr", CONNECT_NBR, 0}
+    {"avance", AVANCE, 7, sizeof("avance")},
+    {"droite", DROITE, 7, sizeof("droite")},
+    {"gauche", GAUCHE, 7, sizeof("gauche")},
+    {"voir", VOIR, 7, sizeof("voir")},
+    {"inventaire", INVENTAIRE, 1, sizeof("inventaire")},
+    {"prend", PREND, 7, sizeof("prend")},
+    {"pose", POSE, 7, sizeof("pose")},
+    {"expulse", EXPULSE, 7, sizeof("expulse")},
+    {"broadcast", BROADCAST, 7, sizeof("broadcast")},
+    {"incantation", INCANTATION, 300, sizeof("incantation")},
+    {"fork", FORK, 42, sizeof("fork")},
+    {"connect_nbr", CONNECT_NBR, 0, sizeof("connect_nbr")}
   };
 
 static const size_t	g_size = sizeof(g_cmd) / sizeof(*g_cmd);
@@ -59,7 +59,7 @@ t_action	*parser(char *str)
   while (str[j] != ' ' && str[j] != '\0')
     j++;
   for (i = 0; i < g_size; i++)
-    if (strncmp(str, g_cmd[i].cmd, j) == 0)
+    if (strncmp(str, g_cmd[i].cmd, g_cmd[i].len_cmd) == 0)
       return (create_action(str, str + j, g_cmd + i));
   return (NULL);
 }
