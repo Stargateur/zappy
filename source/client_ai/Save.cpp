@@ -5,13 +5,14 @@
 // Login   <alix amoureux@epitech.net>
 // 
 // Started on  Fri Jun 19 19:00:59 2015 amoure_a
-** Last update Tue Jun 23 10:00:02 2015 Jérémy MATHON
+// Last update Tue Jun 30 15:22:43 2015 amoure_a
 */
 
 #include		"Save.h"
 
 Save::Save()
 {
+  
 }
 
 Save::~Save()

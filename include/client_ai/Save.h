@@ -5,7 +5,7 @@
 ** Login   <alix amoureux@epitech.net>
 ** 
 ** Started on  Fri Jun 19 19:01:23 2015 amoure_a
-** Last update Tue Jun 23 14:19:39 2015 amoure_a
+** Last update Tue Jun 30 15:23:24 2015 amoure_a
 */
 
 #ifndef			SAVE_H
@@ -33,7 +33,7 @@ class			Save
  public:
   std::list<std::string>				mouv;
   int							cpt;
-  std::vector<std::vector<t_case> >			map;
+  std::vector<std::vector<std::list<t_case> > >		map;
  public:
   Save();
   ~Save();

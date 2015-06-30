@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:53:31 2015 Jérémy MATHON
-// Last update Tue Jun 30 14:36:19 2015 amoure_a
+// Last update Tue Jun 30 15:46:22 2015 amoure_a
 */
 
 #ifndef PERSO_HPP_
@@ -25,6 +25,12 @@ private:
   int				_time;
   Invent			_invent;
   std::list<std::string>	_action;
+  int				_posx;
+  int				_posy;
+  int				_mapheight;
+  int				_maplength;
+  int				_numclient;
+
 public:
   Perso(std::string team, int port, std::string ip);
   ~Perso();
@@ -47,6 +53,8 @@ public:
   void		execute_commands(std::string &answer, bool *death);
   void		welcome();
   const void	*getTeamName();
+  void		size_map_pos_ia(std::string coords);
+  void		get_numclient(std::string num_client);
 };
 
 #endif /* !PERSO_HPP_ */

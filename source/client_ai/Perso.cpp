@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Tue Jun 30 14:36:54 2015 amoure_a
+// Last update Tue Jun 30 15:47:18 2015 amoure_a
 */
 
 #include		"Perso.hpp"
@@ -189,6 +189,28 @@ const void	*Perso::getTeamName()
   return ((const void *)team_name.c_str());
 }
 
+void		Perso::size_map_pos_ia(std::string coords)
+{
+  std::string	x;
+  std::string	y;
+
+  x = coords.substr(0, coords.find_first_of(" "));
+  y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
+  this->_mapheight = atoi(y.c_str());
+  this->_maplength = atoi(x.c_str());
+  this->_posx = this->_mapheight / 2;
+  this->_posy = this->_maplength / 2;
+  std::cout << "Map X Y = " << this->_mapheight << this->_maplength << std::endl;
+  std::cout << "x y = " << this->_posx << this->_posy << std::endl;
+}
+
+void		Perso::get_numclient(std::string num_client)
+{
+  this->_numclient = atoi(num_client.c_str());
+  std::cout << "num client = " << this->_numclient << std::endl;
+  exit(0);
+}
+
 void	Perso::welcome()
 {
   ssize_t	res;
@@ -208,13 +230,12 @@ void	Perso::welcome()
 	  res = read(this->getClient(), (void *)num_client.c_str(), 20);
 	  if (res != -1)
 	    {
+	      this->get_numclient(num_client);
 	      coords.resize(100);
 	      std::cout << "NUM_CLIENT = " << num_client;
 	      res = read(this->getClient(), (void *)coords.c_str(), 100);
 	      if (res != -1)
-		{
-		  std::cout << "X Y = " << coords;
-		}
+		this->size_map_pos_ia(coords);
 	      else
 		std::cerr << "Error son X Y" << std::endl;
 	    }
