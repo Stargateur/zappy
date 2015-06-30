@@ -118,13 +118,13 @@ void			Perso::dead()
 // machine à état ici
 std::string		Perso::do_action()
 {
-  std::string		action("voir\n");
+  std::string		action("inventaire\n");
 
-  std::cout << "time = " << this->_time << std::endl;
+  /*std::cout << "time = " << this->_time << std::endl;
   std::cout << "nourriture = " << this->_invent._nourriture << std::endl;
-  std::cout << "client = " << this->getClient() << std::endl;
+  std::cout << "client = " << this->getClient() << std::endl;*/
 
-  std::cout << "Action = " << action << std::endl;
+  std::cout << "Action = " << action;
   /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
     {
     std::cout << "Action = " << *tmpAction << std::endl;
@@ -140,8 +140,7 @@ std::string		Perso::server_answer(std::string action)
   ssize_t		ret;
 
   answer.resize(2048);
-  std::cout << "En attente d'une réponse du serveur ..." << std::endl;
-  std::cout << action << std::endl;
+  std::cout << "En attente d'une reponse du serveur ..." << std::endl;
   if (write(this->getClient(), (const void *)action.c_str(), (size_t)action.size()) != -1)
     {
       ret = -1;
@@ -152,7 +151,7 @@ std::string		Perso::server_answer(std::string action)
 	}
       else
 	{
-	  std::cout << "Réponse du serveur = " << answer <<  "nombre de caractères = " << ret << std::endl;
+	  std::cout << "Reponse du serveur = " << answer <<  "nombre de caracteres = " << ret << std::endl;
 	}
     }
   else
@@ -160,7 +159,43 @@ std::string		Perso::server_answer(std::string action)
   return (answer);
 }
 
-void	Perso::execute_commands(std::string &answer, bool *death)
+//{nourriture 1, linemate 0}
+
+int	Perso::find_number(std::string &answer, char char_end)
+{
+  size_t	pos_space;
+  size_t	pos_coma;
+  int		number;
+
+  pos_space = answer.find_first_of(" ");
+  answer = answer.replace(pos_space, 1, "");
+  pos_coma = answer.find_first_of(char_end);
+  answer = answer.replace(pos_coma, 1, "");
+  number  = atoi((answer.substr(pos_space, pos_coma - pos_space)).c_str());
+  return (number);
+}
+
+void	Perso::get_inventory(std::string answer)
+{
+  this->_invent._nourriture = this->find_number(answer, ',');
+  this->_invent._linemate = this->find_number(answer, ',');
+  this->_invent._deraumere = this->find_number(answer, ',');
+  this->_invent._sibur = this->find_number(answer, ',');
+  this->_invent._mendiane = this->find_number(answer, ',');
+  this->_invent._phiras = this->find_number(answer, ',');
+  this->_invent._thystame = this->find_number(answer, '}');
+  
+  //this->_invent._thystame = this->find_number(answer);
+  /*std::cout << "Nourriture : " << this->_invent._nourriture << std::endl;
+  std::cout << "linemate : " << this->_invent._linemate << std::endl;
+  std::cout << "deraumere : " << this->_invent._deraumere << std::endl;
+  std::cout << "sibur : " << this->_invent._sibur << std::endl;
+  std::cout << "mendiane : " << this->_invent._mendiane << std::endl;
+  std::cout << "phyras : " << this->_invent._phiras << std::endl;
+  std::cout << "thystame : " << this->_invent._thystame << std::endl;*/
+}
+
+void	Perso::execute_commands(std::string &answer, bool *death, std::string &action)
 {
   if (answer.compare("OK") == 0)
     {
@@ -177,6 +212,22 @@ void	Perso::execute_commands(std::string &answer, bool *death)
     }
   else
     {
+      if (action.compare("voir") == 0)
+	{
+	  // comment faire par rapport au placement des cases
+	}
+      else if (action.compare("inventaire\n") == 0)
+	{
+	  this->get_inventory(answer);
+	}
+      else if (action.compare("incantation") == 0)
+	{
+
+	}
+      else if (action.compare("connect_nbr") == 0)
+	{
+
+	}
       // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
 }
@@ -196,20 +247,25 @@ void		Perso::size_map_pos_ia(std::string coords)
   int		i;
   int		j;
 
-  i = -1;
+  i = 0;
   x = coords.substr(0, coords.find_first_of(" "));
   y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
   this->_mapheight = atoi(y.c_str());
   this->_maplength = atoi(x.c_str());
   this->_posx = this->_mapheight / 2;
   this->_posy = this->_maplength / 2;
-  std::cout << "Map X Y = " << this->_mapheight << this->_maplength << std::endl;
-  std::cout << "x y = " << this->_posx << this->_posy << std::endl;
-  while (++i != this->_mapheight)
+  this->_sav->map = std::vector< std::vector< std::list <t_case> > > (this->_mapheight);
+  while (i < this->_mapheight)
     {
-      j = -1;
-      while (++j != this->_maplength)
-	this->_sav->map[i][j].push_back(NONE);
+      this->_sav->map[i] = std::vector<std::list <t_case> > (this->_maplength);
+      j = 0;
+      while (j < this->_maplength)
+	{
+	  std::cout << i << " " << j << std::endl;
+	  this->_sav->map[i][j].push_back(NONE);
+	  j++;
+	}
+      i++;
     }
 }
 
@@ -217,7 +273,6 @@ void		Perso::get_numclient(std::string num_client)
 {
   this->_numclient = atoi(num_client.c_str());
   std::cout << "num client = " << this->_numclient << std::endl;
-  exit(0);
 }
 
 void	Perso::welcome()
@@ -275,7 +330,7 @@ void	Perso::main_loop()
 	}
       action = do_action(); // on fait la machine à état ici
       answer = this->server_answer(action); // envoi de la cmd au serveur et attente de la réponse (faudra faire jusque 10 envois possibles)
-      this->execute_commands(answer, &death);
+      this->execute_commands(answer, &death, action);
       if (this->_action.size() < 10)
 	{
 	  //this->_action.push_back(mouv);

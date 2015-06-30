@@ -5,12 +5,13 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 19:39:37 2015 zwertv_e
-** Last update Fri Jun 26 14:24:23 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:20:28 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
 #include	<unistd.h>
 #include	<stdlib.h>
+#include	<string.h>
 #include	"cbuf.h"
 
 #define		add_one_cbuf_len(x) (x + 1 >= CBUF_LEN ? 0 : x + 1)
@@ -19,6 +20,7 @@ t_cbuf		*init_cbuf(t_cbuf * const cbuf)
 {
   if (cbuf == NULL)
     return (NULL);
+  memset(cbuf->buf, 0, CBUF_LEN);
   cbuf->r = 0;
   cbuf->w = 0;
   cbuf->has_read = true;

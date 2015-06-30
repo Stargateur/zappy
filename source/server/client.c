@@ -5,10 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Tue Jun 30 18:32:30 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:51:20 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
+#include	<stdio.h>
 #include	<string.h>
 #include	"client.h"
 #include	"cbuf.h"
@@ -21,7 +22,7 @@ t_string	*add_string(t_string * const list, char *str)
 
   if ((new = malloc(sizeof(*new))) == NULL)
     return (NULL);
-  new->str = str;
+  new->str = strdup(str);
   return (put_node(&list->node, &new->node));
 }
 
@@ -41,16 +42,43 @@ t_client	*add_client(t_client * const list,
   return (put_node(&list->node, &new->node));
 }
 
+static bool	anwser_team(t_client * const client, size_t const num_client)
+{
+  char		*str;
+  int           len;
+
+  if (client == NULL || client->player == NULL)
+    return (true);
+  if ((len = snprintf(NULL, 0, "%lu\n", num_client)) < 0)
+    return (true);
+  if ((str = malloc(sizeof(*str) * ((size_t)len + 1))) == NULL)
+    return (true);
+  if (snprintf(str, (size_t)len + 1, "%lu\n", num_client) != len)
+    return (true);
+  client->to_write = add_string(client->to_write, str);
+  free(str);
+  if ((len = snprintf(NULL, 0, "%lu %lu\n", client->player->x, client->player->y)) < 0)
+    return (true);
+  if ((str = malloc(sizeof(*str) * ((size_t)len + 1))) == NULL)
+    return (true);
+  if (snprintf(str, (size_t)len + 1, "%lu %lu\n", client->player->x, client->player->y) != len)
+    return (true);
+  client->to_write = add_string(client->to_write, str);
+  free(str);
+  return (false);
+}
+
 bool		set_team(t_client * const client, t_game * const game,
-			 char * const str)
+			 char * str)
 {
   t_player	*player;
   size_t	team;
 
+  str = strtok(str, " ");
   if (client == NULL || game == NULL || str == NULL || game->team == NULL)
     return (true);
   for (team = 0; team < game->size_team; team++)
-    if (strcmp(game->team[team].team, str) == 0)
+    if (strncmp(game->team[team].team, str, game->team[team].len_team) == 0)
       {
 	if (game->team[team].connect < game->team[team].connect_max)
 	  {
@@ -59,9 +87,10 @@ bool		set_team(t_client * const client, t_game * const game,
 	      player = init_player(malloc(sizeof(*player)), rand(), rand(), game->team[team].team);
 	    if (player == NULL)
 	      return (true);
+	    game->player = put_node(&game->player->node, &player->node);
 	    client->player = player;
 	    player->client = client;
-	    return (false);
+	    return (anwser_team(client, game->team[team].connect_max - game->team[team].connect));
 	  }
 	else
 	  return (true);

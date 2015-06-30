@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:40:05 2015 Antoine Plaskowski
-** Last update Tue Jun 30 17:00:11 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:59:16 2015 Antoine Plaskowski
 */
 
 #ifndef		UTILS_H_
@@ -17,6 +17,5 @@
 typedef	struct	timespec	t_time;
 
 size_t		len_tab(void * const * const tab);
-size_t		find_team(char * const team);
 
 #endif		/* !UTILS_H_ */

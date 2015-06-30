@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Mon Jun 29 16:32:56 2015 Antoine Plaskowski
+** Last update Tue Jun 30 18:44:23 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -19,7 +19,7 @@ t_opt		opt;
 
 static void	init_opt(void)
 {
-  static char	*team[] = {"team1", "team2"};
+  static char	*team[] = {"team1", "team2", NULL};
 
   opt.p = "4242";
   opt.x = 42;
@@ -31,7 +31,7 @@ static void	init_opt(void)
 
 bool		show_opt(void)
 {
-  int		i;
+  size_t	i;
 
   printf("port : %s\n", opt.p);
   printf("x : %lu\n", opt.x);
@@ -83,6 +83,7 @@ bool		get_opt(char * const * const argv, int const argc)
   while ((c = getopt(argc, argv, "hp:x:y:c:t:")) != -1)
     if (ana_opt(argv, c) == NULL)
       ret = true;
-  opt.team = argv + optind;
+  if (argv[optind] != NULL)
+    opt.team = argv + optind;
   return (ret);
 }

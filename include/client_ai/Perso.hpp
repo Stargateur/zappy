@@ -50,11 +50,13 @@ public:
   void	main_loop();
   std::string	do_action();
   std::string	server_answer(std::string action);
-  void		execute_commands(std::string &answer, bool *death);
+  void		execute_commands(std::string &answer, bool *death, std::string &action);
   void		welcome();
   const void	*getTeamName();
   void		size_map_pos_ia(std::string coords);
   void		get_numclient(std::string num_client);
+  void		get_inventory(std::string answer);
+  int		find_number(std::string &answer, char char_end);
 };
 
 #endif /* !PERSO_HPP_ */

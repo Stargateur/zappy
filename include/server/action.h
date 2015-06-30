@@ -5,11 +5,13 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:24 2015 Antoine Plaskowski
-** Last update Mon Jun 29 20:00:06 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:53:44 2015 Antoine Plaskowski
 */
 
 #ifndef		ACTION_H_
 # define	ACTION_H_
+
+# include	<stdbool.h>
 
 typedef	struct	s_action	t_action;
 
@@ -23,5 +25,7 @@ struct		s_action
   char		*arg;
   t_cmd		*cmd;
 };
+
+bool		show_action(t_action *action);
 
 #endif		/* !ACTION_H_ */

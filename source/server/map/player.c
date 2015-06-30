@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Tue Jun 30 18:12:32 2015 Antoine Plaskowski
+** Last update Tue Jun 30 23:05:52 2015 zwertv_e
 */
 
 #include	<stdio.h>
@@ -80,7 +80,7 @@ void		move(t_map const * const map, t_player * const player)
 }
 
 t_player		*init_player(t_player * const player, size_t const x,
-				     size_t const y, char const * const team)
+				     size_t const y, char * const team)
 {
   if (player == NULL || team == NULL)
     return (NULL);
@@ -89,6 +89,7 @@ t_player		*init_player(t_player * const player, size_t const x,
   player->dir = NORTH;
   player->range = 1;
   player->client = NULL;
+  player->action = NULL;
   init_inv(&player->inv);
   player->team = team;
   printf("New player at pos [%lu - %lu] in '%s' team\n", player->x, player->y, player->team);

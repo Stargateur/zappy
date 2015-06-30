@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Tue Jun 30 17:38:52 2015 Kevin Costa
+** Last update Tue Jun 30 23:47:48 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -45,54 +45,66 @@ int		main(int argc, char **argv)
 {
   t_game	game;
   int		sfd;
-  t_texture     text;
-  t_display	*display;
-  SDL_Window    *fenetre;
-  t_map			map;
-  t_squarre		*disp;
+  /* t_texture     text; */
+  /* t_display	*display; */
+  /* SDL_Window    *fenetre; */
+  /* t_map			map; */
+  /* t_squarre		*disp; */
 
-  if ((display = malloc(sizeof(t_display))) == NULL)
-    return (1);
-  fenetre = init_video();
-  display = init_renderer(fenetre, display);
-  init_texture(&text, display->renderer);
+  /* if ((display = malloc(sizeof(t_display))) == NULL) */
+  /*   return (1); */
+  /* fenetre = init_video(); */
+  /* display = init_renderer(fenetre, display); */
+  /* init_texture(&text, display->renderer); */
+
+  /* init_map(&map, 50, 50); */
+  /* map_generate(&map); */
+  /* disp = first_node(&map.items->node); */
+  /* while (disp != NULL) */
+  /*   { */
+  /*     printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->x, disp->y, disp->ressources.linemlate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food); */
+  /*     disp = disp->node.next; */
+  /*   } */
+
+  /* int cont = 0; */
+
+  /* while (cont == 0) */
+  /*   { */
+  /*     cont = input(display); */
+  /*     draw_stone(&map, &text, display); */
+  /*     draw_grid(&map, display); */
+  /*     draw_select(display); */
+  /*     SDL_RenderPresent(display->renderer); */
+  /*     SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255); */
+  /*     SDL_RenderClear(display->renderer); */
+  /*     SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255); */
+  /*   } */
+
+  /* /\* draw_stone(&map, &text, renderer, display); *\/ */
+  /* SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255); */
+  /* draw_grid(&map, display); */
+  /* draw_select(display); */
+  /* SDL_RenderPresent(display->renderer); */
+
+  /* sleep(5); */
+  t_map			map;
+  t_player		test;
+  char			*inv;
+  char			*view;
 
   init_map(&map, 50, 50);
   map_generate(&map);
-  disp = first_node(&map.items->node);
-  while (disp != NULL)
-    {
-      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->x, disp->y, disp->ressources.linemlate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
-      disp = disp->node.next;
-    }
-
-  int cont = 0;
-
-  while (cont == 0)
-    {
-      cont = input(display);
-      draw_stone(&map, &text, display);
-      draw_grid(&map, display);
-      draw_select(display);
-      SDL_RenderPresent(display->renderer);
-      SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255);
-      SDL_RenderClear(display->renderer);
-      SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
-    }
-
-  /* draw_stone(&map, &text, renderer, display); */
-  SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
-  draw_grid(&map, display);
-  draw_select(display);
-  SDL_RenderPresent(display->renderer);
-
-  sleep(5);
-  t_player		test;
-
   init_player(&test, 0, 0, "Razmoket");
   test.inv.linemlate += 2;
   test.inv.food += 5;
-  printf("Inventory: %s\n", get_inventory(&test.inv));
+  inv = get_inventory(&test.inv);
+  if (inv)
+    {
+      printf("Inventory: %s\n", inv);
+      free(inv);
+    }
+  else
+    printf("Inv is NULL\n");
   move(&map, &test);
   rotate_left(&test);
   move(&map, &test);
@@ -106,17 +118,24 @@ int		main(int argc, char **argv)
   if (test.dir == NORTH)
     printf("Player has rotated correctly\n");
 
-  player_view(&map, &test);
+  view = player_view(&map, &test);
+  if (view)
+    {
+      printf("View: %s\n", view);
+      free(view);
+    }
+  else
+    printf("View is NULL\n");
 
-  if (get_opt(argv, argc) == true)
-    return (1);
-  if (init_game(&game) == NULL)
-    return (1);
-  show_opt();
-  if ((sfd = init_socket(opt.p)) == -1)
-    return (1);
-  if (manage_select(&game, sfd) == true)
-    return (1);
-  close(sfd);
+  /* if (get_opt(argv, argc) == true) */
+  /*   return (1); */
+  /* show_opt(); */
+  /* if (init_game(&game) == NULL) */
+  /*   return (1); */
+  /* if ((sfd = init_socket(opt.p)) == -1) */
+  /*   return (1); */
+  /* if (manage_select(&game, sfd) == true) */
+  /*   return (1); */
+  /* close(sfd); */
   return (0);
 }
