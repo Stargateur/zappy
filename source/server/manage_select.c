@@ -5,10 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Tue Jun 30 16:51:46 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:36:41 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	<unistd.h>
 #include	<string.h>
 #include	"client.h"
