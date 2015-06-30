@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Mar 11 06:50:08 2015 Antoine Plaskowski
-** Last update Wed Mar 25 15:21:20 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:17:32 2015 Antoine Plaskowski
 */
 
 #ifndef		ACCEPT_CLIENT_H_
@@ -14,8 +14,8 @@
 # include      <netinet/in.h>
 
 typedef	struct		s_clientaddr	t_clientaddr;
-
 typedef	union		u_sockaddr_in	t_sockaddr_in;
+
 union			u_sockaddr_in
 {
   struct sockaddr	base;

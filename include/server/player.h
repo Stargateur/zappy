@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Mon Jun 29 22:52:31 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:22:32 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -26,6 +26,7 @@ typedef	enum
 # include	"node.h"
 # include	"map.h"
 # include	"action.h"
+# include	"client.h"
 
 struct		s_player
 {
@@ -38,6 +39,7 @@ struct		s_player
   t_inv		inv;
   t_time	time;
   t_action	*action;
+  t_client	*client;
 };
 
 void		init_player(t_player * const player, size_t const x,

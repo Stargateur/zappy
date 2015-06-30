@@ -5,13 +5,14 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:20 2015 zwertv_e
-** Last update Tue Jun 30 17:02:55 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:16:56 2015 Antoine Plaskowski
 */
 
 #ifndef		CLIENT_H_
 # define	CLIENT_H_
 
 typedef	struct	s_client	t_client;
+typedef	struct	s_string	t_string;
 
 # include	"accept_client.h"
 # include	"cbuf.h"
@@ -19,7 +20,6 @@ typedef	struct	s_client	t_client;
 # include	"game.h"
 # include	"player.h"
 
-typedef	struct	s_string	t_string;
 struct		s_string
 {
   t_node	node;

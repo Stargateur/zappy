@@ -5,18 +5,16 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:37:14 2015 Antoine Plaskowski
-** Last update Mon Jun 29 22:14:28 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:21:55 2015 Antoine Plaskowski
 */
 
 #ifndef		PARSER_H_
 # define	PARSER_H_
 
-typedef	struct	s_cmd	t_cmd;
-
 # include	<stddef.h>
-# include	"action.h"
 
-enum		e_tcmd
+typedef	struct	s_cmd	t_cmd;
+typedef	enum	e_tcmd
   {
     AVANCE,
     DROITE,
@@ -30,8 +28,9 @@ enum		e_tcmd
     INCANTATION,
     FORK,
     CONNECT_NBR
-  };
-typedef	enum	e_tcmd	t_tcmd;
+  }		t_tcmd;
+
+# include	"action.h"
 
 struct		s_cmd
 {

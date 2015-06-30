@@ -5,15 +5,15 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:43:00 2015 zwertv_e
-** Last update Thu Jun 25 22:14:47 2015 zwertv_e
+** Last update Tue Jun 30 17:18:50 2015 Antoine Plaskowski
 */
 
 #ifndef		INV_H__
 # define	INV_H__
 
-# include	"node.h"
-
 typedef	struct	s_inv		t_inv;
+
+# include	"node.h"
 
 # define        RESC_COUNT	(7)
 
