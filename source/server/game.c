@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Tue Jun 30 19:16:56 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:21:36 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -19,6 +19,7 @@ t_game		*init_game(t_game * const game)
 
   if (game == NULL)
     return (NULL);
+  game->player = NULL;
   game->size_team = len_tab((void **)opt.team);
   game->team = malloc(sizeof(*game->team) * (game->size_team + 1));
   if (game->team == NULL)
