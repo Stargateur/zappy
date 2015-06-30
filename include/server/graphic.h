@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Tue Jun 30 17:37:42 2015 Kevin Costa
+** Last update Tue Jun 30 17:41:01 2015 Kevin Costa
 */
 
 #ifndef		GRAPHIC_H_
@@ -46,7 +46,7 @@ SDL_Window	*init_video();
 t_display	*init_renderer(SDL_Window *, t_display *);
 void		init_texture(t_texture *, SDL_Renderer *);
 SDL_Renderer	*draw_stone(t_map *, t_texture *, t_display *);
-void		*draw_select(t_display *);
+void		draw_select(t_display *);
 int		input(t_display *);
 
 #endif		/* !GRAPHIC_H_ */

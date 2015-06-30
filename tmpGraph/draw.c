@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Tue Jun 30 17:34:10 2015 Kevin Costa
+** Last update Tue Jun 30 17:40:52 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -52,7 +52,7 @@ SDL_Renderer		*draw_stone(t_map *map, t_texture *img, t_display *display)
   return (display->renderer);
 }
 
-void		*draw_select(t_display *display)
+void		draw_select(t_display *display)
 {
   int		a = display->_click_x * (display->_shape_size + 1);
   int		b = display->_click_y * (display->_shape_size + 1);
