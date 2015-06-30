@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Tue Jun 30 14:16:24 2015 Alaric
+** Last update Tue Jun 30 15:31:33 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -14,6 +14,9 @@
 #include	"graphic.h"
 
 int		_shape_size = 24;
+int		_click_x = 0;
+int		_click_y = 0;
+int		_nb_case = 40;
 
 SDL_Window	*init_video()
 {

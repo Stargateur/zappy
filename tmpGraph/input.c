@@ -5,11 +5,16 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Tue Jun 30 15:06:41 2015 Kevin Costa
+** Last update Tue Jun 30 15:51:34 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
 #include	"graphic.h"
+
+extern int	_shape_size;
+extern int	_click_x;
+extern int	_click_y;
+extern int	_nb_case;
 
 int input(t_map map, t_texture text, SDL_Renderer *renderer)
 {
@@ -24,8 +29,8 @@ int input(t_map map, t_texture text, SDL_Renderer *renderer)
 	case SDL_QUIT:
 	  exit(1); /* quitter */
 	case SDL_MOUSEBUTTONDOWN:
-	  x = event.button.x;
-	  y = event.button.y;
+	  _click_x = event.button.x / (_shape_size + 1);
+	  _click_y = event.button.y / (_shape_size + 1);
 	case SDL_KEYDOWN:
 	  if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
 	    {
@@ -49,7 +54,19 @@ int input(t_map map, t_texture text, SDL_Renderer *renderer)
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 	    exit(1); /* quitter */
-	    /* case SDL_SCANCODE_KP_PLUS: */
+	  if (event.key.keysym.scancode == SDL_SCANCODE_KP_PLUS)
+	    {
+	      if (_nb_case != 1)
+		_nb_case--;
+	      _shape_size = SIZE_X / _nb_case;
+	    }
+	  if (event.key.keysym.scancode == SDL_SCANCODE_KP_MINUS)
+	    {
+	      if (_nb_case != 1)
+		_nb_case++;
+	      _shape_size = SIZE_X / _nb_case;
+	    }
+	  /*case SDL_SCANCODE_KP_PLUS: */
 	    /*   a = 0; /\* ZOOM + *\/ */
 	    /* case SDL_SCANCODE_KP_MINUS: */
 	    /*   a = 0; /\* ZOOM - *\/ */

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Tue Jun 30 15:08:49 2015 Kevin Costa
+** Last update Tue Jun 30 15:38:02 2015 Alaric
 */
 
 #include        <unistd.h>
@@ -68,7 +68,16 @@ int		main(int argc, char **argv)
   int cont = 0;
 
   while (cont == 0)
-    cont = input(map, text, renderer);
+    {
+      cont = input(map, text, renderer);
+      draw_stone(&map, &text, renderer);
+      draw_grid(renderer, &map);
+      draw_select(renderer);
+      SDL_RenderPresent(renderer);
+      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+      SDL_RenderClear(renderer);
+      SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    }
 
   /* draw_stone(&map, &text, renderer); */
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

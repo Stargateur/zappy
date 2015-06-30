@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Tue Jun 30 14:35:45 2015 Alaric
+** Last update Tue Jun 30 15:31:06 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -14,6 +14,8 @@
 #include	"../include/server/node.h"
 
 extern int	_shape_size;
+extern int	_click_x;
+extern int	_click_y;
 
 void		draw_grid(SDL_Renderer *renderer, t_map *map)
 {
@@ -56,13 +58,13 @@ SDL_Renderer		*draw_stone(t_map *map, t_texture *img, SDL_Renderer *renderer)
 
 SDL_Renderer		*draw_select(SDL_Renderer *renderer)
 {
-  int		a = /*global*/5 * SIZE_X / 40;
-  int		b = /*global*/5 * SIZE_X / 40;
+  int		a = _click_x * (_shape_size + 1);
+  int		b = _click_y * (_shape_size + 1);
 
   SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-  SDL_RenderDrawLine(renderer, a, b, a + _shape_size, b);
-  SDL_RenderDrawLine(renderer, a, b, a, b + _shape_size);
-  SDL_RenderDrawLine(renderer, a + _shape_size, b, a + _shape_size, b + _shape_size);
-  SDL_RenderDrawLine(renderer, a, b + _shape_size, a + _shape_size, b + _shape_size);
+  SDL_RenderDrawLine(renderer, a, b, a + _shape_size + 1, b);
+  SDL_RenderDrawLine(renderer, a, b, a, b + _shape_size + 1);
+  SDL_RenderDrawLine(renderer, a + _shape_size + 1, b, a + _shape_size + 1, b + _shape_size + 1);
+  SDL_RenderDrawLine(renderer, a, b + _shape_size + 1, a + _shape_size + 1, b + _shape_size + 1);
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 }
