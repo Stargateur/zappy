@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Tue Jun 30 17:33:42 2015 Kevin Costa
+** Last update Tue Jun 30 17:38:52 2015 Kevin Costa
 */
 
 #include        <unistd.h>
@@ -70,7 +70,7 @@ int		main(int argc, char **argv)
 
   while (cont == 0)
     {
-      cont = input(map, text, display);
+      cont = input(display);
       draw_stone(&map, &text, display);
       draw_grid(&map, display);
       draw_select(display);

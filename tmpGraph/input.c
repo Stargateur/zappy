@@ -5,13 +5,13 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Tue Jun 30 17:32:33 2015 Kevin Costa
+** Last update Tue Jun 30 17:37:36 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
 #include	"graphic.h"
 
-int input(t_map map, t_texture text, t_display *display)
+int input(t_display *display)
 {
   SDL_Event event;
 
