@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:12:11 2015 Antoine Plaskowski
-** Last update Tue Jun 30 17:08:55 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:12:09 2015 Antoine Plaskowski
 */
 
 #ifndef		GAME_H_
@@ -17,7 +17,8 @@
 typedef	struct	s_team	t_team;
 struct		s_team
 {
-  size_t	connect_nbr;
+  size_t	connect;
+  size_t	connect_max;
   char		*team;
 };
 typedef	struct	s_game	t_game;

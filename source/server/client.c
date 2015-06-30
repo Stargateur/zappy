@@ -5,10 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Tue Jun 30 17:10:07 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:12:43 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
+#include	<string.h>
 #include	"client.h"
 #include	"cbuf.h"
 #include	"game.h"
@@ -49,7 +50,7 @@ bool		set_team(t_client * const client, t_game * const game, char *str)
   for (team = 0; team < game->size_team; team++)
     if (strcmp(game->team[team].team, str) == 0)
       {
-	
+	if (game->team
       }
   return (true);
 }
