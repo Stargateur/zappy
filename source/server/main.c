@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Tue Jun 30 17:38:52 2015 Kevin Costa
+** Last update Tue Jun 30 18:41:53 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -45,74 +45,74 @@ int		main(int argc, char **argv)
 {
   t_game	game;
   int		sfd;
-  t_texture     text;
-  t_display	*display;
-  SDL_Window    *fenetre;
-  t_map			map;
-  t_squarre		*disp;
+  /* t_texture     text; */
+  /* t_display	*display; */
+  /* SDL_Window    *fenetre; */
+  /* t_map			map; */
+  /* t_squarre		*disp; */
 
-  if ((display = malloc(sizeof(t_display))) == NULL)
-    return (1);
-  fenetre = init_video();
-  display = init_renderer(fenetre, display);
-  init_texture(&text, display->renderer);
+  /* if ((display = malloc(sizeof(t_display))) == NULL) */
+  /*   return (1); */
+  /* fenetre = init_video(); */
+  /* display = init_renderer(fenetre, display); */
+  /* init_texture(&text, display->renderer); */
 
-  init_map(&map, 50, 50);
-  map_generate(&map);
-  disp = first_node(&map.items->node);
-  while (disp != NULL)
-    {
-      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->x, disp->y, disp->ressources.linemlate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
-      disp = disp->node.next;
-    }
+  /* init_map(&map, 50, 50); */
+  /* map_generate(&map); */
+  /* disp = first_node(&map.items->node); */
+  /* while (disp != NULL) */
+  /*   { */
+  /*     printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->x, disp->y, disp->ressources.linemlate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food); */
+  /*     disp = disp->node.next; */
+  /*   } */
 
-  int cont = 0;
+  /* int cont = 0; */
 
-  while (cont == 0)
-    {
-      cont = input(display);
-      draw_stone(&map, &text, display);
-      draw_grid(&map, display);
-      draw_select(display);
-      SDL_RenderPresent(display->renderer);
-      SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255);
-      SDL_RenderClear(display->renderer);
-      SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
-    }
+  /* while (cont == 0) */
+  /*   { */
+  /*     cont = input(display); */
+  /*     draw_stone(&map, &text, display); */
+  /*     draw_grid(&map, display); */
+  /*     draw_select(display); */
+  /*     SDL_RenderPresent(display->renderer); */
+  /*     SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255); */
+  /*     SDL_RenderClear(display->renderer); */
+  /*     SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255); */
+  /*   } */
 
-  /* draw_stone(&map, &text, renderer, display); */
-  SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
-  draw_grid(&map, display);
-  draw_select(display);
-  SDL_RenderPresent(display->renderer);
+  /* /\* draw_stone(&map, &text, renderer, display); *\/ */
+  /* SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255); */
+  /* draw_grid(&map, display); */
+  /* draw_select(display); */
+  /* SDL_RenderPresent(display->renderer); */
 
-  sleep(5);
-  t_player		test;
+  /* sleep(5); */
+  /* t_player		test; */
 
-  init_player(&test, 0, 0, "Razmoket");
-  test.inv.linemlate += 2;
-  test.inv.food += 5;
-  printf("Inventory: %s\n", get_inventory(&test.inv));
-  move(&map, &test);
-  rotate_left(&test);
-  move(&map, &test);
-  rotate_left(&test);
-  move(&map, &test);
-  rotate_right(&test);
-  rotate_right(&test);
-  rotate_right(&test);
-  move(&map, &test);
-  rotate_left(&test);
-  if (test.dir == NORTH)
-    printf("Player has rotated correctly\n");
+  /* init_player(&test, 0, 0, "Razmoket"); */
+  /* test.inv.linemlate += 2; */
+  /* test.inv.food += 5; */
+  /* printf("Inventory: %s\n", get_inventory(&test.inv)); */
+  /* move(&map, &test); */
+  /* rotate_left(&test); */
+  /* move(&map, &test); */
+  /* rotate_left(&test); */
+  /* move(&map, &test); */
+  /* rotate_right(&test); */
+  /* rotate_right(&test); */
+  /* rotate_right(&test); */
+  /* move(&map, &test); */
+  /* rotate_left(&test); */
+  /* if (test.dir == NORTH) */
+  /*   printf("Player has rotated correctly\n"); */
 
-  player_view(&map, &test);
+  /* player_view(&map, &test); */
 
   if (get_opt(argv, argc) == true)
     return (1);
+  show_opt();
   if (init_game(&game) == NULL)
     return (1);
-  show_opt();
   if ((sfd = init_socket(opt.p)) == -1)
     return (1);
   if (manage_select(&game, sfd) == true)

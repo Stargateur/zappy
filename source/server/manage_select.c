@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Tue Jun 30 18:34:20 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:12:20 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -42,6 +42,7 @@ static t_string	*write_to_write(t_string *to_write, int const cfd)
     return (NULL);
   if (to_write->str != NULL)
     write(cfd, to_write->str, strlen(to_write->str));
+  free(to_write->str);
   return (sup_node(&to_write->node));
 }
 
@@ -74,15 +75,14 @@ static bool	get_cmd(t_game *game, t_client *client)
 	    return (true);
 	  if (client->player == NULL)
 	    {
+	      printf("lol\n");
 	      if (set_team(client, game, str) == true)
 		return (true);
-	      /* repondre */
+	      printf("pas lol\n");
 	    }
 	  else
-	    {
-	      if (add_action(client->player, str) == true)
-		return (true);
-	    }
+	    if (add_action(client->player, str) == true)
+	      return (true);
 	  free(str);	  
 	}
       client = client->node.next;
