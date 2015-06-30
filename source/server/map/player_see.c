@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Tue Jun 30 23:47:13 2015 zwertv_e
+** Last update Wed Jul  1 01:29:46 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -174,7 +174,7 @@ char		*player_view(t_game const * const game,
 
   if (!player || !map)
     return (NULL);
-  if ((range = find_nb_squarres(1, player->range)) < 0)
+  if ((range = count_malloc_space(player->range)) < 0)
     return (NULL);
   if ((list = malloc(sizeof(t_squarre *) * (range))) == NULL)
     return (NULL);
