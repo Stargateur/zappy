@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Tue Jun 30 17:24:49 2015 Antoine Plaskowski
+** Last update Tue Jun 30 18:32:30 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -41,8 +41,10 @@ t_client	*add_client(t_client * const list,
   return (put_node(&list->node, &new->node));
 }
 
-bool		set_team(t_client * const client, t_game * const game, char *str)
+bool		set_team(t_client * const client, t_game * const game,
+			 char * const str)
 {
+  t_player	*player;
   size_t	team;
 
   if (client == NULL || game == NULL || str == NULL || game->team == NULL)
@@ -52,7 +54,14 @@ bool		set_team(t_client * const client, t_game * const game, char *str)
       {
 	if (game->team[team].connect < game->team[team].connect_max)
 	  {
-	    
+	    game->team[team].connect++;
+	    if ((player = find_free_player(game->player, game->team[team].team)) == NULL)
+	      player = init_player(malloc(sizeof(*player)), rand(), rand(), game->team[team].team);
+	    if (player == NULL)
+	      return (true);
+	    client->player = player;
+	    player->client = client;
+	    return (false);
 	  }
 	else
 	  return (true);

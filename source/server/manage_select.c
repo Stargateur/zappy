@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Tue Jun 30 17:36:41 2015 Antoine Plaskowski
+** Last update Tue Jun 30 18:34:20 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -61,10 +61,9 @@ static t_client	*write_client(fd_set const * const fd_write, t_client *client)
   return (client);
 }
 
-static t_client	*get_cmd(t_game *game, t_client *client)
+static bool	get_cmd(t_game *game, t_client *client)
 {
   char		*str;
-  t_action	*action;
 
   client = first_node(&client->node);
   while (client != NULL)
@@ -72,18 +71,23 @@ static t_client	*get_cmd(t_game *game, t_client *client)
       if (ready_cbuf(&client->cbuf) == true)
 	{
 	  if ((str = read_cbuf(&client->cbuf)) == NULL)
-	    return (client);
+	    return (true);
 	  if (client->player == NULL)
-	    set_team(client, game, str);
-	  if ((action = parser(str)) == NULL)
 	    {
-	      free(str);
-	      return (NULL);
+	      if (set_team(client, game, str) == true)
+		return (true);
+	      /* repondre */
 	    }
-	  
+	  else
+	    {
+	      if (add_action(client->player, str) == true)
+		return (true);
+	    }
+	  free(str);	  
 	}
       client = client->node.next;
     }
+  return (false);
 }
 
 bool		manage_select(t_game * const game, int const sfd)

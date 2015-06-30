@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Mon Jun 29 22:13:27 2015 Antoine Plaskowski
+** Last update Tue Jun 30 18:23:47 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -53,6 +53,8 @@ t_action	*parser(char *str)
     return (NULL);
   while (*str == ' ')
     str++;
+  if ((str = strdup(str)) == NULL)
+    return (NULL);
   j = 0;
   while (str[j] != ' ' || str[j] != '\0')
     j++;
