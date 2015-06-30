@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:53:31 2015 Jérémy MATHON
-// Last update Mon Jun 29 16:39:56 2015 amoure_a
+// Last update Tue Jun 30 14:36:19 2015 amoure_a
 */
 
 #ifndef PERSO_HPP_
@@ -43,7 +43,7 @@ public:
   void	dead();
   void	main_loop();
   std::string	do_action();
-  std::string	server_answer(std::string &action);
+  std::string	server_answer(std::string action);
   void		execute_commands(std::string &answer, bool *death);
   void		welcome();
   const void	*getTeamName();
