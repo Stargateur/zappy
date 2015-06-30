@@ -5,7 +5,7 @@
 ** Login   <alix amoureux@epitech.net>
 ** 
 ** Started on  Fri Jun 19 19:01:23 2015 amoure_a
-** Last update Tue Jun 30 15:23:24 2015 amoure_a
+** Last update Tue Jun 30 16:12:46 2015 Jérémy MATHON
 */
 
 #ifndef			SAVE_H
@@ -25,7 +25,8 @@ typedef enum		s_case
     MENDIANE = 3,
     PHIRAS = 4,
     THYSTAME = 5,
-    PLAYER = 6
+    PLAYER = 6,
+    NONE = 7
   }			t_case;
 
 class			Save

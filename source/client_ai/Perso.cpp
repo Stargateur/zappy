@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Tue Jun 30 15:47:18 2015 amoure_a
+** Last update Tue Jun 30 16:18:24 2015 Jérémy MATHON
 */
 
 #include		"Perso.hpp"
@@ -193,7 +193,10 @@ void		Perso::size_map_pos_ia(std::string coords)
 {
   std::string	x;
   std::string	y;
+  int		i;
+  int		j;
 
+  i = -1;
   x = coords.substr(0, coords.find_first_of(" "));
   y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
   this->_mapheight = atoi(y.c_str());
@@ -202,6 +205,12 @@ void		Perso::size_map_pos_ia(std::string coords)
   this->_posy = this->_maplength / 2;
   std::cout << "Map X Y = " << this->_mapheight << this->_maplength << std::endl;
   std::cout << "x y = " << this->_posx << this->_posy << std::endl;
+  while (++i != this->_mapheight)
+    {
+      j = -1;
+      while (++j != this->_maplength)
+	this->_sav->map[i][j].push_back(NONE);
+    }
 }
 
 void		Perso::get_numclient(std::string num_client)
