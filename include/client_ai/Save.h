@@ -34,7 +34,7 @@ class			Save
  public:
   std::list<std::string>				mouv;
   int							cpt;
-  std::vector<std::vector<std::list<t_case> > >		map;
+  std::vector<std::vector<std::list <t_case> > >	map;
  public:
   Save();
   ~Save();

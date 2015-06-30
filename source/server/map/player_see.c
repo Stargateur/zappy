@@ -1,11 +1,11 @@
 /*
-** player_see.c for  in /home/zwertv_e/rendu/PSU_2014_zappy/source/server/map
+** player_see.c for  in /home/zwertv_e/rendu/PSU_2014_zappy
 ** 
 ** Made by zwertv_e
 ** Login   <zwertv_e@epitech.net>
 ** 
-** Started on  Mon Jun 29 15:43:01 2015 zwertv_e
-** Last update Tue Jun 30 19:57:23 2015 Antoine Plaskowski
+** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
+** Last update Tue Jun 30 23:47:13 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -20,7 +20,7 @@ size_t		find_nb_squarres(size_t const accu, size_t const range)
 }
 
 static size_t	get_x(t_map const * const map, t_player const * const player,
-		      size_t const h, size_t const w)
+		      int const h, int const w)
 {
   bool		addition;
   size_t        pos;
@@ -32,16 +32,103 @@ static size_t	get_x(t_map const * const map, t_player const * const player,
   switch (player->dir)
     {
     case NORTH:
-      quantity = w;
+      if (w < 0)
+	{
+	  quantity = (size_t)(-w);
+	  addition = false;
+	}
+      else
+	{
+	  quantity = (size_t)w;
+	  addition = true;
+	}
       break;
     case SOUTH:
+      if (w < 0)
+	{
+	  quantity = (size_t)(-w);
+	  addition = true;
+	}
+      else
+	{
+	  quantity = (size_t)w;
+	  addition = false;
+	}
       break;
     case WEST:
+      quantity = (size_t)h;
+      addition = false;
       break;
     case EAST:
+      quantity = (size_t)h;
+      addition = true;
       break;
     };
-  return (0);
+  while (quantity > 0)
+    {
+      if (addition)
+	pos = next_x(map, pos);
+      else
+	pos = prev_x(map, pos);
+      quantity--;
+    }
+  return (pos);
+}
+
+static size_t	get_y(t_map const * const map, t_player const * const player,
+		      int const h, int const w)
+{
+  bool		addition;
+  size_t        pos;
+  size_t	quantity;
+
+  addition = true;
+  pos = player->y;
+  quantity = 0;
+  switch (player->dir)
+    {
+    case NORTH:
+      quantity = (size_t)h;
+      addition = false;
+      break;
+    case SOUTH:
+      quantity = (size_t)h;
+      addition = true;
+      break;
+    case WEST:
+      if (w < 0)
+	{
+	  quantity = -w;
+	  addition = false;
+	}
+      else
+	{
+	  quantity = (size_t)w;
+	  addition = true;
+	}
+      break;
+    case EAST:
+      if (w < 0)
+	{
+	  quantity = -w;
+	  addition = true;
+	}
+      else
+	{
+	  quantity = (size_t)w;
+	  addition = false;
+	}
+      break;
+    };
+  while (quantity > 0)
+    {
+      if (addition)
+	pos = next_y(map, pos);
+      else
+	pos = prev_y(map, pos);
+      quantity--;
+    }
+  return (pos);
 }
 
 void		find_squarres(t_map const * const map,
@@ -49,17 +136,17 @@ void		find_squarres(t_map const * const map,
 			      size_t const range)
 {
   size_t	i;
-  size_t	tmp_h;
-  size_t	tmp_w;
+  int		tmp_h;
+  int		tmp_w;
 
   i = 0;
   tmp_h = 0;
-  while (tmp_h < player->range)
+  while (tmp_h <= player->range)
     {
-      tmp_w = 0;
-      while (tmp_w < 2 * i + 1)
+      tmp_w = -((2 * tmp_h + 1) / 2);
+      while (tmp_w <= (2 * tmp_h + 1) / 2)
 	{
-	  list[i] = find_squarre(map, get_x(map, player, tmp_h, tmp_w), 0);
+	  list[i] = find_squarre(first_node(&map->items->node), get_x(map, player, tmp_h, tmp_w), get_y(map, player, tmp_h, tmp_w));
 	  tmp_w++;
 	  i++;
 	}
@@ -67,16 +154,33 @@ void		find_squarres(t_map const * const map,
     }
 }
 
-char		*player_view(t_map const * const map,
+static size_t	count_malloc_space(t_squarre const * const squarre)
+{
+  int		to_malloc;
+
+  to_malloc = 0;
+  /* to_malloc = snprintf(0, NULL, "%s"); */
+  return (0);
+}
+
+char		*player_view(t_game const * const game,
+			     t_map const * const map,
 			    t_player const * const player)
 {
   size_t	range;
+  size_t	needed_space;
+  size_t	i;
   t_squarre	**list;
 
   if (!player || !map)
     return (NULL);
-  if ((range = find_nb_squarres(1, player->range)) == NULL)
+  if ((range = find_nb_squarres(1, player->range)) < 0)
     return (NULL);
-  list = malloc(sizeof(t_squarre *) * (range));
+  if ((list = malloc(sizeof(t_squarre *) * (range))) == NULL)
+    return (NULL);
   find_squarres(map, player, list, range);
+  needed_space = 0;
+  for (i = 0; i < range; i++)
+    needed_space += count_inventory_space();
+  return (NULL);
 }

@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Tue Jun 30 20:33:47 2015 Antoine Plaskowski
+** Last update Tue Jun 30 22:45:31 2015 zwertv_e
 */
 
 #include	<string.h>
@@ -41,4 +41,3 @@ bool            add_action(t_player * const player, char * const str)
     return (true);
   return (false);
 }
-
