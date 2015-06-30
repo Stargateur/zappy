@@ -5,9 +5,10 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Tue Jun 30 20:17:42 2015 Antoine Plaskowski
+** Last update Tue Jun 30 20:34:25 2015 Antoine Plaskowski
 */
 
+#include	<stdio.h>
 #include	"action.h"
 
 bool		show_action(t_action *action)
