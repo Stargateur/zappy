@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Tue Jun 30 18:23:47 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:38:03 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -56,7 +56,7 @@ t_action	*parser(char *str)
   if ((str = strdup(str)) == NULL)
     return (NULL);
   j = 0;
-  while (str[j] != ' ' || str[j] != '\0')
+  while (str[j] != ' ' && str[j] != '\0')
     j++;
   for (i = 0; i < g_size; i++)
     if (strncmp(str, g_cmd[i].cmd, j) == 0)
