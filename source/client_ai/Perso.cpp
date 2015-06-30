@@ -5,10 +5,10 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-// Last update Mon Jun 29 16:52:20 2015 amoure_a
+// Last update Tue Jun 30 14:36:54 2015 amoure_a
 */
 
-#include	"Perso.hpp"
+#include		"Perso.hpp"
 
 Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip)
 {
@@ -20,42 +20,42 @@ Perso::~Perso()
 {
 }
 
-void	Perso::avance()
+void			Perso::avance()
 {
   this->_time += 7;
   this->_sav->mouv.push_back("avance");
   this->_sav->cpt++;
 }
 
-void	Perso::droite()
+void			Perso::droite()
 {
   this->_time += 7;
   this->_sav->mouv.push_back("droite");
   this->_sav->cpt++;
 }
 
-void	Perso::gauche()
+void			Perso::gauche()
 {
   this->_time += 7;
   this->_sav->mouv.push_back("gauche");
   this->_sav->cpt++;
 }
 
-void	Perso::voir()
+void			Perso::voir()
 {
   this->_time += 7;
   this->_sav->mouv.push_back("voir");
   this->_sav->cpt++;
 }
 
-void	Perso::inventaire()
+void			Perso::inventaire()
 {
   this->_time += 7;
   this->_sav->mouv.push_back("inventaire");
   this->_sav->cpt++;
 }
 
-void	Perso::prend(std::string const &obj)
+void			Perso::prend(std::string const &obj)
 {
   (void)obj;
   this->_time += 7;
@@ -63,7 +63,7 @@ void	Perso::prend(std::string const &obj)
   this->_sav->cpt++;
 }
 
-void	Perso::pose(std::string const &obj)
+void			Perso::pose(std::string const &obj)
 {
   (void)obj;
   this->_time += 7;
@@ -71,14 +71,14 @@ void	Perso::pose(std::string const &obj)
   this->_sav->cpt++;
 }
 
-void	Perso::expulse()
+void			Perso::expulse()
 {
   this->_time += 7;
   this->_sav->mouv.push_back("expulse");
   this->_sav->cpt++;
 }
 
-void	Perso::broadcast(std::string const &txt)
+void			Perso::broadcast(std::string const &txt)
 {
   (void)txt;
   this->_time += 7;
@@ -86,7 +86,7 @@ void	Perso::broadcast(std::string const &txt)
   this->_sav->cpt++;
 }
 
-void	Perso::incantation()
+void			Perso::incantation()
 {
   if (this->_invent._nourriture > 2)
     {
@@ -98,27 +98,27 @@ void	Perso::incantation()
     std::cout << "I have not enough food to survive during the incantation..." << std::endl;
 }
 
-void	Perso::fork()
+void			Perso::fork()
 {
   this->_time += 42;
   this->_sav->mouv.push_back("fork");
   this->_sav->cpt++;
 }
 
-void	Perso::connect_nbr()
+void			Perso::connect_nbr()
 {
 
 }
 
-void	Perso::dead()
+void			Perso::dead()
 {
   std::cout << "I'm dead.." << std::endl;
 }
 
 // machine à état ici
-std::string	Perso::do_action()
+std::string		Perso::do_action()
 {
-  std::string	action("voir");
+  std::string		action("voir\n");
 
   std::cout << "time = " << this->_time << std::endl;
   std::cout << "nourriture = " << this->_invent._nourriture << std::endl;
@@ -134,28 +134,29 @@ std::string	Perso::do_action()
   return (action);
 }
 
-std::string	Perso::server_answer(std::string &mouv)
+std::string		Perso::server_answer(std::string action)
 {
-  std::string	answer;
-  ssize_t	ret;
+  std::string		answer;
+  ssize_t		ret;
 
+  answer.resize(2048);
   std::cout << "En attente d'une réponse du serveur ..." << std::endl;
-  answer.reserve(2048);
-  if (write(this->getClient(), (const void *)mouv.c_str(), (size_t)mouv.size()) != -1)
+  std::cout << action << std::endl;
+  if (write(this->getClient(), (const void *)action.c_str(), (size_t)action.size()) != -1)
     {
       ret = -1;
-      answer.reserve();
       ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
-      if (ret == -1 || ret == 0)
+      if (ret == -1)
 	{
 	  std::cerr << "Error on read " << answer << std::endl;
 	}
       else
 	{
-	  std::cout << "Réponse du serveur = " << answer << std::endl;
-	  std::cout << "nombre de caractères = " << answer.size() << std::endl;
+	  std::cout << "Réponse du serveur = " << answer <<  "nombre de caractères = " << ret << std::endl;
 	}
     }
+  else
+    std::cerr << "Error on write in server_answer" << std::endl;
   return (answer);
 }
 
@@ -191,27 +192,27 @@ const void	*Perso::getTeamName()
 void	Perso::welcome()
 {
   ssize_t	res;
-  char		welcome[100];
-  char		num_client[20];
-  char		coords[100];
+  std::string	welcome;
+  std::string	num_client;
+  std::string	coords;
 
-  res = read(this->getClient(), (void *)welcome, 100);
+  welcome.resize(100);
+  res = read(this->getClient(), (void *)welcome.c_str(), 100);
   if (res != -1)
     {
-      welcome[res] = '\0';
       std::cout << welcome;
       res = write(this->getClient(), this->getTeamName(), (size_t)this->getTeam().size() + 1);
       if (res != -1)
 	{
-	  res = read(this->getClient(), (void *)num_client, 20);
+	  num_client.resize(20);
+	  res = read(this->getClient(), (void *)num_client.c_str(), 20);
 	  if (res != -1)
 	    {
-	      num_client[res] = '\0';
+	      coords.resize(100);
 	      std::cout << "NUM_CLIENT = " << num_client;
-	      res = read(this->getClient(), (void *)coords, 100);
+	      res = read(this->getClient(), (void *)coords.c_str(), 100);
 	      if (res != -1)
 		{
-		  coords[res] = '\0';
 		  std::cout << "X Y = " << coords;
 		}
 	      else
