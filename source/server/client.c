@@ -5,13 +5,14 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Mon Jun 29 22:34:10 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:10:07 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
 #include	"client.h"
 #include	"cbuf.h"
 #include	"game.h"
+#include	"opt.h"
 
 t_string	*add_string(t_string * const list, char *str)
 {
@@ -39,7 +40,16 @@ t_client	*add_client(t_client * const list,
   return (put_node(&list->node, &new->node));
 }
 
-bool		set_team(t_client * const list, t_game * const game)
+bool		set_team(t_client * const client, t_game * const game, char *str)
 {
-  
+  size_t	team;
+
+  if (client == NULL || game == NULL || str == NULL || game->team == NULL)
+    return (true);
+  for (team = 0; team < game->size_team; team++)
+    if (strcmp(game->team[team].team, str) == 0)
+      {
+	
+      }
+  return (true);
 }

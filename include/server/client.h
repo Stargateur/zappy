@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:20 2015 zwertv_e
-** Last update Mon Jun 29 22:47:51 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:02:55 2015 Antoine Plaskowski
 */
 
 #ifndef		CLIENT_H_
@@ -37,6 +37,6 @@ struct		s_client
 
 t_client	*add_client(t_client *list, t_clientaddr const * const ca);
 t_client	*remove_client(t_client *list, t_client *to_rem);
-bool		set_team(t_client * const list, t_game * const game);
+bool		set_team(t_client * const list, t_game * const game, char *str);
 
 #endif		/* !CLIENT_H_ */

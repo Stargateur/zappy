@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Mon Jun 29 22:24:06 2015 Antoine Plaskowski
+** Last update Tue Jun 30 16:51:46 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -72,11 +72,14 @@ static t_client	*get_cmd(t_game *game, t_client *client)
 	{
 	  if ((str = read_cbuf(&client->cbuf)) == NULL)
 	    return (client);
+	  if (client->player == NULL)
+	    set_team(client, game, str);
 	  if ((action = parser(str)) == NULL)
 	    {
 	      free(str);
 	      return (NULL);
 	    }
+	  
 	}
       client = client->node.next;
     }

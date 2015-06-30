@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Mon Jun 29 20:19:21 2015 Antoine Plaskowski
+** Last update Tue Jun 30 17:10:46 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -15,16 +15,18 @@
 
 t_game		*init_game(t_game * const game)
 {
-  size_t	len;
   size_t	i;
 
   if (game == NULL)
     return (NULL);
-  len = len_tab((void **)opt.team);
-  game->connect_nbr = malloc(sizeof(*game->connect_nbr) * (len + 1));
-  if (game->connect_nbr != NULL)
+  game->size_team = len_tab((void **)opt.team);
+  game->team = malloc(sizeof(*game->team) * (game->size_team + 1));
+  if (game->team == NULL)
     return (NULL);
-  for (i = 0; i < len; i++)
-    game->connect_nbr[i] = opt.c;
+  for (i = 0; i < game->size_team; i++)
+    {
+      game->team[i].connect_nbr = opt.c;
+      game->team[i].team = opt.team[i];
+    }
   return (game);
 }
