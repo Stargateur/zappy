@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Tue Jun 30 15:07:45 2015 Kevin Costa
+** Last update Tue Jun 30 17:35:27 2015 Kevin Costa
 */
 
 #ifndef		GRAPHIC_H_
@@ -31,12 +31,22 @@ typedef	struct	s_texture
   SDL_Surface	*loader;
 }		t_texture;
 
-void		draw_grid(SDL_Renderer *, t_map *);
+typedef struct s_display
+{
+  int		_shape_size;
+  int		_click_x;
+  int		_click_y;
+  int		_nb_case;
+  SDL_Renderer	*renderer;
+}		t_display;
+
+void		draw_grid(t_map *, t_display *);
 SDL_Surface	*Bmp_Loader(char *);
 SDL_Window	*init_video();
-SDL_Renderer	*init_renderer(SDL_Window *);
+t_display	*init_renderer(SDL_Window *, t_display *);
 void		init_texture(t_texture *, SDL_Renderer *);
-SDL_Renderer	*draw_stone(t_map *, t_texture *, SDL_Renderer *);
-int		input(t_map , t_texture , SDL_Renderer *);
+SDL_Renderer	*draw_stone(t_map *, t_texture *, t_display *);
+void		*draw_select(t_display *);
+int		input(t_map , t_texture , t_display *);
 
 #endif		/* !GRAPHIC_H_ */

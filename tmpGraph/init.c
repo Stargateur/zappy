@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Tue Jun 30 15:31:33 2015 Alaric
+** Last update Tue Jun 30 17:32:11 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -13,10 +13,10 @@
 #include	"include/color.h"
 #include	"graphic.h"
 
-int		_shape_size = 24;
-int		_click_x = 0;
-int		_click_y = 0;
-int		_nb_case = 40;
+/* int		_shape_size = 24; */
+/* int		_click_x = 0; */
+/* int		_click_y = 0; */
+/* int		_nb_case = 40; */
 
 SDL_Window	*init_video()
 {
@@ -31,17 +31,19 @@ SDL_Window	*init_video()
   return (fenetre);
 }
 
-SDL_Renderer	*init_renderer(SDL_Window *fenetre)
+t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
 {
-  SDL_Renderer	*renderer;
-
-  renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
-  if (renderer == NULL)
+  display->_shape_size = 24;
+  display->_click_x = 0;
+  display->_click_y = 0;
+  display->_nb_case = 40;
+  display->renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+  if (display->renderer == NULL)
     {
       printf("%s\n", SDL_GetError());
       exit(-1);
     }
-  return (renderer);
+  return (display);
 }
 
 void      	init_texture(t_texture *text, SDL_Renderer *renderer)

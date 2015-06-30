@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Tue Jun 30 15:38:02 2015 Alaric
+** Last update Tue Jun 30 17:33:42 2015 Kevin Costa
 */
 
 #include        <unistd.h>
@@ -46,15 +46,16 @@ int		main(int argc, char **argv)
   t_game	game;
   int		sfd;
   t_texture     text;
-  SDL_Renderer  *renderer;
+  t_display	*display;
   SDL_Window    *fenetre;
-
   t_map			map;
   t_squarre		*disp;
 
+  if ((display = malloc(sizeof(t_display))) == NULL)
+    return (1);
   fenetre = init_video();
-  renderer = init_renderer(fenetre);
-  init_texture(&text, renderer);
+  display = init_renderer(fenetre, display);
+  init_texture(&text, display->renderer);
 
   init_map(&map, 50, 50);
   map_generate(&map);
@@ -69,21 +70,21 @@ int		main(int argc, char **argv)
 
   while (cont == 0)
     {
-      cont = input(map, text, renderer);
-      draw_stone(&map, &text, renderer);
-      draw_grid(renderer, &map);
-      draw_select(renderer);
-      SDL_RenderPresent(renderer);
-      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-      SDL_RenderClear(renderer);
-      SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+      cont = input(map, text, display);
+      draw_stone(&map, &text, display);
+      draw_grid(&map, display);
+      draw_select(display);
+      SDL_RenderPresent(display->renderer);
+      SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255);
+      SDL_RenderClear(display->renderer);
+      SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
     }
 
-  /* draw_stone(&map, &text, renderer); */
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-  draw_grid(renderer, &map);
-  draw_select(renderer);
-  SDL_RenderPresent(renderer);
+  /* draw_stone(&map, &text, renderer, display); */
+  SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
+  draw_grid(&map, display);
+  draw_select(display);
+  SDL_RenderPresent(display->renderer);
 
   sleep(5);
   t_player		test;
