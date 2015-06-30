@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Tue Jun 30 20:20:47 2015 Antoine Plaskowski
+** Last update Tue Jun 30 20:33:47 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -32,7 +32,7 @@ bool            add_action(t_player * const player, char * const str)
 
   if (player == NULL)
     return (true);
-  if (len_node(&parser->action->node) > 10)
+  if (len_node(&player->action->node) > 10)
     return (true);
   if ((action = parser(str)) == NULL)
     return (true);
