@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Tue Jun 30 19:30:12 2015 Antoine Plaskowski
+** Last update Tue Jun 30 19:41:41 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -83,7 +83,6 @@ static bool	get_cmd(t_game *game, t_client *client)
 	      return (true);
 	  free(str);	  
 	}
-	      printf("pas lol\n");
       client = client->node.next;
     }
   return (false);
@@ -114,7 +113,6 @@ bool		manage_select(t_game * const game, int const sfd)
 	  return (NULL);
       client = write_client(&fd_write, read_client(&fd_read, client));
       get_cmd(game, client);
-      printf("boucle inf\n");
     }
   return (false);
 }
