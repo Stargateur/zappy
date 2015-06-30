@@ -115,14 +115,10 @@ void			Perso::dead()
   std::cout << "I'm dead.." << std::endl;
 }
 
-// machine à état ici
+// machine a� etat ici
 std::string		Perso::do_action()
 {
   std::string		action("inventaire\n");
-
-  /*std::cout << "time = " << this->_time << std::endl;
-  std::cout << "nourriture = " << this->_invent._nourriture << std::endl;
-  std::cout << "client = " << this->getClient() << std::endl;*/
 
   std::cout << "Action = " << action;
   /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
@@ -197,10 +193,9 @@ void	Perso::get_inventory(std::string answer)
 
 void	Perso::execute_commands(std::string &answer, bool *death, std::string &action)
 {
-  std::cout << answer << answer.length() << std::endl;
   if (answer.compare("OK\n") == 0)
     {
-      // éxécuter commandes avance, droite, gauche, prend objet, pose objet, expulse, broadcast text, fork
+      // Excuter commandes avance, droite, gauche, prend objet, pose objet, expulse, broadcast text, fork
     }
   else if (answer.compare("KO\n") == 0)
     {
@@ -262,7 +257,7 @@ void		Perso::size_map_pos_ia(std::string coords)
       j = 0;
       while (j < this->_maplength)
 	{
-	  std::cout << i << " " << j << std::endl;
+	  //std::cout << i << " " << j << std::endl;
 	  this->_sav->map[i][j].push_back(NONE);
 	  j++;
 	}
@@ -273,7 +268,7 @@ void		Perso::size_map_pos_ia(std::string coords)
 void		Perso::get_numclient(std::string num_client)
 {
   this->_numclient = atoi(num_client.c_str());
-  std::cout << "num client = " << this->_numclient << std::endl;
+  //std::cout << "num client = " << this->_numclient << std::endl;
 }
 
 void	Perso::welcome()
