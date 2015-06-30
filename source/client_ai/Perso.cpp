@@ -247,22 +247,26 @@ void		Perso::size_map_pos_ia(std::string coords)
   int		i;
   int		j;
 
-  i = -1;
+  i = 0;
   x = coords.substr(0, coords.find_first_of(" "));
   y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
   this->_mapheight = atoi(y.c_str());
   this->_maplength = atoi(x.c_str());
   this->_posx = this->_mapheight / 2;
   this->_posy = this->_maplength / 2;
-  std::cout << "Map X Y = " << this->_mapheight << this->_maplength << std::endl;
-  std::cout << "x y = " << this->_posx << this->_posy << std::endl;
-  /*while (++i != this->_mapheight)
+  this->_sav->map = std::vector< std::vector< std::list <t_case> > > (this->_mapheight);
+  while (i < this->_mapheight)
     {
-      j = -1;
-      while (++j != this->_maplength)
-	this->_sav->map[i][j].push_back(NONE);
-	}*/
-  //std::cout << "coucou" << std::endl;
+      this->_sav->map[i] = std::vector<std::list <t_case> > (this->_maplength);
+      j = 0;
+      while (j < this->_maplength)
+	{
+	  std::cout << i << " " << j << std::endl;
+	  this->_sav->map[i][j].push_back(NONE);
+	  j++;
+	}
+      i++;
+    }
 }
 
 void		Perso::get_numclient(std::string num_client)
