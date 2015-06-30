@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Mon Jun 29 22:53:19 2015 Antoine Plaskowski
+** Last update Tue Jun 30 13:04:11 2015 Alaric
 */
 
 #include        <unistd.h>
@@ -68,6 +68,7 @@ int		main(int argc, char **argv)
   draw_stone(&map, &text, renderer);
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   draw_grid(renderer, &map);
+  draw_select(renderer);
   SDL_RenderPresent(renderer);
 
   sleep(5);
