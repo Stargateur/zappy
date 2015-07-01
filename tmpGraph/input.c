@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Tue Jun 30 17:37:36 2015 Kevin Costa
+** Last update Wed Jul  1 14:47:23 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -27,23 +27,27 @@ int input(t_display *display)
 	case SDL_KEYDOWN:
 	  if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
 	    {
-	      /* draw_stone(&map, &text, renderer); /\* GAUCHE *\/ */
-	      return (1);
+	      if (display->_shape_size != 24)
+		display->_shape_size = SIZE_X / display->_nb_case;
+	      display->_horiz += (display->_shape_size + 1);
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
 	    {
-	      /* draw_stone(&map, &text, renderer, display); /\* GAUCHE *\/ */
-	      return (1);
+	      if (display->_shape_size != 24)
+		display->_shape_size = SIZE_X / display->_nb_case;
+	      display->_horiz -= (display->_shape_size + 1);
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_UP)
 	    {
-	      /* draw_stone(&map, &text, renderer); /\* GAUCHE *\/ */
-	      return (1);
+	      if (display->_shape_size != 24)
+		display->_shape_size = SIZE_X / display->_nb_case;
+	      display->_verti += (display->_shape_size + 1);
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
 	    {
-	      /* draw_stone(&map, &text, renderer); /\* GAUCHE *\/ */
-	      return (1);
+	      if (display->_shape_size != 24)
+		display->_shape_size = SIZE_X / display->_nb_case;
+	      display->_verti -= (display->_shape_size + 1);
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 	    exit(1); /* quitter */
@@ -59,13 +63,13 @@ int input(t_display *display)
 		display->_nb_case++;
 	      display->_shape_size = SIZE_X / display->_nb_case;
 	    }
-	  /*case SDL_SCANCODE_KP_PLUS: */
-	    /*   a = 0; /\* ZOOM + *\/ */
-	    /* case SDL_SCANCODE_KP_MINUS: */
-	    /*   a = 0; /\* ZOOM - *\/ */
-	    /* case SDL_SCANCODE_R: */
-	    /*   a = 0; /\* reset cam *\/ */
-	    /* } */
+	  if (event.key.keysym.scancode == SDL_SCANCODE_R)
+	    {
+	      display->_shape_size = 24;
+	      display->_nb_case = 40;
+	      display->_horiz = 0;
+	      display->_verti = 0;
+	    }
 	}
     }
   return (0);
