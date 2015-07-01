@@ -14,6 +14,7 @@
 # include	<iostream>
 # include	<string>
 # include	<list>
+# include	<algorithm>
 # include	"Invent.hpp"
 # include	"Save.h"
 # include	"Client.h"
@@ -40,6 +41,7 @@ private:
   int				_maplength;
   int				_numclient;
   int				_nbunusedslots;
+  int				_level;
 
 public:
   Perso(std::string team, int port, std::string ip);
@@ -47,7 +49,7 @@ public:
   void	avance();
   void	droite();
   void	gauche();
-  void	voir();
+  void	voir(std::string answer);
   void	inventaire();
   void	prend(std::string const &);
   void	pose(std::string const &);

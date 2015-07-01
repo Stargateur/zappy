@@ -15,6 +15,7 @@ Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip
   this->_sav = new Save();
   this->_time = 0;
   this->_way = RIGHT;
+  this->_level = 1;
 }
 
 Perso::~Perso()
@@ -66,10 +67,33 @@ void			Perso::gauche()
     this->_way = LEFT;
 }
 
-void			Perso::voir()
+void			Perso::voir(std::string answer)
 {
+  int			i = 0;
+  int			nb_cases;
+  int			pos_first_coma;
+  int			pos_second_coma;
+  std::string		objects_by_case;
+  
   this->_time += 7;
   this->_sav->mouv.push_back("voir");
+  nb_cases = std::count(answer.begin(), answer.end(), ',');
+  std::cout << "Nombre de cases :" << nb_cases << std::endl;
+  pos_first_coma = answer.find_first_of("{") + 1;
+  while (i < nb_cases)
+    {
+      pos_second_coma = answer.find_first_of(",");
+      objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
+      std::cout << "La case " << i << " contient : " << objects_by_case << std::endl;
+      answer = answer.replace(pos_second_coma, 1, "");
+      pos_first_coma = pos_second_coma;
+      i++;
+    }
+  pos_second_coma = answer.find_first_of("}");
+  objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
+  std::cout << "La case " << i<< " contient : " << objects_by_case << std::endl;
+  //std::cout << "Objet par case : " << objects_by_case << std::endl;
+  exit(0);
   this->_sav->cpt++;
 }
 
@@ -143,7 +167,7 @@ void			Perso::dead()
 // machine a  etat ici
 std::string		Perso::do_action()
 {
-  std::string		action("connect_nbr\n");
+  std::string		action("voir\n");
 
   std::cout << "Action = " << action;
   /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
@@ -249,8 +273,9 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
     }
   else
     {
-      if (action.compare("voir") == 0)
+      if (action.compare("voir\n") == 0)
 	{
+	  this->voir(answer);
 	  // comment faire par rapport au placement des cases
 	}
       else if (action.compare("inventaire\n") == 0)
