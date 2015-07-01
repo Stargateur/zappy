@@ -5,11 +5,14 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 17:34:34 2015 zwertv_e
-** Last update Mon Jun 29 22:51:46 2015 zwertv_e
+** Last update Wed Jul  1 01:58:03 2015 Antoine Plaskowski
 */
 
 #ifndef		MAP_H__
 # define	MAP_H__
+
+# include	<stdbool.h>
+# include	<stddef.h>
 
 typedef	struct	s_map		t_map;
 typedef	struct	s_squarre	t_squarre;
@@ -23,10 +26,15 @@ typedef	struct	s_squarre	t_squarre;
 # define	DENSITY_THY	(1.0)
 # define	DENSITY_FOOD	(5.0)
 
-# include	<stdbool.h>
 # include	"inv.h"
-# include	"player.h"
 # include	"node.h"
+
+struct		s_map
+{
+  size_t	height;
+  size_t	width;
+  t_squarre	*items;
+};
 
 struct		s_squarre
 {
@@ -36,14 +44,7 @@ struct		s_squarre
   t_inv		ressources;
 };
 
-struct		s_map
-{
-  size_t	height;
-  size_t	width;
-  t_squarre	*items;
-};
-
-void		init_map(t_map *map, size_t height, size_t width);
+t_map		*init_map(t_map *map, size_t height, size_t width);
 void		free_map(t_map *map);
 bool		add_item(t_map *map, size_t const x, size_t const y,
 			 int const type);

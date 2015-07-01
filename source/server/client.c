@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Tue Jun 30 19:51:20 2015 Antoine Plaskowski
+** Last update Wed Jul  1 01:53:32 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -57,21 +57,41 @@ static bool	anwser_team(t_client * const client, size_t const num_client)
     return (true);
   client->to_write = add_string(client->to_write, str);
   free(str);
-  if ((len = snprintf(NULL, 0, "%lu %lu\n", client->player->x, client->player->y)) < 0)
+  len = snprintf(NULL, 0, "%lu %lu\n", client->player->x, client->player->y);
+  if (len < 0)
     return (true);
   if ((str = malloc(sizeof(*str) * ((size_t)len + 1))) == NULL)
     return (true);
-  if (snprintf(str, (size_t)len + 1, "%lu %lu\n", client->player->x, client->player->y) != len)
+  if (snprintf(str, (size_t)len + 1, "%lu %lu\n",
+	       client->player->x, client->player->y) != len)
     return (true);
   client->to_write = add_string(client->to_write, str);
   free(str);
   return (false);
 }
 
+static bool	set_client_player(t_client * const client, t_game * const game,
+				  size_t const team)
+{
+  t_player	*player;
+
+  if (game->team[team].connect < game->team[team].connect_max)
+    return (true);
+  game->team[team].connect++;
+  if ((player = find_free_player(game->player, game->team[team].team)) == NULL)
+    player = init_player(&game->map, game->team[team].team, rand(), rand());
+  if (player == NULL)
+    return (true);
+  game->player = put_node(&game->player->node, &player->node);
+  client->player = player;
+  player->client = client;
+  return (anwser_team(client, game->team[team].connect_max -
+		      game->team[team].connect));
+}
+
 bool		set_team(t_client * const client, t_game * const game,
 			 char * str)
 {
-  t_player	*player;
   size_t	team;
 
   str = strtok(str, " ");
@@ -79,21 +99,6 @@ bool		set_team(t_client * const client, t_game * const game,
     return (true);
   for (team = 0; team < game->size_team; team++)
     if (strncmp(game->team[team].team, str, game->team[team].len_team) == 0)
-      {
-	if (game->team[team].connect < game->team[team].connect_max)
-	  {
-	    game->team[team].connect++;
-	    if ((player = find_free_player(game->player, game->team[team].team)) == NULL)
-	      player = init_player(malloc(sizeof(*player)), rand(), rand(), game->team[team].team);
-	    if (player == NULL)
-	      return (true);
-	    game->player = put_node(&game->player->node, &player->node);
-	    client->player = player;
-	    player->client = client;
-	    return (anwser_team(client, game->team[team].connect_max - game->team[team].connect));
-	  }
-	else
-	  return (true);
-      }
+      return (set_client_player(client, game, team));
   return (true);
 }

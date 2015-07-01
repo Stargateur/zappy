@@ -5,20 +5,23 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 21:15:02 2015 zwertv_e
-** Last update Mon Jun 29 22:51:01 2015 zwertv_e
+** Last update Wed Jul  1 01:41:21 2015 Antoine Plaskowski
 */
 
-#include		<stdlib.h>
-#include		"map.h"
+#include	<stdlib.h>
+#include	"map.h"
 
-void		        init_map(t_map *map, size_t height, size_t width)
+t_map		*init_map(t_map *map, size_t height, size_t width)
 {
+  if (map == NULL)
+    return (NULL);
   map->height = height;
   map->width = width;
   map->items = NULL;
+  return (map);
 }
 
-void			free_map(t_map *map)
+void		free_map(t_map *map)
 {
   free_all_node(&map->items->node);
 }

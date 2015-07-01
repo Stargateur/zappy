@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Tue Jun 30 23:05:52 2015 zwertv_e
+** Last update Wed Jul  1 01:40:03 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -79,10 +79,12 @@ void		move(t_map const * const map, t_player * const player)
     }
 }
 
-t_player		*init_player(t_player * const player, size_t const x,
-				     size_t const y, char * const team)
+t_player		*init_player(t_map *map, char * const team,
+				     size_t const x, size_t const y)
 {
-  if (player == NULL || team == NULL)
+  t_player		*player;
+
+  if (team == NULL)
     return (NULL);
   player->x = x;
   player->y = y;

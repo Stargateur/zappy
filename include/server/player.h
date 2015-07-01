@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Tue Jun 30 23:06:06 2015 zwertv_e
+** Last update Wed Jul  1 01:51:43 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -42,8 +42,8 @@ struct		s_player
   t_client	*client;
 };
 
-t_player	*init_player(t_player * const player, size_t const x,
-			     size_t const y, char * const team);
+t_player	*init_player(t_map * const map, char * const team,
+			     size_t const x, size_t const y);
 void		move(t_map const * const map, t_player * const player);
 void		rotate_left(t_player * const player);
 void		rotate_right(t_player * const player);
