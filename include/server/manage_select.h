@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 22:35:21 2015 Antoine Plaskowski
-** Last update Mon Jun 29 20:19:55 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:05:30 2015 Antoine Plaskowski
 */
 
 #ifndef		MANAGE_SELECT_H_
@@ -13,7 +13,8 @@
 
 # include	<stdbool.h>
 # include	"game.h"
+# include	"client.h"
 
-bool		manage_select(t_game * const game, int const sfd);
+t_client	*manage_select(t_client *client, int const sfd);
 
 #endif		/* !MANAGE_SELECT_H_ */

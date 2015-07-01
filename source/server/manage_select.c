@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Tue Jun 30 20:17:58 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:05:46 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -62,61 +62,23 @@ static t_client	*write_client(fd_set const * const fd_write, t_client *client)
   return (client);
 }
 
-static bool	get_cmd(t_game *game, t_client *client)
+t_client	*manage_select(t_client *client, int const sfd)
 {
-  char		*str;
-
-  client = first_node(&client->node);
-  while (client != NULL)
-    {
-      if (ready_cbuf(&client->cbuf) == true)
-	{
-	  if ((str = read_cbuf(&client->cbuf)) == NULL)
-	    return (true);
-	  if (client->player == NULL)
-	    {
-	      if (set_team(client, game, str) == true)
-		return (true);
-	    }
-	  else
-	    {
-	      if (add_action(client->player, str) == true)
-		return (true);
-	    }
-	  free(str);	  
-	}
-      if (client->player != NULL)
-	show_action(client->player->action);
-      client = client->node.next;
-    }
-  return (false);
-}
-
-bool		manage_select(t_game * const game, int const sfd)
-{
-  t_clientaddr	ca;
   fd_set	fd_read;
   fd_set	fd_write;
   int		fd_max;
-  t_client	*client;
 
-  if (game == NULL)
-    return (true);
-  client = NULL;
-  while (g_keep_running == true)
+  fd_max = fd_set_client(&fd_read, &fd_write, client, sfd);
+  if (pselect(fd_max + 1, &fd_read, &fd_write, NULL, NULL, NULL) == -1)
     {
-      fd_max = fd_set_client(&fd_read, &fd_write, client, sfd);
-      if (pselect(fd_max + 1, &fd_read, &fd_write, NULL, NULL, NULL) == -1)
-	{
-	  perror("select()");
-	  return (true);
-	}
-      if (FD_ISSET(sfd, &fd_read))
-	if (accept_client(sfd, &ca) == -1 ||
-	    (client = add_client(client, &ca)) == NULL)
-	  return (NULL);
-      client = write_client(&fd_write, read_client(&fd_read, client));
-      get_cmd(game, client);
+      perror("select()");
+      g_keep_running = false;
+      return (client);
     }
-  return (false);
+  if (FD_ISSET(sfd, &fd_read) && (client = add_client(client, sfd)) == NULL)
+    {
+      g_keep_running = false;
+      return (client);
+    }
+  return (write_client(&fd_write, read_client(&fd_read, client)));
 }

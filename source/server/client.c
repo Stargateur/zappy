@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Wed Jul  1 01:53:32 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:04:37 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -26,16 +26,17 @@ t_string	*add_string(t_string * const list, char *str)
   return (put_node(&list->node, &new->node));
 }
 
-t_client	*add_client(t_client * const list,
-			    t_clientaddr const * const ca)
+t_client	*add_client(t_client * const list, int const sfd)
 {
   t_client	*new;
 
-  if (ca == NULL)
-    return (list);
   if ((new = malloc(sizeof(*new))) == NULL)
     return (NULL);
-  new->ca = *ca;
+  if (accept_client(sfd, &new->ca) == -1)
+    {
+      free(new);
+      return (NULL);
+    }
   new->to_write = add_string(NULL, "BIENVENUE\n");
   new->player = NULL;
   init_cbuf(&new->cbuf);

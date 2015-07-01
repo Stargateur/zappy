@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Wed Jul  1 04:45:05 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:05:39 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -45,6 +45,7 @@ int		main(int argc, char **argv)
 {
   t_game	game;
   int		sfd;
+  t_client	*client;;
   /* t_texture     text; */
   /* t_display	*display; */
   /* SDL_Window    *fenetre; */
@@ -127,14 +128,15 @@ int		main(int argc, char **argv)
   /* else */
   /*   printf("View is NULL\n"); */
 
+  client = NULL;
   srand(time(NULL));
   if (init_game(&game, argv, argc) == NULL)
     return (1);
   show_opt(&game.opt);
   if ((sfd = init_socket(game.opt.p)) == -1)
     return (1);
-  if (manage_select(&game, sfd) == true)
-    return (1);
+  while (g_keep_running == true)
+    client = manage_select(client, sfd);
   close(sfd);
   return (0);
 }
