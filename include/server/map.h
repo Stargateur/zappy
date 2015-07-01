@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 17:34:34 2015 zwertv_e
-** Last update Wed Jul  1 13:31:35 2015 zwertv_e
+** Last update Wed Jul  1 14:44:46 2015 zwertv_e
 */
 
 #ifndef		MAP_H__
