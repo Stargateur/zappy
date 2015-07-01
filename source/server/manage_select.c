@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Wed Jul  1 05:29:12 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:15:55 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -28,7 +28,11 @@ static t_client	*read_client(fd_set const * const fd_read, t_client *client)
       tmp2 = tmp->node.next;
       if (FD_ISSET(tmp->ca.cfd, fd_read))
 	if (write_cbuf(&tmp->cbuf, tmp->ca.cfd) <= 0)
-	  client = sup_node(&tmp->node);
+	  {
+	    if (client->player != NULL)
+	      client->player->client = NULL;
+	    client = sup_node(&tmp->node);
+	  }
       tmp = tmp2;
     }
   return (client);

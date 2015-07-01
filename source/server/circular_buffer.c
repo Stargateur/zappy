@@ -1,18 +1,18 @@
 /*
-** cbuf.c for  in /home/zwertv_e/rendu/PSU_2014_myirc/source/server
+** circular_buffer.c for  in /home/zwertv_e/rendu/PSU_2014_myirc/source/server
 ** 
 ** Made by zwertv_e
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 19:39:37 2015 zwertv_e
-** Last update Tue Jun 30 19:20:28 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:17:17 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
 #include	<unistd.h>
 #include	<stdlib.h>
 #include	<string.h>
-#include	"cbuf.h"
+#include	"circular_buffer.h"
 
 #define		add_one_cbuf_len(x) (x + 1 >= CBUF_LEN ? 0 : x + 1)
 

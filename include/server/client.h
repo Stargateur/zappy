@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:20 2015 zwertv_e
-** Last update Wed Jul  1 05:49:01 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:19:50 2015 Antoine Plaskowski
 */
 
 #ifndef		CLIENT_H_
@@ -15,7 +15,7 @@ typedef	struct	s_client	t_client;
 typedef	struct	s_string	t_string;
 
 # include	"accept_client.h"
-# include	"cbuf.h"
+# include	"circular_buffer.h"
 # include	"node.h"
 # include	"game.h"
 # include	"player.h"

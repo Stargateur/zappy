@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Wed Jul  1 05:37:41 2015 Antoine Plaskowski
+## Last update Wed Jul  1 06:18:04 2015 Antoine Plaskowski
 ##
 
 PATH_SRC	=	source/
@@ -20,7 +20,7 @@ SRC_SERVER	+=	$(PATH_SERVER)accept_client.c
 SRC_SERVER	+=	$(PATH_SERVER)create_binded_socket.c
 SRC_SERVER	+=	$(PATH_SERVER)fd_set.c
 SRC_SERVER	+=	$(PATH_SERVER)option.c
-SRC_SERVER	+=	$(PATH_SERVER)cbuf.c
+SRC_SERVER	+=	$(PATH_SERVER)circular_buffer.c
 SRC_SERVER	+=	$(PATH_SERVER)manage_select.c
 SRC_SERVER	+=	$(PATH_SERVER)client.c
 SRC_SERVER	+=	$(PATH_SERVER)parser.c
