@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Wed Jul  1 14:58:08 2015 Kevin Costa
+** Last update Wed Jul  1 15:40:12 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -89,16 +89,16 @@ int		main(int argc, char **argv)
   sleep(5);
 
   t_game		party_everyday;
-  /* t_map			map; */
+  t_map			mapr;
   t_player		*test;
   char			*inv;
 
   init_game(&party_everyday, argv, argc);
-  init_map(&map, 50, 50);
-  map_generate(&map);
-  test = init_player(&map, "Razmoket", 49, 49);
+  init_map(&mapr, 50, 50);
+  map_generate(&mapr);
+  test = init_player(&mapr, "Razmoket", 49, 49);
   party_everyday.player = put_node(party_everyday.player, test);
-  test = init_player(&map, "Razmoket", 0, 0);
+  test = init_player(&mapr, "Razmoket", 0, 0);
   party_everyday.player = put_node(party_everyday.player, test);
   printf("player is in %lu - %lu\n", test->coords.x, test->coords.y);
   init_inv(&test->inv);
@@ -112,20 +112,20 @@ int		main(int argc, char **argv)
     }
   else
     printf("Inv is NULL\n");
-  move(&map, test);
+  move(&mapr, test);
   rotate_left(test);
-  move(&map, test);
+  move(&mapr, test);
   rotate_left(test);
-  move(&map, test);
+  move(&mapr, test);
   rotate_right(test);
   rotate_right(test);
   rotate_right(test);
-  move(&map, test);
+  move(&mapr, test);
   rotate_left(test);
   if (test->dir == NORTH)
     printf("Player has rotated correctly\n");
 
-  player_view(&party_everyday, &map, test);
+  player_view(&party_everyday, &mapr, test);
 
   client = NULL;
   srandom((unsigned int)time(NULL));
