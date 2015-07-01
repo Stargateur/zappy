@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 05:33:47 2015 Antoine Plaskowski
-** Last update Wed Jul  1 06:13:56 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:33:51 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -23,20 +23,20 @@ static bool     set_client_player(t_client * const client, t_game * const game,
   t_player      *player;
   size_t	connect_nbr;
 
-  if (game->team[team].connect >= game->team[team].connect_max)
+  connect_nbr = player_team_online(game->player, game->team[team].team);
+  if (connect_nbr >= game->team[team].connect_max)
     return (true);
   if ((player = find_free_player(game->player, game->team[team].team)) == NULL)
     player = init_player(&game->map, game->team[team].team, random(), random());
   if (player == NULL)
     return (true);
-  game->team[team].connect++;
   game->player = put_node(&game->player->node, &player->node);
   client->player = player;
   player->client = client;
-  connect_nbr = game->team[team].connect_max - game->team[team].connect;
+  connect_nbr = game->team[team].connect_max - connect_nbr - 1;
   if (write_num_client(client, connect_nbr) == true)
     return (true);
-  return (write_pos_player(client) == true);
+  return (write_pos_player(client));
 }
 
 bool		set_team(t_client * const client, t_game * const game,

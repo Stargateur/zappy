@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:28:00 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:24:52 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -32,7 +32,6 @@ t_game		*init_game(t_game * const game, char **argv, int const argc)
   map_generate(&game->map);
   for (i = 0; i < game->size_team; i++)
     {
-      game->team[i].connect = 0;
       game->team[i].connect_max = game->option.c;
       game->team[i].len_team = strlen(game->option.team[i]);
       game->team[i].team = game->option.team[i];

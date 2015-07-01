@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:41:02 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:29:50 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -40,4 +40,22 @@ bool            add_action(t_player * const player, char * const str)
   if (player->action == NULL)
     return (true);
   return (false);
+}
+
+size_t		player_team_online(t_player *player, char *team)
+{
+  size_t	i;
+
+  if (team == NULL)
+    return (0);
+  i = 0;
+  player = first_node(&player->node);
+  while (player != NULL)
+    {
+      if (player->client != NULL && player->team != NULL &&
+	  strcmp(player->team, team) == 0)
+	i++;
+      player = player->node.next;
+    }
+  return (i);
 }
