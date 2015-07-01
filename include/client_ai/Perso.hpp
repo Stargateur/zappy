@@ -69,6 +69,9 @@ public:
   void		get_numclient(std::string num_client);
   void		get_inventory(std::string answer);
   int		find_number(std::string &answer, char char_end);
+  void		save_objects_in_map(std::string objects, int i);
+  void		see_map();
+  void		put_objects_in_case(int x, int y, std::string answer);
 };
 
 #endif /* !PERSO_HPP_ */
