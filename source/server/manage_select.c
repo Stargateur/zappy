@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Wed Jul  1 06:15:55 2015 Antoine Plaskowski
+** Last update Wed Jul  1 07:19:31 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -17,25 +17,25 @@
 #include	"fd_set.h"
 #include	"int_handler.h"
 
-static t_client	*read_client(fd_set const * const fd_read, t_client *client)
+static t_client	*read_client(fd_set const * const fd_read, t_client *list)
 {
-  t_client	*tmp;
-  t_client	*tmp2;
+  t_client	*client;
+  t_client	*client2;
 
-  tmp = first_node(&client->node);
-  while (tmp != NULL)
+  client = first_node(&list->node);
+  while (client != NULL)
     {
-      tmp2 = tmp->node.next;
-      if (FD_ISSET(tmp->ca.cfd, fd_read))
-	if (write_cbuf(&tmp->cbuf, tmp->ca.cfd) <= 0)
+      client2 = client->node.next;
+      if (FD_ISSET(client->ca.cfd, fd_read))
+	if (write_cbuf(&client->cbuf, client->ca.cfd) <= 0)
 	  {
 	    if (client->player != NULL)
 	      client->player->client = NULL;
-	    client = sup_node(&tmp->node);
+	    list = sup_node(&client->node);
 	  }
-      tmp = tmp2;
+      client = client2;
     }
-  return (client);
+  return (list);
 }
 
 static t_string	*write_to_write(t_string *to_write, int const cfd)
@@ -49,20 +49,20 @@ static t_string	*write_to_write(t_string *to_write, int const cfd)
   return (sup_node(&to_write->node));
 }
 
-static t_client	*write_client(fd_set const * const fd_write, t_client *client)
+static t_client	*write_client(fd_set const * const fd_write, t_client *list)
 {
-  t_client	*tmp;
-  t_client	*tmp2;
+  t_client	*client;
+  t_client	*client2;
 
-  tmp = first_node(&client->node);
-  while (tmp != NULL)
+  client = first_node(&list->node);
+  while (client != NULL)
     {
-      tmp2 = tmp->node.next;
-      if (FD_ISSET(tmp->ca.cfd, fd_write))
-	tmp->to_write = write_to_write(tmp->to_write, tmp->ca.cfd);
-      tmp = tmp2;
+      client2 = client->node.next;
+      if (FD_ISSET(client->ca.cfd, fd_write))
+	client->to_write = write_to_write(client->to_write, client->ca.cfd);
+      client = client2;
     }
-  return (client);
+  return (list);
 }
 
 t_client	*manage_select(t_client *client, int const sfd)
