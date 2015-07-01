@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Wed Jul  1 13:49:04 2015 zwertv_e
+** Last update Wed Jul  1 14:48:09 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -155,6 +155,37 @@ void		find_squares(t_map const * const map,
     }
 }
 
+static bool	ffirst_write(char const * const ressource, size_t const quantity, bool first_write)
+{
+  size_t	i;
+
+  for (i = 0; i < quantity; i++)
+    {
+      if (first_write)
+	{
+	  printf("%s", ressource);
+	  first_write = false;
+	}
+      else
+	printf(" %s", ressource);
+    }
+  return (first_write);
+}
+
+static bool	print_inv(t_inv const * const inv, bool first_write)
+{
+  size_t	i;
+
+  first_write = ffirst_write("linemlate", inv->linemlate, first_write);
+  first_write = ffirst_write("deraumere", inv->deraumere, first_write);
+  first_write = ffirst_write("sibur", inv->sibur, first_write);
+  first_write = ffirst_write("mendiane", inv->mendiane, first_write);
+  first_write = ffirst_write("phiras", inv->phiras, first_write);
+  first_write = ffirst_write("thystame", inv->thystame, first_write);
+  first_write = ffirst_write("food", inv->food, first_write);
+  return (first_write);
+}
+
 char		*player_view(t_game const * const game,
 			     t_map const * const map,
 			    t_player const * const player)
@@ -163,31 +194,40 @@ char		*player_view(t_game const * const game,
   size_t	i;
   t_coords	*list;
   t_player	*tmp;
+  t_square	*tmp_square;
   bool		first_write;
 
   if (!player || !map)
     return (NULL);
-  if ((range = find_nb_squares(0, player->range)) < 0)
-    return (NULL);
+  range = find_nb_squares(1, player->range);
   if ((list = malloc(sizeof(t_coords) * (range))) == NULL)
     return (NULL);
   find_squares(map, player, list, range);
   first_write = true;
+  printf("{");
   for (i = 0; i < range; i++)
     {
-      printf("%lu %lu\n", list[i].x, list[i].y);
-      /* tmp = first_node(&game->player->node); */
-      /* while (tmp) */
-      /* 	{ */
-      /* 	  if (player != tmp && tmp->coords.x == ) */
-      /* 	    { */
-      /* 	      if (!first_write) */
-      /* 		printf(" "); */
-      /* 	      printf("player"); */
-      /* 	    } */
-      /* 	  tmp = tmp->node.next; */
-      /* 	} */
+      if (i > 0)
+	{
+	  printf(",");
+	  first_write = false;
+	}
+      tmp_square = find_square(first_node(&map->items->node), list[i].x, list[i].y);
+      if (tmp_square)
+        first_write = print_inv(&tmp_square->ressources, first_write);
+      tmp = first_node(&game->player->node);
+      while (tmp)
+      	{
+      	  if (player != tmp && tmp->coords.x == list[i].x && tmp->coords.y == list[i].y)
+      	    {
+      	      if (!first_write)
+      		printf(" ");
+      	      printf("joueur");
+      	    }
+      	  tmp = tmp->node.next;
+      	}
     }
+  printf("}\n");
   free(list);
   return (NULL);
 }

@@ -3,6 +3,4 @@
 *.dpd
 \#*#
 /zappy_server
-/zappy_ia
-/server
-/client_ai
+/zappy_ai

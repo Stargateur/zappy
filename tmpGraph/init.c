@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Tue Jun 30 17:32:11 2015 Kevin Costa
+** Last update Wed Jul  1 14:12:29 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -37,6 +37,8 @@ t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
   display->_click_x = 0;
   display->_click_y = 0;
   display->_nb_case = 40;
+  display->_horiz = 0;
+  display->_verti = 0;
   display->renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
   if (display->renderer == NULL)
     {

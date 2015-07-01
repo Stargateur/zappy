@@ -5,12 +5,12 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Wed Jul  1 07:59:41 2015 Antoine Plaskowski
+## Last update Wed Jul  1 15:04:00 2015 Antoine Plaskowski
 ##
 
 SERVER		=	zappy_server
 
-CLIENT_AI	=	zappy_ia
+CLIENT_AI	=	zappy_ai
 
 CC		?=	gcc
 
