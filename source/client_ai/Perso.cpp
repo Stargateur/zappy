@@ -220,6 +220,22 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
 {
   if (answer.compare("OK\n") == 0)
     {
+      if (action.compare("avance\n") == 0)
+	this->avance();
+      if (action.compare("droite\n") == 0)
+	this->droite();
+      if (action.compare("gauche\n") == 0)
+	this->gauche();
+      if (action.compare("prend objet\n") == 0)
+	this->prend("test");
+      if (action.compare("pose objet\n") == 0)
+	this->pose("test");
+      if (action.compare("expulse\n") == 0)
+	this->expulse();
+      if (action.compare("broadcast\n") == 0)
+	this->broadcast("ceci est un message code\n");
+      if (action.compare("fork\n") == 0)
+	this->fork();
       // Excuter commandes avance, droite, gauche, prend objet, pose objet, expulse, broadcast text, fork
     }
   else if (answer.compare("KO\n") == 0)
