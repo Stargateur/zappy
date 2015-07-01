@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 17:34:34 2015 zwertv_e
-** Last update Wed Jul  1 05:20:42 2015 Antoine Plaskowski
+** Last update Wed Jul  1 13:31:35 2015 zwertv_e
 */
 
 #ifndef		MAP_H__
@@ -16,6 +16,7 @@
 
 typedef	struct	s_map		t_map;
 typedef	struct	s_square	t_square;
+typedef	struct	s_coords	t_coords;
 
 # define        DENSITY		(2.0)
 # define	DENSITY_LIN	(1.0)
@@ -29,6 +30,12 @@ typedef	struct	s_square	t_square;
 # include	"inv.h"
 # include	"node.h"
 
+struct		s_coords
+{
+  size_t	x;
+  size_t	y;
+};
+
 struct		s_map
 {
   size_t	height;
@@ -39,8 +46,7 @@ struct		s_map
 struct		s_square
 {
   t_node	node;
-  size_t	x;
-  size_t	y;
+  t_coords	coords;
   t_inv		ressources;
 };
 

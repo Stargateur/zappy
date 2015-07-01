@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Wed Jul  1 06:03:34 2015 Antoine Plaskowski
+** Last update Wed Jul  1 13:45:03 2015 zwertv_e
 */
 
 #include	<stdio.h>
@@ -64,19 +64,19 @@ void		move(t_map const * const map, t_player * const player)
       switch(player->dir)
 	{
 	case NORTH:
-	  player->y = prev_y(map, player->y);
+	  player->coords.y = prev_y(map, player->coords.y);
 	  break;
 	case SOUTH:
-	  player->y = next_y(map, player->y);
+	  player->coords.y = next_y(map, player->coords.y);
 	  break;
 	case WEST:
-	  player->x = prev_x(map, player->x);
+	  player->coords.x = prev_x(map, player->coords.x);
 	  break;
 	case EAST:
-	  player->x = next_x(map, player->x);
+	  player->coords.x = next_x(map, player->coords.x);
 	  break;
 	};
-      printf("Player has moved in [%lu - %lu]\n", player->x, player->y);
+      printf("Player has moved in [%lu - %lu]\n", player->coords.x, player->coords.y);
     }
 }
 
@@ -89,14 +89,14 @@ t_player		*init_player(t_map *map, char * const team,
     return (NULL);
   if ((player = malloc(sizeof(*player))) == NULL)
     return (NULL);
-  player->x = x % map->width;
-  player->y = y % map->height;
+  player->coords.x = x % map->width;
+  player->coords.y = y % map->height;
   player->dir = random() % (EAST + 1);
   player->range = 1;
   player->client = NULL;
   player->action = NULL;
   init_inv(&player->inv);
   player->team = team;
-  printf("New player at pos [%lu - %lu] in '%s' team\n", player->x, player->y, player->team);
+  printf("New player at pos [%lu - %lu] in '%s' team\n", player->coords.x, player->coords.y, player->team);
   return (player);
 }

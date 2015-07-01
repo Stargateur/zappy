@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Wed Jul  1 06:19:11 2015 Antoine Plaskowski
+** Last update Wed Jul  1 13:43:59 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -48,13 +48,14 @@ bool		write_pos_player(t_client * const client)
 
   if (client == NULL || client->player == NULL)
     return (true);
-  len = snprintf(NULL, 0, "%lu %lu\n", client->player->x, client->player->y);
+  len = snprintf(NULL, 0, "%lu %lu\n", client->player->coords.x,
+		 client->player->coords.y);
   if (len < 0)
     return (true);
   if ((str = malloc(sizeof(*str) * ((size_t)len + 1))) == NULL)
     return (true);
   if (snprintf(str, (size_t)len + 1, "%lu %lu\n",
-	       client->player->x, client->player->y) != len)
+	       client->player->coords.x, client->player->coords.y) != len)
     return (true);
   client->to_write = add_string(client->to_write, str);
   free(str);

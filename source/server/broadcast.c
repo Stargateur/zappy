@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Wed Jul  1 08:24:28 2015 Antoine Plaskowski
+** Last update Wed Jul  1 13:44:38 2015 zwertv_e
 */
 
 #include	<math.h>
@@ -38,7 +38,7 @@ t_sound		broadcast(t_map *map, t_player *player_a, t_player *player_b)
 
   if (map == NULL || player_a == NULL || player_b == NULL)
     return (S_NONE);
-  vector.x = player_b->x - player_a->x;
-  vector.y = player_b->y - player_a->y;
+  vector.x = player_b->coords.x - player_a->coords.x;
+  vector.y = player_b->coords.y - player_a->coords.y;
   short_vector(&vector, map->width, map->height);
 }

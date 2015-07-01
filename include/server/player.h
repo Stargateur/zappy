@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Wed Jul  1 06:33:09 2015 Antoine Plaskowski
+** Last update Wed Jul  1 13:38:26 2015 zwertv_e
 */
 
 #ifndef		PLAYER_H__
@@ -31,8 +31,7 @@ typedef	enum
 struct		s_player
 {
   t_node	node;
-  size_t	x;
-  size_t	y;
+  t_coords	coords;
   t_dir		dir;
   size_t	range;
   char		*team;

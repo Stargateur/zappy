@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Wed Jul  1 05:21:47 2015 Antoine Plaskowski
+** Last update Wed Jul  1 13:47:57 2015 zwertv_e
 */
 
 #include	<SDL2/SDL.h>
@@ -42,10 +42,10 @@ SDL_Renderer		*draw_stone(t_map *map, t_texture *img, t_display *display)
   DestR.h = display->_shape_size;
   while (tmp != NULL)
     {
-      if (tmp->x * (display->_shape_size + 1) < SIZE_X && tmp->y * (display->_shape_size + 1) < SIZE_Y)
+      if (tmp->coords.x * (display->_shape_size + 1) < SIZE_X && tmp->coords.y * (display->_shape_size + 1) < SIZE_Y)
 	{
-	  DestR.x = tmp->x * (display->_shape_size + 1);
-	  DestR.y = tmp->y * (display->_shape_size + 1);
+	  DestR.x = tmp->coords.x * (display->_shape_size + 1);
+	  DestR.y = tmp->coords.y * (display->_shape_size + 1);
 	  SDL_RenderCopy(display->renderer, img->mine, NULL, &DestR);
 	}
       tmp = tmp->node.next;

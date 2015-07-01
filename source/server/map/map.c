@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 21:15:02 2015 zwertv_e
-** Last update Wed Jul  1 05:13:57 2015 Antoine Plaskowski
+** Last update Wed Jul  1 13:32:46 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -30,7 +30,7 @@ t_square	*find_square(t_square *square, size_t const x, size_t const y)
 {
   if (square == NULL)
     return (NULL);
-  if (square->x == x && square->y == y)
+  if (square->coords.x == x && square->coords.y == y)
     return (square);
   return (find_square(square->node.next, x, y));
 }
@@ -47,8 +47,8 @@ bool		        add_item(t_map *map, size_t const x, size_t const y,
     }
   if ((square = malloc(sizeof(t_square))) == NULL)
     return (false);
-  square->x = x;
-  square->y = y;
+  square->coords.x = x;
+  square->coords.y = y;
   init_inv(&square->ressources);
   add_ressource(&square->ressources, type, 1);
   map->items = put_node(&map->items->node, &square->node);
