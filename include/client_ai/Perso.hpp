@@ -39,6 +39,7 @@ private:
   int				_mapheight;
   int				_maplength;
   int				_numclient;
+  int				_nbunusedslots;
 
 public:
   Perso(std::string team, int port, std::string ip);

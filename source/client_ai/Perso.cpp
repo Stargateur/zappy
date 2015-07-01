@@ -143,7 +143,7 @@ void			Perso::dead()
 // machine a  etat ici
 std::string		Perso::do_action()
 {
-  std::string		action("inventaire\n");
+  std::string		action("connect_nbr\n");
 
   std::cout << "Action = " << action;
   /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
@@ -241,13 +241,15 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
 	{
 	  this->get_inventory(answer);
 	}
-      else if (action.compare("incantation") == 0)
+      else if (action.compare("incantation\n") == 0)
 	{
 
 	}
-      else if (action.compare("connect_nbr") == 0)
+      else if (action.compare("connect_nbr\n") == 0)
 	{
-
+	  this->_nbunusedslots = atoi(answer.c_str());
+	  std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
+	  exit(0);
 	}
       // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
