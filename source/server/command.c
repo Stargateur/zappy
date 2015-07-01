@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 04:53:28 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:50:11 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:57:29 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -13,33 +13,41 @@
 #include	"game.h"
 #include	"client.h"
 #include	"team.h"
+#include	"command.h"
+
+static bool	aux_get_cmd(t_game *game, t_client *client, char *str)
+{
+  if (client->player == NULL)
+    {
+      if (set_team(client, game, str) == true)
+	return (true);
+    }
+  else
+    {
+      if (add_action(client->player, str) == true)
+	return (true);
+    }
+  return (false);
+}
 
 bool		get_cmd(t_game *game, t_client *client)
 {
+  bool		ret;
   char		*str;
 
+  ret = false;
   client = first_node(&client->node);
   while (client != NULL)
     {
       if (ready_cbuf(&client->cbuf) == true)
 	{
 	  if ((str = read_cbuf(&client->cbuf)) == NULL)
-	    return (true);
-	  if (client->player == NULL)
-	    {
-	      if (set_team(client, game, str) == true)
-		return (true);
-	    }
-	  else
-	    {
-	      if (add_action(client->player, str) == true)
-		return (true);
-	    }
+	    ret = true;
+	  if (aux_get_cmd(game, client, str) == true)
+	    ret = true;
 	  free(str);
 	}
-      if (client->player != NULL)
-	show_action(client->player->action);
       client = client->node.next;
     }
-  return (false);
+  return (ret);
 }

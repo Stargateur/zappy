@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:44:00 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:27:31 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:57:10 2015 Antoine Plaskowski
 */
 
 #ifndef		OPTION_H_
@@ -16,12 +16,12 @@
 typedef	struct	s_option	t_option;
 struct		s_option
 {
-  char const	*p;
+  char		*p;
   size_t	x;
   size_t	y;
   size_t	c;
   size_t	t;
-  char * const	*team;
+  char		**team;
 };
 
 bool		get_option(t_option *option, char **argv,

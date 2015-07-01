@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Wed Jul  1 05:19:40 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:03:34 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -91,7 +91,7 @@ t_player		*init_player(t_map *map, char * const team,
     return (NULL);
   player->x = x % map->width;
   player->y = y % map->height;
-  player->dir = rand() % (EAST + 1);
+  player->dir = random() % (EAST + 1);
   player->range = 1;
   player->client = NULL;
   player->action = NULL;

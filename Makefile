@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Thu Jun 25 23:08:57 2015 Antoine Plaskowski
+## Last update Wed Jul  1 05:56:41 2015 Antoine Plaskowski
 ##
 
 SERVER		=	zappy_server
@@ -38,11 +38,11 @@ CXXFLAGS	+=	-ansi -pedantic
 CXXFLAGS	+=	$(INCLUDE)
 
 ifeq ($(CC), clang)
-CFLAGS		+=	-Weverything -Wno-padded
+CFLAGS		+=	-Weverything -Wno-padded -Wno-disabled-macro-expansion
 endif
 
 ifeq ($(CXX), clang++)
-CXXFLAGS	+=	-Weverything -Wno-padded
+CXXFLAGS	+=	-Weverything -Wno-padded -Wno-disabled-macro-expansion
 endif
 
 ifneq ($(DEBUG), no)
