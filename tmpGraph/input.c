@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Wed Jul  1 17:21:10 2015 Kevin Costa
+** Last update Wed Jul  1 17:44:28 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -27,8 +27,9 @@ int		input(t_display *display)
 	case SDL_KEYDOWN:
 	  if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
 	    {
-	      if (display->_horiz != 0)
-		display->_horiz -= 1;
+	      display->_horiz -= 1;
+	      if (display->_horiz == -1)
+		display->_horiz = 40;
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
 	    {
@@ -38,8 +39,9 @@ int		input(t_display *display)
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_UP)
 	    {
-	      if (display->_verti != 0)
-		display->_verti -= 1;
+	      display->_verti -= 1;
+	      if (display->_verti == -1)
+		display->_verti = 40;
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
 	    {
