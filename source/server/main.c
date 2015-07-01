@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Wed Jul  1 06:02:23 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:10:54 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -22,6 +22,7 @@
 #include	"node.h"
 #include	"player.h"
 #include	"inv.h"
+#include	"command.h"
 
 static int	init_socket(char const * const port)
 {
@@ -134,7 +135,10 @@ int		main(int argc, char **argv)
   if ((sfd = init_socket(game.option.p)) == -1)
     return (1);
   while (g_keep_running == true)
-    client = manage_select(client, sfd);
+    {
+      client = manage_select(client, sfd);
+      get_cmd(&game, client);
+    }
   close(sfd);
   return (0);
 }

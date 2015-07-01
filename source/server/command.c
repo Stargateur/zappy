@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 04:53:28 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:57:29 2015 Antoine Plaskowski
+** Last update Wed Jul  1 06:14:35 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
