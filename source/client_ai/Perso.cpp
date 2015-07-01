@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-** Last update Tue Jun 30 16:18:24 2015 Jérémy MATHON
+** Last update Wed Jul  1 14:14:39 2015 J�r�my MATHON
 */
 
 #include		"Perso.hpp"
@@ -14,6 +14,7 @@ Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip
 {
   this->_sav = new Save();
   this->_time = 0;
+  this->_way = RIGHT;
 }
 
 Perso::~Perso()
@@ -25,6 +26,14 @@ void			Perso::avance()
   this->_time += 7;
   this->_sav->mouv.push_back("avance");
   this->_sav->cpt++;
+  if (this->_way == RIGHT)
+    this->_posx++;
+  else if (this->_way == DOWN)
+    this->_posy++;
+  else if (this->_way == LEFT)
+    this->_posx--;
+  else if (this->_way == UP)
+    this->_posy--;
 }
 
 void			Perso::droite()
@@ -32,6 +41,14 @@ void			Perso::droite()
   this->_time += 7;
   this->_sav->mouv.push_back("droite");
   this->_sav->cpt++;
+  if (this->_way == RIGHT)
+    this->_way = DOWN;
+  else if (this->_way == DOWN)
+    this->_way = LEFT;
+  else if (this->_way == LEFT)
+    this->_way = UP;
+  else if (this->_way == UP)
+    this->_way = RIGHT;
 }
 
 void			Perso::gauche()
@@ -39,6 +56,14 @@ void			Perso::gauche()
   this->_time += 7;
   this->_sav->mouv.push_back("gauche");
   this->_sav->cpt++;
+  if (this->_way == RIGHT)
+    this->_way = UP;
+  else if (this->_way == DOWN)
+    this->_way = RIGHT;
+  else if (this->_way == LEFT)
+    this->_way = DOWN;
+  else if (this->_way == UP)
+    this->_way = LEFT;
 }
 
 void			Perso::voir()

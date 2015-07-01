@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Wed Jul  1 06:10:54 2015 Antoine Plaskowski
+** Last update Wed Jul  1 14:48:58 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -87,17 +87,24 @@ int		main(int argc, char **argv)
   /* SDL_RenderPresent(display->renderer); */
 
   /* sleep(5); */
-  /* t_map			map; */
-  /* t_player		test; */
-  /* char			*inv; */
-  /* char			*view; */
 
+  /* t_game		party_everyday; */
+  /* t_map			map; */
+  /* t_player		*test; */
+  /* char			*inv; */
+
+  /* init_game(&party_everyday, argv, argc); */
   /* init_map(&map, 50, 50); */
   /* map_generate(&map); */
-  /* init_player(&test, 0, 0, "Razmoket"); */
-  /* test.inv.linemlate += 2; */
-  /* test.inv.food += 5; */
-  /* inv = get_inventory(&test.inv); */
+  /* test = init_player(&map, "Razmoket", 49, 49); */
+  /* party_everyday.player = put_node(party_everyday.player, test); */
+  /* test = init_player(&map, "Razmoket", 0, 0); */
+  /* party_everyday.player = put_node(party_everyday.player, test); */
+  /* printf("player is in %lu - %lu\n", test->coords.x, test->coords.y); */
+  /* init_inv(&test->inv); */
+  /* test->inv.linemlate += 2; */
+  /* test->inv.food += 5; */
+  /* inv = get_inventory(&test->inv); */
   /* if (inv) */
   /*   { */
   /*     printf("Inventory: %s\n", inv); */
@@ -105,27 +112,20 @@ int		main(int argc, char **argv)
   /*   } */
   /* else */
   /*   printf("Inv is NULL\n"); */
-  /* move(&map, &test); */
-  /* rotate_left(&test); */
-  /* move(&map, &test); */
-  /* rotate_left(&test); */
-  /* move(&map, &test); */
-  /* rotate_right(&test); */
-  /* rotate_right(&test); */
-  /* rotate_right(&test); */
-  /* move(&map, &test); */
-  /* rotate_left(&test); */
-  /* if (test.dir == NORTH) */
+  /* move(&map, test); */
+  /* rotate_left(test); */
+  /* move(&map, test); */
+  /* rotate_left(test); */
+  /* move(&map, test); */
+  /* rotate_right(test); */
+  /* rotate_right(test); */
+  /* rotate_right(test); */
+  /* move(&map, test); */
+  /* rotate_left(test); */
+  /* if (test->dir == NORTH) */
   /*   printf("Player has rotated correctly\n"); */
 
-  /* view = player_view(&map, &test); */
-  /* if (view) */
-  /*   { */
-  /*     printf("View: %s\n", view); */
-  /*     free(view); */
-  /*   } */
-  /* else */
-  /*   printf("View is NULL\n"); */
+  /* player_view(&party_everyday, &map, test); */
 
   client = NULL;
   srandom((unsigned int)time(NULL));
