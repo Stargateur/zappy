@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:36:45 2015 zwertv_e
-** Last update Thu Jun 25 22:55:57 2015 zwertv_e
+** Last update Wed Jul  1 17:11:20 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -23,33 +23,53 @@ void		init_inv(t_inv *inv)
   inv->food = 0;
 }
 
-void	        add_ressource(t_inv * const inv, int const type,
-			      int const quantity)
+static size_t	*get_inv_ressource(t_inv const * const inv, int const type)
 {
+  size_t	*ressource;
+
+  ressource = NULL;
   switch(type)
     {
     case linemlate:
-      inv->linemlate += quantity;
+      ressource = &inv->linemlate;
       break;
     case deraumere:
-      inv->deraumere += quantity;
+      ressource = &inv->deraumere;
       break;
     case sibur:
-      inv->sibur += quantity;
+      ressource = &inv->sibur;
       break;
     case mendiane:
-      inv->mendiane += quantity;
+      ressource = &inv->mendiane;
       break;
     case phiras:
-      inv->phiras += quantity;
+      ressource = &inv->phiras;
       break;
     case thystame:
-      inv->thystame += quantity;
+      ressource = &inv->thystame;
       break;
     case food:
-      inv->food += quantity;
+      ressource = &inv->food;
       break;
     };
+  return (ressource);
+}
+
+bool	        add_ressource(t_inv * const inv, int const type,
+			      size_t const quantity, bool add)
+{
+  size_t	*ressource;
+
+  ressource = get_inv_ressource(inv, type);
+  if (!ressource)
+    return (false);
+  if (!add && *ressource < quantity)
+    return (false);
+  if (add)
+    *ressource += quantity;
+  else
+    *ressource -= quantity;
+  return (true);
 }
 
 size_t		count_ressources(t_inv const * const inv)
