@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Wed Jul  1 05:05:39 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:28:38 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -14,10 +14,8 @@
 #include	<sys/socket.h>
 #include        <SDL2/SDL.h>
 #include        "graphic.h"
-#include	"opt.h"
 #include	"create_binded_socket.h"
 #include	"manage_select.h"
-#include	"opt.h"
 #include	"int_handler.h"
 #include	"game.h"
 #include	"map.h"
@@ -132,8 +130,8 @@ int		main(int argc, char **argv)
   srand(time(NULL));
   if (init_game(&game, argv, argc) == NULL)
     return (1);
-  show_opt(&game.opt);
-  if ((sfd = init_socket(game.opt.p)) == -1)
+  show_option(&game.option);
+  if ((sfd = init_socket(game.option.p)) == -1)
     return (1);
   while (g_keep_running == true)
     client = manage_select(client, sfd);

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Wed Jul  1 05:05:46 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:29:12 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -14,7 +14,6 @@
 #include	<string.h>
 #include	"client.h"
 #include	"manage_select.h"
-#include	"opt.h"
 #include	"fd_set.h"
 #include	"int_handler.h"
 

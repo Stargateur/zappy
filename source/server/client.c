@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Wed Jul  1 05:04:37 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:29:20 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -14,7 +14,6 @@
 #include	"client.h"
 #include	"cbuf.h"
 #include	"game.h"
-#include	"opt.h"
 
 t_string	*add_string(t_string * const list, char *str)
 {

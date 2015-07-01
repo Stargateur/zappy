@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:12:11 2015 Antoine Plaskowski
-** Last update Wed Jul  1 04:41:33 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:28:21 2015 Antoine Plaskowski
 */
 
 #ifndef		GAME_H_
@@ -17,7 +17,7 @@ typedef	struct	s_game	t_game;
 # include	<stddef.h>
 # include	"player.h"
 # include	"map.h"
-# include	"opt.h"
+# include	"option.h"
 
 struct		s_team
 {
@@ -33,7 +33,7 @@ struct		s_game
   t_team	*team;
   t_player	*player;
   t_map		map;
-  t_opt		opt;
+  t_option	option;
 };
 
 t_game		*init_game(t_game * const game, char **argv, int const argc);

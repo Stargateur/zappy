@@ -5,11 +5,10 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Tue Jun 30 19:59:10 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:29:03 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
-#include	"opt.h"
 #include	"utils.h"
 
 size_t		len_tab(void * const * const tab)

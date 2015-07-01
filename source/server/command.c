@@ -5,8 +5,13 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 04:53:28 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:04:18 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:26:33 2015 Antoine Plaskowski
 */
+
+#include	<stdbool.h>
+#include	<stdlib.h>
+#include	"game.h"
+#include	"client.h"
 
 bool		get_cmd(t_game *game, t_client *client)
 {
