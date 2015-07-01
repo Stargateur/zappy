@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Wed Jul  1 05:29:20 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:44:07 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -42,21 +42,13 @@ t_client	*add_client(t_client * const list, int const sfd)
   return (put_node(&list->node, &new->node));
 }
 
-static bool	anwser_team(t_client * const client, size_t const num_client)
+bool		write_pos_player(t_client * const client)
 {
   char		*str;
-  int           len;
+  int		len;
 
   if (client == NULL || client->player == NULL)
     return (true);
-  if ((len = snprintf(NULL, 0, "%lu\n", num_client)) < 0)
-    return (true);
-  if ((str = malloc(sizeof(*str) * ((size_t)len + 1))) == NULL)
-    return (true);
-  if (snprintf(str, (size_t)len + 1, "%lu\n", num_client) != len)
-    return (true);
-  client->to_write = add_string(client->to_write, str);
-  free(str);
   len = snprintf(NULL, 0, "%lu %lu\n", client->player->x, client->player->y);
   if (len < 0)
     return (true);
@@ -68,37 +60,4 @@ static bool	anwser_team(t_client * const client, size_t const num_client)
   client->to_write = add_string(client->to_write, str);
   free(str);
   return (false);
-}
-
-static bool	set_client_player(t_client * const client, t_game * const game,
-				  size_t const team)
-{
-  t_player	*player;
-
-  if (game->team[team].connect < game->team[team].connect_max)
-    return (true);
-  game->team[team].connect++;
-  if ((player = find_free_player(game->player, game->team[team].team)) == NULL)
-    player = init_player(&game->map, game->team[team].team, rand(), rand());
-  if (player == NULL)
-    return (true);
-  game->player = put_node(&game->player->node, &player->node);
-  client->player = player;
-  player->client = client;
-  return (anwser_team(client, game->team[team].connect_max -
-		      game->team[team].connect));
-}
-
-bool		set_team(t_client * const client, t_game * const game,
-			 char * str)
-{
-  size_t	team;
-
-  str = strtok(str, " ");
-  if (client == NULL || game == NULL || str == NULL || game->team == NULL)
-    return (true);
-  for (team = 0; team < game->size_team; team++)
-    if (strncmp(game->team[team].team, str, game->team[team].len_team) == 0)
-      return (set_client_player(client, game, team));
-  return (true);
 }

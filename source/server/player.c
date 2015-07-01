@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Tue Jun 30 22:45:31 2015 zwertv_e
+** Last update Wed Jul  1 05:41:02 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
