@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:53:31 2015 Jérémy MATHON
-// Last update Tue Jun 30 15:46:22 2015 amoure_a
+** Last update Wed Jul  1 14:10:53 2015 Jérémy MATHON
 */
 
 #ifndef PERSO_HPP_
@@ -18,6 +18,14 @@
 # include	"Save.h"
 # include	"Client.h"
 
+typedef	enum	s_way
+  {
+    RIGHT = 0,
+    DOWN = 1,
+    LEFT = 2,
+    UP = 3
+  }		t_way;
+
 class	Perso : public Client
 {
 private:
@@ -27,6 +35,7 @@ private:
   std::list<std::string>	_action;
   int				_posx;
   int				_posy;
+  t_way				_way;
   int				_mapheight;
   int				_maplength;
   int				_numclient;
