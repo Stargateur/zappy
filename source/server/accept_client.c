@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Mar 11 06:48:53 2015 Antoine Plaskowski
-** Last update Fri Mar 27 03:49:18 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:09:31 2015 Antoine Plaskowski
 */
 
 #include	<arpa/inet.h>
@@ -25,21 +25,22 @@ char const	*get_addr(t_sockaddr_in const * const addr)
     char	ipv6[INET6_ADDRSTRLEN];
   }		ip;
 
-  if (addr->base.sa_family == AF_INET)
+  switch (addr->base.sa_family)
     {
+    case AF_INET:
       if (inet_ntop(AF_INET, &addr->ipv4.sin_addr,
 		    ip.ipv4, sizeof(ip.ipv4)) != NULL)
-	return (&ip.base);
-      perror("inet_ntop()");
-    }
-  else if (addr->base.sa_family == AF_INET6)
-    {
+
+	perror("inet_ntop()");
+      break;
+    case AF_INET6:
       if (inet_ntop(AF_INET6, &addr->ipv6.sin6_addr,
 		    ip.ipv6, sizeof(ip.ipv6)) != NULL)
-	return (&ip.base);
-      perror("inet_ntop()");
+	perror("inet_ntop()");
+      break;
+    default:
+      ip.base = '\0';
     }
-  ip.base = '\0';
   return (&ip.base);
 }
 
