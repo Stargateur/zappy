@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Wed Jul  1 14:47:23 2015 Kevin Costa
+** Last update Wed Jul  1 15:17:03 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -27,27 +27,27 @@ int input(t_display *display)
 	case SDL_KEYDOWN:
 	  if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
 	    {
-	      if (display->_shape_size != 24)
-		display->_shape_size = SIZE_X / display->_nb_case;
-	      display->_horiz += (display->_shape_size + 1);
+	      /* if (display->_shape_size != 24) */
+	      /* display->_shape_size = SIZE_X / display->_nb_case - 1; */
+	      display->_horiz -= 1;
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
 	    {
-	      if (display->_shape_size != 24)
-		display->_shape_size = SIZE_X / display->_nb_case;
-	      display->_horiz -= (display->_shape_size + 1);
+	      /* if (display->_shape_size != 24) */
+		/* display->_shape_size = SIZE_X / display->_nb_case - 1; */
+	      display->_horiz += 1;
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_UP)
 	    {
-	      if (display->_shape_size != 24)
-		display->_shape_size = SIZE_X / display->_nb_case;
-	      display->_verti += (display->_shape_size + 1);
+	      /* if (display->_shape_size != 24) */
+		/* display->_shape_size = SIZE_X / display->_nb_case - 1; */
+	      display->_verti -= 1;
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
 	    {
-	      if (display->_shape_size != 24)
-		display->_shape_size = SIZE_X / display->_nb_case;
-	      display->_verti -= (display->_shape_size + 1);
+	      /* if (display->_shape_size != 24) */
+		/* display->_shape_size = SIZE_X / display->_nb_case - 1; */
+	      display->_verti += 1;
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 	    exit(1); /* quitter */
