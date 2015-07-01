@@ -5,13 +5,16 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 07:45:51 2015 Antoine Plaskowski
-** Last update Wed Jul  1 08:12:56 2015 Antoine Plaskowski
+** Last update Wed Jul  1 09:04:44 2015 Antoine Plaskowski
 */
 
 #ifndef		BROADCAST_H_
 # define	BROADCAST_H_
 
 # include	<stdint.h>
+# include	<math.h>
+
+# define	M_PI_8	(M_PI / 8)
 
 typedef	enum	e_sound
   {
@@ -23,7 +26,7 @@ typedef	enum	e_sound
     S_SOUTH_WEST = 6,
     S_SOUTH = 7,
     S_SOUTH_EAST = 8,
-    S_NONE
+    S_HERE
   }		t_sound;
 
 typedef	struct	s_vector	t_vector;
