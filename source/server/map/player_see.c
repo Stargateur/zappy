@@ -5,18 +5,18 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Wed Jul  1 01:29:46 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:15:58 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
 #include	"player.h"
 #include	"map.h"
 
-size_t		find_nb_squarres(size_t const accu, size_t const range)
+size_t		find_nb_squares(size_t const accu, size_t const range)
 {
   if (range == 0)
     return (accu);
-  return (find_nb_squarres(accu + 1 + 2 * range, range - 1));
+  return (find_nb_squares(accu + 1 + 2 * range, range - 1));
 }
 
 static size_t	get_x(t_map const * const map, t_player const * const player,
@@ -131,8 +131,8 @@ static size_t	get_y(t_map const * const map, t_player const * const player,
   return (pos);
 }
 
-void		find_squarres(t_map const * const map,
-			      t_player const * const player, t_squarre **list,
+void		find_squares(t_map const * const map,
+			      t_player const * const player, t_square **list,
 			      size_t const range)
 {
   size_t	i;
@@ -146,7 +146,7 @@ void		find_squarres(t_map const * const map,
       tmp_w = -((2 * tmp_h + 1) / 2);
       while (tmp_w <= (2 * tmp_h + 1) / 2)
 	{
-	  list[i] = find_squarre(first_node(&map->items->node), get_x(map, player, tmp_h, tmp_w), get_y(map, player, tmp_h, tmp_w));
+	  list[i] = find_square(first_node(&map->items->node), get_x(map, player, tmp_h, tmp_w), get_y(map, player, tmp_h, tmp_w));
 	  tmp_w++;
 	  i++;
 	}
@@ -154,7 +154,7 @@ void		find_squarres(t_map const * const map,
     }
 }
 
-static size_t	count_malloc_space(t_squarre const * const squarre)
+static size_t	count_malloc_space(t_square const * const square)
 {
   int		to_malloc;
 
@@ -170,15 +170,15 @@ char		*player_view(t_game const * const game,
   size_t	range;
   size_t	needed_space;
   size_t	i;
-  t_squarre	**list;
+  t_square	**list;
 
   if (!player || !map)
     return (NULL);
   if ((range = count_malloc_space(player->range)) < 0)
     return (NULL);
-  if ((list = malloc(sizeof(t_squarre *) * (range))) == NULL)
+  if ((list = malloc(sizeof(t_square *) * (range))) == NULL)
     return (NULL);
-  find_squarres(map, player, list, range);
+  find_squares(map, player, list, range);
   needed_space = 0;
   for (i = 0; i < range; i++)
     needed_space += count_inventory_space();

@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Mar 11 06:48:53 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:09:31 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:11:51 2015 Antoine Plaskowski
 */
 
 #include	<arpa/inet.h>
@@ -46,11 +46,12 @@ char const	*get_addr(t_sockaddr_in const * const addr)
 
 int		accept_client(int const sock, t_clientaddr *ca)
 {
-  socklen_t	len;
-
-  len = sizeof(ca->addr);
-  memset(&ca->addr, 0, sizeof(ca->addr));
-  if ((ca->cfd = accept(sock, &ca->addr.base, &len)) == -1)
+  if (ca != NULL)
+    {
+      ca->len = sizeof(ca->addr);
+      memset(&ca->addr, 0, sizeof(ca->addr));
+    }
+  if ((ca->cfd = accept(sock, &ca->addr.base, &ca->len)) == -1)
     {
       perror("accept()");
       return (-1);

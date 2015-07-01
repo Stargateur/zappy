@@ -5,22 +5,23 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Thu Jun 25 22:37:39 2015 zwertv_e
+** Last update Wed Jul  1 05:22:56 2015 Antoine Plaskowski
 */
 
 #include	<time.h>
 #include	<stdlib.h>
+#include	<stdio.h>
 #include	"inv.h"
 #include	"map.h"
 
 static int	get_ressource_type(void)
 {
+  int tmp = rand();
   int		type;
   int		repart;
 
   repart = DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN;
   repart += DENSITY_PHI + DENSITY_THY + DENSITY_FOOD;
-  int tmp = rand();
   type = tmp % repart;
   printf("report: %d [%d] -> %d\n", repart, tmp, type);
   if (type < DENSITY_LIN)
@@ -61,7 +62,7 @@ static size_t	need_to_generate(t_map const * const map)
 {
   double	total_ressources;
   double	available_size;
-  t_squarre	*tmp;
+  t_square	*tmp;
 
   total_ressources = 0;
   tmp = first_node(&map->items->node);

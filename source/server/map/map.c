@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 21:15:02 2015 zwertv_e
-** Last update Wed Jul  1 01:41:21 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:13:57 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -26,45 +26,44 @@ void		free_map(t_map *map)
   free_all_node(&map->items->node);
 }
 
-t_squarre	*find_squarre(t_squarre const * const squarre,
-				      size_t const x, size_t const y)
+t_square	*find_square(t_square *square, size_t const x, size_t const y)
 {
-  if (squarre == NULL)
+  if (square == NULL)
     return (NULL);
-  if (squarre->x == x && squarre->y == y)
-    return (squarre);
-  return (find_squarre(squarre->node.next, x, y));
+  if (square->x == x && square->y == y)
+    return (square);
+  return (find_square(square->node.next, x, y));
 }
 
 bool		        add_item(t_map *map, size_t const x, size_t const y,
 				 int const type)
 {
-  t_squarre		*squarre;
+  t_square		*square;
 
-  if ((squarre = find_squarre(first_node(&map->items->node), x, y)) != NULL)
+  if ((square = find_square(first_node(&map->items->node), x, y)) != NULL)
     {
-      add_ressource(&squarre->ressources, type, 1);
+      add_ressource(&square->ressources, type, 1);
       return (true);
     }
-  if ((squarre = malloc(sizeof(t_squarre))) == NULL)
+  if ((square = malloc(sizeof(t_square))) == NULL)
     return (false);
-  squarre->x = x;
-  squarre->y = y;
-  init_inv(&squarre->ressources);
-  add_ressource(&squarre->ressources, type, 1);
-  map->items = put_node(&map->items->node, &squarre->node);
+  square->x = x;
+  square->y = y;
+  init_inv(&square->ressources);
+  add_ressource(&square->ressources, type, 1);
+  map->items = put_node(&map->items->node, &square->node);
   return (true);
 }
 
 bool			delete_item(t_map *map, size_t const x, size_t const y,
 				    int const type)
 {
-  t_squarre		*squarre;
+  t_square		*square;
 
-  if ((squarre = find_squarre(first_node(&map->items->node), x, y)) == NULL)
+  if ((square = find_square(first_node(&map->items->node), x, y)) == NULL)
     return (false);
-  add_ressource(&squarre->ressources, type, -1);
-  if (count_ressources(&squarre->ressources) == 0)
-    map->items = sup_node(&squarre->node);
+  add_ressource(&square->ressources, type, -1);
+  if (count_ressources(&square->ressources) == 0)
+    map->items = sup_node(&square->node);
   return (true);
 }

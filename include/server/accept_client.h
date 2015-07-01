@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Mar 11 06:50:08 2015 Antoine Plaskowski
-** Last update Tue Jun 30 17:17:32 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:11:36 2015 Antoine Plaskowski
 */
 
 #ifndef		ACCEPT_CLIENT_H_
@@ -27,6 +27,7 @@ struct			s_clientaddr
 {
   int			cfd;
   t_sockaddr_in		addr;
+  socklen_t		len;
 };
 
 char const	*get_addr(t_sockaddr_in const * const addr);

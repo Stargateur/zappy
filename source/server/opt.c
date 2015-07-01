@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Wed Jul  1 04:40:39 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:22:25 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -20,13 +20,14 @@ static t_opt	*init_opt(t_opt * const opt)
   static char	*team[] = {"team1", "team2", NULL};
 
   if (opt == NULL)
-    return (true);
+    return (NULL);
   opt->p = "4242";
   opt->x = 42;
   opt->y = 42;
   opt->c = 1;
   opt->t = 100;
   opt->team = team;
+  return (opt);
 }
 
 bool		show_opt(t_opt * const opt)

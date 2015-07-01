@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Wed Jul  1 04:45:26 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:12:17 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -13,6 +13,7 @@
 #include	"utils.h"
 #include	"game.h"
 #include	"opt.h"
+#include	"map.h"
 
 t_game		*init_game(t_game * const game, char **argv, int const argc)
 {

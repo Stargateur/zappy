@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Wed Jul  1 01:51:43 2015 Antoine Plaskowski
+** Last update Wed Jul  1 05:18:52 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -15,10 +15,10 @@ typedef	struct	s_player	t_player;
 
 typedef	enum
   {
-    NORTH,
-    SOUTH,
-    WEST,
-    EAST
+    NORTH = 0,
+    SOUTH = 1,
+    WEST = 2,
+    EAST = 3
   }		t_dir;
 
 # include	"utils.h"

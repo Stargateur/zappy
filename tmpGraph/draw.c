@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Tue Jun 30 17:40:52 2015 Kevin Costa
+** Last update Wed Jul  1 05:21:47 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -17,6 +17,7 @@ void		draw_grid(t_map *map, t_display *display)
 {
   int           a;
 
+  (void)map;
   a = 0;
   while (a <= /*map->height * 25*/ SIZE_X)
     {
@@ -33,7 +34,7 @@ void		draw_grid(t_map *map, t_display *display)
 
 SDL_Renderer		*draw_stone(t_map *map, t_texture *img, t_display *display)
 {
-  t_squarre	*tmp;
+  t_square	*tmp;
   SDL_Rect	DestR;
 
   tmp = first_node(&map->items->node);
