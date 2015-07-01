@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Wed Jul  1 05:56:41 2015 Antoine Plaskowski
+## Last update Wed Jul  1 07:59:41 2015 Antoine Plaskowski
 ##
 
 SERVER		=	zappy_server
@@ -24,7 +24,7 @@ LEVEL		?=	3
 
 COLOR		?=	no
 
-LIB		=
+LIB		=	-l m
 
 INCLUDE		=	-I include -I include/server -I include/client_ai
 
