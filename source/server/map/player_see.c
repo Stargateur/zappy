@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Thu Jul  2 16:03:29 2015 zwertv_e
+** Last update Thu Jul  2 16:12:06 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -132,9 +132,9 @@ static size_t	get_y(t_map const * const map, t_player const * const player,
   return (pos);
 }
 
-void		find_squares(t_map const * const map,
-			      t_player const * const player, t_coords *list,
-			      size_t const range)
+static void	find_squares(t_map const * const map,
+			     t_player const * const player, t_coords *list,
+			     size_t const range)
 {
   size_t	i;
   int		tmp_h;
@@ -179,8 +179,6 @@ static bool	ffirst_write(char const * const ressource,
 
 static bool	print_inv(t_inv const * const inv, bool first_write)
 {
-  size_t	i;
-
   first_write = ffirst_write("linemate", inv->linemate, first_write);
   first_write = ffirst_write("deraumere", inv->deraumere, first_write);
   first_write = ffirst_write("sibur", inv->sibur, first_write);
@@ -191,8 +189,8 @@ static bool	print_inv(t_inv const * const inv, bool first_write)
   return (first_write);
 }
 
-char		*player_view(t_game const * const game,
-			     t_map const * const map,
+bool		player_view(t_game const * const game,
+			    t_map const * const map,
 			    t_player const * const player)
 {
   size_t	range;
@@ -202,11 +200,11 @@ char		*player_view(t_game const * const game,
   t_square	*tmp_square;
   bool		first_write;
 
-  if (!player || !map)
-    return (NULL);
+  if (!game || !player || !map)
+    return (false);
   range = find_nb_squares(1, player->range);
   if ((list = malloc(sizeof(t_coords) * (range))) == NULL)
-    return (NULL);
+    return (false);
   find_squares(map, player, list, range);
   first_write = true;
   printf("{");
@@ -234,5 +232,5 @@ char		*player_view(t_game const * const game,
     }
   printf("}\n");
   free(list);
-  return (NULL);
+  return (true);
 }

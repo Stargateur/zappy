@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:36:45 2015 zwertv_e
-** Last update Thu Jul  2 16:05:29 2015 Antoine Plaskowski
+** Last update Thu Jul  2 16:13:57 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -23,7 +23,7 @@ void		init_inv(t_inv *inv)
   inv->food = 0;
 }
 
-static size_t	*get_inv_ressource(t_inv const * const inv, int const type)
+static size_t	*get_inv_ressource(t_inv * const inv, int const type)
 {
   size_t	*ressource;
 

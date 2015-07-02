@@ -5,13 +5,13 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Thu Jul  2 16:01:44 2015 zwertv_e
+** Last update Thu Jul  2 16:08:41 2015 zwertv_e
 */
 
 #include	<time.h>
 #include	<stdlib.h>
 #include	<stdio.h>
-#include	<map.h>
+#include	<math.h>
 #include	"inv.h"
 #include	"map.h"
 
@@ -21,7 +21,7 @@ static int	get_ressource_type(void)
   double	repart;
   double	rnd;
 
-  rnd = (double)random();
+  rnd = (double)(random());
   repart = DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN;
   repart += DENSITY_PHI + DENSITY_THY + DENSITY_FOOD;
   type = fmod(rnd, repart);
