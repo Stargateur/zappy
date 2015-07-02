@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:20 2015 zwertv_e
-** Last update Wed Jul  1 06:19:50 2015 Antoine Plaskowski
+** Last update Thu Jul  2 14:48:18 2015 Antoine Plaskowski
 */
 
 #ifndef		CLIENT_H_
@@ -33,11 +33,13 @@ struct		s_client
   t_cbuf	cbuf;
   t_string	*to_write;
   t_player	*player;
+  bool		to_kill;
+  t_time	time;
 };
 
 t_string	*add_string(t_string * const list, char *str);
 t_client	*add_client(t_client *list, int const sfd);
-t_client	*remove_client(t_client *list, t_client *to_rem);
 bool		write_pos_player(t_client * const client);
+t_client	*sup_client(t_client *client);
 
 #endif		/* !CLIENT_H_ */

@@ -5,7 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
+<<<<<<< HEAD
 ** Last update Thu Jul  2 15:49:06 2015 Alaric
+=======
+** Last update Thu Jul  2 15:46:10 2015 Antoine Plaskowski
+>>>>>>> ae0c01b9c8aee2651d8a0ae39ddae0debcee4b10
 */
 
 #include        <unistd.h>
