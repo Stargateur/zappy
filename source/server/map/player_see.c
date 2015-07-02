@@ -5,15 +5,15 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Thu Jul  2 15:46:24 2015 zwertv_e
+** Last update Thu Jul  2 16:03:29 2015 zwertv_e
 */
 
 #include	<stdlib.h>
-#include	<stdio.h>x
+#include	<stdio.h>
 #include	"player.h"
 #include	"map.h"
 
-size_t		find_nb_squares(size_t const accu, size_t const range)
+static size_t	find_nb_squares(size_t const accu, size_t const range)
 {
   if (range == 0)
     return (accu);
