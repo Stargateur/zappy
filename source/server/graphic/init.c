@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Thu Jul  2 20:25:09 2015 Kevin Costa
+** Last update Thu Jul  2 20:54:15 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -17,8 +17,8 @@ SDL_Window	*init_video()
 {
   SDL_Window	*fenetre;
 
-  fenetre = SDL_CreateWindow("zappy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SIZE_X + 151, SIZE_Y + 1, SDL_WINDOW_RESIZABLE);
-  if (fenetre == NULL)
+  fenetre = SDL_CreateWindow("Trantor", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SIZE_X + 151, SIZE_Y + 1, SDL_WINDOW_RESIZABLE);
+ if (fenetre == NULL)
     {
       printf("%s\n", SDL_GetError());
       exit(-1);
