@@ -5,12 +5,13 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Wed Jul  1 17:50:06 2015 zwertv_e
+** Last update Thu Jul  2 14:48:13 2015 zwertv_e
 */
 
 #ifndef		PLAYER_H__
 # define	PLAYER_H__
 
+typedef	struct	s_lvlup	t_lvlup;
 typedef	struct	s_player	t_player;
 
 typedef	enum
@@ -27,6 +28,14 @@ typedef	enum
 # include	"map.h"
 # include	"action.h"
 # include	"client.h"
+
+# define	NB_LEVEL	(6)
+
+struct		s_lvlup
+{
+  size_t        nb_players;
+  t_inv	        ressources;
+};
 
 struct		s_player
 {

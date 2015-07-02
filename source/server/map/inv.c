@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:36:45 2015 zwertv_e
-** Last update Wed Jul  1 17:11:20 2015 zwertv_e
+** Last update Thu Jul  2 15:25:13 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -14,7 +14,7 @@
 
 void		init_inv(t_inv *inv)
 {
-  inv->linemlate = 0;
+  inv->linemate = 0;
   inv->deraumere = 0;
   inv->sibur = 0;
   inv->mendiane = 0;
@@ -30,25 +30,25 @@ static size_t	*get_inv_ressource(t_inv const * const inv, int const type)
   ressource = NULL;
   switch(type)
     {
-    case linemlate:
-      ressource = &inv->linemlate;
+    case LINEMATE:
+      ressource = &inv->linemate;
       break;
-    case deraumere:
+    case DERAUMERE:
       ressource = &inv->deraumere;
       break;
-    case sibur:
+    case SIBUR:
       ressource = &inv->sibur;
       break;
-    case mendiane:
+    case MENDIANE:
       ressource = &inv->mendiane;
       break;
-    case phiras:
+    case PHIRAS:
       ressource = &inv->phiras;
       break;
-    case thystame:
+    case THYSTAME:
       ressource = &inv->thystame;
       break;
-    case food:
+    case FOOD:
       ressource = &inv->food;
       break;
     };
@@ -77,7 +77,7 @@ size_t		count_ressources(t_inv const * const inv)
   size_t		res;
 
   res = 0;
-  res += inv->linemlate;
+  res += inv->linemate;
   res += inv->deraumere;
   res += inv->sibur;
   res += inv->mendiane;
@@ -92,13 +92,13 @@ const char	*get_inventory(t_inv const * const inv)
   char		*res;
   int		to_malloc;
 
-  to_malloc = snprintf(NULL, 0, "linemlate %lu, deraumere %lu, \
-sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu", inv->linemlate,
+  to_malloc = snprintf(NULL, 0, "linemate %lu, deraumere %lu, \
+sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu", inv->linemate,
 		       inv->deraumere, inv->sibur, inv->mendiane, inv->phiras,
 		       inv->thystame, inv->food);
   res = malloc(to_malloc + 1);
-  snprintf(res, to_malloc + 1, "linemlate %lu, deraumere %lu, \
-sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu", inv->linemlate,
+  snprintf(res, to_malloc + 1, "linemate %lu, deraumere %lu, \
+sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu", inv->linemate,
 		       inv->deraumere, inv->sibur, inv->mendiane, inv->phiras,
 		       inv->thystame, inv->food);
   return (res);

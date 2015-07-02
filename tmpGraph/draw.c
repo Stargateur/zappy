@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Wed Jul  1 15:39:08 2015 Alaric
+** Last update Thu Jul  2 15:24:39 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -32,28 +32,69 @@ void		draw_grid(t_map *map, t_display *display)
     }
 }
 
-SDL_Renderer		*draw_stone(t_map *map, t_texture *img, t_display *display)
+SDL_Renderer		*draw_more_stone(t_map *map, t_texture *img, t_display *disp)
 {
   t_square	*tmp;
   SDL_Rect	DestR;
 
   tmp = first_node(&map->items->node);
-  DestR.w = display->_shape_size;
-  DestR.h = display->_shape_size;
+  DestR.w = disp->_shape_size;
+  DestR.h = disp->_shape_size;
   while (tmp != NULL)
     {
-      if (tmp->coords.x < display->_horiz + display->_nb_case
-	  && tmp->coords.x >= display->_horiz
-	  && tmp->coords.y < display->_verti + display->_nb_case
-	  && tmp->coords.y >= display->_verti)
+      if (tmp->coords.x <= (disp->_nb_case + disp->_horiz) - map->width
+	   && tmp->coords.y < disp->_verti + disp->_nb_case
+	   && tmp->coords.y >= disp->_verti)
 	{
-	  DestR.x = (tmp->coords.x - display->_horiz) * (display->_shape_size + 1);
-	  DestR.y = (tmp->coords.y - display->_verti) * (display->_shape_size + 1);
-	  SDL_RenderCopy(display->renderer, img->mine, NULL, &DestR);
+	  DestR.x = (tmp->coords.x + (map->width - disp->_horiz)) * (disp->_shape_size + 1);
+	  DestR.y = (tmp->coords.y - disp->_verti) * (disp->_shape_size + 1);
+	}
+      else if (tmp->coords.y <= (disp->_nb_case + disp->_verti) - map->height
+	   && tmp->coords.x < disp->_horiz + disp->_nb_case
+	   && tmp->coords.x >= disp->_horiz)
+	{
+	  DestR.y = (tmp->coords.y + (map->height - disp->_verti)) * (disp->_shape_size + 1);
+	  DestR.x = (tmp->coords.x - disp->_horiz) * (disp->_shape_size + 1);
+	}
+      else if (tmp->coords.x <= (disp->_nb_case + disp->_horiz) - map->width
+	       && tmp->coords.y <= (disp->_nb_case + disp->_verti) - map->height)
+	{
+	  DestR.y = (tmp->coords.y + (map->height - disp->_verti)) * (disp->_shape_size + 1);
+	  DestR.x = (tmp->coords.x + (map->width - disp->_horiz)) * (disp->_shape_size + 1);
+	}
+      SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
+      tmp = tmp->node.next;
+    }
+  return (disp->renderer);
+}
+
+SDL_Renderer		*draw_stone(t_map *map, t_texture *img, t_display *disp)
+{
+  t_square	*tmp;
+  SDL_Rect	DestR;
+
+  tmp = first_node(&map->items->node);
+  DestR.w = disp->_shape_size;
+  DestR.h = disp->_shape_size;
+  while (tmp != NULL)
+    {
+      if (tmp->coords.x < disp->_horiz + disp->_nb_case
+	   && tmp->coords.x >= disp->_horiz
+	   && tmp->coords.y < disp->_verti + disp->_nb_case
+	   && tmp->coords.y >= disp->_verti)
+	{
+	  DestR.x = (tmp->coords.x - disp->_horiz) * (disp->_shape_size + 1);
+	  DestR.y = (tmp->coords.y - disp->_verti) * (disp->_shape_size + 1);
+	  SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
 	}
       tmp = tmp->node.next;
     }
-  return (display->renderer);
+  if (disp->_horiz + disp->_nb_case > map->width || disp->_verti + disp->_nb_case > map->height)
+    {
+      printf("LOLOLOLOL\n");
+      disp->renderer = draw_more_stone(map, img, disp);
+    }
+  return (disp->renderer);
 }
 
 void		draw_select(t_display *display)

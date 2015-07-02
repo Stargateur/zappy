@@ -14,7 +14,7 @@ Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip
 {
   this->_sav = new Save();
   this->_time = 0;
-  this->_way = UP;
+  this->_way = RIGHT;
   this->_level = 1;
 }
 
@@ -72,16 +72,22 @@ void			Perso::see_map()
   int			x = 0;
   int			y = 0;
 
+  std::cout << "Pos du joueur : x : " << this->_posx << " y : " << this->_posy << std::endl;
   std::cout << "lecture de la map !" << std::endl;
   while (y < this->_mapheight)
     {
       x = 0;
       while (x < this->_maplength)
 	{
-	  std::cout << this->_sav->map[y][x].back();
+	  if (this->_sav->map[y][x].back() != NONE)
+	    {
+	      std::cout << "x : " << x << " y : " << y << std::endl;
+	      std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
+	      //std::cout << this->_sav->map[y][x].back(); 
+	    }
 	  x++;
 	}
-      std::cout << std::endl;
+      //std::cout << std::endl;
       y++;
     }
   exit(0);
@@ -186,7 +192,7 @@ std::string		Perso::server_answer(std::string action)
 	}
       else
 	{
-	  std::cout << "Reponse du serveur = " << answer <<  "nombre de caracteres = " << ret << std::endl;
+	  std::cout << "Reponse du serveur = " << answer << std::endl << std::endl;
 	  answer.resize(ret);
 	}
     }
@@ -306,8 +312,10 @@ void		Perso::size_map_pos_ia(std::string coords)
   y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
   this->_mapheight = atoi(y.c_str());
   this->_maplength = atoi(x.c_str());
-  this->_posx = this->_maplength / 2;
-  this->_posy = this->_mapheight / 2;
+  //  this->_posx = this->_maplength / 2;
+  //this->_posy = this->_mapheight / 2;
+  this->_posx = 5;
+  this->_posy = 49;
   this->_sav->map = std::vector< std::vector< std::list <t_case> > > (this->_mapheight);
   while (i < this->_mapheight)
     {

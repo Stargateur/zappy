@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:43:00 2015 zwertv_e
-** Last update Wed Jul  1 17:16:57 2015 zwertv_e
+** Last update Thu Jul  2 15:23:39 2015 zwertv_e
 */
 
 #ifndef		INV_H__
@@ -20,18 +20,18 @@ typedef	struct	s_inv		t_inv;
 
 enum
   {
-    linemlate,
-    deraumere,
-    sibur,
-    mendiane,
-    phiras,
-    thystame,
-    food
+    LINEMATE,
+    DERAUMERE,
+    SIBUR,
+    MENDIANE,
+    PHIRAS,
+    THYSTAME,
+    FOOD
   };
 
 struct		s_inv
 {
-  size_t	linemlate;
+  size_t	linemate;
   size_t	deraumere;
   size_t	sibur;
   size_t	mendiane;
