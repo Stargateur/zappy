@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Thu Jul  2 18:42:30 2015 Antoine Plaskowski
+** Last update Thu Jul  2 19:02:50 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -67,7 +67,7 @@ bool		expulse_players(t_game * const game,
 bool		player_levelup(t_game * const game,
 			       t_map * const map, t_player * const player,
 			       bool const do_);
-bool		player_view(t_game const * const game,
+char		*player_view(t_game const * const game,
 			    t_map const * const map,
 			    t_player const * const player);
 

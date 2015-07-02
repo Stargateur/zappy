@@ -1,11 +1,11 @@
 /*
-** inv.c for  in /home/zwertv_e/rendu/PSU_2014_zappy/source/server/map
+** inv.c for  in /home/zwertv_e/rendu/PSU_2014_zappy
 ** 
 ** Made by zwertv_e
 ** Login   <zwertv_e@epitech.net>
 ** 
-** Started on  Tue Jun 23 14:36:45 2015 zwertv_e
-** Last update Thu Jul  2 16:34:40 2015 Antoine Plaskowski
+** Started on  Thu Jul  2 18:59:57 2015 zwertv_e
+** Last update Thu Jul  2 18:59:59 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -62,13 +62,13 @@ char		*get_inventory(t_inv const * const inv)
   char		*res;
   int		to_malloc;
 
-  to_malloc = snprintf(NULL, 0, "linemate %lu, deraumere %lu, \
-sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu", inv->linemate,
+  to_malloc = snprintf(NULL, 0, "{linemate %lu, deraumere %lu, \
+sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu}", inv->linemate,
 		       inv->deraumere, inv->sibur, inv->mendiane, inv->phiras,
 		       inv->thystame, inv->food);
   res = malloc(sizeof(char) * (to_malloc + 1));
-  snprintf(res, to_malloc + 1, "linemate %lu, deraumere %lu, \
-sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu", inv->linemate,
+  snprintf(res, to_malloc + 1, "{linemate %lu, deraumere %lu, \
+sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu}", inv->linemate,
 		       inv->deraumere, inv->sibur, inv->mendiane, inv->phiras,
 		       inv->thystame, inv->food);
   return (res);

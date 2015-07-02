@@ -4,8 +4,8 @@
 ** Made by zwertv_e
 ** Login   <zwertv_e@epitech.net>
 ** 
-** Started on  Thu Jul  2 15:53:10 2015 zwertv_e
-** Last update Thu Jul  2 18:17:06 2015 Antoine Plaskowski
+** Started on  Thu Jul  2 19:00:16 2015 zwertv_e
+** Last update Thu Jul  2 19:02:07 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -134,6 +134,7 @@ void		elliott(int argc, char **argv)
   t_map			mapr;
   t_player		*test;
   char			*inv;
+  char			*view;
 
   init_game(&party_everyday, argv, argc);
   init_map(&mapr, 50, 50);
@@ -155,6 +156,15 @@ void		elliott(int argc, char **argv)
   else
     printf("Inv is NULL\n");
 
+  view = player_view(&party_everyday, &mapr, test);
+  if (view)
+    {
+      printf("View: %s\n", view);
+      free(view);
+    }
+  else
+    printf("View is NULL\n");
+
   move(&mapr, test);
   rotate_left(test);
   move(&mapr, test);
@@ -168,13 +178,34 @@ void		elliott(int argc, char **argv)
   if (test->dir == NORTH)
     printf("Player has rotated correctly\n");
 
-  player_view(&party_everyday, &mapr, test);
+  view = player_view(&party_everyday, &mapr, test);
+  if (view)
+    {
+      printf("View: %s\n", view);
+      free(view);
+    }
+  else
+    printf("View is NULL\n");
   add_item(&mapr, 0, 0, LINEMATE);
-  player_view(&party_everyday, &mapr, test);
+  view = player_view(&party_everyday, &mapr, test);
+  if (view)
+    {
+      printf("View: %s\n", view);
+      free(view);
+    }
+  else
+    printf("View is NULL\n");
   player_levelup(&party_everyday, &mapr, test, true);
   if (test->range == 2)
     printf("Player successfuly elevated !\n");
-  player_view(&party_everyday, &mapr, test);
+  view = player_view(&party_everyday, &mapr, test);
+  if (view)
+    {
+      printf("View: %s\n", view);
+      free(view);
+    }
+  else
+    printf("View is NULL\n");
 }
 
 int		main(int argc, char **argv)
