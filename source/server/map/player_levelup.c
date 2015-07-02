@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 17:51:47 2015 zwertv_e
-** Last update Thu Jul  2 15:32:31 2015 zwertv_e
+** Last update Thu Jul  2 15:36:37 2015 zwertv_e
 */
 
 #include	"map.h"
@@ -97,7 +97,7 @@ static bool	do_levelup(t_game * const game,
   return (true);
 }
 
-bool		player_levelup(t_game const * const game,
+bool		player_levelup(t_game * const game,
 			       t_map * const map, t_player * const player,
 			       bool const do_)
 {

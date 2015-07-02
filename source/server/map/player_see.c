@@ -5,10 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Thu Jul  2 15:32:16 2015 zwertv_e
+** Last update Thu Jul  2 15:46:24 2015 zwertv_e
 */
 
 #include	<stdlib.h>
+#include	<stdio.h>x
 #include	"player.h"
 #include	"map.h"
 
@@ -98,7 +99,7 @@ static size_t	get_y(t_map const * const map, t_player const * const player,
     case WEST:
       if (w < 0)
 	{
-	  quantity = -w;
+	  quantity = (size_t)(-w);
 	  addition = false;
 	}
       else
@@ -110,7 +111,7 @@ static size_t	get_y(t_map const * const map, t_player const * const player,
     case EAST:
       if (w < 0)
 	{
-	  quantity = -w;
+	  quantity = (size_t)(-w);
 	  addition = true;
 	}
       else
@@ -141,13 +142,16 @@ void		find_squares(t_map const * const map,
 
   i = 0;
   tmp_h = 0;
-  while (tmp_h <= player->range)
+  while (tmp_h <= (int)player->range)
     {
       tmp_w = -((2 * tmp_h + 1) / 2);
       while (tmp_w <= (2 * tmp_h + 1) / 2)
 	{
-	  list[i].x = get_x(map, player, tmp_h, tmp_w);
-	  list[i].y = get_y(map, player, tmp_h, tmp_w);
+	  if (i < range)
+	    {
+	      list[i].x = get_x(map, player, tmp_h, tmp_w);
+	      list[i].y = get_y(map, player, tmp_h, tmp_w);
+	    }
 	  tmp_w++;
 	  i++;
 	}

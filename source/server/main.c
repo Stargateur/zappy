@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Thu Jul  2 15:31:56 2015 zwertv_e
+** Last update Thu Jul  2 15:39:09 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -40,7 +40,7 @@ static int	init_socket(char const * const port)
   return (sfd);
 }
 
-void		plasko(int argc, char **argv)
+int		plasko(int argc, char **argv)
 {
   /*
   **
@@ -66,7 +66,7 @@ void		plasko(int argc, char **argv)
   close(sfd);
 }
 
-void		costa_alaric()
+int		costa_alaric()
 {
   /*
   **
@@ -116,6 +116,7 @@ void		costa_alaric()
   SDL_RenderPresent(display->renderer);
 
   sleep(5);
+  return (0);
 }
 
 void		elliott(int argc, char **argv)
