@@ -5,14 +5,14 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Thu Jul  2 17:35:00 2015 Kevin Costa
+** Last update Thu Jul  2 19:05:50 2015 Antoine Plaskowski
 */
 
 #ifndef		GRAPHIC_H_
 # define	GRAPHIC_H_
 
 #include	<SDL2/SDL.h>
-#include        "../../include/server/map.h"
+#include        "map.h"
 
 #define		SIZE_X 1000
 #define		SIZE_Y 1000
