@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Thu Jul  2 17:44:11 2015 Kevin Costa
+** Last update Thu Jul  2 18:15:18 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -34,6 +34,36 @@ void		draw_grid(t_map *map, t_display *d)
     }
 }
 
+void            select_pos(t_map *m, t_square *t, t_display *d, SDL_Rect *DestR)
+{
+  if (t->coords.x < (d->_nb_case + d->_horiz) - m->width
+      && t->coords.y < d->_verti + d->_nb_case
+      && t->coords.y >= d->_verti)
+    {
+      DestR->x = (int)((t->coords.x + (m->width - d->_horiz))
+		      * (d->_shape_size + 1));
+      DestR->y = (int)((t->coords.y - d->_verti)
+		      * (d->_shape_size + 1));
+    }
+  else if (t->coords.y < (d->_nb_case + d->_verti) - m->height
+	   && t->coords.x < d->_horiz + d->_nb_case
+	   && t->coords.x >= d->_horiz)
+    {
+      DestR->y = (int)((t->coords.y + (m->height - d->_verti))
+		      * (d->_shape_size + 1));
+      DestR->x = (int)((t->coords.x - d->_horiz)
+		      * (d->_shape_size + 1));
+    }
+  else if (t->coords.x < (d->_nb_case + d->_horiz) - m->width
+	   && t->coords.y < (d->_nb_case + d->_verti) - m->height)
+    {
+      DestR->y = (int)((t->coords.y + (m->height - d->_verti))
+		      * (d->_shape_size + 1));
+      DestR->x = (int)((t->coords.x + (m->width - d->_horiz))
+		      * (d->_shape_size + 1));
+    }
+}
+
 void		draw_more_stone(t_map *map, t_texture *img, t_display *disp, SDL_Rect DestR)
 {
   t_square	*tmp;
@@ -41,32 +71,7 @@ void		draw_more_stone(t_map *map, t_texture *img, t_display *disp, SDL_Rect Dest
   tmp = first_node(&map->items->node);
   while (tmp != NULL)
     {
-      if (tmp->coords.x < (disp->_nb_case + disp->_horiz) - map->width
-	   && tmp->coords.y < disp->_verti + disp->_nb_case
-	   && tmp->coords.y >= disp->_verti)
-	{
-	  DestR.x = (int)((tmp->coords.x + (map->width - disp->_horiz))
-			  * (disp->_shape_size + 1));
-	  DestR.y = (int)((tmp->coords.y - disp->_verti)
-			  * (disp->_shape_size + 1));
-	}
-      else if (tmp->coords.y < (disp->_nb_case + disp->_verti) - map->height
-	   && tmp->coords.x < disp->_horiz + disp->_nb_case
-	   && tmp->coords.x >= disp->_horiz)
-	{
-	  DestR.y = (int)((tmp->coords.y + (map->height - disp->_verti))
-			  * (disp->_shape_size + 1));
-	  DestR.x = (int)((tmp->coords.x - disp->_horiz)
-			  * (disp->_shape_size + 1));
-	}
-      else if (tmp->coords.x < (disp->_nb_case + disp->_horiz) - map->width
-	       && tmp->coords.y < (disp->_nb_case + disp->_verti) - map->height)
-	{
-	  DestR.y = (int)((tmp->coords.y + (map->height - disp->_verti))
-			  * (disp->_shape_size + 1));
-	  DestR.x = (int)((tmp->coords.x + (map->width - disp->_horiz))
-			  * (disp->_shape_size + 1));
-	}
+      select_pos(map, tmp, disp, &DestR);
       SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
       tmp = tmp->node.next;
     }
@@ -100,21 +105,21 @@ void		draw_stone(t_map *map, t_texture *img, t_display *disp)
     draw_more_stone(map, img, disp, DestR);
 }
 
-void		draw_select(t_display *display)
+void		draw_select(t_display *disp)
 {
-  size_t	a = display->_click_x * (display->_shape_size + 1);
-  size_t	b = display->_click_y * (display->_shape_size + 1);
+  size_t	a = (disp->_click_x - disp->_horiz) * (disp->_shape_size + 1);
+  size_t	b = (disp->_click_y - disp->_verti) * (disp->_shape_size + 1);
 
-  SDL_SetRenderDrawColor(display->renderer, 0, 255, 255, 255);
-  SDL_RenderDrawLine(display->renderer, (int)a, (int)b,
-		     (int)(a + display->_shape_size + 1), (int)b);
-  SDL_RenderDrawLine(display->renderer, (int)a, (int)b,
-		     (int)a, (int)(b + display->_shape_size + 1));
-  SDL_RenderDrawLine(display->renderer, (int)(a + display->_shape_size + 1),
-		     (int)b, (int)(a + display->_shape_size + 1),
-		     (int)(b + display->_shape_size + 1));
-  SDL_RenderDrawLine(display->renderer, (int)a, (int)(b + display->_shape_size + 1),
-		     (int)(a + display->_shape_size + 1),
-		     (int)(b + display->_shape_size + 1));
-  SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
+  SDL_SetRenderDrawColor(disp->renderer, 0, 255, 255, 255);
+  SDL_RenderDrawLine(disp->renderer, (int)a, (int)b,
+		     (int)(a + disp->_shape_size + 1), (int)b);
+  SDL_RenderDrawLine(disp->renderer, (int)a, (int)b,
+		     (int)a, (int)(b + disp->_shape_size + 1));
+  SDL_RenderDrawLine(disp->renderer, (int)(a + disp->_shape_size + 1),
+		     (int)b, (int)(a + disp->_shape_size + 1),
+		     (int)(b + disp->_shape_size + 1));
+  SDL_RenderDrawLine(disp->renderer, (int)a, (int)(b + disp->_shape_size + 1),
+		     (int)(a + disp->_shape_size + 1),
+		     (int)(b + disp->_shape_size + 1));
+  SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
 }
