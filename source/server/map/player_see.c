@@ -5,11 +5,12 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Thu Jul  2 16:12:06 2015 zwertv_e
+** Last update Thu Jul  2 18:56:34 2015 zwertv_e
 */
 
 #include	<stdlib.h>
 #include	<stdio.h>
+#include	<string.h>
 #include	"player.h"
 #include	"map.h"
 
@@ -18,6 +19,25 @@ static size_t	find_nb_squares(size_t const accu, size_t const range)
   if (range == 0)
     return (accu);
   return (find_nb_squares(accu + 1 + 2 * range, range - 1));
+}
+
+static char	*concat(char const * const str1, char const * const str2)
+{
+  size_t	to_malloc;
+  char		*res;
+
+  to_malloc = 1;
+  if (str1 != NULL)
+    to_malloc += strlen(str1);
+  if (str2 != NULL)
+    to_malloc += strlen(str2);
+  res = malloc(sizeof(char) * to_malloc);
+  res[0] = '\0';
+  if (str1 != NULL)
+    res = strcat(res, str1);
+  if (str2 != NULL)
+    res = strcat(res, str2);
+  return (res);
 }
 
 static size_t	get_x(t_map const * const map, t_player const * const player,
@@ -159,7 +179,7 @@ static void	find_squares(t_map const * const map,
     }
 }
 
-static bool	ffirst_write(char const * const ressource,
+static bool	ffirst_write(char ** const res, char const * const ressource,
 			     size_t const quantity, bool first_write)
 {
   size_t	i;
@@ -168,28 +188,31 @@ static bool	ffirst_write(char const * const ressource,
     {
       if (first_write)
 	{
-	  printf("%s", ressource);
+	  (*res) = concat(*res, ressource);
 	  first_write = false;
 	}
       else
-	printf(" %s", ressource);
+	{
+	  (*res) = concat(*res, " ");
+	  (*res) = concat(*res, ressource);
+	}
     }
   return (first_write);
 }
 
-static bool	print_inv(t_inv const * const inv, bool first_write)
+static bool	print_inv(char ** const res, t_inv const * const inv, bool first_write)
 {
-  first_write = ffirst_write("linemate", inv->linemate, first_write);
-  first_write = ffirst_write("deraumere", inv->deraumere, first_write);
-  first_write = ffirst_write("sibur", inv->sibur, first_write);
-  first_write = ffirst_write("mendiane", inv->mendiane, first_write);
-  first_write = ffirst_write("phiras", inv->phiras, first_write);
-  first_write = ffirst_write("thystame", inv->thystame, first_write);
-  first_write = ffirst_write("nourriture", inv->food, first_write);
+  first_write = ffirst_write(res, "linemate", inv->linemate, first_write);
+  first_write = ffirst_write(res, "deraumere", inv->deraumere, first_write);
+  first_write = ffirst_write(res, "sibur", inv->sibur, first_write);
+  first_write = ffirst_write(res, "mendiane", inv->mendiane, first_write);
+  first_write = ffirst_write(res, "phiras", inv->phiras, first_write);
+  first_write = ffirst_write(res, "thystame", inv->thystame, first_write);
+  first_write = ffirst_write(res, "nourriture", inv->food, first_write);
   return (first_write);
 }
 
-bool		player_view(t_game const * const game,
+char		*player_view(t_game const * const game,
 			    t_map const * const map,
 			    t_player const * const player)
 {
@@ -199,38 +222,40 @@ bool		player_view(t_game const * const game,
   t_player	*tmp;
   t_square	*tmp_square;
   bool		first_write;
+  char		*res;
 
+  res = NULL;
   if (!game || !player || !map)
-    return (false);
+    return (NULL);
   range = find_nb_squares(1, player->range);
   if ((list = malloc(sizeof(t_coords) * (range))) == NULL)
-    return (false);
+    return (NULL);
   find_squares(map, player, list, range);
   first_write = true;
-  printf("{");
+  res = concat(res, "{");
   for (i = 0; i < range; i++)
     {
       if (i > 0)
 	{
-	  printf(",");
+	  res = concat(res, ",");
 	  first_write = false;
 	}
       tmp_square = find_square(first_node(&map->items->node), list[i].x, list[i].y);
       if (tmp_square)
-        first_write = print_inv(&tmp_square->ressources, first_write);
+        first_write = print_inv(&res, &tmp_square->ressources, first_write);
       tmp = first_node(&game->player->node);
       while (tmp)
       	{
       	  if (player != tmp && tmp->coords.x == list[i].x && tmp->coords.y == list[i].y)
       	    {
       	      if (!first_write)
-      		printf(" ");
-      	      printf("joueur");
+		res = concat(res, " ");
+	      res = concat(res, "joueur");
       	    }
       	  tmp = tmp->node.next;
       	}
     }
-  printf("}\n");
+  res = concat(res, "}");
   free(list);
-  return (true);
+  return (res);
 }
