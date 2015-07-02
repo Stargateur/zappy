@@ -1,19 +1,21 @@
 /*
-** inv.c for  in /home/zwertv_e/rendu/PSU_2014_zappy/source/server/map
+** inv.c for  in /home/zwertv_e/rendu/PSU_2014_zappy
 ** 
 ** Made by zwertv_e
 ** Login   <zwertv_e@epitech.net>
 ** 
-** Started on  Tue Jun 23 14:36:45 2015 zwertv_e
-** Last update Thu Jul  2 18:51:10 2015 zwertv_e
+** Started on  Thu Jul  2 18:59:57 2015 zwertv_e
+** Last update Thu Jul  2 18:59:59 2015 zwertv_e
 */
 
 #include	<stdlib.h>
 #include	<stdio.h>
 #include	"inv.h"
 
-void		init_inv(t_inv *inv)
+t_inv		*init_inv(t_inv *inv)
 {
+  if (inv == NULL)
+    return (NULL);
   inv->linemate = 0;
   inv->deraumere = 0;
   inv->sibur = 0;
@@ -21,54 +23,22 @@ void		init_inv(t_inv *inv)
   inv->phiras = 0;
   inv->thystame = 0;
   inv->food = 0;
-}
-
-static size_t	*get_inv_ressource(t_inv * const inv, int const type)
-{
-  size_t	*ressource;
-
-  ressource = NULL;
-  switch(type)
-    {
-    case LINEMATE:
-      ressource = &inv->linemate;
-      break;
-    case DERAUMERE:
-      ressource = &inv->deraumere;
-      break;
-    case SIBUR:
-      ressource = &inv->sibur;
-      break;
-    case MENDIANE:
-      ressource = &inv->mendiane;
-      break;
-    case PHIRAS:
-      ressource = &inv->phiras;
-      break;
-    case THYSTAME:
-      ressource = &inv->thystame;
-      break;
-    case FOOD:
-      ressource = &inv->food;
-      break;
-    };
-  return (ressource);
+  return (inv);
 }
 
 bool	        add_ressource(t_inv * const inv, int const type,
 			      size_t const quantity, bool add)
 {
-  size_t	*ressource;
-
-  ressource = get_inv_ressource(inv, type);
-  if (!ressource)
+  if (type < FOOD + 1)
     return (false);
-  if (!add && *ressource < quantity)
+  if ((&inv->linemate)[type])
     return (false);
-  if (add)
-    *ressource += quantity;
+  if (add == true && (&inv->linemate)[type] < quantity)
+    return (false);
+  if (add == true)
+    (&inv->linemate)[type] += quantity;
   else
-    *ressource -= quantity;
+    (&inv->linemate)[type] -= quantity;
   return (true);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:43:00 2015 zwertv_e
-** Last update Thu Jul  2 16:03:04 2015 Antoine Plaskowski
+** Last update Thu Jul  2 16:32:45 2015 Antoine Plaskowski
 */
 
 #ifndef		INV_H__
@@ -20,13 +20,13 @@ typedef	struct	s_inv		t_inv;
 
 enum
   {
-    LINEMATE,
-    DERAUMERE,
-    SIBUR,
-    MENDIANE,
-    PHIRAS,
-    THYSTAME,
-    FOOD
+    LINEMATE = 0,
+    DERAUMERE = 1,
+    SIBUR = 2,
+    MENDIANE = 3,
+    PHIRAS = 4,
+    THYSTAME = 5,
+    FOOD = 6
   };
 
 struct		s_inv
@@ -40,7 +40,7 @@ struct		s_inv
   size_t	food;
 };
 
-void		init_inv(t_inv *inv);
+t_inv		*init_inv(t_inv *inv);
 bool		add_ressource(t_inv * const inv, int const type,
 			      size_t const quantity, bool add);
 size_t		count_ressources(t_inv const * const inv);
