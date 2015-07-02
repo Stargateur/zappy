@@ -5,24 +5,26 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Thu Jul  2 15:32:48 2015 zwertv_e
+** Last update Thu Jul  2 16:01:44 2015 zwertv_e
 */
 
 #include	<time.h>
 #include	<stdlib.h>
 #include	<stdio.h>
+#include	<map.h>
 #include	"inv.h"
 #include	"map.h"
 
 static int	get_ressource_type(void)
 {
-  int tmp = random();
-  int		type;
-  int		repart;
+  double	type;
+  double	repart;
+  double	rnd;
 
+  rnd = (double)random();
   repart = DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN;
   repart += DENSITY_PHI + DENSITY_THY + DENSITY_FOOD;
-  type = tmp % repart;
+  type = fmod(rnd, repart);
   if (type < DENSITY_LIN)
     return (LINEMATE);
   else if (type < DENSITY_LIN + DENSITY_DER)
@@ -48,8 +50,8 @@ static void	generate_ressources(t_map * const map, size_t const to_generate)
 
   if (to_generate > 0)
     {
-      x = random() % map->width;
-      y = random() % map->height;
+      x = (size_t)random() % map->width;
+      y = (size_t)random() % map->height;
       type = get_ressource_type();
       add_item(map, x, y, type);
       generate_ressources(map, to_generate - 1);

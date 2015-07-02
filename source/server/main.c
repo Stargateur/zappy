@@ -4,12 +4,8 @@
 ** Made by zwertv_e
 ** Login   <zwertv_e@epitech.net>
 ** 
-** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-<<<<<<< HEAD
-** Last update Thu Jul  2 16:00:52 2015 Antoine Plaskowski
-=======
-** Last update Thu Jul  2 15:46:10 2015 Antoine Plaskowski
->>>>>>> ae0c01b9c8aee2651d8a0ae39ddae0debcee4b10
+** Started on  Thu Jul  2 15:53:10 2015 zwertv_e
+** Last update Thu Jul  2 16:05:17 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -120,6 +116,7 @@ int		costa_alaric(void)
   SDL_RenderPresent(display->renderer);
 
   sleep(5);
+  return (0);
 }
 
 void		elliott(int argc, char **argv)
