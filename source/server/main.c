@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Wed Jul  1 15:40:12 2015 zwertv_e
+** Last update Thu Jul  2 15:11:19 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -40,11 +40,40 @@ static int	init_socket(char const * const port)
   return (sfd);
 }
 
-int		main(int argc, char **argv)
+void		plasko(int argc, char **argv)
 {
-  t_game	game;
+  /*
+  **
+  ** TEST UNITAIRE PLASKO
+  **
+  */
   int		sfd;
   t_client	*client;
+  t_game	game;
+
+  client = NULL;
+  srandom((unsigned int)time(NULL));
+  if (init_game(&game, argv, argc) == NULL)
+    return (1);
+  show_option(&game.option);
+  if ((sfd = init_socket(game.option.p)) == -1)
+    return (1);
+  while (g_keep_running == true)
+    {
+      client = manage_select(client, sfd);
+      get_cmd(&game, client);
+    }
+  close(sfd);
+}
+
+void		costa_alaric()
+{
+  /*
+  **
+  ** TEST UNITAIRE COSTA + ALARIC
+  **
+  */
+  t_game	game;
   t_texture     text;
   t_display	*display;
   SDL_Window    *fenetre;
@@ -87,7 +116,15 @@ int		main(int argc, char **argv)
   SDL_RenderPresent(display->renderer);
 
   sleep(5);
+}
 
+void		elliott(int argc, char **argv)
+{
+/*
+  **
+  ** TEST UNITAIRE ELLIOTT
+  **
+  */
   t_game		party_everyday;
   t_map			mapr;
   t_player		*test;
@@ -112,6 +149,7 @@ int		main(int argc, char **argv)
     }
   else
     printf("Inv is NULL\n");
+
   move(&mapr, test);
   rotate_left(test);
   move(&mapr, test);
@@ -126,19 +164,18 @@ int		main(int argc, char **argv)
     printf("Player has rotated correctly\n");
 
   player_view(&party_everyday, &mapr, test);
+  add_item(&mapr, 0, 0, linemlate);
+  player_view(&party_everyday, &mapr, test);
+  player_levelup(&party_everyday, &mapr, test, true);
+  if (test->range == 2)
+    printf("Player successfuly elevated !\n");
+  player_view(&party_everyday, &mapr, test);
+}
 
-  client = NULL;
-  srandom((unsigned int)time(NULL));
-  if (init_game(&game, argv, argc) == NULL)
-    return (1);
-  show_option(&game.option);
-  if ((sfd = init_socket(game.option.p)) == -1)
-    return (1);
-  while (g_keep_running == true)
-    {
-      client = manage_select(client, sfd);
-      get_cmd(&game, client);
-    }
-  close(sfd);
+int		main(int argc, char **argv)
+{
+  /* plasko(argc, argv); */
+  /* costa_alaric(); */
+  /* elliott(argc, argv); */
   return (0);
 }
