@@ -22,51 +22,6 @@ Perso::~Perso()
 {
 }
 
-void			Perso::avance()
-{
-  this->_time += 7;
-  this->_sav->mouv.push_back("avance");
-  this->_sav->cpt++;
-  if (this->_way == RIGHT)
-    this->_posx++;
-  else if (this->_way == DOWN)
-    this->_posy++;
-  else if (this->_way == LEFT)
-    this->_posx--;
-  else if (this->_way == UP)
-    this->_posy--;
-}
-
-void			Perso::droite()
-{
-  this->_time += 7;
-  this->_sav->mouv.push_back("droite");
-  this->_sav->cpt++;
-  if (this->_way == RIGHT)
-    this->_way = DOWN;
-  else if (this->_way == DOWN)
-    this->_way = LEFT;
-  else if (this->_way == LEFT)
-    this->_way = UP;
-  else if (this->_way == UP)
-    this->_way = RIGHT;
-}
-
-void			Perso::gauche()
-{
-  this->_time += 7;
-  this->_sav->mouv.push_back("gauche");
-  this->_sav->cpt++;
-  if (this->_way == RIGHT)
-    this->_way = UP;
-  else if (this->_way == DOWN)
-    this->_way = RIGHT;
-  else if (this->_way == LEFT)
-    this->_way = DOWN;
-  else if (this->_way == UP)
-    this->_way = LEFT;
-}
-
 void			Perso::see_map()
 {
   int			x = 0;
@@ -130,22 +85,6 @@ void			Perso::inventaire(std::string answer)
   std::cout << "thystame : " << this->_invent._thystame << std::endl;
 }
 
-void			Perso::prend(std::string const &obj)
-{
-  (void)obj;
-  this->_time += 7;
-  this->_sav->mouv.push_back("prend");
-  this->_sav->cpt++;
-}
-
-void			Perso::pose(std::string const &obj)
-{
-  (void)obj;
-  this->_time += 7;
-  this->_sav->mouv.push_back("pose");
-  this->_sav->cpt++;
-}
-
 void			Perso::expulse()
 {
   this->_time += 7;
@@ -193,7 +132,7 @@ void			Perso::dead()
 // machine a  etat ici
 std::string		Perso::do_action()
 {
-  std::string		action("pose nourriturez\n");
+  std::string		action("pose nourriture\n");
 
   std::cout << "Action = " << action;
   /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
@@ -233,8 +172,9 @@ std::string		Perso::server_answer(std::string action)
 
 void	Perso::execute_commands(std::string &answer, bool *death, std::string &action)
 {
-  if (answer.compare("OK\n") == 0)
+  if (answer.compare("ok\n") == 0 || answer.compare("OK\n") == 0)
     {
+      std::cout << "C'est ok !\n";
       if (action.compare("avance\n") == 0)
 	this->avance();
       if (action.compare("droite\n") == 0)
@@ -242,9 +182,9 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
       if (action.compare("gauche\n") == 0)
 	this->gauche();
       if (action.compare(0, 5, "prend") == 0)
-	this->prend(action.substr(5, action.size() - 5));
+	this->prend(action.substr(6, action.size() - 6));
       if (action.compare(0, 4, "pose") == 0)
-	this->pose(action.substr(4, action.size() - 4));
+	this->pose(action.substr(5, action.size() - 5));
       if (action.compare("expulse\n") == 0)
 	this->expulse();
       if (action.compare("broadcast\n") == 0)
