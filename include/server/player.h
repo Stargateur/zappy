@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Thu Jul  2 16:11:15 2015 zwertv_e
+** Last update Thu Jul  2 18:42:30 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -45,7 +45,8 @@ struct		s_player
   size_t	range;
   char		*team;
   t_inv		inv;
-  t_time	time;
+  t_time	act;
+  t_time	food;
   t_action	*action;
   t_client	*client;
 };

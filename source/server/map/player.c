@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Wed Jul  1 14:34:40 2015 zwertv_e
+** Last update Thu Jul  2 18:43:49 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -93,6 +93,12 @@ t_player		*init_player(t_map *map, char * const team,
   player->coords.y = y % map->height;
   player->dir = random() % (EAST + 1);
   player->range = 1;
+  if (clock_gettime(CLOCK_MONOTONIC, &player->food) == -1)
+    {
+      perror("clock_gettime :");
+      free(player);
+      return (NULL);
+    }
   player->client = NULL;
   player->action = NULL;
   init_inv(&player->inv);

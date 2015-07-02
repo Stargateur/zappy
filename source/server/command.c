@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 04:53:28 2015 Antoine Plaskowski
-** Last update Thu Jul  2 18:07:11 2015 Antoine Plaskowski
+** Last update Thu Jul  2 18:48:05 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -14,17 +14,13 @@
 #include	"client.h"
 #include	"team.h"
 #include	"command.h"
-#include	"error_message.h"
 
 static bool	aux_get_cmd(t_game *game, t_client *client, char *str)
 {
   if (client->player == NULL)
     {
       if (set_team(client, game, str) == true)
-	{
-	  client->to_write = add_string(client->to_write, E_TEAM_1);
-	  return (true);
-	}
+	return (true);
     }
   else
     {

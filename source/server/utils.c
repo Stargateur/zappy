@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Thu Jul  2 16:58:16 2015 Antoine Plaskowski
+** Last update Thu Jul  2 18:40:55 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -30,6 +30,8 @@ bool		write_fd(char const * const str, int const fd)
 {
   ssize_t	ret;
 
+  if (str == NULL)
+    return (true);
   ret = write(fd, str, strlen(str));
   if (ret == -1)
     {
