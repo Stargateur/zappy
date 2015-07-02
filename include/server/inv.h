@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:43:00 2015 zwertv_e
-** Last update Tue Jun 30 17:18:50 2015 Antoine Plaskowski
+** Last update Wed Jul  1 17:16:57 2015 zwertv_e
 */
 
 #ifndef		INV_H__
@@ -13,6 +13,7 @@
 
 typedef	struct	s_inv		t_inv;
 
+# include	<stdbool.h>
 # include	"node.h"
 
 # define        RESC_COUNT	(7)
@@ -40,8 +41,8 @@ struct		s_inv
 };
 
 void		init_inv(t_inv *inv);
-void		add_ressource(t_inv * const inv, int const type,
-			      int const quantity);
+bool		add_ressource(t_inv * const inv, int const type,
+			      size_t const quantity, bool add);
 size_t		count_ressources(t_inv const * const inv);
 const char	*get_inventory(t_inv const * const inv);
 

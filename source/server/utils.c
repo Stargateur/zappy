@@ -5,10 +5,13 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:29:03 2015 Antoine Plaskowski
+** Last update Thu Jul  2 15:43:30 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
+#include	<unistd.h>
+#include	<stdio.h>
+#include	<string.h>
 #include	"utils.h"
 
 size_t		len_tab(void * const * const tab)
@@ -21,4 +24,44 @@ size_t		len_tab(void * const * const tab)
   while (tab[i] != NULL)
     i++;
   return (i);
+}
+
+bool		write_fd(char const * const str, int const fd)
+{
+  ssize_t	ret;
+
+  ret = write(fd, str, strlen(str));
+  if (ret == -1)
+    {
+      perror("write : ");
+      return (true);
+    }
+  return (false);
+}
+
+bool		time_sub(t_time * const a, t_time const * const b)
+{
+  if (a == NULL || b == NULL)
+    return (true);
+  a->tv_sec -= b->tv_sec;
+  if (a->tv_nsec < b->tv_nsec)
+    {
+      a->tv_nsec += NANO_BY_SEC;
+      a->tv_sec -= 1;
+    }
+  a->tv_nsec -= b->tv_nsec;
+  return (false);
+}
+
+bool		time_small(t_time const * const a, t_time const * const b)
+{
+  if (a == NULL)
+    return (true);
+  if (b == NULL)
+    return (false);
+  if (a->tv_sec >= b->tv_sec)
+    return (true);
+  if (a->tv_nsec >= b->tv_nsec)
+    return (true);
+  return (false);
 }

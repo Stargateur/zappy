@@ -5,10 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Wed Jul  1 13:43:59 2015 zwertv_e
+** Last update Thu Jul  2 15:40:49 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
+#include	<unistd.h>
 #include	<stdio.h>
 #include	<string.h>
 #include	"client.h"
@@ -30,6 +31,12 @@ t_client	*add_client(t_client * const list, int const sfd)
 
   if ((new = malloc(sizeof(*new))) == NULL)
     return (NULL);
+  if (clock_gettime(CLOCK_MONOTONIC, &new->time) == -1)
+    {
+      free(new);
+      perror("clock_gettime : ");
+      return (NULL);
+    }
   if (accept_client(sfd, &new->ca) == -1)
     {
       free(new);
@@ -37,6 +44,7 @@ t_client	*add_client(t_client * const list, int const sfd)
     }
   new->to_write = add_string(NULL, "BIENVENUE\n");
   new->player = NULL;
+  new->to_kill = false;
   init_cbuf(&new->cbuf);
   return (put_node(&list->node, &new->node));
 }
@@ -60,4 +68,42 @@ bool		write_pos_player(t_client * const client)
   client->to_write = add_string(client->to_write, str);
   free(str);
   return (false);
+}
+
+t_client	*sup_client(t_client *client)
+{
+  if (client == NULL)
+    return (NULL);
+  if (client->player != NULL)
+    client->player->client = NULL;
+  close(client->ca.cfd);
+  while (client->to_write != NULL)
+    {
+      free(client->to_write->str);
+      client->to_write = sup_node(&client->to_write->node);
+    }
+  return (sup_node(&client->node));
+}
+
+t_client	*kill_time_out(t_client *list, t_time const * const timeout)
+{
+  t_time	time;
+  t_client	*client;
+  t_client	*client2;
+
+  client = first_node(&list->node);
+  while (client != NULL)
+    {
+      client2 = client->node.next;
+      if (clock_gettime(CLOCK_MONOTONIC, &time) == -1)
+	{
+	  perror("clock_gettime :");
+	  return (list);
+	}
+      time_sub(&time, &client->time);
+      if (time_small(timeout, &time) == true)
+	list = sup_client(client);
+      client = client2;
+    }
+  return (list);
 }

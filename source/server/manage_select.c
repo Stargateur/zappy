@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Wed Jul  1 07:19:31 2015 Antoine Plaskowski
+** Last update Thu Jul  2 15:07:43 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -28,25 +28,22 @@ static t_client	*read_client(fd_set const * const fd_read, t_client *list)
       client2 = client->node.next;
       if (FD_ISSET(client->ca.cfd, fd_read))
 	if (write_cbuf(&client->cbuf, client->ca.cfd) <= 0)
-	  {
-	    if (client->player != NULL)
-	      client->player->client = NULL;
-	    list = sup_node(&client->node);
-	  }
+	  list = sup_client(client);
       client = client2;
     }
   return (list);
 }
 
-static t_string	*write_to_write(t_string *to_write, int const cfd)
+static t_client	*write_to_write(t_client *client)
 {
-  to_write = first_node(&to_write->node);
-  if (to_write == NULL)
-    return (NULL);
-  if (to_write->str != NULL)
-    write(cfd, to_write->str, strlen(to_write->str));
-  free(to_write->str);
-  return (sup_node(&to_write->node));
+  client->to_write = first_node(&client->to_write->node);
+  if (client->to_write == NULL)
+    return (client);
+  if (write_fd(client->to_write->str, client->ca.cfd) == true)
+    return (sup_client(client));
+  free(client->to_write->str);
+  client->to_write = sup_node(&client->to_write->node);
+  return (client);
 }
 
 static t_client	*write_client(fd_set const * const fd_write, t_client *list)
@@ -59,7 +56,7 @@ static t_client	*write_client(fd_set const * const fd_write, t_client *list)
     {
       client2 = client->node.next;
       if (FD_ISSET(client->ca.cfd, fd_write))
-	client->to_write = write_to_write(client->to_write, client->ca.cfd);
+	client = write_to_write(client);
       client = client2;
     }
   return (list);

@@ -26,7 +26,8 @@ typedef enum		s_case
     PHIRAS = 4,
     THYSTAME = 5,
     PLAYER = 6,
-    NONE = 7
+    FOOD = 7,
+    NONE = 8
   }			t_case;
 
 class			Save

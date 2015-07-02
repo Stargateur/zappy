@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Wed Jul  1 13:38:26 2015 zwertv_e
+** Last update Wed Jul  1 17:50:06 2015 zwertv_e
 */
 
 #ifndef		PLAYER_H__
@@ -46,6 +46,14 @@ t_player	*init_player(t_map * const map, char * const team,
 void		move(t_map const * const map, t_player * const player);
 void		rotate_left(t_player * const player);
 void		rotate_right(t_player * const player);
+
+bool		take_item(t_map * const map,
+			  t_player * const player, int const type);
+bool		drop_item(t_map * const map,
+			  t_player * const player, int const type);
+bool		expulse_players(t_game * const game,
+				t_map * const map,
+				t_player const * const player);
 
 t_player	*find_free_player(t_player *player, char * const team);
 bool		add_action(t_player * const player, char * const str);

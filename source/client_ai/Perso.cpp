@@ -14,7 +14,8 @@ Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip
 {
   this->_sav = new Save();
   this->_time = 0;
-  this->_way = RIGHT;
+  this->_way = UP;
+  this->_level = 1;
 }
 
 Perso::~Perso()
@@ -66,11 +67,24 @@ void			Perso::gauche()
     this->_way = LEFT;
 }
 
-void			Perso::voir()
+void			Perso::see_map()
 {
-  this->_time += 7;
-  this->_sav->mouv.push_back("voir");
-  this->_sav->cpt++;
+  int			x = 0;
+  int			y = 0;
+
+  std::cout << "lecture de la map !" << std::endl;
+  while (y < this->_mapheight)
+    {
+      x = 0;
+      while (x < this->_maplength)
+	{
+	  std::cout << this->_sav->map[y][x].back();
+	  x++;
+	}
+      std::cout << std::endl;
+      y++;
+    }
+  exit(0);
 }
 
 void			Perso::inventaire()
@@ -143,7 +157,7 @@ void			Perso::dead()
 // machine a  etat ici
 std::string		Perso::do_action()
 {
-  std::string		action("inventaire\n");
+  std::string		action("voir\n");
 
   std::cout << "Action = " << action;
   /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
@@ -220,6 +234,22 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
 {
   if (answer.compare("OK\n") == 0)
     {
+      if (action.compare("avance\n") == 0)
+	this->avance();
+      if (action.compare("droite\n") == 0)
+	this->droite();
+      if (action.compare("gauche\n") == 0)
+	this->gauche();
+      if (action.compare("prend objet\n") == 0)
+	this->prend("test");
+      if (action.compare("pose objet\n") == 0)
+	this->pose("test");
+      if (action.compare("expulse\n") == 0)
+	this->expulse();
+      if (action.compare("broadcast\n") == 0)
+	this->broadcast("ceci est un message code\n");
+      if (action.compare("fork\n") == 0)
+	this->fork();
       // Excuter commandes avance, droite, gauche, prend objet, pose objet, expulse, broadcast text, fork
     }
   else if (answer.compare("KO\n") == 0)
@@ -233,21 +263,24 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
     }
   else
     {
-      if (action.compare("voir") == 0)
+      if (action.compare("voir\n") == 0)
 	{
+	  this->voir(answer);
 	  // comment faire par rapport au placement des cases
 	}
       else if (action.compare("inventaire\n") == 0)
 	{
 	  this->get_inventory(answer);
 	}
-      else if (action.compare("incantation") == 0)
+      else if (action.compare("incantation\n") == 0)
 	{
 
 	}
-      else if (action.compare("connect_nbr") == 0)
+      else if (action.compare("connect_nbr\n") == 0)
 	{
-
+	  this->_nbunusedslots = atoi(answer.c_str());
+	  std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
+	  exit(0);
 	}
       // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
@@ -273,8 +306,8 @@ void		Perso::size_map_pos_ia(std::string coords)
   y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
   this->_mapheight = atoi(y.c_str());
   this->_maplength = atoi(x.c_str());
-  this->_posx = this->_mapheight / 2;
-  this->_posy = this->_maplength / 2;
+  this->_posx = this->_maplength / 2;
+  this->_posy = this->_mapheight / 2;
   this->_sav->map = std::vector< std::vector< std::list <t_case> > > (this->_mapheight);
   while (i < this->_mapheight)
     {
@@ -282,7 +315,6 @@ void		Perso::size_map_pos_ia(std::string coords)
       j = 0;
       while (j < this->_maplength)
 	{
-	  //std::cout << i << " " << j << std::endl;
 	  this->_sav->map[i][j].push_back(NONE);
 	  j++;
 	}

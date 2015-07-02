@@ -14,6 +14,7 @@
 # include	<iostream>
 # include	<string>
 # include	<list>
+# include	<algorithm>
 # include	"Invent.hpp"
 # include	"Save.h"
 # include	"Client.h"
@@ -39,6 +40,8 @@ private:
   int				_mapheight;
   int				_maplength;
   int				_numclient;
+  int				_nbunusedslots;
+  int				_level;
 
 public:
   Perso(std::string team, int port, std::string ip);
@@ -46,7 +49,7 @@ public:
   void	avance();
   void	droite();
   void	gauche();
-  void	voir();
+  void	voir(std::string answer);
   void	inventaire();
   void	prend(std::string const &);
   void	pose(std::string const &);
@@ -66,6 +69,9 @@ public:
   void		get_numclient(std::string num_client);
   void		get_inventory(std::string answer);
   int		find_number(std::string &answer, char char_end);
+  void		save_objects_in_map(std::string objects, int i);
+  void		see_map();
+  void		put_objects_in_case(int x, int y, std::string answer);
 };
 
 #endif /* !PERSO_HPP_ */
