@@ -93,11 +93,41 @@ void			Perso::see_map()
   exit(0);
 }
 
-void			Perso::inventaire()
+int	Perso::find_number(std::string &answer, char char_end)
+{
+  size_t	pos_space;
+  size_t	pos_coma;
+  int		number;
+
+  pos_space = answer.find_first_of(" ");
+  answer = answer.replace(pos_space, 1, "");
+  pos_coma = answer.find_first_of(char_end);
+  answer = answer.replace(pos_coma, 1, "");
+  number  = atoi((answer.substr(pos_space, pos_coma - pos_space)).c_str());
+  return (number);
+}
+
+void			Perso::inventaire(std::string answer)
 {
   this->_time += 7;
   this->_sav->mouv.push_back("inventaire");
   this->_sav->cpt++;
+
+  this->_invent._nourriture = this->find_number(answer, ',');
+  this->_invent._linemate = this->find_number(answer, ',');
+  this->_invent._deraumere = this->find_number(answer, ',');
+  this->_invent._sibur = this->find_number(answer, ',');
+  this->_invent._mendiane = this->find_number(answer, ',');
+  this->_invent._phiras = this->find_number(answer, ',');
+  this->_invent._thystame = this->find_number(answer, '}');
+  
+  std::cout << "Nourriture : " << this->_invent._nourriture << std::endl;
+  std::cout << "linemate : " << this->_invent._linemate << std::endl;
+  std::cout << "deraumere : " << this->_invent._deraumere << std::endl;
+  std::cout << "sibur : " << this->_invent._sibur << std::endl;
+  std::cout << "mendiane : " << this->_invent._mendiane << std::endl;
+  std::cout << "phyras : " << this->_invent._phiras << std::endl;
+  std::cout << "thystame : " << this->_invent._thystame << std::endl;
 }
 
 void			Perso::prend(std::string const &obj)
@@ -163,7 +193,7 @@ void			Perso::dead()
 // machine a  etat ici
 std::string		Perso::do_action()
 {
-  std::string		action("voir\n");
+  std::string		action("pose nourriturez\n");
 
   std::cout << "Action = " << action;
   /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
@@ -201,41 +231,6 @@ std::string		Perso::server_answer(std::string action)
   return (answer);
 }
 
-//{nourriture 1, linemate 0}
-
-int	Perso::find_number(std::string &answer, char char_end)
-{
-  size_t	pos_space;
-  size_t	pos_coma;
-  int		number;
-
-  pos_space = answer.find_first_of(" ");
-  answer = answer.replace(pos_space, 1, "");
-  pos_coma = answer.find_first_of(char_end);
-  answer = answer.replace(pos_coma, 1, "");
-  number  = atoi((answer.substr(pos_space, pos_coma - pos_space)).c_str());
-  return (number);
-}
-
-void	Perso::get_inventory(std::string answer)
-{
-  this->_invent._nourriture = this->find_number(answer, ',');
-  this->_invent._linemate = this->find_number(answer, ',');
-  this->_invent._deraumere = this->find_number(answer, ',');
-  this->_invent._sibur = this->find_number(answer, ',');
-  this->_invent._mendiane = this->find_number(answer, ',');
-  this->_invent._phiras = this->find_number(answer, ',');
-  this->_invent._thystame = this->find_number(answer, '}');
-  
-  std::cout << "Nourriture : " << this->_invent._nourriture << std::endl;
-  std::cout << "linemate : " << this->_invent._linemate << std::endl;
-  std::cout << "deraumere : " << this->_invent._deraumere << std::endl;
-  std::cout << "sibur : " << this->_invent._sibur << std::endl;
-  std::cout << "mendiane : " << this->_invent._mendiane << std::endl;
-  std::cout << "phyras : " << this->_invent._phiras << std::endl;
-  std::cout << "thystame : " << this->_invent._thystame << std::endl;
-}
-
 void	Perso::execute_commands(std::string &answer, bool *death, std::string &action)
 {
   if (answer.compare("OK\n") == 0)
@@ -246,17 +241,16 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
 	this->droite();
       if (action.compare("gauche\n") == 0)
 	this->gauche();
-      if (action.compare("prend objet\n") == 0)
-	this->prend("test");
-      if (action.compare("pose objet\n") == 0)
-	this->pose("test");
+      if (action.compare(0, 5, "prend") == 0)
+	this->prend(action.substr(5, action.size() - 5));
+      if (action.compare(0, 4, "pose") == 0)
+	this->pose(action.substr(4, action.size() - 4));
       if (action.compare("expulse\n") == 0)
 	this->expulse();
       if (action.compare("broadcast\n") == 0)
 	this->broadcast("ceci est un message code\n");
       if (action.compare("fork\n") == 0)
 	this->fork();
-      // Excuter commandes avance, droite, gauche, prend objet, pose objet, expulse, broadcast text, fork
     }
   else if (answer.compare("KO\n") == 0)
     {
@@ -270,14 +264,9 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
   else
     {
       if (action.compare("voir\n") == 0)
-	{
-	  this->voir(answer);
-	  // comment faire par rapport au placement des cases
-	}
+	this->voir(answer);
       else if (action.compare("inventaire\n") == 0)
-	{
-	  this->get_inventory(answer);
-	}
+	this->inventaire(answer);
       else if (action.compare("incantation\n") == 0)
 	{
 
@@ -290,89 +279,6 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
 	}
       // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
-}
-
-const void	*Perso::getTeamName()
-{
-  std::string	team_name;
-
-  team_name = this->getTeam() + "\n";
-  return ((const void *)team_name.c_str());
-}
-
-void		Perso::size_map_pos_ia(std::string coords)
-{
-  std::string	x;
-  std::string	y;
-  int		i;
-  int		j;
-
-  i = 0;
-  x = coords.substr(0, coords.find_first_of(" "));
-  y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
-  this->_mapheight = atoi(y.c_str());
-  this->_maplength = atoi(x.c_str());
-  //  this->_posx = this->_maplength / 2;
-  //this->_posy = this->_mapheight / 2;
-  this->_posx = 5;
-  this->_posy = 49;
-  this->_sav->map = std::vector< std::vector< std::list <t_case> > > (this->_mapheight);
-  while (i < this->_mapheight)
-    {
-      this->_sav->map[i] = std::vector<std::list <t_case> > (this->_maplength);
-      j = 0;
-      while (j < this->_maplength)
-	{
-	  this->_sav->map[i][j].push_back(NONE);
-	  j++;
-	}
-      i++;
-    }
-}
-
-void		Perso::get_numclient(std::string num_client)
-{
-  this->_numclient = atoi(num_client.c_str());
-  //std::cout << "num client = " << this->_numclient << std::endl;
-}
-
-void	Perso::welcome()
-{
-  ssize_t	res;
-  std::string	welcome;
-  std::string	num_client;
-  std::string	coords;
-
-  welcome.resize(100);
-  res = read(this->getClient(), (void *)welcome.c_str(), 100);
-  if (res != -1)
-    {
-      std::cout << welcome;
-      res = write(this->getClient(), this->getTeamName(), (size_t)this->getTeam().size() + 1);
-      if (res != -1)
-	{
-	  num_client.resize(20);
-	  res = read(this->getClient(), (void *)num_client.c_str(), 20);
-	  if (res != -1)
-	    {
-	      this->get_numclient(num_client);
-	      coords.resize(100);
-	      std::cout << "NUM_CLIENT = " << num_client;
-	      res = read(this->getClient(), (void *)coords.c_str(), 100);
-	      if (res != -1)
-		this->size_map_pos_ia(coords);
-	      else
-		std::cerr << "Error son X Y" << std::endl;
-	    }
-	  else
-	    std::cerr << "Error on NUM_CLIENT" << std::endl;
-	}
-      else
-	std::cerr << "Error on TEAL_NAME" << std::endl;
-    }
-  else
-    std::cerr << "Error on BIENVENUE" << std::endl;
-  std::cout << std::endl;
 }
 
 void	Perso::main_loop()

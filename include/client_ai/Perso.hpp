@@ -50,7 +50,7 @@ public:
   void	droite();
   void	gauche();
   void	voir(std::string answer);
-  void	inventaire();
+  void	inventaire(std::string answer);
   void	prend(std::string const &);
   void	pose(std::string const &);
   void	expulse();
@@ -67,7 +67,6 @@ public:
   const void	*getTeamName();
   void		size_map_pos_ia(std::string coords);
   void		get_numclient(std::string num_client);
-  void		get_inventory(std::string answer);
   int		find_number(std::string &answer, char char_end);
   void		save_objects_in_map(std::string objects, int i);
   void		see_map();
