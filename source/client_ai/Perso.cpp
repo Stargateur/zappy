@@ -87,9 +87,49 @@ void			Perso::inventaire(std::string answer)
 
 void			Perso::expulse()
 {
+  int			nb_player;
+  int			count = 0;
+  int			x;
+  int			y;
+
   this->_time += 7;
   this->_sav->mouv.push_back("expulse");
+  nb_player = std::count(this->_sav->map[this->_posy][this->_posx].begin(), this->_sav->map[this->_posy][this->_posx].end(), PLAYER); 
+  this->_sav->map[this->_posy][this->_posx].remove(PLAYER);
+  if (this->_way == UP)
+    {
+      y = this->_posy - 1;
+      x = this->_posx;
+    }
+  if (this->_way == DOWN)
+    {
+      y = this->_posy + 1;
+      x = this->_posx;
+    }
+  if (this->_way == LEFT)
+    {
+      y = this->_posy;
+      x = this->_posx - 1;
+    }
+  if (this->_way == RIGHT)
+    {
+      y = this->_posy;
+      x = this->_posx + 1;
+    }
+  if (x == -1)
+    x = this->_maplength - 1;
+  if (x == this->_maplength)
+    x = 0;
+  if (y == -1)
+    y = this->_mapheight - 1;
+  if (y == this->_mapheight)
+    y = 0;
   this->_sav->cpt++;
+  while (count < nb_player)
+    {
+      this->_sav->map[this->_posy][this->_posx].push_back(PLAYER);
+      count++;
+    }
 }
 
 void			Perso::broadcast(std::string const &txt)

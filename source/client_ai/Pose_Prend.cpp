@@ -5,8 +5,8 @@ void                    Perso::prend(std::string const &obj)
   int                   pos;
   std::list<t_case>::iterator   it;
 
-  this->_time += 7;
   this->_sav->mouv.push_back("prend");
+  this->_time += 7;
   if (obj.compare(0, 9, "linemate\n") == 0)
     {
       it = std::find(this->_sav->map[this->_posy][this->_posx].begin(), this->_sav->map[this->_posy][this->_posx].end(), LINEMATE);
