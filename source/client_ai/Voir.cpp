@@ -119,6 +119,19 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
                     }
                   else
                     cur_num_col = this->_posx;
+
+		  // gérer à gauche et à droite de la map circulaire
+		  if (cur_num_col > (this->_maplength - 1))
+		    cur_num_col = cur_num_col - this->_maplength;
+		  if (cur_num_col < 0)
+		    cur_num_col = this->_maplength + cur_num_col;
+
+		  // gérer en haut et en bas de la map circulaire
+		  if (cur_num_line > (this->_mapheight - 1))
+		    cur_num_line = cur_num_line - this->_mapheight;
+		  if (cur_num_line < 0)
+		    cur_num_line = this->_mapheight + cur_num_line;
+		  std::cout << "line : " << cur_num_line << std::endl;
                   this->put_objects_in_case(cur_num_col, cur_num_line, objects);
                 }
               cpt++;
@@ -167,6 +180,18 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
                     }
                   else
 		    cur_num_line = this->_posy;
+
+		  if (cur_num_col > (this->_maplength - 1))
+		    cur_num_col = cur_num_col - this->_maplength;
+		  if (cur_num_col < 0)
+		    cur_num_col = this->_maplength + cur_num_col;
+
+		  // gérer en haut et en bas de la map circulaire
+		  if (cur_num_line > (this->_mapheight - 1))
+		    cur_num_line = cur_num_line - this->_mapheight;
+		  if (cur_num_line < 0)
+		    cur_num_line = this->_mapheight + cur_num_line;
+
                   this->put_objects_in_case(cur_num_col, cur_num_line, objects);
 		}
               cpt++;
