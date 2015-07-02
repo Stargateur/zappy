@@ -14,7 +14,7 @@ Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip
 {
   this->_sav = new Save();
   this->_time = 0;
-  this->_way = UP;
+  this->_way = RIGHT;
   this->_level = 1;
 }
 
