@@ -4,44 +4,85 @@ void                    Perso::put_objects_in_case(int x, int y, std::string ans
 {
   int                   i = 0;
   int                   nb_objects =  std::count(answer.begin(), answer.end(), ' ');
+  size_t		pos;
 
-  this->_sav->map[this->_posy][this->_posx].push_back(PLAYER);
-
-  // ne gère pas le fait s'il y a plusieurs fois le même objet dans la case !          
+  //this->_sav->map[this->_posy][this->_posx].push_back(PLAYER);
   while (i < nb_objects)
     {
       if (strstr(answer.c_str(), "joueur") != NULL)
-        this->_sav->map[y][x].push_back(PLAYER);
+	{
+	  pos = answer.find_first_of("joueur");
+	  answer = answer.replace(pos, pos + 6, "");
+	  this->_sav->map[y][x].push_back(PLAYER);
+	  this->_sav->map[y][x].remove(NONE);
+	}
       else if (strstr(answer.c_str(), "linemate") != NULL)
-        this->_sav->map[y][x].push_back(LINEMATE);
+	{
+	  pos = answer.find_first_of("linemate");
+	  answer = answer.replace(pos, pos + 8, "");
+	  this->_sav->map[y][x].push_back(LINEMATE);
+	  this->_sav->map[y][x].remove(NONE);
+	}
       else if (strstr(answer.c_str(), "deraumere") != NULL)
-        this->_sav->map[y][x].push_back(DERAUMERE);
+	{
+	  pos = answer.find_first_of("deraumere");
+	  answer = answer.replace(pos, pos + 9, "");
+	  this->_sav->map[y][x].push_back(DERAUMERE);
+	  this->_sav->map[y][x].remove(NONE);
+	}
       else if (strstr(answer.c_str(), "sibur") != NULL)
-        this->_sav->map[y][x].push_back(SIBUR);
+	{
+	  pos = answer.find_first_of("sibur");
+	  answer = answer.replace(pos, pos + 5, "");
+	  this->_sav->map[y][x].push_back(SIBUR);
+	  this->_sav->map[y][x].remove(NONE);
+	}
       else if (strstr(answer.c_str(), "mendiane") != NULL)
-        this->_sav->map[y][x].push_back(MENDIANE);
+	{
+	  pos = answer.find_first_of("mendiane");
+	  answer = answer.replace(pos, pos + 8, "");
+	  this->_sav->map[y][x].push_back(MENDIANE);
+	  this->_sav->map[y][x].remove(NONE);
+	}
       else if (strstr(answer.c_str(), "phiras") != NULL)
-        this->_sav->map[y][x].push_back(PHIRAS);
+	{
+	  pos = answer.find_first_of("phiras");
+	  answer = answer.replace(pos, pos + 6, "");
+	  this->_sav->map[y][x].push_back(PHIRAS);
+	  this->_sav->map[y][x].remove(NONE);
+	}
       else if (strstr(answer.c_str(), "thystame") != NULL)
-        this->_sav->map[y][x].push_back(THYSTAME);
+	{
+	  pos = answer.find_first_of("thystame");
+	  answer = answer.replace(pos, pos + 8, "");
+	  this->_sav->map[y][x].push_back(THYSTAME);
+	  this->_sav->map[y][x].remove(NONE);
+	}
       else if (strstr(answer.c_str(), "nourriture") != NULL)
-        this->_sav->map[y][x].push_back(FOOD);
+	{
+	  pos = answer.find_first_of("nourriture");
+	  answer = answer.replace(pos, pos + 10, "");
+	  this->_sav->map[y][x].push_back(FOOD);
+	  this->_sav->map[y][x].remove(NONE);
+	}
       i++;
     }
 }
 
 void                    Perso::save_objects_in_map(std::string objects, int i)
 {
-  int                   line = 0;
+  int                   line = 1;
   int                   column = 0;
   int                   tmpcol = 0;
+  int                   tmpline = 0;
   int                   cpt = 0;
   int                   cur_num_col = 0;
   int                   cur_num_line = 0;
   int                   diff = 0;
   int                   coef_vert = 0;
+  int                   coef_hor = 0;
 
-  // si dir vers le haut ou le bas                                                     
+  // map non circulaire
   if (this->_way == UP || this->_way == DOWN)
     {
       if (this->_way == UP)
@@ -50,13 +91,13 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
         coef_vert = 1;
       while (line <= (this->_level + 1))
         {
-          cur_num_line = this->_posy + ((line + 1) * coef_vert);
+          cur_num_line = this->_posy + (line * coef_vert);
           tmpcol = 0;
           while (tmpcol <= (column))
             {
               if (cpt == i)
                 {
-                  if (tmpcol < (column / 2) ) // à gauche de '0'                       
+                  if (tmpcol < (column / 2))
                     {
                       diff = (column / 2) - tmpcol;
                       if (diff < 0)
@@ -66,7 +107,7 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
                       if (this->_way == DOWN)
                         cur_num_col = this->_posx + diff;
                     }
-                  else if (tmpcol > (column / 2)) // à droite de '0'                   
+                  else if (tmpcol > (column / 2))
                     {
                       diff = (column / 2) - tmpcol;
                       if (diff < 0)
@@ -76,7 +117,7 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
                       if (this->_way == DOWN)
                         cur_num_col = this->_posx - diff;
                     }
-                  else // au niveau de '0'                                             
+                  else
                     cur_num_col = this->_posx;
                   this->put_objects_in_case(cur_num_col, cur_num_line, objects);
                 }
@@ -85,6 +126,54 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
             }
           column += 2;
           line++;
+        }
+    }
+  line = 0;
+  column = 1;
+  cpt = 0;
+  if (this->_way == LEFT || this->_way == RIGHT)
+    {
+      if (this->_way == LEFT)
+        coef_hor = -1;
+      if (this->_way == RIGHT)
+        coef_hor = 1;
+      while (column <= (this->_level + 1))
+        {
+          cur_num_col = this->_posx + (column * coef_hor);
+	  tmpline = 0;
+          while (tmpline <= line)
+            {
+              if (cpt == i)
+                {
+                  if (tmpline < (line / 2))
+                    {
+                      diff = (line / 2) - tmpline;
+                      if (diff < 0)
+                        diff = -diff;
+                      if (this->_way == LEFT)
+                        cur_num_line = this->_posy + diff;
+                      if (this->_way == RIGHT)
+                        cur_num_line = this->_posy - diff;
+                    }
+                  else if (tmpline > (line / 2))
+                    {
+                      diff = (line / 2) - tmpline;
+                      if (diff < 0)
+                        diff = -diff;
+                      if (this->_way == LEFT)
+                        cur_num_line = this->_posy - diff;
+                      if (this->_way == RIGHT)
+                        cur_num_line = this->_posy + diff;
+                    }
+                  else
+		    cur_num_line = this->_posy;
+                  this->put_objects_in_case(cur_num_col, cur_num_line, objects);
+		}
+              cpt++;
+              tmpline++;
+	    }
+	  line += 2;
+          column++;
         }
     }
 }
@@ -99,9 +188,6 @@ void                    Perso::voir(std::string answer)
 
   this->_time += 7;
   this->_sav->mouv.push_back("voir");
-  //std::cout << "x = " << this->_posx << " / y = " << this->_posy << std::endl;       
-  //std::cout << "x = " << this->_maplength << " / y = " << this->_mapheight << std::e\
-  ndl;                                                                                   
   nb_cases = std::count(answer.begin(), answer.end(), ',');
   pos_first_coma = answer.find_first_of("{") + 1;
   while (i < nb_cases)
@@ -117,6 +203,7 @@ void                    Perso::voir(std::string answer)
   pos_second_coma = answer.find_first_of("}");
   objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
   this->save_objects_in_map(objects_by_case, i);
+  //exit(0);
   this->see_map();
   this->_sav->cpt++;
 }
