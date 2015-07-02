@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 05:33:47 2015 Antoine Plaskowski
-** Last update Thu Jul  2 15:51:01 2015 Antoine Plaskowski
+** Last update Thu Jul  2 16:46:24 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -53,6 +53,5 @@ bool		set_team(t_client * const client, t_game * const game,
   for (team = 0; team < game->size_team; team++)
     if (strncmp(game->team[team].team, str, game->team[team].len_team) == 0)
       return (set_client_player(client, game, game->team + team));
-  printf("wut\n");
   return (true);
 }

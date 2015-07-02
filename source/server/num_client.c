@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 05:36:20 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:51:45 2015 Antoine Plaskowski
+** Last update Thu Jul  2 16:43:20 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -13,6 +13,7 @@
 #include	<stdio.h>
 #include	<stddef.h>
 #include	"client.h"
+#include	"num_client.h"
 
 bool		write_num_client(t_client * const client, size_t const num)
 {

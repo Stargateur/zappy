@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:20 2015 zwertv_e
-** Last update Thu Jul  2 16:12:14 2015 Antoine Plaskowski
+** Last update Thu Jul  2 17:09:37 2015 Antoine Plaskowski
 */
 
 #ifndef		CLIENT_H_
@@ -42,6 +42,5 @@ t_string	*add_string(t_string * const list, char *str);
 t_client	*add_client(t_client *list, int const sfd);
 bool		write_pos_player(t_client * const client);
 t_client	*sup_client(t_client *client);
-t_client	*kill_time_out(t_client *list, t_time const * const timeout);
 
 #endif		/* !CLIENT_H_ */

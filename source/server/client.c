@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Thu Jul  2 15:40:49 2015 Antoine Plaskowski
+** Last update Thu Jul  2 17:04:39 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -83,27 +83,4 @@ t_client	*sup_client(t_client *client)
       client->to_write = sup_node(&client->to_write->node);
     }
   return (sup_node(&client->node));
-}
-
-t_client	*kill_time_out(t_client *list, t_time const * const timeout)
-{
-  t_time	time;
-  t_client	*client;
-  t_client	*client2;
-
-  client = first_node(&list->node);
-  while (client != NULL)
-    {
-      client2 = client->node.next;
-      if (clock_gettime(CLOCK_MONOTONIC, &time) == -1)
-	{
-	  perror("clock_gettime :");
-	  return (list);
-	}
-      time_sub(&time, &client->time);
-      if (time_small(timeout, &time) == true)
-	list = sup_client(client);
-      client = client2;
-    }
-  return (list);
 }

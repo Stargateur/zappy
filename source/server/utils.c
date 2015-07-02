@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Thu Jul  2 15:43:30 2015 Antoine Plaskowski
+** Last update Thu Jul  2 16:58:16 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -59,9 +59,9 @@ bool		time_small(t_time const * const a, t_time const * const b)
     return (true);
   if (b == NULL)
     return (false);
-  if (a->tv_sec >= b->tv_sec)
-    return (true);
-  if (a->tv_nsec >= b->tv_nsec)
-    return (true);
-  return (false);
+  if (a->tv_sec < b->tv_sec)
+    return (false);
+  if (a->tv_nsec < b->tv_nsec)
+    return (false);
+  return (true);
 }

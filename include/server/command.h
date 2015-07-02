@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 05:24:19 2015 Antoine Plaskowski
-** Last update Thu Jul  2 14:40:33 2015 Antoine Plaskowski
+** Last update Thu Jul  2 17:46:44 2015 Antoine Plaskowski
 */
 
 #ifndef		COMMAND_H_
@@ -15,6 +15,6 @@
 # include	"game.h"
 # include	"client.h"
 
-t_client	*get_cmd(t_game *game, t_client *client);
+bool		get_cmd(t_game *game, t_client *client);
 
 #endif		/* !COMMAND_H_ */

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Thu Jul  2 15:07:43 2015 Antoine Plaskowski
+** Last update Thu Jul  2 17:02:21 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -27,8 +27,16 @@ static t_client	*read_client(fd_set const * const fd_read, t_client *list)
     {
       client2 = client->node.next;
       if (FD_ISSET(client->ca.cfd, fd_read))
-	if (write_cbuf(&client->cbuf, client->ca.cfd) <= 0)
-	  list = sup_client(client);
+	{
+	  if (write_cbuf(&client->cbuf, client->ca.cfd) <= 0)
+	    list = sup_client(client);
+	  else
+	    if (clock_gettime(CLOCK_MONOTONIC, &client->time) == -1)
+	      {
+		perror("clock_gettime :");
+		list = sup_client(client);
+	      }
+	}
       client = client2;
     }
   return (list);
