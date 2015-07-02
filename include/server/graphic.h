@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Thu Jul  2 16:10:17 2015 Kevin Costa
+** Last update Thu Jul  2 17:24:34 2015 Alaric
 */
 
 #ifndef		GRAPHIC_H_
@@ -47,7 +47,8 @@ SDL_Surface	*Bmp_Loader(char *);
 SDL_Window	*init_video();
 t_display	*init_renderer(SDL_Window *, t_display *);
 void		init_texture(t_texture *, SDL_Renderer *);
-SDL_Renderer	*draw_stone(t_map *, t_texture *, t_display *);
+void		draw_stone(t_map *, t_texture *, t_display *);
+void		draw_more_stone(t_map *, t_texture *, t_display *, SDL_Rect);
 void		draw_select(t_display *);
 int		input(t_display *, t_map *);
 
