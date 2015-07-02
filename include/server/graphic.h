@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Thu Jul  2 15:47:35 2015 Alaric
+** Last update Thu Jul  2 16:10:17 2015 Kevin Costa
 */
 
 #ifndef		GRAPHIC_H_
@@ -36,7 +36,7 @@ typedef struct s_display
   int		_shape_size;
   int		_click_x;
   int		_click_y;
-  int		_nb_case;
+  size_t       	_nb_case;
   size_t       	_verti;
   size_t       	_horiz;
   SDL_Renderer	*renderer;
