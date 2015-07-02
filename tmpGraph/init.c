@@ -5,12 +5,12 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Wed Jul  1 15:25:44 2015 Alaric
+** Last update Thu Jul  2 19:06:58 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
 #include	<unistd.h>
-#include	"include/color.h"
+#include	"color.h"
 #include	"graphic.h"
 
 /* int		_shape_size = 24; */
