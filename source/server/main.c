@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jul  2 15:53:10 2015 zwertv_e
-** Last update Thu Jul  2 16:05:17 2015 Antoine Plaskowski
+** Last update Thu Jul  2 16:20:26 2015 Kevin Costa
 */
 
 #include        <unistd.h>
@@ -87,7 +87,7 @@ int		costa_alaric(void)
   display = init_renderer(fenetre, display);
   init_texture(&text, display->renderer);
 
-  init_map(&map, 50, 50);
+  init_map(&map, 100, 100);
   map_generate(&map);
   disp = first_node(&map.items->node);
   while (disp != NULL)
@@ -104,7 +104,7 @@ int		costa_alaric(void)
       draw_grid(&map, display);
       draw_select(display);
       SDL_RenderPresent(display->renderer);
-      SDL_SetRenderDrawColor(display->renderer, 0, 0, 0, 255);
+      SDL_SetRenderDrawColor(display->renderer, 0, 127, 0, 255);
       SDL_RenderClear(display->renderer);
       SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
     }
@@ -175,8 +175,8 @@ void		elliott(int argc, char **argv)
 
 int		main(int argc, char **argv)
 {
-  plasko(argc, argv);
-  /* costa_alaric(); */
+  /* plasko(argc, argv); */
+  costa_alaric();
   /* elliott(argc, argv); */
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Thu Jul  2 15:35:55 2015 Alaric
+** Last update Thu Jul  2 16:07:21 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -19,15 +19,15 @@ void		draw_grid(t_map *map, t_display *display)
 
   (void)map;
   a = 0;
-  while (a <= /*map->height * 25*/ SIZE_X)
+  while (a <= display->_nb_case * (display->_shape_size + 1))
     {
-      SDL_RenderDrawLine(display->renderer, a, 0, a, /*map->width * 25*/SIZE_Y);
+      SDL_RenderDrawLine(display->renderer, a, 0, a, display->_nb_case * (display->_shape_size + 1));
       a += display->_shape_size + 1;
     }
   a = 0;
-  while (a <= /*map->width * 25*/ SIZE_Y)
+  while (a <= display->_nb_case * (display->_shape_size + 1))
     {
-      SDL_RenderDrawLine(display->renderer, 0, a, /*map->height * 25*/ SIZE_X, a);
+      SDL_RenderDrawLine(display->renderer, 0, a, display->_nb_case * (display->_shape_size + 1), a);
       a += display->_shape_size + 1;
     }
 }
@@ -42,27 +42,29 @@ SDL_Renderer		*draw_more_stone(t_map *map, t_texture *img, t_display *disp)
   DestR.h = disp->_shape_size;
   while (tmp != NULL)
     {
-      if (tmp->coords.x <= (disp->_nb_case + disp->_horiz) - map->width
+      if (tmp->coords.x < (disp->_nb_case + disp->_horiz) - map->width
 	   && tmp->coords.y < disp->_verti + disp->_nb_case
 	   && tmp->coords.y >= disp->_verti)
 	{
 	  DestR.x = (tmp->coords.x + (map->width - disp->_horiz)) * (disp->_shape_size + 1);
 	  DestR.y = (tmp->coords.y - disp->_verti) * (disp->_shape_size + 1);
+	  SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
 	}
-      else if (tmp->coords.y <= (disp->_nb_case + disp->_verti) - map->height
+      else if (tmp->coords.y < (disp->_nb_case + disp->_verti) - map->height
 	   && tmp->coords.x < disp->_horiz + disp->_nb_case
 	   && tmp->coords.x >= disp->_horiz)
 	{
 	  DestR.y = (tmp->coords.y + (map->height - disp->_verti)) * (disp->_shape_size + 1);
 	  DestR.x = (tmp->coords.x - disp->_horiz) * (disp->_shape_size + 1);
+	  SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
 	}
-      else if (tmp->coords.x <= (disp->_nb_case + disp->_horiz) - map->width
-	       && tmp->coords.y <= (disp->_nb_case + disp->_verti) - map->height)
+      else if (tmp->coords.x < (disp->_nb_case + disp->_horiz) - map->width
+	       && tmp->coords.y < (disp->_nb_case + disp->_verti) - map->height)
 	{
 	  DestR.y = (tmp->coords.y + (map->height - disp->_verti)) * (disp->_shape_size + 1);
 	  DestR.x = (tmp->coords.x + (map->width - disp->_horiz)) * (disp->_shape_size + 1);
+	  SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
 	}
-      SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
       tmp = tmp->node.next;
     }
   return (disp->renderer);

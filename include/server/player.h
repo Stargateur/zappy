@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Thu Jul  2 14:48:13 2015 zwertv_e
+** Last update Thu Jul  2 16:11:15 2015 zwertv_e
 */
 
 #ifndef		PLAYER_H__
@@ -63,6 +63,12 @@ bool		drop_item(t_map * const map,
 bool		expulse_players(t_game * const game,
 				t_map * const map,
 				t_player const * const player);
+bool		player_levelup(t_game * const game,
+			       t_map * const map, t_player * const player,
+			       bool const do_);
+bool		player_view(t_game const * const game,
+			    t_map const * const map,
+			    t_player const * const player);
 
 t_player	*find_free_player(t_player *player, char * const team);
 bool		add_action(t_player * const player, char * const str);
