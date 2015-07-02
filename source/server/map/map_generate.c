@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Wed Jul  1 15:38:13 2015 zwertv_e
+** Last update Thu Jul  2 15:32:48 2015 zwertv_e
 */
 
 #include	<time.h>
@@ -24,20 +24,20 @@ static int	get_ressource_type(void)
   repart += DENSITY_PHI + DENSITY_THY + DENSITY_FOOD;
   type = tmp % repart;
   if (type < DENSITY_LIN)
-    return (linemlate);
+    return (LINEMATE);
   else if (type < DENSITY_LIN + DENSITY_DER)
-    return (deraumere);
+    return (DERAUMERE);
   else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB)
-    return (sibur);
+    return (SIBUR);
   else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN)
-    return (mendiane);
+    return (MENDIANE);
   else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN +
 	   DENSITY_PHI)
-    return (phiras);
+    return (PHIRAS);
   else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN +
 	   DENSITY_PHI + DENSITY_THY)
-    return (thystame);
-  return (food);
+    return (THYSTAME);
+  return (FOOD);
 }
 
 static void	generate_ressources(t_map * const map, size_t const to_generate)

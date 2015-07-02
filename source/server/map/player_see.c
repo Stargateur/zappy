@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Wed Jul  1 14:48:09 2015 zwertv_e
+** Last update Thu Jul  2 15:32:16 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -155,7 +155,8 @@ void		find_squares(t_map const * const map,
     }
 }
 
-static bool	ffirst_write(char const * const ressource, size_t const quantity, bool first_write)
+static bool	ffirst_write(char const * const ressource,
+			     size_t const quantity, bool first_write)
 {
   size_t	i;
 
@@ -176,13 +177,13 @@ static bool	print_inv(t_inv const * const inv, bool first_write)
 {
   size_t	i;
 
-  first_write = ffirst_write("linemlate", inv->linemlate, first_write);
+  first_write = ffirst_write("linemate", inv->linemate, first_write);
   first_write = ffirst_write("deraumere", inv->deraumere, first_write);
   first_write = ffirst_write("sibur", inv->sibur, first_write);
   first_write = ffirst_write("mendiane", inv->mendiane, first_write);
   first_write = ffirst_write("phiras", inv->phiras, first_write);
   first_write = ffirst_write("thystame", inv->thystame, first_write);
-  first_write = ffirst_write("food", inv->food, first_write);
+  first_write = ffirst_write("nourriture", inv->food, first_write);
   return (first_write);
 }
 

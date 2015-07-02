@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 17:51:47 2015 zwertv_e
-** Last update Thu Jul  2 14:59:45 2015 zwertv_e
+** Last update Thu Jul  2 15:32:31 2015 zwertv_e
 */
 
 #include	"map.h"
@@ -51,7 +51,7 @@ static bool	can_levelup(t_square const * const square,
     return (false);
   if (nb_player != g_needs[i].nb_players)
     return (false);
-  if (square->ressources.linemlate != g_needs[i].ressources.linemlate)
+  if (square->ressources.linemate != g_needs[i].ressources.linemate)
     return (false);
   if (square->ressources.deraumere != g_needs[i].ressources.deraumere)
     return (false);
@@ -74,17 +74,17 @@ static bool	do_levelup(t_game * const game,
 
   if (!game || ! sq || i > NB_LEVEL)
     return (false);
-  if (!add_ressource(&sq->ressources, linemlate, g_needs[i].ressources.linemlate, false))
+  if (!add_ressource(&sq->ressources, LINEMATE, g_needs[i].ressources.linemate, false))
     return (false);
-  if (!add_ressource(&sq->ressources, deraumere, g_needs[i].ressources.deraumere, false))
+  if (!add_ressource(&sq->ressources, DERAUMERE, g_needs[i].ressources.deraumere, false))
     return (false);
-  if (!add_ressource(&sq->ressources, sibur, g_needs[i].ressources.sibur, false))
+  if (!add_ressource(&sq->ressources, SIBUR, g_needs[i].ressources.sibur, false))
     return (false);
-  if (!add_ressource(&sq->ressources, mendiane, g_needs[i].ressources.mendiane, false))
+  if (!add_ressource(&sq->ressources, MENDIANE, g_needs[i].ressources.mendiane, false))
     return (false);
-  if (!add_ressource(&sq->ressources, phiras, g_needs[i].ressources.phiras, false))
+  if (!add_ressource(&sq->ressources, PHIRAS, g_needs[i].ressources.phiras, false))
     return (false);
-  if (!add_ressource(&sq->ressources, thystame, g_needs[i].ressources.thystame, false))
+  if (!add_ressource(&sq->ressources, THYSTAME, g_needs[i].ressources.thystame, false))
     return (false);
   tmp = first_node(&game->player->node);
   while (tmp)
