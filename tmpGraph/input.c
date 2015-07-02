@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Thu Jul  2 15:36:44 2015 Kevin Costa
+** Last update Thu Jul  2 15:49:56 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -79,8 +79,8 @@ int		input(t_display *display, t_map *map)
 	      display->_nb_case = 40;
 	      display->_horiz = 0;
 	      display->_verti = 0;
-	      display->_grid_x = 50;
-	      display->_grid_y = 50;
+	      /* display->_grid_x = 50; */
+	      /* display->_grid_y = 50; */
 	    }
 	}
     }

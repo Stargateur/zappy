@@ -4,8 +4,8 @@
 ** Made by zwertv_e
 ** Login   <zwertv_e@epitech.net>
 ** 
-** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Thu Jul  2 15:39:09 2015 zwertv_e
+** Started on  Thu Jul  2 15:53:10 2015 zwertv_e
+** Last update Thu Jul  2 15:53:16 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -99,7 +99,7 @@ int		costa_alaric()
 
   while (cont == 0)
     {
-      cont = input(display);
+      cont = input(display, &map);
       draw_stone(&map, &text, display);
       draw_grid(&map, display);
       draw_select(display);
@@ -176,7 +176,7 @@ void		elliott(int argc, char **argv)
 int		main(int argc, char **argv)
 {
   /* plasko(argc, argv); */
-  /* costa_alaric(); */
+   costa_alaric();
   /* elliott(argc, argv); */
   return (0);
 }
