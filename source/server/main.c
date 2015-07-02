@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Thu Jul  2 15:11:19 2015 zwertv_e
+** Last update Thu Jul  2 15:31:56 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -91,7 +91,7 @@ void		costa_alaric()
   disp = first_node(&map.items->node);
   while (disp != NULL)
     {
-      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coords.x, disp->coords.y, disp->ressources.linemlate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
+      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coords.x, disp->coords.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
       disp = disp->node.next;
     }
 
@@ -139,7 +139,7 @@ void		elliott(int argc, char **argv)
   party_everyday.player = put_node(party_everyday.player, test);
   printf("player is in %lu - %lu\n", test->coords.x, test->coords.y);
   init_inv(&test->inv);
-  test->inv.linemlate += 2;
+  test->inv.linemate += 2;
   test->inv.food += 5;
   inv = get_inventory(&test->inv);
   if (inv)
@@ -164,7 +164,7 @@ void		elliott(int argc, char **argv)
     printf("Player has rotated correctly\n");
 
   player_view(&party_everyday, &mapr, test);
-  add_item(&mapr, 0, 0, linemlate);
+  add_item(&mapr, 0, 0, LINEMATE);
   player_view(&party_everyday, &mapr, test);
   player_levelup(&party_everyday, &mapr, test, true);
   if (test->range == 2)
