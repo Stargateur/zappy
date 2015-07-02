@@ -152,7 +152,6 @@ void                    Perso::voir(std::string answer)
 
   this->_time += 7;
   this->_sav->mouv.push_back("voir");
-  ndl;                                                                                   
   nb_cases = std::count(answer.begin(), answer.end(), ',');
   pos_first_coma = answer.find_first_of("{") + 1;
   while (i < nb_cases)
@@ -168,6 +167,7 @@ void                    Perso::voir(std::string answer)
   pos_second_coma = answer.find_first_of("}");
   objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
   this->save_objects_in_map(objects_by_case, i);
+  //exit(0);
   this->see_map();
   this->_sav->cpt++;
 }
