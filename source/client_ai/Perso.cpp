@@ -78,10 +78,15 @@ void			Perso::see_map()
       x = 0;
       while (x < this->_maplength)
 	{
-	  std::cout << this->_sav->map[y][x].back();
+	  if (this->_sav->map[y][x].back() != NONE)
+	    {
+	      std::cout << "x : " << x << " y : " << y << std::endl;
+	      std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
+	      //std::cout << this->_sav->map[y][x].back(); 
+	    }
 	  x++;
 	}
-      std::cout << std::endl;
+      //std::cout << std::endl;
       y++;
     }
   exit(0);
