@@ -146,6 +146,7 @@ void			Perso::incantation()
     {
       this->_time += 300;
       this->_sav->mouv.push_back("incantation");
+      this->_level++;
       this->_sav->cpt++;
     }
   else
