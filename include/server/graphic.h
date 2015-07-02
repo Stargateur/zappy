@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Thu Jul  2 16:10:17 2015 Kevin Costa
+** Last update Thu Jul  2 17:35:00 2015 Kevin Costa
 */
 
 #ifndef		GRAPHIC_H_
@@ -33,12 +33,12 @@ typedef	struct	s_texture
 
 typedef struct s_display
 {
-  int		_shape_size;
-  int		_click_x;
-  int		_click_y;
-  size_t       	_nb_case;
-  size_t       	_verti;
-  size_t       	_horiz;
+  size_t	_shape_size;
+  size_t	_click_x;
+  size_t	_click_y;
+  size_t	_nb_case;
+  size_t	_verti;
+  size_t	_horiz;
   SDL_Renderer	*renderer;
 }		t_display;
 
@@ -47,7 +47,8 @@ SDL_Surface	*Bmp_Loader(char *);
 SDL_Window	*init_video();
 t_display	*init_renderer(SDL_Window *, t_display *);
 void		init_texture(t_texture *, SDL_Renderer *);
-SDL_Renderer	*draw_stone(t_map *, t_texture *, t_display *);
+void		draw_stone(t_map *, t_texture *, t_display *);
+void		draw_more_stone(t_map *, t_texture *, t_display *, SDL_Rect);
 void		draw_select(t_display *);
 int		input(t_display *, t_map *);
 

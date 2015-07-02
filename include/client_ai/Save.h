@@ -15,7 +15,6 @@
 # include		<iostream>
 # include		<string>
 # include		<vector>
-# include		"Mouv.h"
 
 typedef enum		s_case
   {
@@ -39,11 +38,6 @@ class			Save
  public:
   Save();
   ~Save();
-
- public:
-  // void		addItem(std::string action, int sens);
-  // void		removeItem();
-  // void		seeList();
 };
 
 #endif
