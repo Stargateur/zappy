@@ -5,12 +5,12 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Thu Jul  2 18:31:51 2015 Antoine Plaskowski
+## Last update Thu Jul  2 19:13:10 2015 Antoine Plaskowski
 ##
 
 PATH_SRC	=	source/
 PATH_SERVER	=	$(PATH_SRC)server/
-PATH_GRAPHIC	=	tmpGraph/
+PATH_GRAPHIC	=	$(PATH_SERVER)graphic/
 PATH_MAP	=	$(PATH_SERVER)map/
 PATH_NODE	=	$(PATH_SERVER)node/
 

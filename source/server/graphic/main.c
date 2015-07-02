@@ -5,13 +5,13 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 15:58:26 2015 Alaric
-** Last update Thu Jun 25 15:45:17 2015 Alaric
+** Last update Thu Jul  2 19:12:33 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
 #include	<unistd.h>
-#include	"include/graphic.h"
-#include	"../include/server/map.h"
+#include	"graphic.h"
+#include	"map.h"
 
 int		main()
 {
