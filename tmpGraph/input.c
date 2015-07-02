@@ -5,13 +5,13 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Wed Jul  1 17:44:28 2015 Kevin Costa
+** Last update Thu Jul  2 15:36:44 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
 #include	"graphic.h"
 
-int		input(t_display *display)
+int		input(t_display *display, t_map *map)
 {
   SDL_Event event;
 
@@ -27,27 +27,37 @@ int		input(t_display *display)
 	case SDL_KEYDOWN:
 	  if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
 	    {
+	      if (display->_horiz == 0)
+		display->_horiz = map->width;
 	      display->_horiz -= 1;
-	      if (display->_horiz == -1)
-		display->_horiz = 40;
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
 	    {
 	      display->_horiz += 1;
-	      if (display->_horiz > 40)
-		display->_horiz = 0;
+	      /* display->_grid_x -= 1; */
+	      /* display->_grid_y -= 1; */
+	      if (display->_horiz > map->width)
+		{
+		  /* display->_grid_x = 50; */
+		  /* display->_grid_y = 40; */
+		  display->_horiz = 0;
+		}
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_UP)
 	    {
+	      if (display->_verti == 0)
+		display->_verti = map->height;
 	      display->_verti -= 1;
-	      if (display->_verti == -1)
-		display->_verti = 40;
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
 	    {
 	      display->_verti += 1;
-	      if (display->_verti > 40)
-		display->_verti = 0;
+	      /* display->_grid_y -= 1; */
+	      if (display->_verti > map->height)
+		{
+		  /* display->_grid_y = 50; */
+		  display->_verti = 0;
+		}
 	    }
 	  if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 	    exit(1);
@@ -69,6 +79,8 @@ int		input(t_display *display)
 	      display->_nb_case = 40;
 	      display->_horiz = 0;
 	      display->_verti = 0;
+	      display->_grid_x = 50;
+	      display->_grid_y = 50;
 	    }
 	}
     }
