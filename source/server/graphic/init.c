@@ -5,18 +5,13 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Thu Jul  2 19:06:58 2015 Antoine Plaskowski
+** Last update Thu Jul  2 20:25:09 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
 #include	<unistd.h>
 #include	"color.h"
 #include	"graphic.h"
-
-/* int		_shape_size = 24; */
-/* int		_click_x = 0; */
-/* int		_click_y = 0; */
-/* int		_nb_case = 40; */
 
 SDL_Window	*init_video()
 {

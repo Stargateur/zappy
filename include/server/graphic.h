@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Thu Jul  2 19:05:50 2015 Antoine Plaskowski
+** Last update Thu Jul  2 20:43:15 2015 Kevin Costa
 */
 
 #ifndef		GRAPHIC_H_
@@ -50,6 +50,10 @@ void		init_texture(t_texture *, SDL_Renderer *);
 void		draw_stone(t_map *, t_texture *, t_display *);
 void		draw_more_stone(t_map *, t_texture *, t_display *, SDL_Rect);
 void		draw_select(t_display *);
+void		key_move(SDL_Event, t_map *, t_display *);
+void		key_option(SDL_Event, t_map *, t_display *);
+void		key_press(SDL_Event, t_map *, t_display *);
 int		input(t_display *, t_map *);
+void            select_pos(t_map *, t_square *, t_display *, SDL_Rect *);
 
 #endif		/* !GRAPHIC_H_ */

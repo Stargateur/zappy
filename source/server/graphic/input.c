@@ -5,11 +5,70 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Thu Jul  2 18:12:51 2015 Alaric
+** Last update Thu Jul  2 20:41:50 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
 #include	"graphic.h"
+
+void		key_move(SDL_Event event, t_map *map, t_display *display)
+{
+  if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
+    {
+      if (display->_horiz == 0)
+	display->_horiz = map->width;
+      display->_horiz -= 1;
+    }
+  if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+    {
+      display->_horiz += 1;
+      if (display->_horiz > map->width)
+	display->_horiz = 0;
+    }
+  if (event.key.keysym.scancode == SDL_SCANCODE_UP)
+    {
+      if (display->_verti == 0)
+	display->_verti = map->height;
+      display->_verti -= 1;
+    }
+  if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
+    {
+      display->_verti += 1;
+      if (display->_verti > map->height)
+	display->_verti = 0;
+    }
+}
+
+void		key_option(SDL_Event event, t_map *map, t_display *display)
+{
+ if (event.key.keysym.scancode == SDL_SCANCODE_KP_PLUS)
+    {
+      if (display->_nb_case != 1)
+	display->_nb_case--;
+      display->_shape_size = SIZE_X / display->_nb_case - 1;
+    }
+  if (event.key.keysym.scancode == SDL_SCANCODE_KP_MINUS)
+    {
+      if (display->_nb_case != map->height && display->_nb_case != map->width)
+	display->_nb_case++;
+      display->_shape_size = SIZE_X / display->_nb_case - 1;
+    }
+  if (event.key.keysym.scancode == SDL_SCANCODE_R)
+    {
+      display->_shape_size = 24;
+      display->_nb_case = 40;
+      display->_horiz = 0;
+      display->_verti = 0;
+    }
+}
+
+void		key_press(SDL_Event event, t_map *map, t_display *display)
+{
+  key_move(event, map, display);
+  key_option(event, map, display);
+  if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+    exit(1);
+ }
 
 int		input(t_display *display, t_map *map)
 {
@@ -22,66 +81,10 @@ int		input(t_display *display, t_map *map)
 	case SDL_QUIT:
 	  exit(1);
 	case SDL_MOUSEBUTTONDOWN:
-	  display->_click_x = display->_horiz + event.button.x / (display->_shape_size + 1);
-	  display->_click_y = display->_verti + event.button.y / (display->_shape_size + 1);
+	  display->_click_x = display->_horiz + (size_t)event.button.x / (display->_shape_size + 1);
+	  display->_click_y = display->_verti + (size_t)event.button.y / (display->_shape_size + 1);
 	case SDL_KEYDOWN:
-	  if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
-	    {
-	      if (display->_horiz == 0)
-		display->_horiz = map->width;
-	      display->_horiz -= 1;
-	    }
-	  if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
-	    {
-	      display->_horiz += 1;
-	      /* display->_grid_x -= 1; */
-	      /* display->_grid_y -= 1; */
-	      if (display->_horiz > map->width)
-		{
-		  /* display->_grid_x = 50; */
-		  /* display->_grid_y = 40; */
-		  display->_horiz = 0;
-		}
-	    }
-	  if (event.key.keysym.scancode == SDL_SCANCODE_UP)
-	    {
-	      if (display->_verti == 0)
-		display->_verti = map->height;
-	      display->_verti -= 1;
-	    }
-	  if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
-	    {
-	      display->_verti += 1;
-	      /* display->_grid_y -= 1; */
-	      if (display->_verti > map->height)
-		{
-		  /* display->_grid_y = 50; */
-		  display->_verti = 0;
-		}
-	    }
-	  if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-	    exit(1);
-	  if (event.key.keysym.scancode == SDL_SCANCODE_KP_PLUS)
-	    {
-	      if (display->_nb_case != 1)
-		display->_nb_case--;
-	      display->_shape_size = SIZE_X / display->_nb_case - 1;
-	    }
-	  if (event.key.keysym.scancode == SDL_SCANCODE_KP_MINUS)
-	    {
-	      if (display->_nb_case != map->height && display->_nb_case != map->width)
-		display->_nb_case++;
-	      display->_shape_size = SIZE_X / display->_nb_case - 1;
-	    }
-	  if (event.key.keysym.scancode == SDL_SCANCODE_R)
-	    {
-	      display->_shape_size = 24;
-	      display->_nb_case = 40;
-	      display->_horiz = 0;
-	      display->_verti = 0;
-	      /* display->_grid_x = 50; */
-	      /* display->_grid_y = 50; */
-	    }
+	  key_press(event, map, display);
 	}
     }
   return (0);
