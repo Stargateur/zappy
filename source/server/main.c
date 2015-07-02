@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
-** Last update Thu Jul  2 15:31:56 2015 zwertv_e
+** Last update Thu Jul  2 15:49:06 2015 Alaric
 */
 
 #include        <unistd.h>
@@ -99,7 +99,7 @@ void		costa_alaric()
 
   while (cont == 0)
     {
-      cont = input(display);
+      cont = input(display, &map);
       draw_stone(&map, &text, display);
       draw_grid(&map, display);
       draw_select(display);
@@ -175,7 +175,7 @@ void		elliott(int argc, char **argv)
 int		main(int argc, char **argv)
 {
   /* plasko(argc, argv); */
-  /* costa_alaric(); */
+   costa_alaric();
   /* elliott(argc, argv); */
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Thu Jul  2 15:24:39 2015 Alaric
+** Last update Thu Jul  2 15:35:55 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -91,7 +91,6 @@ SDL_Renderer		*draw_stone(t_map *map, t_texture *img, t_display *disp)
     }
   if (disp->_horiz + disp->_nb_case > map->width || disp->_verti + disp->_nb_case > map->height)
     {
-      printf("LOLOLOLOL\n");
       disp->renderer = draw_more_stone(map, img, disp);
     }
   return (disp->renderer);
