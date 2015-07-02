@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:43:00 2015 zwertv_e
-** Last update Thu Jul  2 15:23:39 2015 zwertv_e
+** Last update Thu Jul  2 16:03:04 2015 Antoine Plaskowski
 */
 
 #ifndef		INV_H__
@@ -44,6 +44,6 @@ void		init_inv(t_inv *inv);
 bool		add_ressource(t_inv * const inv, int const type,
 			      size_t const quantity, bool add);
 size_t		count_ressources(t_inv const * const inv);
-const char	*get_inventory(t_inv const * const inv);
+char		*get_inventory(t_inv const * const inv);
 
 #endif		/* INV_H__ */

@@ -6,7 +6,7 @@
 ** 
 ** Started on  Mon Jun 29 22:47:01 2015 zwertv_e
 <<<<<<< HEAD
-** Last update Thu Jul  2 15:49:06 2015 Alaric
+** Last update Thu Jul  2 16:00:52 2015 Antoine Plaskowski
 =======
 ** Last update Thu Jul  2 15:46:10 2015 Antoine Plaskowski
 >>>>>>> ae0c01b9c8aee2651d8a0ae39ddae0debcee4b10
@@ -44,7 +44,7 @@ static int	init_socket(char const * const port)
   return (sfd);
 }
 
-void		plasko(int argc, char **argv)
+int		plasko(int argc, char **argv)
 {
   /*
   **
@@ -68,21 +68,22 @@ void		plasko(int argc, char **argv)
       get_cmd(&game, client);
     }
   close(sfd);
+  return (0);
 }
 
-void		costa_alaric()
+int		costa_alaric(void)
 {
   /*
   **
   ** TEST UNITAIRE COSTA + ALARIC
   **
   */
-  t_game	game;
   t_texture     text;
   t_display	*display;
   SDL_Window    *fenetre;
   t_map			map;
   t_square		*disp;
+  int cont = 0;
 
   if ((display = malloc(sizeof(t_display))) == NULL)
     return (1);
@@ -99,7 +100,6 @@ void		costa_alaric()
       disp = disp->node.next;
     }
 
-  int cont = 0;
 
   while (cont == 0)
     {
@@ -138,9 +138,9 @@ void		elliott(int argc, char **argv)
   init_map(&mapr, 50, 50);
   map_generate(&mapr);
   test = init_player(&mapr, "Razmoket", 49, 49);
-  party_everyday.player = put_node(party_everyday.player, test);
+  party_everyday.player = put_node(&party_everyday.player->node, &test->node);
   test = init_player(&mapr, "Razmoket", 0, 0);
-  party_everyday.player = put_node(party_everyday.player, test);
+  party_everyday.player = put_node(&party_everyday.player->node, &test->node);
   printf("player is in %lu - %lu\n", test->coords.x, test->coords.y);
   init_inv(&test->inv);
   test->inv.linemate += 2;
@@ -178,8 +178,8 @@ void		elliott(int argc, char **argv)
 
 int		main(int argc, char **argv)
 {
-  /* plasko(argc, argv); */
-   costa_alaric();
+  plasko(argc, argv);
+  /* costa_alaric(); */
   /* elliott(argc, argv); */
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:36:45 2015 zwertv_e
-** Last update Thu Jul  2 15:25:13 2015 zwertv_e
+** Last update Thu Jul  2 16:02:47 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -87,7 +87,7 @@ size_t		count_ressources(t_inv const * const inv)
   return (res);
 }
 
-const char	*get_inventory(t_inv const * const inv)
+char		*get_inventory(t_inv const * const inv)
 {
   char		*res;
   int		to_malloc;

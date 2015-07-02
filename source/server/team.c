@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 05:33:47 2015 Antoine Plaskowski
-** Last update Wed Jul  1 07:23:47 2015 Antoine Plaskowski
+** Last update Thu Jul  2 15:51:01 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -28,7 +28,8 @@ static bool     set_client_player(t_client * const client, t_game * const game,
     return (true);
   if ((player = find_free_player(game->player, team->team)) == NULL)
     {
-      player = init_player(&game->map, team->team, random(), random());
+      player = init_player(&game->map, team->team,
+			   (size_t)random(), (size_t)random());
       game->player = put_node(&game->player->node, &player->node);
     }
   if (player == NULL)
