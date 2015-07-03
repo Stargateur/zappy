@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Fri Jul  3 17:04:16 2015 Alaric
+** Last update Fri Jul  3 19:07:36 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -45,7 +45,7 @@ void		key_option(SDL_Event event, t_map *map, t_display *display)
   int		h;
 
   SDL_GetWindowSize(display->fenetre, &w, &h);
- if (event.key.keysym.scancode == SDL_SCANCODE_KP_PLUS)
+  if (event.key.keysym.scancode == SDL_SCANCODE_KP_PLUS)
     {
       if (display->_nb_case != 1)
 	display->_nb_case--;
@@ -62,9 +62,9 @@ void		key_option(SDL_Event event, t_map *map, t_display *display)
     }
   if (event.key.keysym.scancode == SDL_SCANCODE_R)
     {
+      display->_nb_case = 40;
       display->_shape_size = (w - 150) / display->_nb_case - 1;
       display->_shape_size2 = h / display->_nb_case - 1;
-      display->_nb_case = 40;
       display->_horiz = 0;
       display->_verti = 0;
     }

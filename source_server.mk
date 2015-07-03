@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Fri Jul  3 16:10:07 2015 zwertv_e
+## Last update Fri Jul  3 19:21:38 2015 Alaric
 ##
 
 PATH_SRC	=	source/

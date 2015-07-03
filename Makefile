@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Fri Jul  3 17:27:55 2015 Kevin Costa
+## Last update Fri Jul  3 19:27:13 2015 Alaric
 ##
 
 SERVER		=	zappy_server
@@ -29,7 +29,7 @@ LIB		=	-l m
 INCLUDE		=	-I include -I include/server -I include/client_ai
 
 CFLAGS		+=	-Wall -Wextra -O$(LEVEL)
-CFLAGS		+=	-ansi -pedantic -lSDL_ttf
+CFLAGS		+=	-ansi -pedantic
 CFLAGS		+=	$(INCLUDE)
 CFLAGS          +=      -D _POSIX_SOURCE -D _GNU_SOURCE -D _XOPEN_SOURCE
 
@@ -55,7 +55,7 @@ CFLAGS		+=	-fdiagnostics-color
 CXXFLAGS	+=	-fdiagnostics-color
 endif
 
-LDFLAGS		=	-lSDL2 $(LIB)
+LDFLAGS		=	-lSDL2 -lSDL_ttf $(LIB)
 
 ifeq ($(DEBUG), no)
 LDFLAGS		+=	-s

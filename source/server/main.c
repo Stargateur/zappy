@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Fri Jul  3 16:51:09 2015 zwertv_e
+** Last update Fri Jul  3 19:28:21 2015 Alaric
 */
 
 #include        <unistd.h>
@@ -87,19 +87,19 @@ int		costa_alaric(void)
 
   if ((display = malloc(sizeof(t_display))) == NULL)
     return (1);
-  fenetre = init_video();
-  display = init_renderer(fenetre, display);
+  display->fenetre = init_video();
+  display = init_renderer(display->fenetre, display);
   init_texture(&text, display->renderer);
 
   init_map(&map, 100, 100);
   map_generate(&map);
-  disp = first_node(&map.items->node);
+  /* disp = first_node(&map.items->node);
   while (disp != NULL)
     {
       printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coord.x, disp->coord.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
       disp = disp->node.next;
     }
-
+  */
 
   while (cont == 0)
     {
@@ -220,7 +220,7 @@ void		elliott(int argc, char **argv)
 int		main(int argc, char **argv)
 {
   srandom((unsigned int)time(NULL));
-  plasko(argc, argv);
+  /*plasko(argc, argv); */
   costa_alaric();
   /* elliott(argc, argv); */
   return (0);

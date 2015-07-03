@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:12:07 2015 zwertv_e
-** Last update Fri Jul  3 16:12:10 2015 zwertv_e
+** Last update Fri Jul  3 18:05:00 2015 Alaric
 */
 
 #ifndef		MAP_H__

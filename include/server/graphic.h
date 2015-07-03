@@ -5,13 +5,14 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Fri Jul  3 16:54:31 2015 Alaric
+** Last update Fri Jul  3 19:26:01 2015 Alaric
 */
 
 #ifndef		GRAPHIC_H_
 # define	GRAPHIC_H_
 
 #include	<SDL2/SDL.h>
+#include	<SDL/SDL_ttf.h>
 #include        "map.h"
 
 #define		SIZE_X 1000
@@ -29,6 +30,7 @@ typedef	struct	s_texture
   SDL_Texture	*cursor;
   SDL_Texture	*mine;
   SDL_Surface	*loader;
+  char		text[40];
 }		t_texture;
 
 typedef struct s_display
@@ -43,6 +45,7 @@ typedef struct s_display
   size_t	_horiz;
   SDL_Renderer	*renderer;
   SDL_Window	*fenetre;
+  TTF_Font	*font;
 }		t_display;
 
 void		draw_grid(t_map *, t_display *);

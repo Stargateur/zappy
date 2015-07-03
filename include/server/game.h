@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:12:11 2015 Antoine Plaskowski
-** Last update Fri Jul  3 16:32:01 2015 Antoine Plaskowski
+** Last update Fri Jul  3 17:59:47 2015 Alaric
 */
 
 #ifndef		GAME_H_
