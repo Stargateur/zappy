@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Fri Jul  3 13:23:28 2015 Kevin Costa
+** Last update Fri Jul  3 14:03:31 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -31,6 +31,7 @@ SDL_Window	*init_video()
 t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
 {
   display->_shape_size = 24;
+  display->_shape_max = 32;
   display->_click_x = 0;
   display->_click_y = 0;
   display->_nb_case = 40;

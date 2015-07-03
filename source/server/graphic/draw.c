@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Fri Jul  3 13:22:19 2015 Kevin Costa
+** Last update Fri Jul  3 14:08:58 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -105,7 +105,7 @@ void		draw_stone(t_map *map, t_texture *img, t_display *disp)
     draw_more_stone(map, img, disp, DestR);
 }
 
-void		draw_select(t_display *disp)
+void		draw_select(t_display *disp, t_map *map, t_texture *img)
 {
   size_t	a = (disp->_click_x - disp->_horiz) * (disp->_shape_size + 1);
   size_t	b = (disp->_click_y - disp->_verti) * (disp->_shape_size + 1);
@@ -122,4 +122,5 @@ void		draw_select(t_display *disp)
 		     (int)(a + disp->_shape_size + 1),
 		     (int)(b + disp->_shape_size + 1));
   SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
+  draw_inventory(map, img, disp);
 }

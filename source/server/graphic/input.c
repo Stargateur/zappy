@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Fri Jul  3 13:25:01 2015 Kevin Costa
+** Last update Fri Jul  3 13:54:22 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -49,7 +49,8 @@ void		key_option(SDL_Event event, t_map *map, t_display *display)
     }
   if (event.key.keysym.scancode == SDL_SCANCODE_KP_MINUS)
     {
-      if (display->_nb_case != map->height && display->_nb_case != map->width)
+      if (display->_nb_case != map->height &&
+	  display->_nb_case != map->width && display->_nb_case < 70)
 	display->_nb_case++;
       display->_shape_size = SIZE_X / display->_nb_case - 1;
     }
