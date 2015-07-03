@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 07:45:51 2015 Antoine Plaskowski
-** Last update Fri Jul  3 01:01:05 2015 Antoine Plaskowski
+** Last update Fri Jul  3 15:52:27 2015 Antoine Plaskowski
 */
 
 #ifndef		BROADCAST_H_
@@ -15,6 +15,8 @@
 # include	<math.h>
 
 # define	M_PI_8	(M_PI / 8)
+
+typedef	struct	s_minmax	t_minmax;
 
 typedef	enum	e_sound
   {
@@ -38,6 +40,13 @@ struct		s_v2d
 {
   intmax_t	x;
   intmax_t	y;
+};
+
+struct		s_minmax
+{
+  double	min;
+  double	max;
+  t_sound	sound;
 };
 
 t_sound		broadcast(t_map *map, t_player *player_a, t_player *player_b);
