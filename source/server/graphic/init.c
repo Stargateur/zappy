@@ -5,10 +5,11 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Fri Jul  3 14:03:31 2015 Kevin Costa
+** Last update Fri Jul  3 19:21:05 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
+#include	<SDL/SDL_ttf.h>
 #include	<unistd.h>
 #include	"color.h"
 #include	"graphic.h"
@@ -25,20 +26,28 @@ SDL_Window	*init_video()
       printf("%s\n", SDL_GetError());
       exit(-1);
     }
+ if (TTF_Init() == -1)
+   exit(0);
   return (fenetre);
 }
 
 t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
 {
-  display->_shape_size = 24;
+  int		w;
+  int		h;
+
+  SDL_GetWindowSize(display->fenetre, &w, &h);
+  display->renderer = SDL_CreateRenderer(fenetre, -1,
+					 SDL_RENDERER_ACCELERATED);
+  display->_nb_case = 40;
+  display->_shape_size = (w - 150) / display->_nb_case - 1;
+  display->_shape_size2 = h / display->_nb_case - 1;
   display->_shape_max = 32;
   display->_click_x = 0;
   display->_click_y = 0;
-  display->_nb_case = 40;
   display->_horiz = 0;
   display->_verti = 0;
-  display->renderer = SDL_CreateRenderer(fenetre, -1,
-					 SDL_RENDERER_ACCELERATED);
+  display->font = TTF_OpenFont("TTF/police.ttf", 28);
   if (display->renderer == NULL)
     {
       printf("%s\n", SDL_GetError());
