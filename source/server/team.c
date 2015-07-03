@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 05:33:47 2015 Antoine Plaskowski
-** Last update Thu Jul  2 18:52:02 2015 Antoine Plaskowski
+** Last update Fri Jul  3 16:32:34 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -15,6 +15,7 @@
 #include	<stdio.h>
 #include	"client.h"
 #include	"game.h"
+#include	"team.h"
 #include	"num_client.h"
 #include	"error_message.h"
 

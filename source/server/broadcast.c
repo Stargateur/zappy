@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Fri Jul  3 16:08:39 2015 Antoine Plaskowski
+** Last update Fri Jul  3 16:30:36 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -39,8 +39,8 @@ static void	short_vector(t_coord *a, t_coord *b, t_v2d *v, t_map *map)
 {
   t_v2d		m;
 
-  m.x = map->width;
-  m.y = map->height;
+  m.x = (intmax_t)map->width;
+  m.y = (intmax_t)map->height;
   v->x = b->x - a->x;
   v->y = b->y - a->y;
   diff_vector(v, a->x + m.x, b->y + m.y);

@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:12:11 2015 Antoine Plaskowski
-** Last update Wed Jul  1 06:24:23 2015 Antoine Plaskowski
+** Last update Fri Jul  3 16:32:01 2015 Antoine Plaskowski
 */
 
 #ifndef		GAME_H_
@@ -17,6 +17,7 @@ typedef	struct	s_game	t_game;
 # include	<stddef.h>
 # include	"player.h"
 # include	"map.h"
+# include	"egg.h"
 # include	"option.h"
 
 struct		s_team
@@ -31,6 +32,7 @@ struct		s_game
   size_t	size_team;
   t_team	*team;
   t_player	*player;
+  t_egg		*egg;
   t_map		map;
   t_option	option;
 };
