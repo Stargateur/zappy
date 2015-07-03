@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jul  2 18:28:45 2015 Antoine Plaskowski
-** Last update Fri Jul  3 16:43:54 2015 Antoine Plaskowski
+** Last update Fri Jul  3 16:46:51 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -27,7 +27,9 @@ t_time          *set_shortest_time(t_player *player, t_time *select_time)
     {
       player->action = first_node(&player->action->node);
       if (player->action != NULL)
+	{
 	if (time_small(&player->act,&cpy) == true)
 	  player = player->node.next;
+	}
     }
 }
