@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 21:15:02 2015 zwertv_e
-** Last update Wed Jul  1 17:12:30 2015 zwertv_e
+** Last update Fri Jul  3 14:43:50 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -36,10 +36,10 @@ t_square	*find_square(t_square *square, size_t const x, size_t const y)
   return (find_square(square->node.next, x, y));
 }
 
-bool		        add_item(t_map *map, size_t const x, size_t const y,
-				 int const type)
+bool		add_item(t_map *map, size_t const x, size_t const y,
+			 int const type)
 {
-  t_square		*square;
+  t_square	*square;
 
   if ((square = find_square(first_node(&map->items->node), x, y)) != NULL)
     {
@@ -56,10 +56,10 @@ bool		        add_item(t_map *map, size_t const x, size_t const y,
   return (true);
 }
 
-bool			delete_item(t_map *map, size_t const x, size_t const y,
-				    int const type)
+bool		delete_item(t_map *map, size_t const x, size_t const y,
+			    int const type)
 {
-  t_square		*square;
+  t_square	*square;
 
   if ((square = find_square(first_node(&map->items->node), x, y)) == NULL)
     return (false);

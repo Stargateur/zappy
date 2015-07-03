@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Thu Jul  2 18:56:34 2015 zwertv_e
+** Last update Fri Jul  3 14:56:57 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -38,118 +38,6 @@ static char	*concat(char const * const str1, char const * const str2)
   if (str2 != NULL)
     res = strcat(res, str2);
   return (res);
-}
-
-static size_t	get_x(t_map const * const map, t_player const * const player,
-		      int const h, int const w)
-{
-  bool		addition;
-  size_t        pos;
-  size_t	quantity;
-
-  addition = true;
-  pos = player->coords.x;
-  quantity = 0;
-  switch (player->dir)
-    {
-    case NORTH:
-      if (w < 0)
-	{
-	  quantity = (size_t)(-w);
-	  addition = false;
-	}
-      else
-	{
-	  quantity = (size_t)w;
-	  addition = true;
-	}
-      break;
-    case SOUTH:
-      if (w < 0)
-	{
-	  quantity = (size_t)(-w);
-	  addition = true;
-	}
-      else
-	{
-	  quantity = (size_t)w;
-	  addition = false;
-	}
-      break;
-    case WEST:
-      quantity = (size_t)h;
-      addition = false;
-      break;
-    case EAST:
-      quantity = (size_t)h;
-      addition = true;
-      break;
-    };
-  while (quantity > 0)
-    {
-      if (addition)
-	pos = next_x(map, pos);
-      else
-	pos = prev_x(map, pos);
-      quantity--;
-    }
-  return (pos);
-}
-
-static size_t	get_y(t_map const * const map, t_player const * const player,
-		      int const h, int const w)
-{
-  bool		addition;
-  size_t        pos;
-  size_t	quantity;
-
-  addition = true;
-  pos = player->coords.y;
-  quantity = 0;
-  switch (player->dir)
-    {
-    case NORTH:
-      quantity = (size_t)h;
-      addition = false;
-      break;
-    case SOUTH:
-      quantity = (size_t)h;
-      addition = true;
-      break;
-    case WEST:
-      if (w < 0)
-	{
-	  quantity = (size_t)(-w);
-	  addition = false;
-	}
-      else
-	{
-	  quantity = (size_t)w;
-	  addition = true;
-	}
-      break;
-    case EAST:
-      if (w < 0)
-	{
-	  quantity = (size_t)(-w);
-	  addition = true;
-	}
-      else
-	{
-	  quantity = (size_t)w;
-	  addition = false;
-	}
-      break;
-    };
-  while (quantity > 0)
-    {
-      if (addition)
-	pos = next_y(map, pos);
-      else
-	pos = prev_y(map, pos);
-      quantity--;
-    }
-  return (pos);
 }
 
 static void	find_squares(t_map const * const map,

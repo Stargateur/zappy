@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jul  2 18:59:57 2015 zwertv_e
-** Last update Thu Jul  2 18:59:59 2015 zwertv_e
+** Last update Fri Jul  3 14:42:35 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -26,7 +26,7 @@ t_inv		*init_inv(t_inv *inv)
   return (inv);
 }
 
-bool	        add_ressource(t_inv * const inv, int const type,
+bool		add_ressource(t_inv * const inv, int const type,
 			      size_t const quantity, bool add)
 {
   if (type < FOOD + 1)
@@ -44,7 +44,7 @@ bool	        add_ressource(t_inv * const inv, int const type,
 
 size_t		count_ressources(t_inv const * const inv)
 {
-  size_t		res;
+  size_t	res;
 
   res = 0;
   res += inv->linemate;

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Thu Jul  2 18:43:49 2015 Antoine Plaskowski
+** Last update Fri Jul  3 14:50:03 2015 zwertv_e
 */
 
 #include	<stdio.h>
@@ -76,7 +76,6 @@ void		move(t_map const * const map, t_player * const player)
 	  player->coords.x = next_x(map, player->coords.x);
 	  break;
 	};
-      printf("Player has moved in [%lu - %lu]\n", player->coords.x, player->coords.y);
     }
 }
 
@@ -103,6 +102,5 @@ t_player		*init_player(t_map *map, char * const team,
   player->action = NULL;
   init_inv(&player->inv);
   player->team = team;
-  printf("New player at pos [%lu - %lu] in '%s' team\n", player->coords.x, player->coords.y, player->team);
   return (player);
 }
