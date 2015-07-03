@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Thu Jul  2 19:02:50 2015 Antoine Plaskowski
+** Last update Fri Jul  3 21:02:24 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -72,7 +72,8 @@ char		*player_view(t_game const * const game,
 			    t_player const * const player);
 
 t_player	*find_free_player(t_player *player, char * const team);
-bool		add_action(t_player * const player, char * const str);
+bool		add_action(t_player * const player, char * const str,
+			   size_t const t);
 size_t		player_team_online(t_player * player, char * const team);
 
 #endif		/* PLAYER_H__ */

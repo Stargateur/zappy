@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:24 2015 Antoine Plaskowski
-** Last update Tue Jun 30 19:53:44 2015 Antoine Plaskowski
+** Last update Fri Jul  3 21:03:42 2015 Antoine Plaskowski
 */
 
 #ifndef		ACTION_H_
@@ -17,6 +17,7 @@ typedef	struct	s_action	t_action;
 
 # include	"node.h"
 # include	"parser.h"
+# include	"utils.h"
 
 struct		s_action
 {
@@ -24,6 +25,7 @@ struct		s_action
   char		*str;
   char		*arg;
   t_cmd		*cmd;
+  t_time	time;
 };
 
 bool		show_action(t_action *action);

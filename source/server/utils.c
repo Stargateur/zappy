@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Fri Jul  3 20:38:42 2015 Antoine Plaskowski
+** Last update Fri Jul  3 20:52:51 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -68,7 +68,7 @@ bool		time_small(t_time const * const a, t_time const * const b)
   return (true);
 }
 
-bool		time_div(t_time * const a, size_t num, size_t dem)
+bool		time_div(t_time * const a, size_t const num, size_t const dem)
 {
   if (a == NULL || dem == 0)
     return (false);

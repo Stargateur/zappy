@@ -5,20 +5,28 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jul  2 18:28:45 2015 Antoine Plaskowski
-** Last update Fri Jul  3 20:40:03 2015 Antoine Plaskowski
+** Last update Fri Jul  3 20:59:34 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
 #include	"player.h"
 #include	"utils.h"
 
-t_time          *set_shortest_time(t_player *player, t_time *select_time)
+static bool	truc(t_player *player, t_time cpy_time, t_time *s_time)
+{
+  if (time_sub(&cpy_time, &player->act) == true)
+    return (true);
+  
+  if (time_small(&player->act, &cpy_time) == true)
+    ;
+}
+
+t_time          *set_s_time(t_game *game, t_player *player, t_time *s_time)
 {
   t_time	actual_time;
-  t_time	cpy;
 
-  select_time->tv_sec = 1;
-  select_time->tv_nsec = 0;
+  s_time->tv_sec = 1;
+  s_time->tv_nsec = 0;
   if (clock_gettime(CLOCK_MONOTONIC, &actual_time) == -1)
     {
       perror("clock_gettime :");
@@ -30,11 +38,7 @@ t_time          *set_shortest_time(t_player *player, t_time *select_time)
       player->action = first_node(&player->action->node);
       if (player->action != NULL)
 	{
-	  cpy = actual_time;
-	  time_sub(&cpy, &player->act);
-	  
-	  if (time_small(&player->act, &cpy) == true)
-	    ;
+	  truc(player, actual_time, s_time);
 	}
       player = player->node.next;
     }
