@@ -5,9 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 20:36:57 2015 zwertv_e
-** Last update Fri Jul  3 20:37:23 2015 zwertv_e
+** Last update Fri Jul  3 21:10:40 2015 zwertv_e
 */
 
+#include	<string.h>
+#include	<stdlib.h>
 #include	"player.h"
 
 char		*concat(char *str1, char const * const str2,
