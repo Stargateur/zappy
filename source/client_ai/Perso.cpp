@@ -14,7 +14,7 @@ Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip
 {
   this->_sav = new Save();
   this->_time = 0;
-  this->_way = RIGHT;
+  this->_way = UP;
   this->_level = 1;
 }
 
@@ -78,6 +78,7 @@ int			*Perso::find_obj_in_map(t_case obj)
 	      pos_obj[1] = y;
 	      std::cout << "Element trouve !" << std::endl;
 	      std::cout << "x : " << pos_obj[0] << " y : " << pos_obj[1] << std::endl;
+	      return (pos_obj);
 	    }
 	  x++;
 	}
@@ -86,205 +87,372 @@ int			*Perso::find_obj_in_map(t_case obj)
   return (pos_obj);
 }
 
-void			Perso::go_to_the_obj(int *coord_obj)
+void			Perso::go_to_obj(int *coord_obj)
 {
   int			x;
   int			y;
   bool			find = false;
-  int			tmpx;
-  int			tmpy;
+  int			objx;
+  int			objy;
+  int			tmpx = this->_posx;
+  int			tmpy = this->_posy;
+
+  // on a les coordonnees x et y sur la map (ne gère pas la map circulaire)
+  if (this->_way == UP)
+    {
+      objx = this->_posx + coord_obj[0];
+      objy = this->_posy + coord_obj[1];
+    }
+  if (this->_way == DOWN)
+    {
+      objx = this->_posx - coord_obj[0];
+      objy = this->_posy - coord_obj[1];
+    }
+  if (this->_way == LEFT)
+    {
+      objx = this->_posx - coord_obj[1];
+      objy = this->_posy + coord_obj[0];
+    }
+  if (this->_way == RIGHT)
+    {
+      objx = this->_posx + coord_obj[0];
+      objy = this->_posy - coord_obj[1];
+    }
 
   while (find == false)
     {
-      if (this->_way == UP)
+      if (tmpx < objx) // obj a droite
 	{
-	  /*	  if (coord_obj[0] < 0)
+	  if (this->_way == UP)
 	    {
-	      this->_action.push_back("gauche\n");
-	      this->_way = LEFT;
-	      coord_obj[0]++;
-	      }*/
-	  if (coord_obj[1] < 0)
+	      std::cout << "A droite !" << std::endl;
+	      this->_way = RIGHT;
+	      tmpx++;
+	      while (tmpx < objx)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpx++;
+		}
+	    }
+	  else if (this->_way == DOWN)
 	    {
-	      this->_action.push_back("gauche\n");
+	      std::cout << "A gauche !" << std::endl;
 	      this->_way = LEFT;
-	      if (coord_obj[0] < 0)
-		coord_obj[0]++;
-	      if (coord_obj[0] > 0)
-		coord_obj[0]--;
-	      this->_action.push_back("gauche\n");
+	      tmpx++;
+	      while (tmpx < objx)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpx++;
+		}
+	    }
+	  else if (this->_way == LEFT)
+	    {
+	      std::cout << "A gauche !" << std::endl;
+	      std::cout << "A gauche !" << std::endl;
+	      std::cout << "A gauche !" << std::endl;
+	      this->_way = UP;
+	      tmpx++;
+	    }
+	  else if (this->_way == RIGHT)
+	    {
+	      while (tmpx < objx)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpx++;
+		}
+	    }
+	}
+      else if (tmpx > objx) // obj a gauche
+	{
+	  if (this->_way == UP)
+	    {
+	      std::cout << "A gauche !" << std::endl;
+	      this->_way = LEFT;
+	      tmpx--;
+	      while (tmpx > objx)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpx--;
+		}
+	    }
+	  else if (this->_way == DOWN)
+	    {
+	      std::cout << "A droite !" << std::endl;
+	      this->_way = LEFT;
+	      tmpx--;
+	      while (tmpx > objx)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpx--;
+		}
+	    }
+	  else if (this->_way == RIGHT)
+	    {
+	      std::cout << "A gauche !" << std::endl;
+	      std::cout << "A gauche !" << std::endl;
+	      std::cout << "A gauche !" << std::endl;
 	      this->_way = DOWN;
+	      tmpx--;
 	    }
-	}
-      else if (this->_way == DOWN)
-	{
-
-	}
-      else if (this->_way == LEFT)
-	{
-
-	}
-      else if (this->_way == DOWN)
-	{
-	  
-	}
-    }
-}
-
-// machine a etat ici => push_back plusieurs cmds
-void			Perso::find_actions()
-{
-  int			*coords_obj_in_map;
-
-  std::cout << "coucou 1" << std::endl;
-  if (this->_level == 1)
-    {
-      // chercher FOOD
-      if (this->_invent._nourriture < 10)
-	{
-	  // chercher de la nourriture sur un carre de 4*4
-	  coords_obj_in_map = this->find_obj_in_map(FOOD);
-	  std::cout << coords_obj_in_map[0] << std::endl;
-	  if (coords_obj_in_map[0] == -42)
+	  else if (this->_way == LEFT)
 	    {
-	      this->_action.push_front("avance\n");
-	      this->_action.push_front("voir\n");
-	    }
-	  else
-	    {
-	      // 1) on est deja dessus
-	      // 2) on se dirige vers avec gauche droite avance
-	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
+	      while (tmpx > objx)
 		{
-		  this->_action.push_front("prend\n");
+		  std::cout << "Devant !" << std::endl;
+		  tmpx--;
 		}
-	      else
+	    
+	    }
+	}
+      else if (tmpy > objy) // obj en bas
+	{
+	  if (this->_way == LEFT)
+	    {
+	      std::cout << "A gauche !" << std::endl;
+	      this->_way = DOWN;
+	      tmpy--;
+	      while (tmpy > objy)
 		{
-		  std::cout << "on doit bouger !" << std::endl;
-		  //this->go_to_the_obj(coords_ob_in_map);
+		  std::cout << "Devant !" << std::endl;
+		  tmpy--;
 		}
 	    }
+	  else if (this->_way == RIGHT)
+	    {
+	      std::cout << "A droite !" << std::endl;
+	      this->_way = DOWN;
+	      tmpy--;
+	      while (tmpy > objy)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpy--;
+		}
+	    }
+	  else if (this->_way == UP)
+	    {
+	      std::cout << "A gauche !" << std::endl;
+	      std::cout << "A gauche !" << std::endl;
+	      std::cout << "A gauche !" << std::endl;
+	      this->_way = RIGHT;
+	      tmpy--;
+	    }
+	  else if (this->_way == DOWN)
+	    {
+	      while (tmpy > objy)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpy--;
+		}
+	    }
+	}
+      else if (tmpy < objy) // obj en haut
+	{
+	  if (this->_way == LEFT)
+	    {
+	      std::cout << "A droite !" << std::endl;
+	      this->_way = UP;
+	      tmpy++;
+	      while (tmpy < objy)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpy++;
+		}
+	    }
+	  else if (this->_way == RIGHT)
+	    {
+	      std::cout << "A gauche !" << std::endl;
+	      this->_way = UP;
+	      tmpy++;
+	      while (tmpy < objy)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpy++;
+		}
+	    }
+	  else if (this->_way == DOWN)
+	    {
+	      std::cout << "A gauche !" << std::endl;
+	      std::cout << "A gauche !" << std::endl;
+	      std::cout << "A gauche !" << std::endl;
+	      this->_way = LEFT;
+	      tmpy++;
+	    }
+	  else if (this->_way == UP)
+	    {
+	      while (tmpy < objy)
+		{
+		  std::cout << "Devant !" << std::endl;
+		  tmpy++;
+		}
+	    }
+	}
+      if ((objx == tmpx) && (objy == tmpy))
+	{
+	  std::cout << "Fini !" << std::endl;
+	  find = true;
 	}
     }
-  std::cout << "coucou 2" << std::endl;
-  usleep(500);
 }
 
-std::string		Perso::server_answer(std::string action)
-{
-  std::string		answer;
-  ssize_t		ret;
+  // machine a etat ici => push_back plusieurs cmds
+  void			Perso::find_actions()
+  {
+    int			*coords_obj_in_map;
 
-  answer.resize(2048);
-  std::cout << "En attente d'une reponse du serveur ..." << std::endl;
-  if (write(this->getClient(), (const void *)action.c_str(), (size_t)action.size()) != -1)
-    {
-      ret = -1;
-      ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
-      if (ret == -1)
-	{
-	  std::cerr << "Error on read " << answer << std::endl;
-	}
-      else
-	{
-	  std::cout << "Reponse du serveur = " << answer << std::endl << std::endl;
-	  answer.resize(ret);
-	}
-    }
-  else
-    std::cerr << "Error on write in server_answer" << std::endl;
-  return (answer);
-}
+    if (this->_level == 1)
+      {
+	// chercher FOOD
+	if (this->_invent._nourriture < 10)
+	  {
+	    // chercher de la nourriture sur un carre de 4*4
+	    coords_obj_in_map = this->find_obj_in_map(FOOD);
+	    std::cout << coords_obj_in_map[0] << std::endl;
+	    if (coords_obj_in_map[0] == -42)
+	      {
+		this->_action.push_back("avance\n");
+		this->_action.push_back("voir\n");
+	      }
+	    else
+	      {
+		// 1) on est deja dessus
+		// 2) on se dirige vers avec gauche droite avance
+		if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
+		  {
+		    this->_action.push_back("prend\n");
+		  }
+		else
+		  {
+		    std::cout << "on doit bouger !" << std::endl;
+		    this->go_to_obj(coords_obj_in_map);
+		  }
+	      }
+	  }
+      }
+    usleep(500);
+  }
 
-void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
-{
-  std::list<std::string>::iterator	it;
+  std::string		Perso::server_answer(std::string action)
+  {
+    std::string		answer;
+    ssize_t		ret;
 
-  if (answer.compare("ok\n") == 0 || answer.compare("OK\n") == 0)
-    {
-      if (action.compare("avance\n") == 0)
-	this->avance();
-      if (action.compare("droite\n") == 0)
-	this->droite();
-      if (action.compare("gauche\n") == 0)
-	this->gauche();
-      if (action.compare(0, 5, "prend") == 0)
-	this->prend(action.substr(6, action.size() - 6));
-      if (action.compare(0, 4, "pose") == 0)
-	this->pose(action.substr(5, action.size() - 5));
-      if (action.compare("expulse\n") == 0)
-	this->expulse();
-      if (action.compare("broadcast\n") == 0)
-	this->broadcast("ceci est un message code\n");
-      if (action.compare("fork\n") == 0)
-	this->fork();
-    }
-  else if (answer.compare("KO\n") == 0 || answer.compare("ko\n") == 0)
-    {
-      // continuer le jeu
-    }
-  else if (answer.compare("mort\n") == 0)
-    {
-      std::cerr << "Le joueur est mort" << std::endl;
-      *death = true;
-    }
-  else
-    {
-      if (action.compare("voir\n") == 0)
-	this->voir(answer);
-      else if (action.compare("inventaire\n") == 0)
-	this->inventaire(answer);
-      else if (action.compare("incantation\n") == 0)
-	this->incantation();
-      else if (action.compare("connect_nbr\n") == 0)
-	{
-	  this->_nbunusedslots = atoi(answer.c_str());
-	  std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
-	}
-    }
-  it = std::find(this->_action.begin(), this->_action.end(), action);
-  if (it != this->_action.end())
+    answer.resize(2048);
+    std::cout << "En attente d'une reponse du serveur ..." << std::endl;
+    if (write(this->getClient(), (const void *)action.c_str(), (size_t)action.size()) != -1)
+      {
+	ret = -1;
+	ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
+	if (ret == -1)
+	  {
+	    std::cerr << "Error on read " << answer << std::endl;
+	  }
+	else
+	  {
+	    std::cout << "Reponse du serveur = " << answer << std::endl << std::endl;
+	    answer.resize(ret);
+	  }
+      }
+    else
+      std::cerr << "Error on write in server_answer" << std::endl;
+    return (answer);
+  }
+
+  void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
+  {
+    std::list<std::string>::iterator	it;
+
+    if (answer.compare("ok\n") == 0 || answer.compare("OK\n") == 0)
+      {
+	if (action.compare("avance\n") == 0)
+	  this->avance();
+	if (action.compare("droite\n") == 0)
+	  this->droite();
+	if (action.compare("gauche\n") == 0)
+	  this->gauche();
+	if (action.compare(0, 5, "prend") == 0)
+	  this->prend(action.substr(6, action.size() - 6));
+	if (action.compare(0, 4, "pose") == 0)
+	  this->pose(action.substr(5, action.size() - 5));
+	if (action.compare("expulse\n") == 0)
+	  this->expulse();
+	if (action.compare("broadcast\n") == 0)
+	  this->broadcast("ceci est un message code\n");
+	if (action.compare("fork\n") == 0)
+	  this->fork();
+      }
+    else if (answer.compare("KO\n") == 0 || answer.compare("ko\n") == 0)
+      {
+	// continuer le jeu
+      }
+    else if (answer.compare("mort\n") == 0)
+      {
+	std::cerr << "Le joueur est mort" << std::endl;
+	*death = true;
+      }
+    else
+      {
+	if (action.compare("voir\n") == 0)
+	  this->voir(answer);
+	else if (action.compare("inventaire\n") == 0)
+	  this->inventaire(answer);
+	else if (action.compare("incantation\n") == 0)
+	  this->incantation();
+	else if (action.compare("connect_nbr\n") == 0)
+	  {
+	    this->_nbunusedslots = atoi(answer.c_str());
+	    std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
+	  }
+      }
+    it = std::find(this->_action.begin(), this->_action.end(), action);
+    std::cout << "On elimine " << *it << std::endl;
     this->_action.erase(it);
-}
+  }
 
-void	Perso::main_loop()
-{
-  std::string	answer;
-  bool		death;
-  std::string	last_action;
-  std::list<std::string>::iterator	it;
+  void	Perso::main_loop()
+  {
+    std::string	answer;
+    bool		death;
+    std::string	last_action;
+    std::list<std::string>::iterator	it;
+    int		size_list;
+    int		num_item;
 
-  death = false;
-  while (this->_invent._nourriture > 0 && death == false)
-    {
-      //std::cout << "Taille list actions :" << this->_action.size() << std::endl;
-      if ((this->_time % 126) == 0)
-	{
-	  this->_time = 0;
-	  this->_invent._nourriture--;
-	}
-      if (this->_action.size() < 10)
-	{
-	  find_actions();
-	  it = this->_action.begin();
-	  while (it != this->_action.end())
-	    {
-	      std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;
-	      std::cout << "Action = " << *it << std::endl;
-	      answer = this->server_answer(*it);
-	      this->execute_commands(answer, &death, *it);
-	      it = this->_action.begin();
-	      ++it;
-	    }
-	  this->_action.clear();
-	}
-      else
-	{
-	}
-      if (this->_sav->cpt >= 100)
-	{
-	  this->_sav->mouv.pop_front();
-	}
-      sleep(2);
-    }
-}
+    death = false;
+    while (this->_invent._nourriture > 0 && death == false)
+      {
+	if ((this->_time % 126) == 0)
+	  {
+	    this->_time = 0;
+	    this->_invent._nourriture--;
+	  }
+	if (this->_action.size() < 10)
+	  {
+	    find_actions();
+	    size_list = this->_action.size();
+	    num_item = 0;
+	    it = this->_action.begin();
+	    std::cout << "On commence à parcourir la liste " << std::endl;
+	    for (it; (it != this->_action.end() || this->_action.size() > 0); ++it)
+	      {
+		if (num_item > 0)
+		  --it;
+		std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;
+		std::cout << "Action = " << *it << std::endl;
+		answer = this->server_answer(*it);
+		this->execute_commands(answer, &death, *it);
+		std::cout << "Taille list actions : " << this->_action.size() << std::endl;
+		it = this->_action.begin();
+		num_item++;
+	      }
+	    this->_action.clear();
+	  }
+	else
+	  {
+	  }
+	if (this->_sav->cpt >= 100)
+	  {
+	    this->_sav->mouv.pop_front();
+	  }
+	sleep(2);
+      }
+  }
