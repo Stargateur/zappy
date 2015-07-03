@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Fri Jul  3 01:19:38 2015 Antoine Plaskowski
+** Last update Fri Jul  3 15:38:36 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -75,6 +75,6 @@ t_sound		broadcast(t_map *map, t_player *a, t_player *b)
   if (vector.x == 0 && vector.y == 0)
     return (S_HERE);
   if ((vector.x < 0) == (vector.y < 0))
-    return (same_sign(vector));
-  return (not_same_sign(vector));
+    return (same_sign(&vector));
+  return (not_same_sign(&vector));
 }

@@ -1,11 +1,11 @@
 /*
 ** Perso.cpp for Perso in /home/mathon_j/rendu/PSU_2014_zappy/source/client_ai
 ** 
-** Made by Jérémy MATHON
+** Made by JÃ©rÃ©my MATHON
 ** Login   <mathon_j@mathonj>
 ** 
-** Started on  Fri Jun 19 18:57:30 2015 Jérémy MATHON
-** Last update Wed Jul  1 14:14:39 2015 J�r�my MATHON
+** Started on  Fri Jun 19 18:57:30 2015 JÃ©rÃ©my MATHON
+// Last update Fri Jul  3 14:46:39 2015 amoure_a
 */
 
 #include		"Perso.hpp"
@@ -75,7 +75,6 @@ void			Perso::inventaire(std::string answer)
   this->_invent._mendiane = this->find_number(answer, ',');
   this->_invent._phiras = this->find_number(answer, ',');
   this->_invent._thystame = this->find_number(answer, '}');
-  
   std::cout << "Nourriture : " << this->_invent._nourriture << std::endl;
   std::cout << "linemate : " << this->_invent._linemate << std::endl;
   std::cout << "deraumere : " << this->_invent._deraumere << std::endl;
@@ -94,7 +93,7 @@ void			Perso::expulse()
 
   this->_time += 7;
   this->_sav->mouv.push_back("expulse");
-  nb_player = std::count(this->_sav->map[this->_posy][this->_posx].begin(), this->_sav->map[this->_posy][this->_posx].end(), PLAYER); 
+  nb_player = std::count(this->_sav->map[this->_posy][this->_posx].begin(), this->_sav->map[this->_posy][this->_posx].end(), PLAYER);
   this->_sav->map[this->_posy][this->_posx].remove(PLAYER);
   if (this->_way == UP)
     {
@@ -170,19 +169,80 @@ void			Perso::dead()
   std::cout << "I'm dead.." << std::endl;
 }
 
-// machine a� etat ici
-std::string		Perso::do_action()
-{
-  std::string		action("pose nourriture\n");
 
-  std::cout << "Action = " << action;
-  /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
+int			*Perso::find_obj_in_map(t_case obj)
+{
+  int			*pos_obj = new (int [2]);
+  int			x = - 2;
+  int			y = - 2;
+  int			posx;
+  int			posy;
+  std::list<t_case>::iterator	it;
+
+  pos_obj[0] = -1;
+  pos_obj[1] = -1;
+  while (y < 2)
     {
-    std::cout << "Action = " << *tmpAction << std::endl;
-    }*/
-  std::cout << std::endl;
+      posy = this->_posy + y;
+      if (posy < 0)
+	posy = (this->_mapheight - 1) + posy;
+      if (posy > (this->_mapheight - 1))
+	posy = posy - (this->_mapheight - 1);
+      x = -2;
+      while (x < 2)
+	{
+	  posx = this->_posx + x;
+	  if (posx < 0)
+	    posx = (this->_maplength - 1) + posx;
+	  if (posx > (this->_maplength - 1))
+	    posx = posx - (this->_maplength - 1);
+	  it = std::find(this->_sav->map[posy][posx].begin(), this->_sav->map[posy][posx].end(), obj);
+	  if (it != this->_sav->map[posy][posx].end())
+	    {
+	      pos_obj[0] = posx;
+	      pos_obj[1] = posy;
+	      std::cout << "Element trouve !" << std::endl;
+	    }
+	  x++;
+	}
+      y++;
+    }
+  return ((int *)pos_obj);
+}
+
+// machine a etat ici => push_back plusieurs cmds
+void			Perso::find_actions()
+{
+  int			*coords_obj_in_map;
+
+  if (this->_level == 1)
+    {
+      // chercher FOOD
+      if (this->_invent._nourriture < 10)
+	{
+	  // chercher de la nourriture sur un carre de 4*4
+	  coords_obj_in_map = this->find_obj_in_map(FOOD);
+	  if (coords_obj_in_map[0] == -1)
+	    {
+	      this->_action.push_back("avance\n");
+	      this->_action.push_back("voir\n");
+	    }
+	  else
+	    {
+	      // 1) on est deja dessus
+	      // 2) on se dirige vers avec gauche droite avance
+	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
+		{
+		  this->_action.push_back("prend\n");
+		}
+	      else
+		{
+		  
+		}
+	    }
+	}
+    }
   usleep(500);
-  return (action);
 }
 
 std::string		Perso::server_answer(std::string action)
@@ -197,7 +257,7 @@ std::string		Perso::server_answer(std::string action)
       ret = -1;
       ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
       if (ret == -1)
-	{	  
+	{
 	  std::cerr << "Error on read " << answer << std::endl;
 	}
       else
@@ -213,9 +273,10 @@ std::string		Perso::server_answer(std::string action)
 
 void	Perso::execute_commands(std::string &answer, bool *death, std::string &action)
 {
+  std::list<std::string>::iterator	it;
+
   if (answer.compare("ok\n") == 0 || answer.compare("OK\n") == 0)
     {
-      std::cout << "C'est ok !\n";
       if (action.compare("avance\n") == 0)
 	this->avance();
       if (action.compare("droite\n") == 0)
@@ -233,7 +294,7 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
       if (action.compare("fork\n") == 0)
 	this->fork();
     }
-  else if (answer.compare("KO\n") == 0)
+  else if (answer.compare("KO\n") == 0 || answer.compare("ko\n") == 0)
     {
       // continuer le jeu
     }
@@ -249,39 +310,40 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
       else if (action.compare("inventaire\n") == 0)
 	this->inventaire(answer);
       else if (action.compare("incantation\n") == 0)
-	{
-
-	}
+	this->incantation();
       else if (action.compare("connect_nbr\n") == 0)
 	{
 	  this->_nbunusedslots = atoi(answer.c_str());
 	  std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
-	  exit(0);
 	}
       // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
+  it = std::find(this->_action.begin(), this->_action.end(), action);
+  this->_action.erase(it);
 }
 
 void	Perso::main_loop()
 {
-  std::string	action;
   std::string	answer;
   bool		death;
+  std::string	last_action;
 
   death = false;
   while (this->_invent._nourriture > 0 && death == false)
     {
+      std::cout << "Taille list actions :" << this->_action.size() << std::endl;
       if ((this->_time % 126) == 0)
 	{
 	  this->_time = 0;
 	  this->_invent._nourriture--;
 	}
-      action = do_action(); // on fait la machine à état ici
-      answer = this->server_answer(action); // envoi de la cmd au serveur et attente de la réponse (faudra faire jusque 10 envois possibles)
-      this->execute_commands(answer, &death, action);
       if (this->_action.size() < 10)
 	{
-	  //this->_action.push_back(mouv);
+	  find_actions();
+	  last_action = this->_action.back();
+	  //this->_action.push_back(action);
+	  answer = this->server_answer(last_action);
+	  this->execute_commands(answer, &death, last_action);
 	}
       else
 	{

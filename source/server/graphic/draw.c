@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Thu Jul  2 18:15:18 2015 Alaric
+** Last update Fri Jul  3 15:38:02 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -34,7 +34,8 @@ void		draw_grid(t_map *map, t_display *d)
     }
 }
 
-void            select_pos(t_map *m, t_square *t, t_display *d, SDL_Rect *DestR)
+void            select_pos(t_map *m, t_square *t, t_display *d,
+			   SDL_Rect *DestR)
 {
   if (t->coord.x < (d->_nb_case + d->_horiz) - m->width
       && t->coord.y < d->_verti + d->_nb_case
@@ -64,7 +65,8 @@ void            select_pos(t_map *m, t_square *t, t_display *d, SDL_Rect *DestR)
     }
 }
 
-void		draw_more_stone(t_map *map, t_texture *img, t_display *disp, SDL_Rect DestR)
+void		draw_more_stone(t_map *map, t_texture *img, t_display *disp,
+				SDL_Rect DestR)
 {
   t_square	*tmp;
 
@@ -105,7 +107,7 @@ void		draw_stone(t_map *map, t_texture *img, t_display *disp)
     draw_more_stone(map, img, disp, DestR);
 }
 
-void		draw_select(t_display *disp)
+void		draw_select(t_display *disp, t_map *map, t_texture *img)
 {
   size_t	a = (disp->_click_x - disp->_horiz) * (disp->_shape_size + 1);
   size_t	b = (disp->_click_y - disp->_verti) * (disp->_shape_size + 1);
@@ -122,4 +124,5 @@ void		draw_select(t_display *disp)
 		     (int)(a + disp->_shape_size + 1),
 		     (int)(b + disp->_shape_size + 1));
   SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
+  draw_inventory(map, img, disp);
 }

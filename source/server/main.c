@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jul  2 19:00:16 2015 zwertv_e
-** Last update Thu Jul  2 19:02:07 2015 Antoine Plaskowski
+** Last update Fri Jul  3 14:10:38 2015 Kevin Costa
 */
 
 #include        <unistd.h>
@@ -106,7 +106,7 @@ int		costa_alaric(void)
       cont = input(display, &map);
       draw_stone(&map, &text, display);
       draw_grid(&map, display);
-      draw_select(display);
+      draw_select(display, &map, &text);
       SDL_RenderPresent(display->renderer);
       SDL_SetRenderDrawColor(display->renderer, 0, 127, 0, 255);
       SDL_RenderClear(display->renderer);
@@ -116,7 +116,7 @@ int		costa_alaric(void)
   /* draw_stone(&map, &text, renderer, display); */
   SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
   draw_grid(&map, display);
-  draw_select(display);
+  draw_select(display, &map, &text);
   SDL_RenderPresent(display->renderer);
 
   sleep(5);
@@ -211,8 +211,8 @@ void		elliott(int argc, char **argv)
 int		main(int argc, char **argv)
 {
   srandom((unsigned int)time(NULL));
-  plasko(argc, argv);
-  /* costa_alaric(); */
+  /* plasko(argc, argv); */
+  costa_alaric();
   /* elliott(argc, argv); */
   return (0);
 }

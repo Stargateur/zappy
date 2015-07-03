@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:53:31 2015 Jérémy MATHON
-** Last update Wed Jul  1 14:10:53 2015 Jérémy MATHON
+// Last update Fri Jul  3 14:13:58 2015 amoure_a
 */
 
 #ifndef PERSO_HPP_
@@ -46,21 +46,21 @@ private:
 public:
   Perso(std::string team, int port, std::string ip);
   ~Perso();
-  void	avance();
-  void	droite();
-  void	gauche();
-  void	voir(std::string answer);
-  void	inventaire(std::string answer);
-  void	prend(std::string const &);
-  void	pose(std::string const &);
-  void	expulse();
-  void	broadcast(std::string const &);
-  void	incantation();
-  void	fork();
-  void	connect_nbr();
-  void	dead();
-  void	main_loop();
-  std::string	do_action();
+  void		avance();
+  void		droite();
+  void		gauche();
+  void		voir(std::string answer);
+  void		inventaire(std::string answer);
+  void		prend(std::string const &);
+  void		pose(std::string const &);
+  void		expulse();
+  void		broadcast(std::string const &);
+  void		incantation();
+  void		fork();
+  void		connect_nbr();
+  void		dead();
+  void		main_loop();
+  void		find_actions();
   std::string	server_answer(std::string action);
   void		execute_commands(std::string &answer, bool *death, std::string &action);
   void		welcome();
@@ -71,6 +71,7 @@ public:
   void		save_objects_in_map(std::string objects, int i);
   void		see_map();
   void		put_objects_in_case(int x, int y, std::string answer);
+  int		*find_obj_in_map(t_case obj);
 };
 
 #endif /* !PERSO_HPP_ */
