@@ -2,7 +2,6 @@
 
 void                    Perso::prend(std::string const &obj)
 {
-  int                   pos;
   std::list<t_case>::iterator   it;
 
   this->_sav->mouv.push_back("prend");
@@ -51,7 +50,6 @@ void                    Perso::prend(std::string const &obj)
     }
 
   this->_sav->cpt++;
-  exit(0);
 }
 
 void                    Perso::pose(std::string const &obj)

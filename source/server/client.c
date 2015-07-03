@@ -56,14 +56,14 @@ bool		write_pos_player(t_client * const client)
 
   if (client == NULL || client->player == NULL)
     return (true);
-  len = snprintf(NULL, 0, "%lu %lu\n", client->player->coords.x,
-		 client->player->coords.y);
+  len = snprintf(NULL, 0, "%lu %lu\n", client->player->coord.x,
+		 client->player->coord.y);
   if (len < 0)
     return (true);
   if ((str = malloc(sizeof(*str) * ((size_t)len + 1))) == NULL)
     return (true);
   if (snprintf(str, (size_t)len + 1, "%lu %lu\n",
-	       client->player->coords.x, client->player->coords.y) != len)
+	       client->player->coord.x, client->player->coord.y) != len)
     return (true);
   client->to_write = add_string(client->to_write, str);
   free(str);

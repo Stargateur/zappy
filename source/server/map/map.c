@@ -31,7 +31,7 @@ t_square	*find_square(t_square *square, size_t const x, size_t const y)
 {
   if (square == NULL)
     return (NULL);
-  if (square->coords.x == x && square->coords.y == y)
+  if (square->coord.x == x && square->coord.y == y)
     return (square);
   return (find_square(square->node.next, x, y));
 }
@@ -48,8 +48,8 @@ bool		add_item(t_map *map, size_t const x, size_t const y,
     }
   if ((square = malloc(sizeof(t_square))) == NULL)
     return (false);
-  square->coords.x = x;
-  square->coords.y = y;
+  square->coord.x = x;
+  square->coord.y = y;
   init_inv(&square->ressources);
   add_ressource(&square->ressources, type, 1, true);
   map->items = put_node(&map->items->node, &square->node);

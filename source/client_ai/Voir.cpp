@@ -6,6 +6,7 @@ void                    Perso::put_objects_in_case(int x, int y, std::string ans
   int                   nb_objects =  std::count(answer.begin(), answer.end(), ' ');
   size_t		pos;
 
+  this->_sav->map[y][x].clear();
   //this->_sav->map[this->_posy][this->_posx].push_back(PLAYER);
   while (i < nb_objects)
     {
@@ -120,18 +121,15 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
                   else
                     cur_num_col = this->_posx;
 
-		  // gérer à gauche et à droite de la map circulaire
 		  if (cur_num_col > (this->_maplength - 1))
 		    cur_num_col = cur_num_col - this->_maplength;
 		  if (cur_num_col < 0)
 		    cur_num_col = this->_maplength + cur_num_col;
-
-		  // gérer en haut et en bas de la map circulaire
 		  if (cur_num_line > (this->_mapheight - 1))
 		    cur_num_line = cur_num_line - this->_mapheight;
 		  if (cur_num_line < 0)
 		    cur_num_line = this->_mapheight + cur_num_line;
-		  std::cout << "line : " << cur_num_line << std::endl;
+
                   this->put_objects_in_case(cur_num_col, cur_num_line, objects);
                 }
               cpt++;
@@ -185,8 +183,6 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
 		    cur_num_col = cur_num_col - this->_maplength;
 		  if (cur_num_col < 0)
 		    cur_num_col = this->_maplength + cur_num_col;
-
-		  // gérer en haut et en bas de la map circulaire
 		  if (cur_num_line > (this->_mapheight - 1))
 		    cur_num_line = cur_num_line - this->_mapheight;
 		  if (cur_num_line < 0)
@@ -228,7 +224,6 @@ void                    Perso::voir(std::string answer)
   pos_second_coma = answer.find_first_of("}");
   objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
   this->save_objects_in_map(objects_by_case, i);
-  //exit(0);
   this->see_map();
   this->_sav->cpt++;
 }

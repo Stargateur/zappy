@@ -21,10 +21,10 @@ void            Perso::size_map_pos_ia(std::string coords)
   y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
   this->_mapheight = atoi(y.c_str());
   this->_maplength = atoi(x.c_str());
-  //  this->_posx = this->_maplength / 2;                                              
-  //this->_posy = this->_mapheight / 2;                                                
-  this->_posx = 5;
-  this->_posy = 49;
+  this->_posx = this->_maplength / 2;
+  this->_posy = this->_mapheight / 2;
+  //this->_posx = 5;
+  //this->_posy = 49;
   this->_sav->map = std::vector< std::vector< std::list <t_case> > > (this->_mapheight\
 								      );
   while (i < this->_mapheight)

@@ -32,7 +32,7 @@ static size_t	get_nb_players(t_game const * const game,
   tmp = first_node(&game->player->node);
   while (tmp)
     {
-      if (tmp->coords.x == x && tmp->coords.y == y)
+      if (tmp->coord.x == x && tmp->coord.y == y)
 	res++;
       tmp = tmp->node.next;
     }
@@ -89,8 +89,8 @@ static bool	do_levelup(t_game * const game,
   tmp = first_node(&game->player->node);
   while (tmp)
     {
-      if (tmp->coords.x == sq->coords.x &&
-	  tmp->coords.y == sq->coords.y && tmp->range == i + 1)
+      if (tmp->coord.x == sq->coord.x &&
+	  tmp->coord.y == sq->coord.y && tmp->range == i + 1)
 	tmp->range++;
       tmp = tmp->node.next;
     }
@@ -105,10 +105,10 @@ bool		player_levelup(t_game * const game,
   size_t	nb_players;
 
   square = find_square(first_node(&map->items->node),
-		       player->coords.x, player->coords.y);
+		       player->coord.x, player->coord.y);
   if (square == NULL)
     return (false);
-  nb_players = get_nb_players(game, player->coords.x, player->coords.y);
+  nb_players = get_nb_players(game, player->coord.x, player->coord.y);
   if (nb_players == 0)
     return (false);
   if (!can_levelup(square, player, nb_players))

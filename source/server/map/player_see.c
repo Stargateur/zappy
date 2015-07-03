@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Fri Jul  3 14:56:57 2015 zwertv_e
+** Last update Fri Jul  3 16:11:37 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -41,7 +41,7 @@ static char	*concat(char const * const str1, char const * const str2)
 }
 
 static void	find_squares(t_map const * const map,
-			     t_player const * const player, t_coords *list,
+			     t_player const * const player, t_coord *list,
 			     size_t const range)
 {
   size_t	i;
@@ -106,7 +106,7 @@ char		*player_view(t_game const * const game,
 {
   size_t	range;
   size_t	i;
-  t_coords	*list;
+  t_coord	*list;
   t_player	*tmp;
   t_square	*tmp_square;
   bool		first_write;
@@ -116,7 +116,7 @@ char		*player_view(t_game const * const game,
   if (!game || !player || !map)
     return (NULL);
   range = find_nb_squares(1, player->range);
-  if ((list = malloc(sizeof(t_coords) * (range))) == NULL)
+  if ((list = malloc(sizeof(t_coord) * (range))) == NULL)
     return (NULL);
   find_squares(map, player, list, range);
   first_write = true;
@@ -134,7 +134,7 @@ char		*player_view(t_game const * const game,
       tmp = first_node(&game->player->node);
       while (tmp)
       	{
-      	  if (player != tmp && tmp->coords.x == list[i].x && tmp->coords.y == list[i].y)
+      	  if (player != tmp && tmp->coord.x == list[i].x && tmp->coord.y == list[i].y)
       	    {
       	      if (!first_write)
 		res = concat(res, " ");

@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 JÃ©rÃ©my MATHON
-// Last update Fri Jul  3 13:29:40 2015 amoure_a
+// Last update Fri Jul  3 16:07:07 2015 amoure_a
 */
 
 #include		"Perso.hpp"
@@ -38,14 +38,11 @@ void			Perso::see_map()
 	    {
 	      std::cout << "x : " << x << " y : " << y << std::endl;
 	      std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
-	      //std::cout << this->_sav->map[y][x].back(); 
 	    }
 	  x++;
 	}
-      //std::cout << std::endl;
       y++;
     }
-  exit(0);
 }
 
 int	Perso::find_number(std::string &answer, char char_end)
@@ -169,18 +166,129 @@ void			Perso::dead()
   std::cout << "I'm dead.." << std::endl;
 }
 
-// machine a  etat ici
+
+int			*Perso::find_obj_in_map(t_case obj)
+{
+  int			*pos_obj = new (int [2]);
+  int			x = -2;
+  int			y = -2;
+  int			posx;
+  int			posy;
+  std::list<t_case>::iterator	it;
+
+  pos_obj[0] = -42;
+  pos_obj[1] = -42;
+  while (y < 4)
+    {
+      posy = this->_posy + y;
+      if (posy < 0)
+	posy = (this->_mapheight - 1) + posy;
+      if (posy > (this->_mapheight - 1))
+	posy = posy - (this->_mapheight - 1);
+      x = -2;
+      while (x < 4)
+	{
+	  posx = this->_posx + x;
+	  if (posx < 0)
+	    posx = (this->_maplength - 1) + posx;
+	  if (posx > (this->_maplength - 1))
+	    posx = posx - (this->_maplength - 1);
+	  it = std::find(this->_sav->map[posy][posx].begin(), this->_sav->map[posy][posx].end(), obj);
+	  if (it != this->_sav->map[posy][posx].end())
+	    {
+	      pos_obj[0] = x;
+	      pos_obj[1] = y;
+	      std::cout << "Element trouve !" << std::endl;
+	      std::cout << "x : " << pos_obj[0] << " y : " << pos_obj[1] << std::endl;
+	    }
+	  x++;
+	}
+      y++;
+    }
+  return (pos_obj);
+}
+
+void			Perso::go_to_the_obj(int *coord_obj)
+{
+  int			x;
+  int			y;
+  bool			find = false;
+  int			tmpx;
+  int			tmpy;
+
+  while (find == false)
+    {
+      if (this->_way == UP)
+	{
+	  /*	  if (coord_obj[0] < 0)
+	    {
+	      this->_action.push_back("gauche\n");
+	      this->_way = LEFT;
+	      coord_obj[0]++;
+	      }*/
+	  if (coord_obj[1] < 0)
+	    {
+	      this->_action.push_back("gauche\n");
+	      this->_way = LEFT;
+	      if (coord_obj[0] < 0)
+		coord_obj[0]++;
+	      if (coord_obj[0] > 0)
+		coord_obj[0]--;
+	      this->_action.push_back("gauche\n");
+	      this->_way = DOWN;
+	    }
+	}
+      else if (this->_way == DOWN)
+	{
+
+	}
+      else if (this->_way == LEFT)
+	{
+
+	}
+      else if (this->_way == DOWN)
+	{
+	  
+	}
+    }
+}
+
+// machine a etat ici => push_back plusieurs cmds
 void			Perso::find_actions()
 {
-  std::string		action("pose nourriture\n");
+  int			*coords_obj_in_map;
 
-  std::cout << "Action = " << action;
-  this->_action.push_back(action);
-  /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
+  std::cout << "coucou 1" << std::endl;
+  if (this->_level == 1)
     {
-    std::cout << "Action = " << *tmpAction << std::endl;
-    }*/
-  std::cout << std::endl;
+      // chercher FOOD
+      if (this->_invent._nourriture < 10)
+	{
+	  // chercher de la nourriture sur un carre de 4*4
+	  coords_obj_in_map = this->find_obj_in_map(FOOD);
+	  std::cout << coords_obj_in_map[0] << std::endl;
+	  if (coords_obj_in_map[0] == -42)
+	    {
+	      this->_action.push_front("avance\n");
+	      this->_action.push_front("voir\n");
+	    }
+	  else
+	    {
+	      // 1) on est deja dessus
+	      // 2) on se dirige vers avec gauche droite avance
+	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
+		{
+		  this->_action.push_front("prend\n");
+		}
+	      else
+		{
+		  std::cout << "on doit bouger !" << std::endl;
+		  //this->go_to_the_obj(coords_ob_in_map);
+		}
+	    }
+	}
+    }
+  std::cout << "coucou 2" << std::endl;
   usleep(500);
 }
 
@@ -210,7 +318,7 @@ std::string		Perso::server_answer(std::string action)
   return (answer);
 }
 
-void	Perso::execute_commands(std::string &answer, bool *death, std::string &action)
+void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
 {
   std::list<std::string>::iterator	it;
 
@@ -255,10 +363,10 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
 	  this->_nbunusedslots = atoi(answer.c_str());
 	  std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
 	}
-      // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
   it = std::find(this->_action.begin(), this->_action.end(), action);
-  this->_action.erase(it);
+  if (it != this->_action.end())
+    this->_action.erase(it);
 }
 
 void	Perso::main_loop()
@@ -266,11 +374,12 @@ void	Perso::main_loop()
   std::string	answer;
   bool		death;
   std::string	last_action;
+  std::list<std::string>::iterator	it;
 
   death = false;
   while (this->_invent._nourriture > 0 && death == false)
     {
-      std::cout << "Taille list actions :" << this->_action.size() << std::endl;
+      //std::cout << "Taille list actions :" << this->_action.size() << std::endl;
       if ((this->_time % 126) == 0)
 	{
 	  this->_time = 0;
@@ -279,10 +388,17 @@ void	Perso::main_loop()
       if (this->_action.size() < 10)
 	{
 	  find_actions();
-	  last_action = this->_action.back();
-	  //this->_action.push_back(action);
-	  answer = this->server_answer(last_action);
-	  this->execute_commands(answer, &death, last_action);
+	  it = this->_action.begin();
+	  while (it != this->_action.end())
+	    {
+	      std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;
+	      std::cout << "Action = " << *it << std::endl;
+	      answer = this->server_answer(*it);
+	      this->execute_commands(answer, &death, *it);
+	      it = this->_action.begin();
+	      ++it;
+	    }
+	  this->_action.clear();
 	}
       else
 	{
@@ -291,6 +407,6 @@ void	Perso::main_loop()
 	{
 	  this->_sav->mouv.pop_front();
 	}
-      sleep(1);
+      sleep(2);
     }
 }

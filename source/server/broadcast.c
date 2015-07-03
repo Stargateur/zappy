@@ -5,14 +5,28 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Wed Jul  1 14:57:49 2015 Antoine Plaskowski
+** Last update Fri Jul  3 16:08:39 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
 #include	<stdint.h>
 #include	"broadcast.h"
 
-static void	diff_vector(t_vector *v1, intmax_t x, intmax_t y)
+static t_minmax	g_minmax[] =
+  {
+    {0 - M_PI_8, 0 + M_PI_8, S_EAST},
+    {M_PI_4 - M_PI_8, M_PI_4 + M_PI_8, S_NORTH_EAST},
+    {M_PI_2 - M_PI_8, M_PI_2 + M_PI_8, S_NORTH},
+    {M_PI_4 * 3 - M_PI_8, M_PI_4 * 3 + M_PI_8, S_NORTH_WEST},
+    {M_PI - M_PI_8, M_PI + M_PI_8, S_WEST},
+    {M_PI_4 * 5 - M_PI_8, M_PI_4 * 5 + M_PI_8, S_SOUTH_WEST},
+    {M_PI_2 * 3 - M_PI_8, M_PI_2 * 3 + M_PI_8, S_SOUTH},
+    {M_PI_4 * 7 - M_PI_8, M_PI_4 * 7 + M_PI_8, S_SOUTH_EAST},
+  };
+
+static size_t	g_s_minmax = sizeof(g_minmax) / sizeof(*g_minmax);
+
+static void	diff_vector(t_v2d *v1, intmax_t x, intmax_t y)
 {
   if (sqrt(v1->x * v1->x + v1->y * v1->y) > sqrt(x * x + y * y))
     {
@@ -21,55 +35,48 @@ static void	diff_vector(t_vector *v1, intmax_t x, intmax_t y)
     }
 }
 
-static void	short_vector(t_vector *vector, size_t x_map, size_t y_map)
+static void	short_vector(t_coord *a, t_coord *b, t_v2d *v, t_map *map)
 {
-  t_vector	origin;
+  t_v2d		m;
 
-  origin = *vector;
-  diff_vector(vector, origin.x + x_map, origin.y);
-  diff_vector(vector, origin.x - x_map, origin.y);
-  diff_vector(vector, origin.x, origin.y + y_map);
-  diff_vector(vector, origin.x, origin.y - y_map);
+  m.x = map->width;
+  m.y = map->height;
+  v->x = b->x - a->x;
+  v->y = b->y - a->y;
+  diff_vector(v, a->x + m.x, b->y + m.y);
+  diff_vector(v, a->x + m.x, b->y - m.y);
+  diff_vector(v, a->x + m.x, b->y);
+  diff_vector(v, a->x - m.x, b->y + m.y);
+  diff_vector(v, a->x - m.x, b->y - m.y);
+  diff_vector(v, a->x - m.x, b->y);
+  diff_vector(v, a->x, b->y + m.y);
+  diff_vector(v, a->x, b->y - m.y);
 }
 
-static t_sound	same_sign(t_vector *vector)
+static t_sound	minmax(t_v2d *vector)
 {
   double	angle;
+  size_t	i;
 
-  if (vector->x == 0)
-    return (vector->y < 0 ? S_SOUTH : S_NORTH);
   angle = atan2(vector->y, vector->x);
-  if (-M_PI_2 - M_PI_8 < angle && angle < -M_PI_2 + M_PI_8)
-    return (S_SOUTH);
-  if (-M_PI_4 * 3 - M_PI_8 <= angle && angle <= -M_PI_4 * 3 + M_PI_8)
-    return (S_SOUTH_WEST);
-  if (-M_PI - M_PI_8 < angle && angle < -M_PI + M_PI_8)
-    return (S_WEST);
-  if (M_PI_2 - M_PI_8 < angle && angle < M_PI_2 + M_PI_8)
-    return (S_NORTH);
-  if (M_PI_4 - M_PI_8 <= angle && angle <= M_PI_4 + M_PI_8)
-    return (S_NORTH_EAST);
-  if (-M_PI - M_PI_8 < angle && angle < -M_PI + M_PI_8)
-    return (S_EAST);
+  for (i = 0; i < g_s_minmax; i++)
+    if (angle >= g_minmax[i].min && angle <= g_minmax[i].max)
+      return (g_minmax[i].sound);
   return (S_HERE);
 }
 
-static t_sound	not_same_sign(t_vector *vector)
+t_sound		broadcast(t_map *map, t_player *a, t_player *b)
 {
-}
+  t_v2d		vector;
 
-t_sound		broadcast(t_map *map, t_player *player_a, t_player *player_b)
-{
-  t_vector	vector;
-
-  if (map == NULL || player_a == NULL || player_b == NULL)
+  if (map == NULL || a == NULL || b == NULL)
     return (S_HERE);
-  vector.x = player_b->coords.x - player_a->coords.x;
-  vector.y = player_b->coords.y - player_a->coords.y;
-  short_vector(&vector, map->width, map->height);
+  short_vector(&a->coord, &b->coord, &vector, map);
   if (vector.x == 0 && vector.y == 0)
     return (S_HERE);
-  if ((vector.x < 0) == (vector.y < 0))
-    return (same_sign(&vector));
-  return (not_same_sign(&vector));
+  if (vector.x == 0)
+    return (vector.y < 0 ? S_SOUTH : S_NORTH);
+  if (vector.y == 0)
+    return (vector.x < 0 ? S_WEST : S_EAST);
+  return (minmax(&vector));
 }

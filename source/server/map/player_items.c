@@ -17,7 +17,7 @@ bool		take_item(t_map * const map,
 {
   if (!map || !player)
     return (false);
-  if (!delete_item(map, player->coords.x, player->coords.y, type))
+  if (!delete_item(map, player->coord.x, player->coord.y, type))
     return (false);
   if (!add_ressource(&player->inv, type, 1, true))
     return (false);
@@ -29,7 +29,7 @@ bool		drop_item(t_map * const map,
 {
   if (!map || !player)
     return (false);
-  if (!add_item(map, player->coords.x, player->coords.y, type))
+  if (!add_item(map, player->coord.x, player->coord.y, type))
     return (false);
   if (!add_ressource(&player->inv, type, 1, false))
     return (false);

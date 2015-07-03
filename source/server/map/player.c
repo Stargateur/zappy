@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Fri Jul  3 14:50:03 2015 zwertv_e
+** Last update Fri Jul  3 16:12:01 2015 zwertv_e
 */
 
 #include	<stdio.h>
@@ -64,16 +64,16 @@ void		move(t_map const * const map, t_player * const player)
       switch(player->dir)
 	{
 	case NORTH:
-	  player->coords.y = prev_y(map, player->coords.y);
+	  player->coord.y = prev_y(map, player->coord.y);
 	  break;
 	case SOUTH:
-	  player->coords.y = next_y(map, player->coords.y);
+	  player->coord.y = next_y(map, player->coord.y);
 	  break;
 	case WEST:
-	  player->coords.x = prev_x(map, player->coords.x);
+	  player->coord.x = prev_x(map, player->coord.x);
 	  break;
 	case EAST:
-	  player->coords.x = next_x(map, player->coords.x);
+	  player->coord.x = next_x(map, player->coord.x);
 	  break;
 	};
     }
@@ -88,8 +88,8 @@ t_player		*init_player(t_map *map, char * const team,
     return (NULL);
   if ((player = malloc(sizeof(*player))) == NULL)
     return (NULL);
-  player->coords.x = x % map->width;
-  player->coords.y = y % map->height;
+  player->coord.x = x % map->width;
+  player->coord.y = y % map->height;
   player->dir = random() % (EAST + 1);
   player->range = 1;
   if (clock_gettime(CLOCK_MONOTONIC, &player->food) == -1)
