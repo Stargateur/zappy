@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Fri Jul  3 17:27:32 2015 Alaric
+** Last update Fri Jul  3 17:31:11 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -124,5 +124,5 @@ void		draw_select(t_display *disp, t_map *map, t_texture *img)
 		     (int)(a + disp->_shape_size + 1),
 		     (int)(b + disp->_shape_size2 + 1));
   SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
-  draw_inventory(map, img, disp);
+  /* draw_inventory(map, img, disp); */
 }
