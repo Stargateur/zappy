@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:53:31 2015 Jérémy MATHON
-// Last update Fri Jul  3 13:28:41 2015 amoure_a
+// Last update Fri Jul  3 14:13:58 2015 amoure_a
 */
 
 #ifndef PERSO_HPP_
@@ -71,6 +71,7 @@ public:
   void		save_objects_in_map(std::string objects, int i);
   void		see_map();
   void		put_objects_in_case(int x, int y, std::string answer);
+  int		*find_obj_in_map(t_case obj);
 };
 
 #endif /* !PERSO_HPP_ */

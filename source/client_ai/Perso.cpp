@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 JÃ©rÃ©my MATHON
-// Last update Fri Jul  3 13:29:40 2015 amoure_a
+// Last update Fri Jul  3 14:46:39 2015 amoure_a
 */
 
 #include		"Perso.hpp"
@@ -169,18 +169,79 @@ void			Perso::dead()
   std::cout << "I'm dead.." << std::endl;
 }
 
-// machine a  etat ici
+
+int			*Perso::find_obj_in_map(t_case obj)
+{
+  int			*pos_obj = new (int [2]);
+  int			x = - 2;
+  int			y = - 2;
+  int			posx;
+  int			posy;
+  std::list<t_case>::iterator	it;
+
+  pos_obj[0] = -1;
+  pos_obj[1] = -1;
+  while (y < 2)
+    {
+      posy = this->_posy + y;
+      if (posy < 0)
+	posy = (this->_mapheight - 1) + posy;
+      if (posy > (this->_mapheight - 1))
+	posy = posy - (this->_mapheight - 1);
+      x = -2;
+      while (x < 2)
+	{
+	  posx = this->_posx + x;
+	  if (posx < 0)
+	    posx = (this->_maplength - 1) + posx;
+	  if (posx > (this->_maplength - 1))
+	    posx = posx - (this->_maplength - 1);
+	  it = std::find(this->_sav->map[posy][posx].begin(), this->_sav->map[posy][posx].end(), obj);
+	  if (it != this->_sav->map[posy][posx].end())
+	    {
+	      pos_obj[0] = posx;
+	      pos_obj[1] = posy;
+	      std::cout << "Element trouve !" << std::endl;
+	    }
+	  x++;
+	}
+      y++;
+    }
+  return ((int *)pos_obj);
+}
+
+// machine a etat ici => push_back plusieurs cmds
 void			Perso::find_actions()
 {
-  std::string		action("pose nourriture\n");
+  int			*coords_obj_in_map;
 
-  std::cout << "Action = " << action;
-  this->_action.push_back(action);
-  /*for (std::list<std::string>::iterator tmpAction = this->_action.begin(); tmpAction != this->_action.end(); ++tmpAction)
+  if (this->_level == 1)
     {
-    std::cout << "Action = " << *tmpAction << std::endl;
-    }*/
-  std::cout << std::endl;
+      // chercher FOOD
+      if (this->_invent._nourriture < 10)
+	{
+	  // chercher de la nourriture sur un carre de 4*4
+	  coords_obj_in_map = this->find_obj_in_map(FOOD);
+	  if (coords_obj_in_map[0] == -1)
+	    {
+	      this->_action.push_back("avance\n");
+	      this->_action.push_back("voir\n");
+	    }
+	  else
+	    {
+	      // 1) on est deja dessus
+	      // 2) on se dirige vers avec gauche droite avance
+	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
+		{
+		  this->_action.push_back("prend\n");
+		}
+	      else
+		{
+		  
+		}
+	    }
+	}
+    }
   usleep(500);
 }
 
