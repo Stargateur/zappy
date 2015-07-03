@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:53:31 2015 Jérémy MATHON
-// Last update Fri Jul  3 14:13:58 2015 amoure_a
+// Last update Fri Jul  3 15:49:53 2015 amoure_a
 */
 
 #ifndef PERSO_HPP_
@@ -62,7 +62,7 @@ public:
   void		main_loop();
   void		find_actions();
   std::string	server_answer(std::string action);
-  void		execute_commands(std::string &answer, bool *death, std::string &action);
+  void		execute_commands(std::string &answer, bool *death, std::string action);
   void		welcome();
   const void	*getTeamName();
   void		size_map_pos_ia(std::string coords);
@@ -72,6 +72,7 @@ public:
   void		see_map();
   void		put_objects_in_case(int x, int y, std::string answer);
   int		*find_obj_in_map(t_case obj);
+  void		go_to_the_obj(int *coords_obj);
 };
 
 #endif /* !PERSO_HPP_ */

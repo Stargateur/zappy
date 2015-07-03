@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 JÃ©rÃ©my MATHON
-// Last update Fri Jul  3 14:46:39 2015 amoure_a
+// Last update Fri Jul  3 15:57:06 2015 amoure_a
 */
 
 #include		"Perso.hpp"
@@ -45,7 +45,7 @@ void			Perso::see_map()
       //std::cout << std::endl;
       y++;
     }
-  exit(0);
+  //exit(0);
 }
 
 int	Perso::find_number(std::string &answer, char char_end)
@@ -173,15 +173,15 @@ void			Perso::dead()
 int			*Perso::find_obj_in_map(t_case obj)
 {
   int			*pos_obj = new (int [2]);
-  int			x = - 2;
-  int			y = - 2;
+  int			x = -2;
+  int			y = -2;
   int			posx;
   int			posy;
   std::list<t_case>::iterator	it;
 
-  pos_obj[0] = -1;
-  pos_obj[1] = -1;
-  while (y < 2)
+  pos_obj[0] = -42;
+  pos_obj[1] = -42;
+  while (y < 4)
     {
       posy = this->_posy + y;
       if (posy < 0)
@@ -189,7 +189,7 @@ int			*Perso::find_obj_in_map(t_case obj)
       if (posy > (this->_mapheight - 1))
 	posy = posy - (this->_mapheight - 1);
       x = -2;
-      while (x < 2)
+      while (x < 4)
 	{
 	  posx = this->_posx + x;
 	  if (posx < 0)
@@ -199,15 +199,60 @@ int			*Perso::find_obj_in_map(t_case obj)
 	  it = std::find(this->_sav->map[posy][posx].begin(), this->_sav->map[posy][posx].end(), obj);
 	  if (it != this->_sav->map[posy][posx].end())
 	    {
-	      pos_obj[0] = posx;
-	      pos_obj[1] = posy;
+	      pos_obj[0] = x;
+	      pos_obj[1] = y;
 	      std::cout << "Element trouve !" << std::endl;
 	    }
 	  x++;
 	}
       y++;
     }
-  return ((int *)pos_obj);
+  return (pos_obj);
+}
+
+void			Perso::go_to_the_obj(int *coord_obj)
+{
+  int			x;
+  int			y;
+  bool			find = false;
+  int			tmpx;
+  int			tmpy;
+
+  while (find == false)
+    {
+      if (this->_way == UP)
+	{
+	  /*	  if (coord_obj[0] < 0)
+	    {
+	      this->_action.push_back("gauche\n");
+	      this->_way = LEFT;
+	      coord_obj[0]++;
+	      }*/
+	  if (coord_obj[1] < 0)
+	    {
+	      this->_action.push_back("gauche\n");
+	      this->_way = LEFT;
+	      if (coord_obj[0] < 0)
+		coord_obj[0]++;
+	      if (coord_obj[0] > 0)
+		coord_obj[0]--;
+	      this->_action.push_back("gauche\n");
+	      this->_way = DOWN;
+	    }
+	}
+      else if (this->_way == DOWN)
+	{
+
+	}
+      else if (this->_way == LEFT)
+	{
+
+	}
+      else if (this->_way == DOWN)
+	{
+	  
+	}
+    }
 }
 
 // machine a etat ici => push_back plusieurs cmds
@@ -215,6 +260,7 @@ void			Perso::find_actions()
 {
   int			*coords_obj_in_map;
 
+  std::cout << "coucou 1" << std::endl;
   if (this->_level == 1)
     {
       // chercher FOOD
@@ -222,10 +268,11 @@ void			Perso::find_actions()
 	{
 	  // chercher de la nourriture sur un carre de 4*4
 	  coords_obj_in_map = this->find_obj_in_map(FOOD);
-	  if (coords_obj_in_map[0] == -1)
+	  std::cout << coords_obj_in_map[0] << std::endl;
+	  if (coords_obj_in_map[0] == -42)
 	    {
-	      this->_action.push_back("avance\n");
-	      this->_action.push_back("voir\n");
+	      this->_action.push_front("avance\n");
+	      this->_action.push_front("voir\n");
 	    }
 	  else
 	    {
@@ -233,15 +280,16 @@ void			Perso::find_actions()
 	      // 2) on se dirige vers avec gauche droite avance
 	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
 		{
-		  this->_action.push_back("prend\n");
+		  this->_action.push_front("prend\n");
 		}
 	      else
 		{
-		  
+		  //this->go_to_the_obj(coords_ob_in_map);
 		}
 	    }
 	}
     }
+  std::cout << "coucou 2" << std::endl;
   usleep(500);
 }
 
@@ -271,7 +319,7 @@ std::string		Perso::server_answer(std::string action)
   return (answer);
 }
 
-void	Perso::execute_commands(std::string &answer, bool *death, std::string &action)
+void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
 {
   std::list<std::string>::iterator	it;
 
@@ -319,7 +367,9 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string &acti
       // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
   it = std::find(this->_action.begin(), this->_action.end(), action);
-  this->_action.erase(it);
+  if (it != this->_action.end())
+    this->_action.erase(it);
+  std::cout << this->_action.back() << std::endl;
 }
 
 void	Perso::main_loop()
@@ -327,6 +377,7 @@ void	Perso::main_loop()
   std::string	answer;
   bool		death;
   std::string	last_action;
+  std::list<std::string>::iterator	it;
 
   death = false;
   while (this->_invent._nourriture > 0 && death == false)
@@ -340,10 +391,16 @@ void	Perso::main_loop()
       if (this->_action.size() < 10)
 	{
 	  find_actions();
-	  last_action = this->_action.back();
-	  //this->_action.push_back(action);
-	  answer = this->server_answer(last_action);
-	  this->execute_commands(answer, &death, last_action);
+	  it = this->_action.begin();
+	  while (it != this->_action.end())
+	    {
+	      std::cout << "Action = " << *it << std::endl;
+	      answer = this->server_answer(*it);
+	      this->execute_commands(answer, &death, *it);
+	      it = this->_action.begin();
+	      ++it;
+	    }
+	  this->_action.clear();
 	}
       else
 	{
@@ -352,6 +409,6 @@ void	Perso::main_loop()
 	{
 	  this->_sav->mouv.pop_front();
 	}
-      sleep(1);
+      sleep(2);
     }
 }
