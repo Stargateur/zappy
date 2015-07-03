@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Tue Jun 30 20:16:04 2015 Antoine Plaskowski
+** Last update Fri Jul  3 21:04:57 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -32,7 +32,7 @@ static t_cmd	g_cmd[] =
 
 static const size_t	g_size = sizeof(g_cmd) / sizeof(*g_cmd);
 
-static t_action	*create_action(char *str, char *arg, t_cmd *cmd)
+static t_action	*create_action(char *str, char *arg, t_cmd *cmd, size_t t)
 {
   t_action	*action;
 
@@ -41,10 +41,15 @@ static t_action	*create_action(char *str, char *arg, t_cmd *cmd)
   action->str = str;
   action->arg = arg;
   action->cmd = cmd;
+  if (time_div(&action->time, cmd->time, t) == true)
+    {
+      free(action);
+      return (NULL);
+    }
   return (action);
 }
 
-t_action	*parser(char *str)
+t_action	*parser(char *str, size_t const t)
 {
   size_t	i;
   size_t	j;
@@ -60,6 +65,6 @@ t_action	*parser(char *str)
     j++;
   for (i = 0; i < g_size; i++)
     if (strncmp(str, g_cmd[i].cmd, g_cmd[i].len_cmd) == 0)
-      return (create_action(str, str + j, g_cmd + i));
+      return (create_action(str, str + j, g_cmd + i, t));
   return (NULL);
 }

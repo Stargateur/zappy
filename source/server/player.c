@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Thu Jul  2 18:42:40 2015 Antoine Plaskowski
+** Last update Fri Jul  3 21:02:49 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -26,7 +26,8 @@ t_player	*find_free_player(t_player *player, char * const team)
   return (NULL);
 }
 
-bool            add_action(t_player * const player, char * const str)
+bool            add_action(t_player * const player, char * const str,
+			   size_t const t)
 {
   t_action      *action;
 
@@ -34,7 +35,7 @@ bool            add_action(t_player * const player, char * const str)
     return (true);
   if (len_node(&player->action->node) > 10)
     return (true);
-  if ((action = parser(str)) == NULL)
+  if ((action = parser(str, t)) == NULL)
     return (true);
   if (player->action == NULL)
     if (clock_gettime(CLOCK_MONOTONIC, &player->act) == -1)

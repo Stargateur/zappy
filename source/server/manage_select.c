@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Thu Jul  2 18:36:48 2015 Antoine Plaskowski
+** Last update Fri Jul  3 21:39:50 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -70,14 +70,14 @@ static t_client	*write_client(fd_set const * const fd_write, t_client *list)
   return (list);
 }
 
-t_client	*manage_select(t_client *client, int const sfd)
+t_client	*manage_select(t_client *client, t_time *time, int const sfd)
 {
   fd_set	fd_read;
   fd_set	fd_write;
   int		fd_max;
 
   fd_max = fd_set_client(&fd_read, &fd_write, client, sfd);
-  if (pselect(fd_max + 1, &fd_read, &fd_write, NULL, NULL, NULL) == -1)
+  if (pselect(fd_max + 1, &fd_read, &fd_write, NULL, time, NULL) == -1)
     {
       perror("select()");
       g_keep_running = false;
