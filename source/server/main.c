@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Fri Jul  3 16:46:35 2015 zwertv_e
+** Last update Fri Jul  3 16:51:09 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -141,12 +141,12 @@ void		elliott(int argc, char **argv)
   init_map(&mapr, 50, 50);
   map_generate(&mapr);
 
-  /* disp = first_node(&mapr.items->node); */
-  /* while (disp != NULL) */
-  /*   { */
-  /*     printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coord.x, disp->coord.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food); */
-  /*     disp = disp->node.next; */
-  /*   } */
+  disp = first_node(&mapr.items->node);
+  while (disp != NULL)
+    {
+      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coord.x, disp->coord.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
+      disp = disp->node.next;
+    }
 
   test = init_player(&mapr, "Razmoket", 49, 49);
   party_everyday.player = put_node(&party_everyday.player->node, &test->node);
@@ -220,8 +220,8 @@ void		elliott(int argc, char **argv)
 int		main(int argc, char **argv)
 {
   srandom((unsigned int)time(NULL));
-  /* plasko(argc, argv); */
-  /* costa_alaric(); */
-  elliott(argc, argv);
+  plasko(argc, argv);
+  costa_alaric();
+  /* elliott(argc, argv); */
   return (0);
 }

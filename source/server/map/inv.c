@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jul  2 18:59:57 2015 zwertv_e
-** Last update Fri Jul  3 16:45:53 2015 Antoine Plaskowski
+** Last update Fri Jul  3 16:49:28 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -31,7 +31,7 @@ bool		add_ressource(t_inv * const inv, int const type,
 {
   if (inv == NULL)
     return (false);
-  if (type < FOOD + 1)
+  if (type > FOOD + 1)
     return (false);
   if (add == false && (&inv->linemate)[type] < quantity)
     return (false);
