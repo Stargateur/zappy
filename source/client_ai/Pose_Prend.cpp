@@ -95,5 +95,4 @@ void                    Perso::pose(std::string const &obj)
     }
   this->_sav->map[this->_posy][this->_posx].remove(NONE);
   this->_sav->cpt++;
-  exit(0);
 }
