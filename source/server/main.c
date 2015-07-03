@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jul  2 19:00:16 2015 zwertv_e
-** Last update Fri Jul  3 14:10:38 2015 Kevin Costa
+** Last update Fri Jul  3 16:15:06 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -211,7 +211,7 @@ void		elliott(int argc, char **argv)
 int		main(int argc, char **argv)
 {
   srandom((unsigned int)time(NULL));
-  /* plasko(argc, argv); */
+  plasko(argc, argv);
   costa_alaric();
   /* elliott(argc, argv); */
   return (0);
