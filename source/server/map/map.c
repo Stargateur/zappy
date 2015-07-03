@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 21:15:02 2015 zwertv_e
-** Last update Fri Jul  3 14:43:50 2015 zwertv_e
+** Last update Fri Jul  3 16:44:00 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -43,6 +43,7 @@ bool		add_item(t_map *map, size_t const x, size_t const y,
 
   if ((square = find_square(first_node(&map->items->node), x, y)) != NULL)
     {
+      printf("SQUZRE %lu - %lu\n", square->coord.x, square->coord.y);
       add_ressource(&square->ressources, type, 1, true);
       return (true);
     }
@@ -50,8 +51,10 @@ bool		add_item(t_map *map, size_t const x, size_t const y,
     return (false);
   square->coord.x = x;
   square->coord.y = y;
+  printf("SQUARE %lu - %lu\n", square->coord.x, square->coord.y);
   init_inv(&square->ressources);
   add_ressource(&square->ressources, type, 1, true);
+  printf("count: %lu\n", count_ressources(&square->ressources));
   map->items = put_node(&map->items->node, &square->node);
   return (true);
 }

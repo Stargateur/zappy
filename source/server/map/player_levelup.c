@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 17:51:47 2015 zwertv_e
-** Last update Fri Jul  3 16:19:15 2015 zwertv_e
+** Last update Fri Jul  3 16:25:24 2015 zwertv_e
 */
 
 #include	"map.h"
@@ -72,7 +72,7 @@ static bool	do_levelup(t_game * const game,
 {
   t_player	*tmp;
 
-  if (!game || ! sq || i > NB_LEVEL ||
+  if (!game || !sq || i > NB_LEVEL ||
       !add_ressource(&sq->ressources, LINEMATE,
 		     g_needs[i].ressources.linemate, false) ||
       !add_ressource(&sq->ressources, DERAUMERE,
