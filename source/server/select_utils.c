@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jul  2 18:28:45 2015 Antoine Plaskowski
-** Last update Fri Jul  3 20:59:34 2015 Antoine Plaskowski
+** Last update Fri Jul  3 21:39:09 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -17,20 +17,24 @@ static bool	truc(t_player *player, t_time cpy_time, t_time *s_time)
   if (time_sub(&cpy_time, &player->act) == true)
     return (true);
   
-  if (time_small(&player->act, &cpy_time) == true)
-    ;
+  if (time_small(&player->action->time, &cpy_time) == true)
+    {
+
+    }
+  return (false);
 }
 
-t_time          *set_s_time(t_game *game, t_player *player, t_time *s_time)
+bool		set_s_time(t_player *player, t_time *s_time)
 {
   t_time	actual_time;
 
   s_time->tv_sec = 1;
   s_time->tv_nsec = 0;
+  return (false);
   if (clock_gettime(CLOCK_MONOTONIC, &actual_time) == -1)
     {
       perror("clock_gettime :");
-      return (NULL);
+      return (true);
     }
   player = first_node(&player->node);
   while (player != NULL)
@@ -42,4 +46,5 @@ t_time          *set_s_time(t_game *game, t_player *player, t_time *s_time)
 	}
       player = player->node.next;
     }
+  return (false);
 }

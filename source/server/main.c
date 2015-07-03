@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Fri Jul  3 19:28:21 2015 Alaric
+** Last update Fri Jul  3 21:38:42 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -23,6 +23,7 @@
 #include	"player.h"
 #include	"inv.h"
 #include	"command.h"
+#include	"select_utils.h"
 #include	"kill_client.h"
 
 static int	init_socket(char const * const port)
@@ -51,6 +52,7 @@ int		plasko(int argc, char **argv)
   int		sfd;
   t_client	*client;
   t_game	game;
+  t_time	s_time;
 
   client = NULL;
   if (init_game(&game, argv, argc) == NULL)
@@ -60,7 +62,9 @@ int		plasko(int argc, char **argv)
     return (1);
   while (g_keep_running == true)
     {
-      client = manage_select(client, sfd);
+      printf("je boucle\n");
+      set_s_time(game.player, &s_time);
+      client = manage_select(client, &s_time, sfd);
       get_cmd(&game, client);
       client = kill_client(client);
     }
@@ -220,8 +224,8 @@ void		elliott(int argc, char **argv)
 int		main(int argc, char **argv)
 {
   srandom((unsigned int)time(NULL));
-  /*plasko(argc, argv); */
-  costa_alaric();
+  plasko(argc, argv);
+  /* costa_alaric(); */
   /* elliott(argc, argv); */
   return (0);
 }

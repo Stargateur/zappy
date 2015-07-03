@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Fri Jul  3 20:52:51 2015 Antoine Plaskowski
+** Last update Fri Jul  3 21:33:15 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -44,6 +44,8 @@ bool		write_fd(char const * const str, int const fd)
 bool		time_sub(t_time * const a, t_time const * const b)
 {
   if (a == NULL || b == NULL)
+    return (true);
+  if (a->tv_sec < b->tv_sec)
     return (true);
   a->tv_sec -= b->tv_sec;
   if (a->tv_nsec < b->tv_nsec)
