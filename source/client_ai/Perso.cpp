@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 JÃ©rÃ©my MATHON
-// Last update Fri Jul  3 15:57:06 2015 amoure_a
+// Last update Fri Jul  3 16:07:07 2015 amoure_a
 */
 
 #include		"Perso.hpp"
@@ -38,14 +38,11 @@ void			Perso::see_map()
 	    {
 	      std::cout << "x : " << x << " y : " << y << std::endl;
 	      std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
-	      //std::cout << this->_sav->map[y][x].back(); 
 	    }
 	  x++;
 	}
-      //std::cout << std::endl;
       y++;
     }
-  //exit(0);
 }
 
 int	Perso::find_number(std::string &answer, char char_end)
@@ -202,6 +199,7 @@ int			*Perso::find_obj_in_map(t_case obj)
 	      pos_obj[0] = x;
 	      pos_obj[1] = y;
 	      std::cout << "Element trouve !" << std::endl;
+	      std::cout << "x : " << pos_obj[0] << " y : " << pos_obj[1] << std::endl;
 	    }
 	  x++;
 	}
@@ -284,6 +282,7 @@ void			Perso::find_actions()
 		}
 	      else
 		{
+		  std::cout << "on doit bouger !" << std::endl;
 		  //this->go_to_the_obj(coords_ob_in_map);
 		}
 	    }
@@ -364,12 +363,10 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string actio
 	  this->_nbunusedslots = atoi(answer.c_str());
 	  std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
 	}
-      // envoyer les infos aux commandes voir, inventaire, incantation, connect_nbr
     }
   it = std::find(this->_action.begin(), this->_action.end(), action);
   if (it != this->_action.end())
     this->_action.erase(it);
-  std::cout << this->_action.back() << std::endl;
 }
 
 void	Perso::main_loop()
@@ -382,7 +379,7 @@ void	Perso::main_loop()
   death = false;
   while (this->_invent._nourriture > 0 && death == false)
     {
-      std::cout << "Taille list actions :" << this->_action.size() << std::endl;
+      //std::cout << "Taille list actions :" << this->_action.size() << std::endl;
       if ((this->_time % 126) == 0)
 	{
 	  this->_time = 0;
@@ -394,6 +391,7 @@ void	Perso::main_loop()
 	  it = this->_action.begin();
 	  while (it != this->_action.end())
 	    {
+	      std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;
 	      std::cout << "Action = " << *it << std::endl;
 	      answer = this->server_answer(*it);
 	      this->execute_commands(answer, &death, *it);
