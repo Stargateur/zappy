@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Fri Jul  3 14:16:02 2015 Kevin Costa
+** Last update Fri Jul  3 16:54:31 2015 Alaric
 */
 
 #ifndef		GRAPHIC_H_
@@ -34,6 +34,7 @@ typedef	struct	s_texture
 typedef struct s_display
 {
   size_t	_shape_size;
+  size_t	_shape_size2;
   size_t	_shape_max;
   size_t	_click_x;
   size_t	_click_y;
@@ -41,6 +42,7 @@ typedef struct s_display
   size_t	_verti;
   size_t	_horiz;
   SDL_Renderer	*renderer;
+  SDL_Window	*fenetre;
 }		t_display;
 
 void		draw_grid(t_map *, t_display *);

@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Fri Jul  3 13:54:22 2015 Kevin Costa
+** Last update Fri Jul  3 17:04:16 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -41,22 +41,29 @@ void		key_move(SDL_Event event, t_map *map, t_display *display)
 
 void		key_option(SDL_Event event, t_map *map, t_display *display)
 {
+  int		w;
+  int		h;
+
+  SDL_GetWindowSize(display->fenetre, &w, &h);
  if (event.key.keysym.scancode == SDL_SCANCODE_KP_PLUS)
     {
       if (display->_nb_case != 1)
 	display->_nb_case--;
-      display->_shape_size = SIZE_X / display->_nb_case - 1;
+      display->_shape_size = (w - 150) / display->_nb_case - 1;
+      display->_shape_size2 = h / display->_nb_case - 1;
     }
   if (event.key.keysym.scancode == SDL_SCANCODE_KP_MINUS)
     {
       if (display->_nb_case != map->height &&
 	  display->_nb_case != map->width && display->_nb_case < 70)
 	display->_nb_case++;
-      display->_shape_size = SIZE_X / display->_nb_case - 1;
+      display->_shape_size = (w - 150) / display->_nb_case - 1;
+      display->_shape_size2 = h / display->_nb_case - 1;
     }
   if (event.key.keysym.scancode == SDL_SCANCODE_R)
     {
-      display->_shape_size = 24;
+      display->_shape_size = (w - 150) / display->_nb_case - 1;
+      display->_shape_size2 = h / display->_nb_case - 1;
       display->_nb_case = 40;
       display->_horiz = 0;
       display->_verti = 0;
@@ -85,7 +92,7 @@ int		input(t_display *display, t_map *map)
 	  display->_click_x = display->_horiz + (size_t)event.button.x
 	    / (display->_shape_size + 1);
 	  display->_click_y = display->_verti + (size_t)event.button.y
-	    / (display->_shape_size + 1);
+	    / (display->_shape_size2 + 1);
 	case SDL_KEYDOWN:
 	  key_press(event, map, display);
 	}
