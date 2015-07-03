@@ -5,13 +5,13 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 14:57:08 2015 zwertv_e
-** Last update Fri Jul  3 15:09:42 2015 zwertv_e
+** Last update Fri Jul  3 16:13:11 2015 zwertv_e
 */
 
 #include	"map.h"
 #include	"player.h"
 
-static size_t	get_x(t_map const * const map, t_player const * const player,
+size_t	get_x(t_map const * const map, t_player const * const player,
 		      int const h, int const w)
 {
   bool		addition;
@@ -19,7 +19,7 @@ static size_t	get_x(t_map const * const map, t_player const * const player,
   size_t	quantity;
 
   addition = true;
-  pos = player->coords.x;
+  pos = player->coord.x;
   quantity = (size_t)h;
   if (player->dir == NORTH || player->dir == SOUTH)
     quantity = (w < 0) ? ((size_t)(-w)) : ((size_t)w);
@@ -40,7 +40,7 @@ static size_t	get_x(t_map const * const map, t_player const * const player,
   return (pos);
 }
 
-static size_t	get_y(t_map const * const map, t_player const * const player,
+size_t	get_y(t_map const * const map, t_player const * const player,
 		      int const h, int const w)
 {
   bool		addition;
@@ -48,7 +48,7 @@ static size_t	get_y(t_map const * const map, t_player const * const player,
   size_t	quantity;
 
   addition = true;
-  pos = player->coords.y;
+  pos = player->coord.y;
   quantity = (size_t)h;
   if (player->dir == WEST || player->dir == EAST)
     quantity = (w < 0) ? ((size_t)(-w)) : ((size_t)w);
