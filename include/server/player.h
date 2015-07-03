@@ -40,7 +40,7 @@ struct		s_lvlup
 struct		s_player
 {
   t_node	node;
-  t_coords	coords;
+  t_coord	coord;
   t_dir		dir;
   size_t	range;
   char		*team;

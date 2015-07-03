@@ -96,7 +96,7 @@ int		costa_alaric(void)
   disp = first_node(&map.items->node);
   while (disp != NULL)
     {
-      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coords.x, disp->coords.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
+      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coord.x, disp->coord.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
       disp = disp->node.next;
     }
 
@@ -143,7 +143,7 @@ void		elliott(int argc, char **argv)
   party_everyday.player = put_node(&party_everyday.player->node, &test->node);
   test = init_player(&mapr, "Razmoket", 0, 0);
   party_everyday.player = put_node(&party_everyday.player->node, &test->node);
-  printf("player is in %lu - %lu\n", test->coords.x, test->coords.y);
+  printf("player is in %lu - %lu\n", test->coord.x, test->coord.y);
   init_inv(&test->inv);
   test->inv.linemate += 2;
   test->inv.food += 5;

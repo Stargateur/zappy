@@ -1,5 +1,5 @@
 /*
-** map_coords.c for  in /home/zwertv_e/rendu/PSU_2014_zappy/source/server/map
+** map_coord.c for  in /home/zwertv_e/rendu/PSU_2014_zappy/source/server/map
 ** 
 ** Made by zwertv_e
 ** Login   <zwertv_e@epitech.net>

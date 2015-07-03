@@ -18,16 +18,16 @@ static void	expulse_player(t_map * const map,
   switch (player->dir)
     {
     case NORTH:
-      target->coords.y = prev_y(map, target->coords.y);
+      target->coord.y = prev_y(map, target->coord.y);
       break;
     case SOUTH:
-      target->coords.y = next_y(map, target->coords.y);
+      target->coord.y = next_y(map, target->coord.y);
       break;
     case WEST:
-      target->coords.x = prev_x(map, target->coords.x);
+      target->coord.x = prev_x(map, target->coord.x);
       break;
     case EAST:
-      target->coords.x = next_x(map, target->coords.x);
+      target->coord.x = next_x(map, target->coord.x);
       break;
     };
 }
@@ -43,8 +43,8 @@ bool		expulse_players(t_game * const game,
   tmp = first_node(&game->player->node);
   while (tmp)
     {
-      if (tmp != player && tmp->coords.x == player->coords.x &&
-	  tmp->coords.y == player->coords.y)
+      if (tmp != player && tmp->coord.x == player->coord.x &&
+	  tmp->coord.y == player->coord.y)
 	expulse_player(map, player, tmp);
       tmp = tmp->node.next;
     }

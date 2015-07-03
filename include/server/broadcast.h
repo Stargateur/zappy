@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 07:45:51 2015 Antoine Plaskowski
-** Last update Wed Jul  1 09:04:44 2015 Antoine Plaskowski
+** Last update Fri Jul  3 01:01:05 2015 Antoine Plaskowski
 */
 
 #ifndef		BROADCAST_H_
@@ -29,12 +29,12 @@ typedef	enum	e_sound
     S_HERE
   }		t_sound;
 
-typedef	struct	s_vector	t_vector;
+typedef	struct	s_v2d	t_v2d;
 
 # include	"map.h"
 # include	"player.h"
 
-struct		s_vector
+struct		s_v2d
 {
   intmax_t	x;
   intmax_t	y;

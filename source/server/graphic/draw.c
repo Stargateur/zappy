@@ -36,30 +36,30 @@ void		draw_grid(t_map *map, t_display *d)
 
 void            select_pos(t_map *m, t_square *t, t_display *d, SDL_Rect *DestR)
 {
-  if (t->coords.x < (d->_nb_case + d->_horiz) - m->width
-      && t->coords.y < d->_verti + d->_nb_case
-      && t->coords.y >= d->_verti)
+  if (t->coord.x < (d->_nb_case + d->_horiz) - m->width
+      && t->coord.y < d->_verti + d->_nb_case
+      && t->coord.y >= d->_verti)
     {
-      DestR->x = (int)((t->coords.x + (m->width - d->_horiz))
+      DestR->x = (int)((t->coord.x + (m->width - d->_horiz))
 		      * (d->_shape_size + 1));
-      DestR->y = (int)((t->coords.y - d->_verti)
+      DestR->y = (int)((t->coord.y - d->_verti)
 		      * (d->_shape_size + 1));
     }
-  else if (t->coords.y < (d->_nb_case + d->_verti) - m->height
-	   && t->coords.x < d->_horiz + d->_nb_case
-	   && t->coords.x >= d->_horiz)
+  else if (t->coord.y < (d->_nb_case + d->_verti) - m->height
+	   && t->coord.x < d->_horiz + d->_nb_case
+	   && t->coord.x >= d->_horiz)
     {
-      DestR->y = (int)((t->coords.y + (m->height - d->_verti))
+      DestR->y = (int)((t->coord.y + (m->height - d->_verti))
 		      * (d->_shape_size + 1));
-      DestR->x = (int)((t->coords.x - d->_horiz)
+      DestR->x = (int)((t->coord.x - d->_horiz)
 		      * (d->_shape_size + 1));
     }
-  else if (t->coords.x < (d->_nb_case + d->_horiz) - m->width
-	   && t->coords.y < (d->_nb_case + d->_verti) - m->height)
+  else if (t->coord.x < (d->_nb_case + d->_horiz) - m->width
+	   && t->coord.y < (d->_nb_case + d->_verti) - m->height)
     {
-      DestR->y = (int)((t->coords.y + (m->height - d->_verti))
+      DestR->y = (int)((t->coord.y + (m->height - d->_verti))
 		      * (d->_shape_size + 1));
-      DestR->x = (int)((t->coords.x + (m->width - d->_horiz))
+      DestR->x = (int)((t->coord.x + (m->width - d->_horiz))
 		      * (d->_shape_size + 1));
     }
 }
@@ -87,14 +87,14 @@ void		draw_stone(t_map *map, t_texture *img, t_display *disp)
   DestR.h = (int)disp->_shape_size;
   while (tmp != NULL)
     {
-      if (tmp->coords.x < disp->_horiz + disp->_nb_case
-	   && tmp->coords.x >= disp->_horiz
-	   && tmp->coords.y < disp->_verti + disp->_nb_case
-	   && tmp->coords.y >= disp->_verti)
+      if (tmp->coord.x < disp->_horiz + disp->_nb_case
+	   && tmp->coord.x >= disp->_horiz
+	   && tmp->coord.y < disp->_verti + disp->_nb_case
+	   && tmp->coord.y >= disp->_verti)
 	{
-	  DestR.x = (int)((tmp->coords.x - disp->_horiz)
+	  DestR.x = (int)((tmp->coord.x - disp->_horiz)
 			  * (disp->_shape_size + 1));
-	  DestR.y = (int)((tmp->coords.y - disp->_verti)
+	  DestR.y = (int)((tmp->coord.y - disp->_verti)
 			  * (disp->_shape_size + 1));
 	  SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
 	}
