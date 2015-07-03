@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Thu Jul  2 20:41:50 2015 Kevin Costa
+** Last update Fri Jul  3 13:25:01 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -81,8 +81,10 @@ int		input(t_display *display, t_map *map)
 	case SDL_QUIT:
 	  exit(1);
 	case SDL_MOUSEBUTTONDOWN:
-	  display->_click_x = display->_horiz + (size_t)event.button.x / (display->_shape_size + 1);
-	  display->_click_y = display->_verti + (size_t)event.button.y / (display->_shape_size + 1);
+	  display->_click_x = display->_horiz + (size_t)event.button.x
+	    / (display->_shape_size + 1);
+	  display->_click_y = display->_verti + (size_t)event.button.y
+	    / (display->_shape_size + 1);
 	case SDL_KEYDOWN:
 	  key_press(event, map, display);
 	}
