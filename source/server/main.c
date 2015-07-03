@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Fri Jul  3 19:28:21 2015 Alaric
+** Last update Fri Jul  3 20:59:54 2015 zwertv_e
 */
 
 #include        <unistd.h>
@@ -221,7 +221,7 @@ int		main(int argc, char **argv)
 {
   srandom((unsigned int)time(NULL));
   /*plasko(argc, argv); */
-  costa_alaric();
-  /* elliott(argc, argv); */
+  /* costa_alaric(); */
+  elliott(argc, argv);
   return (0);
 }

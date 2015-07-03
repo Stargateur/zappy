@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Thu Jul  2 19:02:50 2015 Antoine Plaskowski
+** Last update Fri Jul  3 20:57:49 2015 zwertv_e
 */
 
 #ifndef		PLAYER_H__
@@ -74,5 +74,16 @@ char		*player_view(t_game const * const game,
 t_player	*find_free_player(t_player *player, char * const team);
 bool		add_action(t_player * const player, char * const str);
 size_t		player_team_online(t_player * player, char * const team);
+
+char		*concat(char *str1, char const * const str2,
+			bool const do_free);
+void		find_squares(t_map const * const map,
+			     t_player const * const player, t_coord *list,
+			     size_t const range);
+size_t		find_nb_squares(size_t const accu, size_t const range);
+size_t		get_x(t_map const * const map, t_player const * const player,
+		      int const h, int const w);
+size_t		get_y(t_map const * const map, t_player const * const player,
+		      int const h, int const w);
 
 #endif		/* PLAYER_H__ */
