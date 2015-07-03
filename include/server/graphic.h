@@ -5,14 +5,14 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Fri Jul  3 19:26:01 2015 Alaric
+** Last update Fri Jul  3 22:05:47 2015 Alaric
 */
 
 #ifndef		GRAPHIC_H_
 # define	GRAPHIC_H_
 
 #include	<SDL2/SDL.h>
-#include	<SDL/SDL_ttf.h>
+#include	<SDL2/SDL_ttf.h>
 #include        "map.h"
 
 #define		SIZE_X 1000

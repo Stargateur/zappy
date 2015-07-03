@@ -5,11 +5,11 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Fri Jul  3 19:21:05 2015 Alaric
+** Last update Fri Jul  3 21:59:03 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
-#include	<SDL/SDL_ttf.h>
+#include	<SDL2/SDL_ttf.h>
 #include	<unistd.h>
 #include	"color.h"
 #include	"graphic.h"
@@ -47,7 +47,9 @@ t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
   display->_click_y = 0;
   display->_horiz = 0;
   display->_verti = 0;
-  display->font = TTF_OpenFont("TTF/police.ttf", 28);
+  display->font = TTF_OpenFont("TTF/arial.ttf", 18);
+  if (display->font == NULL)
+    printf("TTF_OpenFont: %s\n", TTF_GetError());
   if (display->renderer == NULL)
     {
       printf("%s\n", SDL_GetError());
