@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Fri Jul  3 16:11:37 2015 zwertv_e
+** Last update Fri Jul  3 16:20:35 2015 zwertv_e
 */
 
 #include	<stdlib.h>
@@ -88,7 +88,8 @@ static bool	ffirst_write(char ** const res, char const * const ressource,
   return (first_write);
 }
 
-static bool	print_inv(char ** const res, t_inv const * const inv, bool first_write)
+static bool	print_inv(char ** const res, t_inv const * const inv,
+			  bool first_write)
 {
   first_write = ffirst_write(res, "linemate", inv->linemate, first_write);
   first_write = ffirst_write(res, "deraumere", inv->deraumere, first_write);
@@ -128,13 +129,15 @@ char		*player_view(t_game const * const game,
 	  res = concat(res, ",");
 	  first_write = false;
 	}
-      tmp_square = find_square(first_node(&map->items->node), list[i].x, list[i].y);
+      tmp_square = find_square(first_node(&map->items->node),
+			       list[i].x, list[i].y);
       if (tmp_square)
         first_write = print_inv(&res, &tmp_square->ressources, first_write);
       tmp = first_node(&game->player->node);
       while (tmp)
       	{
-      	  if (player != tmp && tmp->coord.x == list[i].x && tmp->coord.y == list[i].y)
+      	  if (player != tmp && tmp->coord.x == list[i].x &&
+	      tmp->coord.y == list[i].y)
       	    {
       	      if (!first_write)
 		res = concat(res, " ");

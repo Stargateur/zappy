@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Fri Jul  3 14:48:31 2015 zwertv_e
+** Last update Fri Jul  3 16:14:20 2015 zwertv_e
 */
 
 #include	<time.h>
@@ -33,11 +33,11 @@ static int	get_ressource_type(void)
     return (SIBUR);
   else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN)
     return (MENDIANE);
-  else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN +
-	   DENSITY_PHI)
+  else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN
+	   + DENSITY_PHI)
     return (PHIRAS);
-  else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN +
-	   DENSITY_PHI + DENSITY_THY)
+  else if (type < DENSITY_LIN + DENSITY_DER + DENSITY_SIB + DENSITY_MEN
+	   + DENSITY_PHI + DENSITY_THY)
     return (THYSTAME);
   return (FOOD);
 }
