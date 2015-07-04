@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Sat Jul  4 19:05:00 2015 Antoine Plaskowski
+** Last update Sat Jul  4 20:58:22 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -41,11 +41,12 @@ static t_action	*create_action(char *str, char *arg, t_cmd *cmd, size_t t)
   action->str = str;
   action->arg = arg;
   action->cmd = cmd;
-  if (time_div(&action->time, cmd->time, t) == true)
-    {
-      free(action);
-      return (NULL);
-    }
+  if (cmd != NULL)
+    if (time_div(&action->time, cmd->time, t) == true)
+      {
+	free(action);
+	return (NULL);
+      }
   return (action);
 }
 
@@ -66,6 +67,5 @@ t_action	*parser(char *str, size_t const t)
   for (i = 0; i < g_size; i++)
     if (strncmp(str, g_cmd[i].cmd, g_cmd[i].len_cmd) == 0)
       return (create_action(str, str + j, g_cmd + i, t));
-  free(str);
-  return (NULL);
+  return (create_action(NULL, NULL, NULL, 0));
 }

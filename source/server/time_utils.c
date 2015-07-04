@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 13:23:18 2015 Antoine Plaskowski
-** Last update Sat Jul  4 15:49:19 2015 Antoine Plaskowski
+** Last update Sat Jul  4 20:57:46 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -60,8 +60,13 @@ bool		time_small(t_time const * const a, t_time const * const b)
 
 bool		time_div(t_time * const a, size_t const num, size_t const dem)
 {
-  if (a == NULL || dem == 0)
+  if (a == NULL)
     return (true);
+  if (num == 0 || dem == 0)
+    {
+      a->tv_sec = 0;
+      a->tv_nsec = 0;      
+    }
   a->tv_sec = num / dem;
   a->tv_nsec = num % dem * NANO_BY_SEC / dem;
   return (false);

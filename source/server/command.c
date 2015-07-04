@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 04:53:28 2015 Antoine Plaskowski
-** Last update Fri Jul  3 21:02:30 2015 Antoine Plaskowski
+** Last update Sat Jul  4 20:59:09 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -14,6 +14,7 @@
 #include	"client.h"
 #include	"team.h"
 #include	"command.h"
+#include	"error_message.h"
 
 static bool	aux_get_cmd(t_game *game, t_client *client, char *str)
 {
@@ -25,7 +26,7 @@ static bool	aux_get_cmd(t_game *game, t_client *client, char *str)
   else
     {
       if (add_action(client->player, str, game->option.t) == true)
-	return (false);
+	return (true);
     }
   return (false);
 }
