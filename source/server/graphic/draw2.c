@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Fri Jul  3 13:54:53 2015 Kevin Costa
-** Last update Sat Jul  4 19:46:45 2015 Kevin Costa
+** Last update Sun Jul  5 00:16:53 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -18,7 +18,7 @@ void		draw_inventory(t_map *map, t_texture *img, t_display *disp)
 {
   SDL_Rect	DestR;
   SDL_Texture	*ecr;
-  SDL_Color	textColor = { 250, 250, 250 };
+  SDL_Color	textColor = {250, 250, 250, 0};
   size_t	i;
   size_t	j;
   t_square	*tmp;
@@ -45,7 +45,7 @@ void		draw_inventory(t_map *map, t_texture *img, t_display *disp)
 void	draw_items(t_texture *img, t_display *disp, t_square *tmp, SDL_Rect DestR)
 {
   SDL_Texture	*ecr;
-  SDL_Color	textColor = { 250, 250, 250 };
+  SDL_Color	textColor = {250, 250, 250, 0};
 
   sprintf(img->text, "Linemate : %lu", tmp->ressources.linemate);
   img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);
@@ -74,7 +74,7 @@ void	draw_items(t_texture *img, t_display *disp, t_square *tmp, SDL_Rect DestR)
 void	draw_items_next(t_texture *img, t_display *disp, t_square *tmp, SDL_Rect DestR)
 {
   SDL_Texture	*ecr;
-  SDL_Color	textColor = { 250, 250, 250 };
+  SDL_Color	textColor = {250, 250, 250, 0};
 
   sprintf(img->text, "Phiras : %lu", tmp->ressources.phiras);
   img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);

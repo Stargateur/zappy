@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Sat Jul  4 20:02:42 2015 Kevin Costa
+** Last update Sun Jul  5 00:18:25 2015 Antoine Plaskowski
 */
 
 #ifndef		GRAPHIC_H_
@@ -32,7 +32,7 @@ typedef	struct	s_texture
   SDL_Texture	*food;
   SDL_Texture	*egg;
   SDL_Surface	*loader;
-  char		text[40];
+  char		text[512];
 }		t_texture;
 
 typedef struct s_display
