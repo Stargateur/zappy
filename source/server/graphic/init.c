@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Sat Jul  4 19:45:36 2015 Kevin Costa
+** Last update Sat Jul  4 20:02:20 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -91,5 +91,11 @@ void		init_food_text(t_texture *text, SDL_Renderer *renderer)
 {
   text->loader = Bmp_Loader("BMP/Food.bmp");
   text->food = SDL_CreateTextureFromSurface(renderer, text->loader);
+  SDL_FreeSurface(text->loader);
+  text->loader = Bmp_Loader("BMP/Food.bmp");
+  text->food = SDL_CreateTextureFromSurface(renderer, text->loader);
+  SDL_FreeSurface(text->loader);
+  text->loader = Bmp_Loader("BMP/Oeuf.bmp");
+  text->egg = SDL_CreateTextureFromSurface(renderer, text->loader);
   SDL_FreeSurface(text->loader);
 }
