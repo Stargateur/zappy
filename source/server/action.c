@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Sat Jul  4 23:36:09 2015 Antoine Plaskowski
+** Last update Sat Jul  4 23:40:42 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -35,7 +35,11 @@ static void	exec_action(t_game *game, t_player *player, t_action *action)
       add_string(player->client, KO);
       return;
     }
-  action->cmd->fct(game, player, action->arg);
+  if (action->cmd->fct(game, player, action->arg) == true)
+    {
+      add_string(player->client, KO);
+      return;
+    }
 }
 
 static bool	aux(t_game *game, t_player *player, t_time act, bool ret)

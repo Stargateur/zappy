@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Fri Jul  3 21:09:01 2015 zwertv_e
+** Last update Sun Jul  5 00:09:29 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -50,7 +50,7 @@ static char	*print_players(t_game const * const game,
   t_player	*tmp;
 
   tmp = first_node(&game->player->node);
-  while (tmp)
+  while (tmp != NULL)
     {
       if (player != tmp && tmp->coord.x == (*list).x &&
 	  tmp->coord.y == (*list).y)
@@ -74,7 +74,7 @@ char		*player_view(t_game const * const game,
   t_square	*tmp_square;
   char		*res;
 
-  if (!game || !player || !map)
+  if (game == NULL || player == NULL || map == NULL)
     return (NULL);
   range = find_nb_squares(1, player->range);
   if ((list = malloc(sizeof(t_coord) * (range))) == NULL)
@@ -86,7 +86,7 @@ char		*player_view(t_game const * const game,
       res = (i > 0) ? (concat(res, ",", true)) : (res);
       tmp_square = find_square(first_node(&map->items->node),
 			       list[i].x, list[i].y);
-      if (tmp_square)
+      if (tmp_square != NULL)
         print_inv(&res, &tmp_square->ressources);
       res = print_players(game, player, &(list[i]), res);
     }

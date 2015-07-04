@@ -5,9 +5,10 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 20:39:08 2015 zwertv_e
-** Last update Fri Jul  3 20:40:13 2015 zwertv_e
+** Last update Sun Jul  5 00:12:37 2015 Antoine Plaskowski
 */
 
+#include	<stdint.h>
 #include	"map.h"
 #include	"player.h"
 
@@ -23,12 +24,12 @@ void		find_squares(t_map const * const map,
 			     size_t const range)
 {
   size_t	i;
-  int		tmp_h;
-  int		tmp_w;
+  intmax_t	tmp_h;
+  intmax_t	tmp_w;
 
   i = 0;
   tmp_h = 0;
-  while (tmp_h <= (int)player->range)
+  while (tmp_h <= (intmax_t)player->range)
     {
       tmp_w = -((2 * tmp_h + 1) / 2);
       while (tmp_w <= (2 * tmp_h + 1) / 2)

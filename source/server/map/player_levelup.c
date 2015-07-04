@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 17:51:47 2015 zwertv_e
-** Last update Fri Jul  3 16:25:24 2015 zwertv_e
+** Last update Sun Jul  5 00:08:29 2015 Antoine Plaskowski
 */
 
 #include	"map.h"
@@ -22,6 +22,8 @@ static t_lvlup	g_needs[7] = {
   {6, {2, 2, 2, 2, 2, 1, 0}}
 };
 
+static size_t	g_s_needs = sizeof(g_needs) / sizeof(*g_needs);
+
 static size_t	get_nb_players(t_game const * const game,
 			       size_t const x, size_t const y)
 {
@@ -30,7 +32,7 @@ static size_t	get_nb_players(t_game const * const game,
 
   res = 0;
   tmp = first_node(&game->player->node);
-  while (tmp)
+  while (tmp != NULL)
     {
       if (tmp->coord.x == x && tmp->coord.y == y)
 	res++;
@@ -45,25 +47,25 @@ static bool	can_levelup(t_square const * const square,
 {
    size_t	i;
 
-  if (!square || !player)
-    return (false);
+  if (square == NULL || player == NULL)
+    return (true);
   if ((i = player->range - 1) > NB_LEVEL)
-    return (false);
+    return (true);
   if (nb_player != g_needs[i].nb_players)
-    return (false);
+    return (true);
   if (square->ressources.linemate != g_needs[i].ressources.linemate)
-    return (false);
+    return (true);
   if (square->ressources.deraumere != g_needs[i].ressources.deraumere)
-    return (false);
+    return (true);
   if (square->ressources.sibur != g_needs[i].ressources.sibur)
-    return (false);
+    return (true);
   if (square->ressources.mendiane != g_needs[i].ressources.mendiane)
-    return (false);
+    return (true);
   if (square->ressources.phiras != g_needs[i].ressources.phiras)
-    return (false);
+    return (true);
   if (square->ressources.thystame != g_needs[i].ressources.thystame)
-    return (false);
-  return (true);
+    return (true);
+  return (false);
 }
 
 static bool	do_levelup(t_game * const game,
@@ -72,22 +74,22 @@ static bool	do_levelup(t_game * const game,
 {
   t_player	*tmp;
 
-  if (!game || !sq || i > NB_LEVEL ||
-      !add_ressource(&sq->ressources, LINEMATE,
-		     g_needs[i].ressources.linemate, false) ||
-      !add_ressource(&sq->ressources, DERAUMERE,
-		     g_needs[i].ressources.deraumere, false) ||
-      !add_ressource(&sq->ressources, SIBUR,
-		     g_needs[i].ressources.sibur, false) ||
-      !add_ressource(&sq->ressources, MENDIANE,
-		     g_needs[i].ressources.mendiane, false) ||
-      !add_ressource(&sq->ressources, PHIRAS,
-		     g_needs[i].ressources.phiras, false) ||
-      !add_ressource(&sq->ressources, THYSTAME,
-		     g_needs[i].ressources.thystame, false))
+  if (game == NULL || sq == NULL || i > NB_LEVEL ||
+      add_ressource(&sq->ressources, LINEMATE,
+		    g_needs[i].ressources.linemate, false) == true ||
+      add_ressource(&sq->ressources, DERAUMERE,
+		    g_needs[i].ressources.deraumere, false) == true ||
+      add_ressource(&sq->ressources, SIBUR,
+		    g_needs[i].ressources.sibur, false) == true ||
+      add_ressource(&sq->ressources, MENDIANE,
+		    g_needs[i].ressources.mendiane, false) == true ||
+      add_ressource(&sq->ressources, PHIRAS,
+		    g_needs[i].ressources.phiras, false) == true ||
+      add_ressource(&sq->ressources, THYSTAME,
+		    g_needs[i].ressources.thystame, false) == true)
     return (false);
   tmp = first_node(&game->player->node);
-  while (tmp)
+  while (tmp != NULL)
     {
       if (tmp->coord.x == sq->coord.x &&
 	  tmp->coord.y == sq->coord.y && tmp->range == i + 1)
@@ -104,16 +106,18 @@ bool		player_levelup(t_game * const game,
   t_square	*square;
   size_t	nb_players;
 
+  if (g_s_needs > player->range)
+    return (true);
   square = find_square(first_node(&map->items->node),
 		       player->coord.x, player->coord.y);
   if (square == NULL)
-    return (false);
+    return (true);
   nb_players = get_nb_players(game, player->coord.x, player->coord.y);
   if (nb_players == 0)
-    return (false);
-  if (!can_levelup(square, player, nb_players))
-    return (false);
-  if (do_)
+    return (true);
+  if (can_levelup(square, player, nb_players) == true)
+    return (true);
+  if (do_ == true)
     return (do_levelup(game, square, player->range - 1));
-  return (true);
+  return (false);
 }

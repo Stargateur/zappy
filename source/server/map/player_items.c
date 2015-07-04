@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 15:12:00 2015 zwertv_e
-** Last update Wed Jul  1 17:17:48 2015 zwertv_e
+** Last update Sat Jul  4 23:57:39 2015 Antoine Plaskowski
 */
 
 #include	"map.h"
@@ -15,23 +15,23 @@
 bool		take_item(t_map * const map,
 			  t_player * const player, int const type)
 {
-  if (!map || !player)
-    return (false);
-  if (!delete_item(map, player->coord.x, player->coord.y, type))
-    return (false);
-  if (!add_ressource(&player->inv, type, 1, true))
-    return (false);
-  return (true);
+  if (map == NULL || player == NULL)
+    return (true);
+  if (delete_item(map, player->coord.x, player->coord.y, type) == true)
+    return (true);
+  if (add_ressource(&player->inv, type, 1, false) == true)
+    return (true);
+  return (false);
 }
 
 bool		drop_item(t_map * const map,
 			  t_player * const player, int const type)
 {
-  if (!map || !player)
-    return (false);
-  if (!add_item(map, player->coord.x, player->coord.y, type))
-    return (false);
-  if (!add_ressource(&player->inv, type, 1, false))
-    return (false);
-  return (true);
+  if (map == NULL || player == NULL)
+    return (true);
+  if (add_item(map, player->coord.x, player->coord.y, type) == true)
+    return (true);
+  if (add_ressource(&player->inv, type, 1, false) == true)
+    return (true);
+  return (false);
 }

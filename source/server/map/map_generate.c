@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Fri Jul  3 16:50:10 2015 zwertv_e
+** Last update Sat Jul  4 23:53:58 2015 Antoine Plaskowski
 */
 
 #include	<time.h>
@@ -85,7 +85,7 @@ bool		map_generate(t_map * const map)
   if ((to_generate = need_to_generate(map)) > 0)
     {
       generate_ressources(map, to_generate);
-      return (true);
+      return (false);
     }
-  return (false);
+  return (true);
 }

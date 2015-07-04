@@ -5,13 +5,13 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 14:57:08 2015 zwertv_e
-** Last update Fri Jul  3 21:11:26 2015 zwertv_e
+** Last update Sun Jul  5 00:11:18 2015 Antoine Plaskowski
 */
 
 #include	"map.h"
 #include	"player.h"
 
-size_t	get_x(t_map const * const map, t_player const * const player,
+size_t		get_x(t_map const * const map, t_player const * const player,
 		      int const h, int const w)
 {
   bool		addition;
@@ -40,7 +40,7 @@ size_t	get_x(t_map const * const map, t_player const * const player,
   return (pos);
 }
 
-size_t	get_y(t_map const * const map, t_player const * const player,
+size_t		get_y(t_map const * const map, t_player const * const player,
 		      int const h, int const w)
 {
   bool		addition;

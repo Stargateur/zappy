@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Fri Jul  3 16:12:01 2015 zwertv_e
+** Last update Sat Jul  4 23:43:12 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -17,7 +17,7 @@ void		rotate_left(t_player * const player)
 {
   if (player != NULL)
     {
-      switch(player->dir)
+      switch (player->dir)
 	{
 	case NORTH:
 	  player->dir = WEST;
@@ -39,7 +39,7 @@ void		rotate_right(t_player * const player)
 {
   if (player != NULL)
     {
-      switch(player->dir)
+      switch (player->dir)
 	{
 	case NORTH:
 	  player->dir = EAST;
@@ -61,7 +61,7 @@ void		move(t_map const * const map, t_player * const player)
 {
   if (player != NULL)
     {
-      switch(player->dir)
+      switch (player->dir)
 	{
 	case NORTH:
 	  player->coord.y = prev_y(map, player->coord.y);
@@ -101,6 +101,7 @@ t_player		*init_player(t_map *map, char * const team,
   player->client = NULL;
   player->action = NULL;
   init_inv(&player->inv);
+  add_ressource(&player->inv, FOOD, 10, true);
   player->team = team;
   return (player);
 }
