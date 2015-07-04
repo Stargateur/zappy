@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 17:51:35 2015 Antoine Plaskowski
+** Last update Sat Jul  4 17:59:33 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -47,16 +47,15 @@ static void	*graphic(t_game *game)
 {
   t_texture	texture;
   t_display	display;
-  SDL_Event	event;
 
   display.fenetre = init_video();
   init_renderer(display.fenetre, &display);
   init_texture(&texture, display.renderer);
   while (g_keep_running == true)
     {
-      SDL_WaitEvent(&event);
+      SDL_WaitEvent(NULL);
       pthread_mutex_lock(&game->mutex);
-      input(&display, &game->map, &event);
+      input(&display, &game->map);
       draw_stone(&game->map, &texture, &display);
       draw_grid(&game->map, &display);
       draw_select(&display, &game->map, &texture);
