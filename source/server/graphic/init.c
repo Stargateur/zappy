@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Sat Jul  4 20:02:20 2015 Kevin Costa
+** Last update Sun Jul  5 00:49:40 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -14,10 +14,11 @@
 #include	"color.h"
 #include	"graphic.h"
 
-SDL_Window	*init_video()
+SDL_Window	*init_video(void)
 {
   SDL_Window	*fenetre;
 
+  SDL_Init(SDL_INIT_VIDEO);
   fenetre = SDL_CreateWindow("Trantor", SDL_WINDOWPOS_CENTERED,
 			     SDL_WINDOWPOS_CENTERED, SIZE_X + 151,
 			     SIZE_Y + 1, SDL_WINDOW_RESIZABLE);

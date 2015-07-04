@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 21:33:30 2015 Antoine Plaskowski
+** Last update Sun Jul  5 00:36:11 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -52,7 +52,6 @@ static void	*graphic(t_game *game)
   init_texture(&texture, display.renderer);
   while (g_keep_running == true)
     {
-      SDL_WaitEvent(NULL);
       pthread_mutex_lock(&game->mutex);
       input(&display, &game->map);
       draw_stone(&game->map, &texture, &display);
@@ -63,20 +62,21 @@ static void	*graphic(t_game *game)
       SDL_RenderClear(display.renderer);
       SDL_SetRenderDrawColor(display.renderer, 255, 255, 255, 255);
       pthread_mutex_unlock(&game->mutex);
+      SDL_WaitEvent(NULL);
     }
   return (game);
 }
 
 static t_client	*game_select(t_game *game, t_client *client, int sfd)
 {
-  if (do_action(game) == true)
-    client = manage_select(client, NULL, sfd);
-  else
-    client = manage_select(client, &game->s_time, sfd);
   pthread_mutex_lock(&game->mutex);
   get_cmd(game, client);
   client = kill_client(client);
   pthread_mutex_unlock(&game->mutex);
+  if (do_action(game) == true)
+    client = manage_select(client, NULL, sfd);
+  else
+    client = manage_select(client, &game->s_time, sfd);
   return (client);
 }
 
