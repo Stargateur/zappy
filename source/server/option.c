@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:30:34 2015 Antoine Plaskowski
+** Last update Sat Jul  4 17:53:58 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -43,7 +43,7 @@ bool		show_option(t_option * const option)
   printf("t : %lu\n", option->t);
   if (option->team != NULL)
     for (i = 0; option->team[i] != NULL; i++)
-      printf("%s\n", option->team[i]);
+      printf("%lu : %s\n", i, option->team[i]);
   return (false);
 }
 
@@ -69,7 +69,7 @@ static char	*set_option(t_option * const option, char **argv,
       return (optarg);
     case 'h':
       fprintf(stderr, "%s: [-p 4242] [-x 42] [-y 42] [-c 1] [-t 100]", *argv);
-      fprintf(stderr, " Team1 Team2\n");
+      fprintf(stderr, " Team1 Team2 etc\n");
       return (NULL);
     }
   return (NULL);

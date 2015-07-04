@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 17:39:02 2015 Antoine Plaskowski
+** Last update Sat Jul  4 17:51:35 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -54,7 +54,6 @@ static void	*graphic(t_game *game)
   init_texture(&texture, display.renderer);
   while (g_keep_running == true)
     {
-      pthread_mutex_unlock(&game->mutex);
       SDL_WaitEvent(&event);
       pthread_mutex_lock(&game->mutex);
       input(&display, &game->map, &event);
@@ -65,6 +64,7 @@ static void	*graphic(t_game *game)
       SDL_SetRenderDrawColor(display.renderer, 0, 127, 0, 255);
       SDL_RenderClear(display.renderer);
       SDL_SetRenderDrawColor(display.renderer, 255, 255, 255, 255);
+      pthread_mutex_unlock(&game->mutex);
     }
   return (game);
 }

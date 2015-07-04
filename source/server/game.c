@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Sat Jul  4 16:56:39 2015 Antoine Plaskowski
+** Last update Sat Jul  4 17:51:54 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -25,7 +25,7 @@ t_game		*init_game(t_game * const game, char **argv, int const argc)
     return (NULL);
   if (pthread_mutex_init(&game->mutex, NULL) < 0)
     return (NULL);
-  pthread_mutex_lock(&game->mutex);
+  pthread_mutex_unlock(&game->mutex);
   game->player = NULL;
   game->size_team = len_tab((void **)game->option.team);
   game->team = malloc(sizeof(*game->team) * (game->size_team + 1));

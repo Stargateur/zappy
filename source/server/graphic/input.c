@@ -5,11 +5,12 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Sat Jul  4 17:05:49 2015 Antoine Plaskowski
+** Last update Sat Jul  4 17:49:55 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
 #include	"graphic.h"
+#include	"int_handler.h"
 
 void		key_move(SDL_Event event, t_map *map, t_display *display)
 {
@@ -83,7 +84,8 @@ int		input(t_display *display, t_map *map, SDL_Event *event)
   switch (event->type)
     {
     case SDL_QUIT:
-      exit(1);
+      g_keep_running = false;
+      return (1);
     case SDL_MOUSEBUTTONDOWN:
       display->_click_x = display->_horiz + (size_t)event->button.x
 	/ (display->_shape_size + 1);
