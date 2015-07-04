@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Sat Jul  4 13:33:02 2015 Antoine Plaskowski
+** Last update Sat Jul  4 18:37:39 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -86,5 +86,6 @@ size_t		get_x(t_map const * const map, t_player const * const player,
 		      int const h, int const w);
 size_t		get_y(t_map const * const map, t_player const * const player,
 		      int const h, int const w);
+t_player	*delete_player(t_player *player);
 
 #endif		/* PLAYER_H__ */

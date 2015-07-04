@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Fri Jul  3 16:30:36 2015 Antoine Plaskowski
+** Last update Sat Jul  4 19:07:37 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -41,16 +41,16 @@ static void	short_vector(t_coord *a, t_coord *b, t_v2d *v, t_map *map)
 
   m.x = (intmax_t)map->width;
   m.y = (intmax_t)map->height;
-  v->x = b->x - a->x;
-  v->y = b->y - a->y;
-  diff_vector(v, a->x + m.x, b->y + m.y);
-  diff_vector(v, a->x + m.x, b->y - m.y);
-  diff_vector(v, a->x + m.x, b->y);
-  diff_vector(v, a->x - m.x, b->y + m.y);
-  diff_vector(v, a->x - m.x, b->y - m.y);
-  diff_vector(v, a->x - m.x, b->y);
-  diff_vector(v, a->x, b->y + m.y);
-  diff_vector(v, a->x, b->y - m.y);
+  v->x = (intmax_t)b->x - (intmax_t)a->x;
+  v->y = (intmax_t)b->y - (intmax_t)a->y;
+  diff_vector(v, (intmax_t)a->x + m.x, (intmax_t)b->y + m.y);
+  diff_vector(v, (intmax_t)a->x + m.x, (intmax_t)b->y - m.y);
+  diff_vector(v, (intmax_t)a->x + m.x, (intmax_t)b->y);
+  diff_vector(v, (intmax_t)a->x - m.x, (intmax_t)b->y + m.y);
+  diff_vector(v, (intmax_t)a->x - m.x, (intmax_t)b->y - m.y);
+  diff_vector(v, (intmax_t)a->x - m.x, (intmax_t)b->y);
+  diff_vector(v, (intmax_t)a->x, (intmax_t)b->y + m.y);
+  diff_vector(v, (intmax_t)a->x, (intmax_t)b->y - m.y);
 }
 
 static t_sound	minmax(t_v2d *vector)

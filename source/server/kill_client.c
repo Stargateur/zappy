@@ -5,13 +5,14 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jul  2 17:04:08 2015 Antoine Plaskowski
-** Last update Sat Jul  4 16:00:35 2015 Antoine Plaskowski
+** Last update Sat Jul  4 19:06:17 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
 #include	<unistd.h>
 #include	<stdio.h>
 #include	<string.h>
+#include	"kill_client.h"
 #include	"client.h"
 #include	"game.h"
 

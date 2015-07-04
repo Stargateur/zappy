@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Sat Jul  4 15:27:52 2015 Antoine Plaskowski
+** Last update Sat Jul  4 18:29:32 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -66,4 +66,19 @@ size_t		player_team_online(t_player *player, char *team)
       player = player->node.next;
     }
   return (i);
+}
+
+t_player	*delete_player(t_player *player)
+{
+  if (player == NULL)
+    return (NULL);
+  while (player->action != NULL)
+    player->action = delete_action(player->action);
+  if (player->client != NULL)
+    {
+      player->client->to_write = add_string(player->client->to_write, "mort\n");
+      player->client->to_kill = true;
+      player->client->player = NULL;
+    }
+  return (sup_node(&player->node));
 }

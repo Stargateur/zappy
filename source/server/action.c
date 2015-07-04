@@ -5,13 +5,15 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Sat Jul  4 16:01:24 2015 Antoine Plaskowski
+** Last update Sat Jul  4 18:56:54 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
+#include	<stdlib.h>
 #include	"player.h"
 #include	"utils.h"
 #include	"action.h"
+#include	"food.h"
 
 bool		show_action(t_action *action)
 {
@@ -29,6 +31,9 @@ static bool	aux(t_game *game, t_player *player, t_time act, bool ret)
 {
   t_time	cpy_action;
 
+  player->action = first_node(&player->action->node);
+  if (player->action == NULL)
+    return (true);
   if (time_sub(&act, &player->act) == true)
     return (true);
   while (time_small(&player->action->time, &act) == true)
@@ -42,7 +47,7 @@ static bool	aux(t_game *game, t_player *player, t_time act, bool ret)
     }
   cpy_action = player->action->time;
   time_sub(&cpy_action, &act);
-  if (time_small(&cpy_action, &game->s_time) == true || ret == true)
+  if (ret == true || time_small(&cpy_action, &game->s_time) == true)
     {
       game->s_time = cpy_action;
       return (false);
@@ -50,8 +55,10 @@ static bool	aux(t_game *game, t_player *player, t_time act, bool ret)
   return (true);
 }
 
-bool		do_action(t_game *game, t_player *player)
+bool		do_action(t_game *game)
 {
+  t_player	*player;
+  t_player	*player2;
   t_time	actual_time;
   bool		ret;
 
@@ -63,14 +70,23 @@ bool		do_action(t_game *game, t_player *player)
       perror("clock_gettime :");
       return (true);
     }
-  player = first_node(&player->node);
+  player = first_node(&game->player->node);
   while (player != NULL)
     {
-      player->action = first_node(&player->action->node);
-      if (player->action != NULL)
+      player2 = player->node.next;
+      game->player = food(player, &game->food, actual_time);
+      if (game->player == player)
 	if (aux(game, player, actual_time, ret) == false)
 	  ret = false;
-      player = player->node.next;
+      player = player2;
     }
   return (ret);
+}
+
+t_action	*delete_action(t_action *action)
+{
+  if (action == NULL)
+    return (NULL);
+  free(action->str);
+  return (sup_node(&action->node));
 }
