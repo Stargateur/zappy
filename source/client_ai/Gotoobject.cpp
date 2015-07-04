@@ -214,7 +214,7 @@ void                    Perso::go_to_obj(int *coord_obj)
   int                   tmpy = this->_posy;
 
   std::cout << "Objx : " << coord_obj[0] << " Objy : " << coord_obj[1] << std::endl;
-  sleep(2);
+  //sleep(2);
   //  std::cout << "x : " << this->_posx << " y : " << this->_posy;
   //std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy;
   if (this->_way == UP)
