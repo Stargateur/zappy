@@ -73,10 +73,10 @@ public:
   void		put_objects_in_case(int x, int y, std::string answer);
   int		*find_obj_in_map(t_case obj);
   void		go_to_obj(int *coords_obj);
-  void		go_up(int *, int *);
-  void		go_down(int *, int *);
-  void		go_left(int *, int *);
-  void		go_right(int *, int *);
+  void		go_up(int *, int *, int *);
+  void		go_down(int *, int *, int *);
+  void		go_left(int *, int *, int *);
+  void		go_right(int *, int *, int *);
 };
 
 #endif /* !PERSO_HPP_ */
