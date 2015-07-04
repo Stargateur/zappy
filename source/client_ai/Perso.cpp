@@ -87,249 +87,42 @@ int			*Perso::find_obj_in_map(t_case obj)
   return (pos_obj);
 }
 
-void			Perso::go_to_obj(int *coord_obj)
-{
-  int			x;
-  int			y;
-  bool			find = false;
-  int			objx;
-  int			objy;
-  int			tmpx = this->_posx;
-  int			tmpy = this->_posy;
-
-  // on a les coordonnees x et y sur la map (ne gère pas la map circulaire)
-  if (this->_way == UP)
-    {
-      objx = this->_posx + coord_obj[0];
-      objy = this->_posy + coord_obj[1];
-    }
-  if (this->_way == DOWN)
-    {
-      objx = this->_posx - coord_obj[0];
-      objy = this->_posy - coord_obj[1];
-    }
-  if (this->_way == LEFT)
-    {
-      objx = this->_posx - coord_obj[1];
-      objy = this->_posy + coord_obj[0];
-    }
-  if (this->_way == RIGHT)
-    {
-      objx = this->_posx + coord_obj[0];
-      objy = this->_posy - coord_obj[1];
-    }
-
-  while (find == false)
-    {
-      if (tmpx < objx) // obj a droite
-	{
-	  if (this->_way == UP)
-	    {
-	      std::cout << "A droite !" << std::endl;
-	      this->_way = RIGHT;
-	      tmpx++;
-	      while (tmpx < objx)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpx++;
-		}
-	    }
-	  else if (this->_way == DOWN)
-	    {
-	      std::cout << "A gauche !" << std::endl;
-	      this->_way = LEFT;
-	      tmpx++;
-	      while (tmpx < objx)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpx++;
-		}
-	    }
-	  else if (this->_way == LEFT)
-	    {
-	      std::cout << "A gauche !" << std::endl;
-	      std::cout << "A gauche !" << std::endl;
-	      std::cout << "A gauche !" << std::endl;
-	      this->_way = UP;
-	      tmpx++;
-	    }
-	  else if (this->_way == RIGHT)
-	    {
-	      while (tmpx < objx)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpx++;
-		}
-	    }
-	}
-      else if (tmpx > objx) // obj a gauche
-	{
-	  if (this->_way == UP)
-	    {
-	      std::cout << "A gauche !" << std::endl;
-	      this->_way = LEFT;
-	      tmpx--;
-	      while (tmpx > objx)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpx--;
-		}
-	    }
-	  else if (this->_way == DOWN)
-	    {
-	      std::cout << "A droite !" << std::endl;
-	      this->_way = LEFT;
-	      tmpx--;
-	      while (tmpx > objx)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpx--;
-		}
-	    }
-	  else if (this->_way == RIGHT)
-	    {
-	      std::cout << "A gauche !" << std::endl;
-	      std::cout << "A gauche !" << std::endl;
-	      std::cout << "A gauche !" << std::endl;
-	      this->_way = DOWN;
-	      tmpx--;
-	    }
-	  else if (this->_way == LEFT)
-	    {
-	      while (tmpx > objx)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpx--;
-		}
-	    
-	    }
-	}
-      else if (tmpy > objy) // obj en bas
-	{
-	  if (this->_way == LEFT)
-	    {
-	      std::cout << "A gauche !" << std::endl;
-	      this->_way = DOWN;
-	      tmpy--;
-	      while (tmpy > objy)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpy--;
-		}
-	    }
-	  else if (this->_way == RIGHT)
-	    {
-	      std::cout << "A droite !" << std::endl;
-	      this->_way = DOWN;
-	      tmpy--;
-	      while (tmpy > objy)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpy--;
-		}
-	    }
-	  else if (this->_way == UP)
-	    {
-	      std::cout << "A gauche !" << std::endl;
-	      std::cout << "A gauche !" << std::endl;
-	      std::cout << "A gauche !" << std::endl;
-	      this->_way = RIGHT;
-	      tmpy--;
-	    }
-	  else if (this->_way == DOWN)
-	    {
-	      while (tmpy > objy)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpy--;
-		}
-	    }
-	}
-      else if (tmpy < objy) // obj en haut
-	{
-	  if (this->_way == LEFT)
-	    {
-	      std::cout << "A droite !" << std::endl;
-	      this->_way = UP;
-	      tmpy++;
-	      while (tmpy < objy)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpy++;
-		}
-	    }
-	  else if (this->_way == RIGHT)
-	    {
-	      std::cout << "A gauche !" << std::endl;
-	      this->_way = UP;
-	      tmpy++;
-	      while (tmpy < objy)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpy++;
-		}
-	    }
-	  else if (this->_way == DOWN)
-	    {
-	      std::cout << "A gauche !" << std::endl;
-	      std::cout << "A gauche !" << std::endl;
-	      std::cout << "A gauche !" << std::endl;
-	      this->_way = LEFT;
-	      tmpy++;
-	    }
-	  else if (this->_way == UP)
-	    {
-	      while (tmpy < objy)
-		{
-		  std::cout << "Devant !" << std::endl;
-		  tmpy++;
-		}
-	    }
-	}
-      if ((objx == tmpx) && (objy == tmpy))
-	{
-	  std::cout << "Fini !" << std::endl;
-	  find = true;
-	}
-    }
-}
-
   // machine a etat ici => push_back plusieurs cmds
-  void			Perso::find_actions()
-  {
-    int			*coords_obj_in_map;
+void			Perso::find_actions()
+{
+  int			*coords_obj_in_map;
 
-    if (this->_level == 1)
-      {
-	// chercher FOOD
-	if (this->_invent._nourriture < 10)
-	  {
-	    // chercher de la nourriture sur un carre de 4*4
-	    coords_obj_in_map = this->find_obj_in_map(FOOD);
-	    std::cout << coords_obj_in_map[0] << std::endl;
-	    if (coords_obj_in_map[0] == -42)
-	      {
-		this->_action.push_back("avance\n");
-		this->_action.push_back("voir\n");
-	      }
-	    else
-	      {
-		// 1) on est deja dessus
-		// 2) on se dirige vers avec gauche droite avance
-		if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
-		  {
-		    this->_action.push_back("prend\n");
-		  }
-		else
-		  {
-		    std::cout << "on doit bouger !" << std::endl;
-		    this->go_to_obj(coords_obj_in_map);
-		  }
-	      }
-	  }
-      }
-    usleep(500);
-  }
+  if (this->_level == 1)
+    {
+      // chercher FOOD
+      if (this->_invent._nourriture < 10)
+	{
+	  // chercher de la nourriture sur un carre de 4*4
+	  coords_obj_in_map = this->find_obj_in_map(FOOD);
+	  std::cout << coords_obj_in_map[0] << std::endl;
+	  if (coords_obj_in_map[0] == -42)
+	    {
+	      this->_action.push_back("avance\n");
+	      this->_action.push_back("voir\n");
+	    }
+	  else
+	    {
+	      // 1) on est deja dessus
+	      // 2) on se dirige vers avec gauche droite avance
+	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
+		{
+		  this->_action.push_back("prend\n");
+		}
+	      else
+		{
+		  std::cout << "on doit bouger !" << std::endl;
+		  this->go_to_obj(coords_obj_in_map);
+		}
+	    }
+	}
+    }
+  usleep(500);
+}
 
   std::string		Perso::server_answer(std::string action)
   {

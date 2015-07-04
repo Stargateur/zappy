@@ -21,3 +21,4 @@ SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Voir.cpp
 SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Welcome.cpp
 SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Pose_Prend.cpp
 SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Other_cmds.cpp
+SRC_CLIENT_AI	+=	$(PATH_CLIENT_AI)Gotoobject.cpp
