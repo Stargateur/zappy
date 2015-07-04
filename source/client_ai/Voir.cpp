@@ -25,17 +25,18 @@ void                    Perso::put_objects_in_case(int x, int y, std::string tmp
   this->_sav->map[y][x].clear();
   if (f == 0 && l == 0 && s == 0 && m == 0 && p == 0 && t == 0 && j == 0 && d == 0)
     this->_sav->map[y][x].push_back(NONE);
-
   else
     {
-      std::cout << "Food : " << f << std::endl;
+      if (i == 0)
+	j--;
+      /*std::cout << "Food : " << f << std::endl;
       std::cout << "l : " << l << std::endl;
       std::cout << "s : " << s << std::endl;
       std::cout << "m : " << m << std::endl;
       std::cout << "p : " << p << std::endl;
       std::cout << "t : " << t << std::endl;
       std::cout << "j : " << j << std::endl;
-      std::cout << "d : " << d << std::endl;
+      std::cout << "d : " << d << std::endl;*/
       while (f > 0)
 	{
 	  this->_sav->map[y][x].push_back(FOOD);
@@ -66,8 +67,6 @@ void                    Perso::put_objects_in_case(int x, int y, std::string tmp
 	  this->_sav->map[y][x].push_back(THYSTAME);
 	  t--;
 	}
-      if (i == 0)
-	j--;
       while (j > 0)
 	{   
 	  this->_sav->map[y][x].push_back(PLAYER);
@@ -78,10 +77,6 @@ void                    Perso::put_objects_in_case(int x, int y, std::string tmp
 	  this->_sav->map[y][x].push_back(DERAUMERE);
 	  d--;
 	}
-    }
-  if (i == 0)
-    {
-      
     }
 }
   

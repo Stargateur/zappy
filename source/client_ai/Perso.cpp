@@ -75,7 +75,7 @@ int			*Perso::find_obj_in_map(t_case obj)
 	    {
 	      for (it = this->_sav->map[posy][posx].begin(); it != this->_sav->map[posy][posx].end(); ++it)
 		{
-		  std::cout << "Objet " << *it << " aux coords " <<  posx << "/" << posy << std::endl;
+		  //std::cout << "Objet " << *it << " aux coords " <<  posx << "/" << posy << std::endl;
 		  if (*it == obj)
 		    {
 		      std::cout << "L'objet " << obj << " a ete trouve !" << std::endl;
@@ -121,7 +121,7 @@ void			Perso::find_actions()
 		{
 		  this->go_to_obj(coords_obj_in_map);
 		  this->_action.push_back("voir\n");
-		  //this->_action.push_back("prend nourriture\n");
+		  this->_action.push_back("prend nourriture");
 		  //std::cout << "prend nourriture\n";
 		}
 	    }
@@ -155,65 +155,65 @@ std::string		Perso::server_answer(std::string action)
   return (answer);
 }
 
-  void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
-  {
-    std::list<std::string>::iterator	it;
+void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
+{
+  std::list<std::string>::iterator	it;
 
-    if (answer.compare("ok\n") == 0 || answer.compare("OK\n") == 0)
-      {
-	//std::cout << "Action = " << action << std::endl;
-	if (action.compare("avance\n") == 0)
-	  {
-	    //std::cout << "La cmd avance est demandee\n";
-	    this->avance();
-	  }
-	if (action.compare("droite\n") == 0)
-	  {
-	    //std::cout << "La cmd droite est demandee\n";
-	    this->droite();
-	  }
-	if (action.compare("gauche\n") == 0)
-	  {
-	    //std::cout << "La cmd gauche est demandee\n";
-	    this->gauche();
-	  }
-	if (action.compare(0, 5, "prend") == 0)
-	  this->prend(action.substr(6, action.size() - 6));
-	if (action.compare(0, 4, "pose") == 0)
-	  this->pose(action.substr(5, action.size() - 5));
-	if (action.compare("expulse\n") == 0)
-	  this->expulse();
-	if (action.compare("broadcast\n") == 0)
-	  this->broadcast("ceci est un message code\n");
-	if (action.compare("fork\n") == 0)
-	  this->fork();
-      }
-    else if (answer.compare("KO\n") == 0 || answer.compare("ko\n") == 0)
-      {
-	// continuer le jeu
-      }
-    else if (answer.compare("mort\n") == 0)
-      {
-	std::cerr << "Le joueur est mort" << std::endl;
-	*death = true;
-      }
-    else
-      {
-	if (action.compare("voir\n") == 0)
-	  this->voir(answer);
-	else if (action.compare("inventaire\n") == 0)
-	  this->inventaire(answer);
-	else if (action.compare("incantation\n") == 0)
-	  this->incantation();
-	else if (action.compare("connect_nbr\n") == 0)
-	  {
-	    this->_nbunusedslots = atoi(answer.c_str());
-	    std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
-	  }
-      }
-    it = std::find(this->_action.begin(), this->_action.end(), action);
-    this->_action.erase(it);
-  }
+  if (answer.compare("ok\n") == 0 || answer.compare("OK\n") == 0)
+    {
+      //std::cout << "Action = " << action << std::endl;
+      if (action.compare("avance\n") == 0)
+	{
+	  //std::cout << "La cmd avance est demandee\n";
+	  this->avance();
+	}
+      if (action.compare("droite\n") == 0)
+	{
+	  //std::cout << "La cmd droite est demandee\n";
+	  this->droite();
+	}
+      if (action.compare("gauche\n") == 0)
+	{
+	  //std::cout << "La cmd gauche est demandee\n";
+	  this->gauche();
+	}
+      if (action.compare(0, 5, "prend") == 0)
+	this->prend(action.substr(6, action.size() - 6));
+      if (action.compare(0, 4, "pose") == 0)
+	this->pose(action.substr(5, action.size() - 5));
+      if (action.compare("expulse\n") == 0)
+	this->expulse();
+      if (action.compare("broadcast\n") == 0)
+	this->broadcast("ceci est un message code\n");
+      if (action.compare("fork\n") == 0)
+	this->fork();
+    }
+  else if (answer.compare("KO\n") == 0 || answer.compare("ko\n") == 0)
+    {
+      // continuer le jeu
+    }
+  else if (answer.compare("mort\n") == 0)
+    {
+      std::cerr << "Le joueur est mort" << std::endl;
+      *death = true;
+    }
+  else
+    {
+      if (action.compare("voir\n") == 0)
+	this->voir(answer);
+      else if (action.compare("inventaire\n") == 0)
+	this->inventaire(answer);
+      else if (action.compare("incantation\n") == 0)
+	this->incantation();
+      else if (action.compare("connect_nbr\n") == 0)
+	{
+	  this->_nbunusedslots = atoi(answer.c_str());
+	  std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
+	}
+    }
+  it = std::find(this->_action.begin(), this->_action.end(), action);
+  this->_action.erase(it);
+}
 
 void	Perso::main_loop()
 {

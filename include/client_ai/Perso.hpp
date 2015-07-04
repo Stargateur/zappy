@@ -70,7 +70,7 @@ public:
   int		find_number(std::string &answer, char char_end);
   void		save_objects_in_map(std::string objects, int i);
   void		see_map();
-  void		put_objects_in_case(int x, int y, std::string answer);
+  void		put_objects_in_case(int x, int y, std::string answer, int);
   int		*find_obj_in_map(t_case obj);
   void		go_to_obj(int *coords_obj);
   void		go_up(int *, int *, int *);
