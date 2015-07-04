@@ -79,134 +79,134 @@ void                    Perso::put_objects_in_case(int x, int y, std::string tmp
     }
 }
   
-  void                    Perso::save_objects_in_map(std::string objects, int i)
-  {
-    int                   line = 1;
-    int                   column = 0;
-    int                   tmpcol = 0;
-    int                   tmpline = 0;
-    int                   cpt = 0;
-    int                   cur_num_col = 0;
-    int                   cur_num_line = 0;
-    int                   diff = 0;
-    int                   coef_vert = 0;
-    int                   coef_hor = 0;
+void                    Perso::save_objects_in_map(std::string objects, int i)
+{
+  int                   line = 0;
+  int                   column = 0;
+  int                   tmpcol = 0;
+  int                   tmpline = 0;
+  int                   cpt = 0;
+  int                   cur_num_col = 0;
+  int                   cur_num_line = 0;
+  int                   diff = 0;
+  int                   coef_vert = 0;
+  int                   coef_hor = 0;
 
-    // map non circulaire
-    if (this->_way == UP || this->_way == DOWN)
-      {
-	if (this->_way == UP)
-	  coef_vert = -1;
-	if (this->_way == DOWN)
-	  coef_vert = 1;
-	while (line <= (this->_level + 1))
-	  {
-	    cur_num_line = this->_posy + (line * coef_vert);
-	    tmpcol = 0;
-	    while (tmpcol <= (column))
-	      {
-		if (cpt == i)
-		  {
-		    if (tmpcol < (column / 2))
-		      {
-			diff = (column / 2) - tmpcol;
-			if (diff < 0)
-			  diff = -diff;
-			if (this->_way == UP)
-			  cur_num_col = this->_posx - diff;
-			if (this->_way == DOWN)
-			  cur_num_col = this->_posx + diff;
-		      }
-		    else if (tmpcol > (column / 2))
-		      {
-			diff = (column / 2) - tmpcol;
-			if (diff < 0)
-			  diff = -diff;
-			if (this->_way == UP)
-			  cur_num_col = this->_posx + diff;
-			if (this->_way == DOWN)
-			  cur_num_col = this->_posx - diff;
-		      }
-		    else
-		      cur_num_col = this->_posx;
+  // map non circulaire
+  if (this->_way == UP || this->_way == DOWN)
+    {
+      if (this->_way == UP)
+	coef_vert = -1;
+      if (this->_way == DOWN)
+	coef_vert = 1;
+      while (line <= (this->_level + 1))
+	{
+	  cur_num_line = this->_posy + (line * coef_vert);
+	  tmpcol = 0;
+	  while (tmpcol <= (column))
+	    {
+	      if (cpt == i)
+		{
+		  if (tmpcol < (column / 2))
+		    {
+		      diff = (column / 2) - tmpcol;
+		      if (diff < 0)
+			diff = -diff;
+		      if (this->_way == UP)
+			cur_num_col = this->_posx - diff;
+		      if (this->_way == DOWN)
+			cur_num_col = this->_posx + diff;
+		    }
+		  else if (tmpcol > (column / 2))
+		    {
+		      diff = (column / 2) - tmpcol;
+		      if (diff < 0)
+			diff = -diff;
+		      if (this->_way == UP)
+			cur_num_col = this->_posx + diff;
+		      if (this->_way == DOWN)
+			cur_num_col = this->_posx - diff;
+		    }
+		  else
+		    cur_num_col = this->_posx;
 
-		    if (cur_num_col > (this->_maplength - 1))
-		      cur_num_col = cur_num_col - this->_maplength;
-		    if (cur_num_col < 0)
-		      cur_num_col = this->_maplength + cur_num_col;
-		    if (cur_num_line > (this->_mapheight - 1))
-		      cur_num_line = cur_num_line - this->_mapheight;
-		    if (cur_num_line < 0)
-		      cur_num_line = this->_mapheight + cur_num_line;
+		  if (cur_num_col > (this->_maplength - 1))
+		    cur_num_col = cur_num_col - this->_maplength;
+		  if (cur_num_col < 0)
+		    cur_num_col = this->_maplength + cur_num_col;
+		  if (cur_num_line > (this->_mapheight - 1))
+		    cur_num_line = cur_num_line - this->_mapheight;
+		  if (cur_num_line < 0)
+		    cur_num_line = this->_mapheight + cur_num_line;
 		  
-		    this->put_objects_in_case(cur_num_col, cur_num_line, objects);
-		  }
-		cpt++;
-		tmpcol++;
-	      }
-	    column += 2;
-	    line++;
-	  }
-      }
-    line = 0;
-    column = 1;
-    cpt = 0;
-    if (this->_way == LEFT || this->_way == RIGHT)
-      {
-	if (this->_way == LEFT)
-	  coef_hor = -1;
-	if (this->_way == RIGHT)
-	  coef_hor = 1;
-	while (column <= (this->_level + 1))
-	  {
-	    cur_num_col = this->_posx + (column * coef_hor);
-	    tmpline = 0;
-	    while (tmpline <= line)
-	      {
-		if (cpt == i)
-		  {
-		    if (tmpline < (line / 2))
-		      {
-			diff = (line / 2) - tmpline;
-			if (diff < 0)
-			  diff = -diff;
-			if (this->_way == LEFT)
-			  cur_num_line = this->_posy + diff;
-			if (this->_way == RIGHT)
-			  cur_num_line = this->_posy - diff;
-		      }
-		    else if (tmpline > (line / 2))
-		      {
-			diff = (line / 2) - tmpline;
-			if (diff < 0)
-			  diff = -diff;
-			if (this->_way == LEFT)
-			  cur_num_line = this->_posy - diff;
-			if (this->_way == RIGHT)
-			  cur_num_line = this->_posy + diff;
-		      }
-		    else
-		      cur_num_line = this->_posy;
+		  this->put_objects_in_case(cur_num_col, cur_num_line, objects);
+		}
+	      cpt++;
+	      tmpcol++;
+	    }
+	  column += 2;
+	  line++;
+	}
+    }
+  line = 0;
+  column = 1;
+  cpt = 0;
+  if (this->_way == LEFT || this->_way == RIGHT)
+    {
+      if (this->_way == LEFT)
+	coef_hor = -1;
+      if (this->_way == RIGHT)
+	coef_hor = 1;
+      while (column <= (this->_level + 1))
+	{
+	  cur_num_col = this->_posx + (column * coef_hor);
+	  tmpline = 0;
+	  while (tmpline <= line)
+	    {
+	      if (cpt == i)
+		{
+		  if (tmpline < (line / 2))
+		    {
+		      diff = (line / 2) - tmpline;
+		      if (diff < 0)
+			diff = -diff;
+		      if (this->_way == LEFT)
+			cur_num_line = this->_posy + diff;
+		      if (this->_way == RIGHT)
+			cur_num_line = this->_posy - diff;
+		    }
+		  else if (tmpline > (line / 2))
+		    {
+		      diff = (line / 2) - tmpline;
+		      if (diff < 0)
+			diff = -diff;
+		      if (this->_way == LEFT)
+			cur_num_line = this->_posy - diff;
+		      if (this->_way == RIGHT)
+			cur_num_line = this->_posy + diff;
+		    }
+		  else
+		    cur_num_line = this->_posy;
 
-		    if (cur_num_col > (this->_maplength - 1))
-		      cur_num_col = cur_num_col - this->_maplength;
-		    if (cur_num_col < 0)
-		      cur_num_col = this->_maplength + cur_num_col;
-		    if (cur_num_line > (this->_mapheight - 1))
-		      cur_num_line = cur_num_line - this->_mapheight;
-		    if (cur_num_line < 0)
-		      cur_num_line = this->_mapheight + cur_num_line;
+		  if (cur_num_col > (this->_maplength - 1))
+		    cur_num_col = cur_num_col - this->_maplength;
+		  if (cur_num_col < 0)
+		    cur_num_col = this->_maplength + cur_num_col;
+		  if (cur_num_line > (this->_mapheight - 1))
+		    cur_num_line = cur_num_line - this->_mapheight;
+		  if (cur_num_line < 0)
+		    cur_num_line = this->_mapheight + cur_num_line;
 
-		    this->put_objects_in_case(cur_num_col, cur_num_line, objects);
-		  }
-		cpt++;
-		tmpline++;
-	      }
-	    line += 2;
-	    column++;
-	  }
-      }
-  }
+		  this->put_objects_in_case(cur_num_col, cur_num_line, objects);
+		}
+	      cpt++;
+	      tmpline++;
+	    }
+	  line += 2;
+	  column++;
+	}
+    }
+}
 
   void                    Perso::voir(std::string answer)
   {
