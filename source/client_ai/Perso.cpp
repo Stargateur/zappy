@@ -27,8 +27,6 @@ void			Perso::see_map()
   int			x = 0;
   int			y = 0;
 
-  //std::cout << "Pos du joueur : x : " << this->_posx << " y : " << this->_posy << std::endl;
-  //std::cout << "lecture de la map !" << std::endl;
   while (y < this->_mapheight)
     {
       x = 0;
@@ -36,8 +34,8 @@ void			Perso::see_map()
 	{
 	  if (this->_sav->map[y][x].back() != NONE)
 	    {
-	      std::cout << "x : " << x << " y : " << y << std::endl;
-	      std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
+	      //std::cout << "x : " << x << " y : " << y << std::endl;
+	      //std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
 	    }
 	  x++;
 	}
@@ -80,7 +78,6 @@ int			*Perso::find_obj_in_map(t_case obj)
 		  std::cout << "Objet " << *it << " aux coords " <<  posx << "/" << posy << std::endl;
 		  if (*it == obj)
 		    {
-		      std::cout << "x : " << posx << " y : " << posy << std::endl;
 		      std::cout << "L'objet " << obj << " a ete trouve !" << std::endl;
 		      pos_obj[0] = x;
 		      pos_obj[1] = y;
@@ -95,7 +92,6 @@ int			*Perso::find_obj_in_map(t_case obj)
   return (pos_obj);
 }
 
-  // machine a etat ici => push_back plusieurs cmds
 void			Perso::find_actions()
 {
   int			*coords_obj_in_map;
@@ -107,8 +103,7 @@ void			Perso::find_actions()
 	{
 	  // chercher de la nourriture sur un carre de 4 * 4
 	  coords_obj_in_map = this->find_obj_in_map(FOOD);
-	  std::cout << coords_obj_in_map[0] << std::endl;
-	  sleep(1);
+	  //std::cout << coords_obj_in_map[0] << "/" << coords_obj_in_map[1] << std::endl;
 	  if (coords_obj_in_map[0] == -42)
 	    {
 	      //std::cout << "Avance\n";
@@ -125,13 +120,13 @@ void			Perso::find_actions()
 	      else
 		{
 		  this->go_to_obj(coords_obj_in_map);
-		  this->_action.push_back("prend nourriture\n");
+		  this->_action.push_back("voir\n");
+		  //this->_action.push_back("prend nourriture\n");
 		  //std::cout << "prend nourriture\n";
 		}
 	    }
 	}
     }
-  usleep(500);
 }
 
 std::string		Perso::server_answer(std::string action)
@@ -255,7 +250,7 @@ void	Perso::main_loop()
 	      std::cout << "Action = " << *it << std::endl;
 	      //std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;
 	      answer = this->server_answer(*it);
-	      std::cout << "Reponse du serveur : " << answer;
+	      //std::cout << "Reponse du serveur : " << answer;
 	      this->execute_commands(answer, &death, *it);
 	      //std::cout << "Taille list actions : " << this->_action.size() << std::endl;
 	      it = this->_action.begin();
