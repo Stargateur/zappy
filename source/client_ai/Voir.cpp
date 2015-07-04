@@ -13,10 +13,6 @@ int			Perso::count_obj_by_case(const std::string &str, const std::string sub)
 
 void                    Perso::put_objects_in_case(int x, int y, std::string tmp)
 {
-  int                   i = 0;
-  int                   nb_objects =  std::count(tmp.begin(), tmp.end(), ' ');
-  size_t		pos;
-  std::string		answer = tmp;
   int		       f = count_obj_by_case(tmp, "nourriture");
   int		       l = count_obj_by_case(tmp, "linemate");
   int		       s = count_obj_by_case(tmp, "sibur");
