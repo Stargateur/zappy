@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 17:02:25 2015 Antoine Plaskowski
+** Last update Sat Jul  4 17:39:02 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -66,24 +66,19 @@ static void	*graphic(t_game *game)
       SDL_RenderClear(display.renderer);
       SDL_SetRenderDrawColor(display.renderer, 255, 255, 255, 255);
     }
-  return (false);
+  return (game);
 }
 
 static t_client	*game_select(t_game *game, t_client *client, int sfd)
 {
   if (do_action(game, game->player) == true)
-    {
-      pthread_mutex_unlock(&game->mutex);
-      client = manage_select(client, NULL, sfd);
-    }
+    client = manage_select(client, NULL, sfd);
   else
-    {
-      pthread_mutex_unlock(&game->mutex);
-      client = manage_select(client, &game->s_time, sfd);
-    }
+    client = manage_select(client, &game->s_time, sfd);
   pthread_mutex_lock(&game->mutex);
   get_cmd(game, client);
   client = kill_client(client);
+  pthread_mutex_unlock(&game->mutex);
   return (client);
 }
 
