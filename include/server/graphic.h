@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Sat Jul  4 17:59:15 2015 Antoine Plaskowski
+** Last update Sat Jul  4 20:02:42 2015 Kevin Costa
 */
 
 #ifndef		GRAPHIC_H_
@@ -29,6 +29,8 @@ typedef	struct	s_texture
   SDL_Texture	*thystame;
   SDL_Texture	*cursor;
   SDL_Texture	*mine;
+  SDL_Texture	*food;
+  SDL_Texture	*egg;
   SDL_Surface	*loader;
   char		text[40];
 }		t_texture;
@@ -53,6 +55,7 @@ SDL_Surface	*Bmp_Loader(char *);
 SDL_Window	*init_video();
 t_display	*init_renderer(SDL_Window *, t_display *);
 void		init_texture(t_texture *, SDL_Renderer *);
+void		init_food_text(t_texture *, SDL_Renderer *);
 void		draw_stone(t_map *, t_texture *, t_display *);
 void		draw_more_stone(t_map *, t_texture *, t_display *, SDL_Rect);
 void		draw_select(t_display *, t_map *, t_texture *);

@@ -77,6 +77,7 @@ public:
   void		go_down(int *, int *, int *);
   void		go_left(int *, int *, int *);
   void		go_right(int *, int *, int *);
+  int		count_obj_by_case(const std::string &, const::std::string);
 };
 
 #endif /* !PERSO_HPP_ */
