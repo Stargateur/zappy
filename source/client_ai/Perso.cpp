@@ -27,8 +27,8 @@ void			Perso::see_map()
   int			x = 0;
   int			y = 0;
 
-  std::cout << "Pos du joueur : x : " << this->_posx << " y : " << this->_posy << std::endl;
-  std::cout << "lecture de la map !" << std::endl;
+  //std::cout << "Pos du joueur : x : " << this->_posx << " y : " << this->_posy << std::endl;
+  //std::cout << "lecture de la map !" << std::endl;
   while (y < this->_mapheight)
     {
       x = 0;
@@ -54,32 +54,36 @@ int			*Perso::find_obj_in_map(t_case obj)
   int			posy;
   std::list<t_case>::iterator	it;
 
+  this->_way = UP;
   pos_obj[0] = -42;
   pos_obj[1] = -42;
-  while (y < 4)
+
+  std::cout << "Joueur x : " << this->_posx << " y : " << this->_posy << std::endl;
+  while (y < 3)
     {
       posy = this->_posy + y;
       if (posy < 0)
-	posy = (this->_mapheight - 1) + posy;
-      if (posy > (this->_mapheight - 1))
+	posy = (this->_mapheight) + posy;
+      else if (posy > (this->_mapheight - 1))
 	posy = posy - (this->_mapheight - 1);
       x = -2;
-      while (x < 4)
+      while (x < 3)
 	{
 	  posx = this->_posx + x;
 	  if (posx < 0)
-	    posx = (this->_maplength - 1) + posx;
-	  if (posx > (this->_maplength - 1))
+	    posx = (this->_maplength) + posx;
+	  else if (posx > (this->_maplength - 1))
 	    posx = posx - (this->_maplength - 1);
-	  it = std::find(this->_sav->map[posy][posx].begin(), this->_sav->map[posy][posx].end(), obj);
-	  if (it != this->_sav->map[posy][posx].end())
+	  std::cout << "x : " << posx << " y : " << posy << std::endl;
+	  if (this->_sav->map[posy][posx].back() != NONE)
 	    {
-	      pos_obj[0] = x;
-	      pos_obj[1] = y;
-	      std::cout << "Element trouve !" << std::endl;
-	      std::cout << "x : " << pos_obj[0] << " y : " << pos_obj[1] << std::endl;
-	      return (pos_obj);
+	      std::cout << "Nb objets dans la case : " << this->_sav->map[posy][posx].size() << std::endl;
+	      for (it = this->_sav->map[posy][posx].begin(); it != this->_sav->map[posy][posx].end(); ++it)
+		{
+		  //std::cout << "Objets de la case : " << *it << std::endl; 
+		}
 	    }
+	  //it = std::find(this->_sav->map[posy][posx].begin(), this->_sav->map[posy][posx].end(), obj);
 	  x++;
 	}
       y++;
@@ -97,12 +101,15 @@ void			Perso::find_actions()
       // chercher FOOD
       if (this->_invent._nourriture < 10)
 	{
-	  // chercher de la nourriture sur un carre de 4*4
+	  // chercher de la nourriture sur un carre de 4 * 4
 	  coords_obj_in_map = this->find_obj_in_map(FOOD);
 	  std::cout << coords_obj_in_map[0] << std::endl;
+	  sleep(1);
 	  if (coords_obj_in_map[0] == -42)
 	    {
-	      this->_action.push_back("avance\n");
+	      //std::cout << "Avance\n";
+	      //std::cout << "voir\n";
+	      //this->_action.push_back("avance\n");
 	      this->_action.push_back("voir\n");
 	    }
 	  else
@@ -110,13 +117,12 @@ void			Perso::find_actions()
 	      // 1) on est deja dessus
 	      // 2) on se dirige vers avec gauche droite avance
 	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
-		{
-		  this->_action.push_back("prend\n");
-		}
+		this->_action.push_back("prend nourriture\n");
 	      else
 		{
-		  std::cout << "on doit bouger !" << std::endl;
 		  this->go_to_obj(coords_obj_in_map);
+		  this->_action.push_back("prend nourriture\n");
+		  //std::cout << "prend nourriture\n";
 		}
 	    }
 	}
@@ -124,31 +130,31 @@ void			Perso::find_actions()
   usleep(500);
 }
 
-  std::string		Perso::server_answer(std::string action)
-  {
-    std::string		answer;
-    ssize_t		ret;
+std::string		Perso::server_answer(std::string action)
+{
+  std::string		answer;
+  ssize_t		ret;
 
-    answer.resize(2048);
-    std::cout << "En attente d'une reponse du serveur ..." << std::endl;
-    if (write(this->getClient(), (const void *)action.c_str(), (size_t)action.size()) != -1)
-      {
-	ret = -1;
-	ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
-	if (ret == -1)
-	  {
-	    std::cerr << "Error on read " << answer << std::endl;
-	  }
-	else
-	  {
-	    std::cout << "Reponse du serveur = " << answer << std::endl << std::endl;
-	    answer.resize(ret);
-	  }
-      }
-    else
-      std::cerr << "Error on write in server_answer" << std::endl;
-    return (answer);
-  }
+  answer.resize(2048);
+  //std::cout << "En attente d'une reponse du serveur ..." << std::endl;
+  if (write(this->getClient(), (const void *)action.c_str(), (size_t)action.size()) != -1)
+    {
+      ret = -1;
+      ret = read(this->getClient(), (void *)answer.c_str(), (size_t)answer.size());
+      if (ret == -1)
+	{
+	  std::cerr << "Error on read " << answer << std::endl;
+	}
+      else
+	{
+	  std::cout << "Reponse du serveur = " << answer << std::endl << std::endl;
+	  answer.resize(ret);
+	}
+    }
+  else
+    std::cerr << "Error on write in server_answer" << std::endl;
+  return (answer);
+}
 
   void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
   {
@@ -156,12 +162,22 @@ void			Perso::find_actions()
 
     if (answer.compare("ok\n") == 0 || answer.compare("OK\n") == 0)
       {
+	//std::cout << "Action = " << action << std::endl;
 	if (action.compare("avance\n") == 0)
-	  this->avance();
+	  {
+	    //std::cout << "La cmd avance est demandee\n";
+	    this->avance();
+	  }
 	if (action.compare("droite\n") == 0)
-	  this->droite();
+	  {
+	    //std::cout << "La cmd droite est demandee\n";
+	    this->droite();
+	  }
 	if (action.compare("gauche\n") == 0)
-	  this->gauche();
+	  {
+	    //std::cout << "La cmd gauche est demandee\n";
+	    this->gauche();
+	  }
 	if (action.compare(0, 5, "prend") == 0)
 	  this->prend(action.substr(6, action.size() - 6));
 	if (action.compare(0, 4, "pose") == 0)
@@ -197,55 +213,62 @@ void			Perso::find_actions()
 	  }
       }
     it = std::find(this->_action.begin(), this->_action.end(), action);
-    std::cout << "On elimine " << *it << std::endl;
     this->_action.erase(it);
   }
 
-  void	Perso::main_loop()
-  {
-    std::string	answer;
-    bool		death;
-    std::string	last_action;
-    std::list<std::string>::iterator	it;
-    int		size_list;
-    int		num_item;
+void	Perso::main_loop()
+{
+  std::string	answer;
+  bool		death;
+  std::string	last_action;
+  std::list<std::string>::iterator	it;
+  int		size_list;
+  int		num_item;
+  int		nb_loop = 0;
 
-    death = false;
-    while (this->_invent._nourriture > 0 && death == false)
-      {
-	if ((this->_time % 126) == 0)
-	  {
-	    this->_time = 0;
-	    this->_invent._nourriture--;
-	  }
-	if (this->_action.size() < 10)
-	  {
-	    find_actions();
-	    size_list = this->_action.size();
-	    num_item = 0;
-	    it = this->_action.begin();
-	    std::cout << "On commence à parcourir la liste " << std::endl;
-	    for (it; (it != this->_action.end() || this->_action.size() > 0); ++it)
-	      {
-		if (num_item > 0)
-		  --it;
-		std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;
-		std::cout << "Action = " << *it << std::endl;
-		answer = this->server_answer(*it);
-		this->execute_commands(answer, &death, *it);
-		std::cout << "Taille list actions : " << this->_action.size() << std::endl;
-		it = this->_action.begin();
-		num_item++;
-	      }
-	    this->_action.clear();
-	  }
-	else
-	  {
-	  }
-	if (this->_sav->cpt >= 100)
-	  {
-	    this->_sav->mouv.pop_front();
-	  }
-	sleep(2);
-      }
-  }
+  death = false;
+  while (this->_invent._nourriture > 0 && death == false)
+    {
+      if ((this->_time % 126) == 0)
+	{
+	  this->_time = 0;
+	  this->_invent._nourriture--;
+	}
+      if (this->_action.size() < 10)
+	{
+	  find_actions();
+	  size_list = this->_action.size();
+	  //std::cout << "On a " << this->_invent._nourriture << " en nourriture et il y a " << size_list << " actions a faire" << std::endl;
+	  //exit(0);
+	  //sleep(1);
+	  num_item = 0;
+	  it = this->_action.begin();
+	  //std::cout << "On commence à parcourir la liste " << std::endl;
+	  for (it; (it != this->_action.end() || this->_action.size() > 0); ++it)
+	    {
+	      if (num_item > 0)
+		--it;
+	      std::cout << "Action = " << *it << std::endl;
+	      //std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;
+	      answer = this->server_answer(*it);
+	      std::cout << "Reponse du serveur : " << answer;
+	      this->execute_commands(answer, &death, *it);
+	      //std::cout << "Taille list actions : " << this->_action.size() << std::endl;
+	      it = this->_action.begin();
+	      num_item++;
+	    }
+	  this->_action.clear();
+	  if (nb_loop == 1)
+	    exit(0);
+	}
+      else
+	{
+	}
+      if (this->_sav->cpt >= 100)
+	{
+	  this->_sav->mouv.pop_front();
+	}
+      nb_loop++;
+      //sleep(2);
+    }
+}
