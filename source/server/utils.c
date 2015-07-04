@@ -5,12 +5,14 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Sat Jul  4 13:23:36 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:15:11 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
 #include	<unistd.h>
 #include	<stdio.h>
+#include	<stdarg.h>
+#include	<stdlib.h>
 #include	<string.h>
 #include	"utils.h"
 
@@ -39,4 +41,27 @@ bool		write_fd(char const * const str, int const fd)
       return (true);
     }
   return (false);
+}
+
+char		*malloc_vsnprintf(char *format, ...)
+{
+  va_list	ap;
+  va_list	cpy;
+  char		*str;
+  int		len;
+
+  va_start(ap, format);
+  va_copy(cpy, ap);
+  if ((len = vsnprintf(NULL, 0, format, ap)) < 0)
+    return (NULL);
+  if ((str = malloc(sizeof(*str) * ((size_t)len + 1))) == NULL)
+    return (NULL);
+  if (snprintf(str, (size_t)len + 1, format, cpy) != len)
+    {
+      free(str);
+      return (NULL);
+    }
+  va_end(ap);
+  return (str);
+  
 }
