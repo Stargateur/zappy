@@ -11,7 +11,7 @@ int			Perso::count_obj_by_case(const std::string &str, const std::string sub)
   return (count);
 }
 
-void                    Perso::put_objects_in_case(int x, int y, std::string tmp)
+void                    Perso::put_objects_in_case(int x, int y, std::string tmp, int i)
 {
   int		       f = count_obj_by_case(tmp, "nourriture");
   int		       l = count_obj_by_case(tmp, "linemate");
@@ -66,8 +66,10 @@ void                    Perso::put_objects_in_case(int x, int y, std::string tmp
 	  this->_sav->map[y][x].push_back(THYSTAME);
 	  t--;
 	}
+      if (i == 0)
+	j--;
       while (j > 0)
-	{
+	{   
 	  this->_sav->map[y][x].push_back(PLAYER);
 	  j--;
 	}
@@ -76,6 +78,10 @@ void                    Perso::put_objects_in_case(int x, int y, std::string tmp
 	  this->_sav->map[y][x].push_back(DERAUMERE);
 	  d--;
 	}
+    }
+  if (i == 0)
+    {
+      
     }
 }
   
@@ -139,7 +145,7 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
 		  if (cur_num_line < 0)
 		    cur_num_line = this->_mapheight + cur_num_line;
 		  
-		  this->put_objects_in_case(cur_num_col, cur_num_line, objects);
+		  this->put_objects_in_case(cur_num_col, cur_num_line, objects, i);
 		}
 	      cpt++;
 	      tmpcol++;
@@ -197,7 +203,7 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
 		  if (cur_num_line < 0)
 		    cur_num_line = this->_mapheight + cur_num_line;
 
-		  this->put_objects_in_case(cur_num_col, cur_num_line, objects);
+		  this->put_objects_in_case(cur_num_col, cur_num_line, objects, i);
 		}
 	      cpt++;
 	      tmpline++;
