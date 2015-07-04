@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Sat Jul  4 14:55:31 2015 Antoine Plaskowski
+** Last update Sat Jul  4 16:01:24 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -25,26 +25,39 @@ bool		show_action(t_action *action)
   return (false);
 }
 
-static bool	truc(t_player *player, t_time cpy_time, t_time *s_time)
+static bool	aux(t_game *game, t_player *player, t_time act, bool ret)
 {
-  if (time_sub(&cpy_time, &player->act) == true)
-    return (true);
-  while (time_small(&player->action->time, &cpy_time) == true)
-    {
-      exec_action();
-      time_add(&player->act, &player->action->time);
-      time_add(&player->act, &player->action->time);
-    }
+  t_time	cpy_action;
 
-  return (false);
+  if (time_sub(&act, &player->act) == true)
+    return (true);
+  while (time_small(&player->action->time, &act) == true)
+    {
+      /* exec_action(game, player); */
+      time_add(&player->act, &player->action->time);
+      time_sub(&act, &player->action->time);
+      player->action = player->action->node.next;
+      if (player->action == NULL)
+	return (true);
+    }
+  cpy_action = player->action->time;
+  time_sub(&cpy_action, &act);
+  if (time_small(&cpy_action, &game->s_time) == true || ret == true)
+    {
+      game->s_time = cpy_action;
+      return (false);
+    }
+  return (true);
 }
 
-bool		do_action(t_player *player, t_time *s_time)
+bool		do_action(t_game *game, t_player *player)
 {
   t_time	actual_time;
+  bool		ret;
 
-  time_div(s_time, 1, 60);
-  return (false);
+  if (game == NULL)
+    return (true);
+  ret = true;
   if (clock_gettime(CLOCK_MONOTONIC, &actual_time) == -1)
     {
       perror("clock_gettime :");
@@ -55,10 +68,9 @@ bool		do_action(t_player *player, t_time *s_time)
     {
       player->action = first_node(&player->action->node);
       if (player->action != NULL)
-	{
-	  truc(player, actual_time, s_time);
-	}
+	if (aux(game, player, actual_time, ret) == false)
+	  ret = false;
       player = player->node.next;
     }
-  return (false);  
+  return (ret);
 }

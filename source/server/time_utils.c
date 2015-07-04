@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 13:23:18 2015 Antoine Plaskowski
-** Last update Sat Jul  4 13:51:40 2015 Antoine Plaskowski
+** Last update Sat Jul  4 15:49:19 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -30,7 +30,7 @@ bool		time_sub(t_time * const a, t_time const * const b)
   return (false);
 }
 
-bool		time_abb(t_time * const a, t_time const * const b)
+bool		time_add(t_time * const a, t_time const * const b)
 {
   if (a == NULL || b == NULL)
     return (true);
@@ -46,22 +46,30 @@ bool		time_abb(t_time * const a, t_time const * const b)
 
 bool		time_small(t_time const * const a, t_time const * const b)
 {
-  if (a == NULL)
+  if (a == NULL && b != NULL)
     return (true);
   if (b == NULL)
     return (false);
   if (a->tv_sec < b->tv_sec)
-    return (false);
-  if (a->tv_nsec < b->tv_nsec)
-    return (false);
-  return (true);
+    return (true);
+  else if (a->tv_sec == b->tv_sec)
+    if (a->tv_nsec < b->tv_nsec)
+      return (true);
+  return (false);
 }
 
 bool		time_div(t_time * const a, size_t const num, size_t const dem)
 {
   if (a == NULL || dem == 0)
-    return (false);
+    return (true);
   a->tv_sec = num / dem;
   a->tv_nsec = num % dem * NANO_BY_SEC / dem;
-  return (true);
+  return (false);
+}
+
+bool		time_show(t_time const * const a)
+{
+  if (printf("time : %ld sec et %ld nanosec\n", a->tv_sec, a->tv_nsec) < 0)
+    return (true);
+  return (false);
 }

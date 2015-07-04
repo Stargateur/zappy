@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:12:11 2015 Antoine Plaskowski
-** Last update Sat Jul  4 14:57:55 2015 Antoine Plaskowski
+** Last update Sat Jul  4 15:56:20 2015 Antoine Plaskowski
 */
 
 #ifndef		GAME_H_
@@ -35,6 +35,7 @@ struct		s_game
   t_egg		*egg;
   t_map		map;
   t_option	option;
+  t_time	s_time;
 };
 
 t_game		*init_game(t_game * const game, char **argv, int const argc);

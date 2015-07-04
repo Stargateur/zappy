@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jul  2 17:04:08 2015 Antoine Plaskowski
-** Last update Thu Jul  2 18:08:07 2015 Antoine Plaskowski
+** Last update Sat Jul  4 16:00:35 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -26,7 +26,7 @@ static bool	kill_timeout(t_time *client, t_time const * const timeout)
     }
   if (time_sub(&time, client) == true)
     return (true);
-  if (time_small(&time, timeout) == true)
+  if (time_small(&time, timeout) == false)
     return (true);
   return (false);
 }

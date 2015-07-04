@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 14:57:22 2015 Antoine Plaskowski
+** Last update Sat Jul  4 15:59:20 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -57,10 +57,10 @@ static bool	graphic(t_display *display, t_texture *texture, t_game *game)
 
 static t_client	*game_select(t_game *game, t_client *client, int sfd)
 {
-  t_time	s_time;
-
-  do_action(game->player, &s_time);
-  client = manage_select(client, &s_time, sfd);
+  if (do_action(game, game->player) == true)
+    client = manage_select(client, NULL, sfd);
+  else
+    client = manage_select(client, &game->s_time, sfd);
   get_cmd(game, client);
   client = kill_client(client);
   return (client);
@@ -92,6 +92,7 @@ int		main(int argc, char **argv)
     return (1);
   while (g_keep_running == true)
     {
+      printf("boucle\n");
       client = game_select(&game, client, sfd);
       /* graphic(&display, &texture, &game); */
     }
