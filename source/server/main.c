@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 11:20:15 2015 Antoine Plaskowski
+** Last update Sat Jul  4 11:32:04 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -42,164 +42,48 @@ static int	init_socket(char const * const port)
   return (sfd);
 }
 
-int		costa_alaric(void)
+static bool	graphic(t_display *display, t_texture *texture, t_game *game)
 {
-  /*
-  **
-  ** TEST UNITAIRE COSTA + ALARIC
-  **
-  */
-  t_texture     text;
-  t_display		*display;
-  t_map			map;
-  t_square		*disp;
-  int cont = 0;
-
-  if ((display = malloc(sizeof(t_display))) == NULL)
-    return (1);
-  display->fenetre = init_video();
-  display = init_renderer(display->fenetre, display);
-  init_texture(&text, display->renderer);
-  init_map(&map, 100, 100);
-  map_generate(&map);
-  /* disp = first_node(&map.items->node);
-     while (disp != NULL)
-     {
-     printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coord.x, disp->coord.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
-     disp = disp->node.next;
-     }
-  */
-
-  while (cont == 0)
-    {
-      cont = input(display, &map);
-      draw_stone(&map, &text, display);
-      draw_grid(&map, display);
-      draw_select(display, &map, &text);
-      SDL_RenderPresent(display->renderer);
-      SDL_SetRenderDrawColor(display->renderer, 0, 127, 0, 255);
-      SDL_RenderClear(display->renderer);
-      SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
-    }
-
-  /* draw_stone(&map, &text, renderer, display); */
-  SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
-  draw_grid(&map, display);
-  draw_select(display, &map, &text);
+  input(display, &game->map);
+  draw_stone(&game->map, texture, display);
+  draw_grid(&game->map, display);
+  draw_select(display, &game->map, texture);
   SDL_RenderPresent(display->renderer);
-
-  sleep(5);
-  return (0);
+  SDL_SetRenderDrawColor(display->renderer, 0, 127, 0, 255);
+  SDL_RenderClear(display->renderer);
+  SDL_SetRenderDrawColor(display->renderer, 255, 255, 255, 255);
+  return (false);
 }
 
-void		elliott(int argc, char **argv)
+static t_client	*game_select(t_game *game, t_client *client, int sfd)
 {
-/*
-  **
-  ** TEST UNITAIRE ELLIOTT
-  **
-  */
-  t_game		party_everyday;
-  t_map			mapr;
-  t_player		*test;
-  char			*inv;
-  char			*view;
-  t_square		*disp;
+  t_time	s_time;
 
-  init_game(&party_everyday, argv, argc);
-  init_map(&mapr, 50, 50);
-  map_generate(&mapr);
+  set_s_time(game->player, &s_time);
+  client = manage_select(client, &s_time, sfd);
+  get_cmd(game, client);
+  client = kill_client(client);
+  return (client);
+}
 
-  disp = first_node(&mapr.items->node);
-  while (disp != NULL)
-    {
-      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coord.x, disp->coord.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
-      disp = disp->node.next;
-    }
-
-  test = init_player(&mapr, "Razmoket", 49, 49);
-  party_everyday.player = put_node(&party_everyday.player->node, &test->node);
-  test = init_player(&mapr, "Razmoket", 0, 0);
-  party_everyday.player = put_node(&party_everyday.player->node, &test->node);
-  printf("player is in %lu - %lu\n", test->coord.x, test->coord.y);
-  init_inv(&test->inv);
-  test->inv.linemate += 2;
-  test->inv.food += 5;
-  inv = get_inventory(&test->inv);
-  if (inv)
-    {
-      printf("Inventory: %s\n", inv);
-      free(inv);
-    }
-  else
-    printf("Inv is NULL\n");
-
-  view = player_view(&party_everyday, &mapr, test);
-  if (view)
-    {
-      printf("View: %s\n", view);
-      free(view);
-    }
-  else
-    printf("View is NULL\n");
-
-  move(&mapr, test);
-  rotate_left(test);
-  move(&mapr, test);
-  rotate_left(test);
-  move(&mapr, test);
-  rotate_right(test);
-  rotate_right(test);
-  rotate_right(test);
-  move(&mapr, test);
-  rotate_left(test);
-  if (test->dir == NORTH)
-    printf("Player has rotated correctly\n");
-
-  view = player_view(&party_everyday, &mapr, test);
-  if (view)
-    {
-      printf("View: %s\n", view);
-      free(view);
-    }
-  else
-    printf("View is NULL\n");
-  add_item(&mapr, 0, 0, LINEMATE);
-  view = player_view(&party_everyday, &mapr, test);
-  if (view)
-    {
-      printf("View: %s\n", view);
-      free(view);
-    }
-  else
-    printf("View is NULL\n");
-  player_levelup(&party_everyday, &mapr, test, true);
-  if (test->range == 2)
-    printf("Player successfuly elevated !\n");
-  view = player_view(&party_everyday, &mapr, test);
-  if (view)
-    {
-      printf("View: %s\n", view);
-      free(view);
-    }
-  else
-    printf("View is NULL\n");
+static bool	init_graph(t_display *display, t_texture *texture)
+{
+  display->fenetre = init_video();
+  init_renderer(display->fenetre, display);
+  init_texture(texture, display->renderer);
+  return (false);
 }
 
 int		main(int argc, char **argv)
 {
-  t_texture     text;
-  SDL_Window    *fenetre;
+  t_texture     texture;
   t_display	display;
   int		sfd;
   t_client	*client;
   t_game	game;
-  t_time	s_time;
 
+  init_graph(&display, &texture);
   srandom((unsigned int)time(NULL));
-  display.fenetre = init_video();
-  init_renderer(display.fenetre, &display);
-  init_texture(&text, display.renderer);
   client = NULL;
   if (init_game(&game, argv, argc) == NULL)
     return (1);
@@ -208,18 +92,8 @@ int		main(int argc, char **argv)
     return (1);
   while (g_keep_running == true)
     {
-      set_s_time(game.player, &s_time);
-      client = manage_select(client, &s_time, sfd);
-      get_cmd(&game, client);
-      client = kill_client(client);
-      input(&display, &game.map);
-      draw_stone(&game.map, &text, &display);
-      draw_grid(&game.map, &display);
-      draw_select(&display, &game.map, &text);
-      SDL_RenderPresent(display.renderer);
-      SDL_SetRenderDrawColor(display.renderer, 0, 127, 0, 255);
-      SDL_RenderClear(display.renderer);
-      SDL_SetRenderDrawColor(display.renderer, 255, 255, 255, 255);
+      client = game_select(&game, client, sfd);
+      graphic(&display, &texture, &game);
     }
   while (client != NULL)
     client = sup_client(client);
