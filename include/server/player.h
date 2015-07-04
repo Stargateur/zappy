@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Fri Jul  3 21:30:58 2015 Antoine Plaskowski
+** Last update Sat Jul  4 13:33:02 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H__
@@ -22,7 +22,7 @@ typedef	enum
     EAST = 3
   }		t_dir;
 
-# include	"utils.h"
+# include	"time_utils.h"
 # include	"inv.h"
 # include	"node.h"
 # include	"map.h"

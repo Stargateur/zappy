@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Sat Jul  4 11:37:25 2015 Antoine Plaskowski
+## Last update Sat Jul  4 13:33:42 2015 Antoine Plaskowski
 ##
 
 PATH_SRC	=	source/
@@ -35,6 +35,7 @@ SRC_SERVER	+=	$(PATH_SERVER)broadcast.c
 SRC_SERVER	+=	$(PATH_SERVER)kill_client.c
 SRC_SERVER	+=	$(PATH_SERVER)select_utils.c
 SRC_SERVER	+=	$(PATH_SERVER)food.c
+SRC_SERVER	+=	$(PATH_SERVER)time_utils.c
 
 SRC_SERVER	+=	$(PATH_NODE)first_node.c
 SRC_SERVER	+=	$(PATH_NODE)free_node.c

@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Fri Jul  3 21:33:15 2015 Antoine Plaskowski
+** Last update Sat Jul  4 13:23:36 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -39,42 +39,4 @@ bool		write_fd(char const * const str, int const fd)
       return (true);
     }
   return (false);
-}
-
-bool		time_sub(t_time * const a, t_time const * const b)
-{
-  if (a == NULL || b == NULL)
-    return (true);
-  if (a->tv_sec < b->tv_sec)
-    return (true);
-  a->tv_sec -= b->tv_sec;
-  if (a->tv_nsec < b->tv_nsec)
-    {
-      a->tv_nsec += NANO_BY_SEC;
-      a->tv_sec -= 1;
-    }
-  a->tv_nsec -= b->tv_nsec;
-  return (false);
-}
-
-bool		time_small(t_time const * const a, t_time const * const b)
-{
-  if (a == NULL)
-    return (true);
-  if (b == NULL)
-    return (false);
-  if (a->tv_sec < b->tv_sec)
-    return (false);
-  if (a->tv_nsec < b->tv_nsec)
-    return (false);
-  return (true);
-}
-
-bool		time_div(t_time * const a, size_t const num, size_t const dem)
-{
-  if (a == NULL || dem == 0)
-    return (false);
-  a->tv_sec = num / dem;
-  a->tv_nsec = num % dem * NANO_BY_SEC / dem;
-  return (true);
 }
