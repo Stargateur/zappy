@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 02:24:27 2015 Antoine Plaskowski
+** Last update Sat Jul  4 11:20:15 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -42,38 +42,6 @@ static int	init_socket(char const * const port)
   return (sfd);
 }
 
-int		plasko(int argc, char **argv)
-{
-  /*
-  **
-  ** TEST UNITAIRE PLASKO
-  **
-  */
-  int		sfd;
-  t_client	*client;
-  t_game	game;
-  t_time	s_time;
-
-  client = NULL;
-  if (init_game(&game, argv, argc) == NULL)
-    return (1);
-  show_option(&game.option);
-  if ((sfd = init_socket(game.option.p)) == -1)
-    return (1);
-  while (g_keep_running == true)
-    {
-      set_s_time(game.player, &s_time);
-      client = manage_select(client, &s_time, sfd);
-      get_cmd(&game, client);
-      client = kill_client(client);
-    }
-  while (client != NULL)
-    client = sup_client(client);
-  printf("Bye mother fucker\n");
-  close(sfd);
-  return (0);
-}
-
 int		costa_alaric(void)
 {
   /*
@@ -82,8 +50,7 @@ int		costa_alaric(void)
   **
   */
   t_texture     text;
-  t_display	*display;
-  SDL_Window    *fenetre;
+  t_display		*display;
   t_map			map;
   t_square		*disp;
   int cont = 0;
@@ -93,15 +60,14 @@ int		costa_alaric(void)
   display->fenetre = init_video();
   display = init_renderer(display->fenetre, display);
   init_texture(&text, display->renderer);
-
   init_map(&map, 100, 100);
   map_generate(&map);
   /* disp = first_node(&map.items->node);
-  while (disp != NULL)
-    {
-      printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coord.x, disp->coord.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
-      disp = disp->node.next;
-    }
+     while (disp != NULL)
+     {
+     printf("[%lu - %lu] %lu %lu %lu %lu %lu %lu %lu\n", disp->coord.x, disp->coord.y, disp->ressources.linemate, disp->ressources.deraumere, disp->ressources.sibur, disp->ressources.mendiane, disp->ressources.phiras, disp->ressources.thystame, disp->ressources.food);
+     disp = disp->node.next;
+     }
   */
 
   while (cont == 0)
@@ -222,9 +188,42 @@ void		elliott(int argc, char **argv)
 
 int		main(int argc, char **argv)
 {
+  t_texture     text;
+  SDL_Window    *fenetre;
+  t_display	display;
+  int		sfd;
+  t_client	*client;
+  t_game	game;
+  t_time	s_time;
+
   srandom((unsigned int)time(NULL));
-  /*plasko(argc, argv); */
-  costa_alaric();
-  /*elliott(argc, argv);*/
+  display.fenetre = init_video();
+  init_renderer(display.fenetre, &display);
+  init_texture(&text, display.renderer);
+  client = NULL;
+  if (init_game(&game, argv, argc) == NULL)
+    return (1);
+  show_option(&game.option);
+  if ((sfd = init_socket(game.option.p)) == -1)
+    return (1);
+  while (g_keep_running == true)
+    {
+      set_s_time(game.player, &s_time);
+      client = manage_select(client, &s_time, sfd);
+      get_cmd(&game, client);
+      client = kill_client(client);
+      input(&display, &game.map);
+      draw_stone(&game.map, &text, &display);
+      draw_grid(&game.map, &display);
+      draw_select(&display, &game.map, &text);
+      SDL_RenderPresent(display.renderer);
+      SDL_SetRenderDrawColor(display.renderer, 0, 127, 0, 255);
+      SDL_RenderClear(display.renderer);
+      SDL_SetRenderDrawColor(display.renderer, 255, 255, 255, 255);
+    }
+  while (client != NULL)
+    client = sup_client(client);
+  printf("Bye\n");
+  close(sfd);
   return (0);
 }
