@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Sat Jul  4 22:15:11 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:20:52 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -63,5 +63,4 @@ char		*malloc_vsnprintf(char *format, ...)
     }
   va_end(ap);
   return (str);
-  
 }

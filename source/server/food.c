@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 11:34:29 2015 Antoine Plaskowski
-** Last update Sat Jul  4 19:06:05 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:21:05 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -24,7 +24,7 @@ t_player	*food(t_player *player, t_time const *food, t_time act)
 	return (delete_player(player));
       add_ressource(&player->inv, FOOD, 1, false);
       if (time_sub(&act, food) == true)
-	return (delete_player(player));      
+	return (delete_player(player));
       if (time_add(&player->food, food) == true)
 	return (delete_player(player));
     }
