@@ -5,18 +5,27 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 11:34:29 2015 Antoine Plaskowski
-** Last update Sat Jul  4 11:37:08 2015 Antoine Plaskowski
+** Last update Sat Jul  4 18:38:43 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
 #include	"player.h"
 
-t_player	*food(t_player *player, size_t const t)
+t_player	*food(t_player *player, t_time const *food, t_time act)
 {
-  player = first_node(&player->node);
-  while (player != NULL)
+  if (player == NULL)
+    return (NULL);
+  if (time_sub(&act, &player->food) == true)
+    return (delete_player(player));
+  while (time_small(food, &act) == true)
     {
-      
-      player = player->node.next;
+      if (player->inv.food == 0)
+	return (delete_player(player));
+      add_ressource(&player->inv, FOOD, 1, false);
+      if (time_sub(&act, food) == true)
+	return (delete_player(player));      
+      if (time_add(&player->food, food) == true)
+	return (delete_player(player));
     }
+  return (player);
 }

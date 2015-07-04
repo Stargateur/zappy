@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 17:59:33 2015 Antoine Plaskowski
+** Last update Sat Jul  4 18:53:59 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -22,7 +22,6 @@
 #include	"map.h"
 #include	"node.h"
 #include	"player.h"
-#include	"select_utils.h"
 #include	"inv.h"
 #include	"command.h"
 #include	"kill_client.h"
@@ -70,7 +69,7 @@ static void	*graphic(t_game *game)
 
 static t_client	*game_select(t_game *game, t_client *client, int sfd)
 {
-  if (do_action(game, game->player) == true)
+  if (do_action(game) == true)
     client = manage_select(client, NULL, sfd);
   else
     client = manage_select(client, &game->s_time, sfd);
@@ -93,14 +92,14 @@ int		main(int argc, char **argv)
   if (init_game(&game, argv, argc) == NULL)
     return (1);
   show_option(&game.option);
-  if (pthread_create(&pthread, NULL, (void *(*)(void *))&graphic, &game) != 0)
-    return (false);
+  /* if (pthread_create(&pthread, NULL, (void *(*)(void *))&graphic, &game) != 0) */
+  /*   return (false); */
   if ((sfd = init_socket(game.option.p)) == -1)
     return (1);
   while (g_keep_running == true)
     client = game_select(&game, client, sfd);
-  if (pthread_join(pthread, NULL) != 0)
-    return (false);
+  /* if (pthread_join(pthread, NULL) != 0) */
+  /*   return (false); */
   while (client != NULL)
     client = sup_client(client);
   printf("Bye\n");

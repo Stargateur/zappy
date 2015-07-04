@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Sat Jul  4 17:51:54 2015 Antoine Plaskowski
+** Last update Sat Jul  4 18:11:02 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -31,6 +31,7 @@ t_game		*init_game(t_game * const game, char **argv, int const argc)
   game->team = malloc(sizeof(*game->team) * (game->size_team + 1));
   if (game->team == NULL)
     return (NULL);
+  time_div(&game->food, FOOD_BY_TIME, game->option.t);
   init_map(&game->map, game->option.x, game->option.y);
   map_generate(&game->map);
   for (i = 0; i < game->size_team; i++)

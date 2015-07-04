@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:24 2015 Antoine Plaskowski
-** Last update Sat Jul  4 15:58:57 2015 Antoine Plaskowski
+** Last update Sat Jul  4 18:52:01 2015 Antoine Plaskowski
 */
 
 #ifndef		ACTION_H_
@@ -31,6 +31,7 @@ struct		s_action
 };
 
 bool		show_action(t_action *action);
-bool		do_action(t_game *game, t_player *player);
+bool		do_action(t_game *game);
+t_action	*delete_action(t_action *action);
 
 #endif		/* !ACTION_H_ */
