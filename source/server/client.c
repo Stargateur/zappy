@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Thu Jul  2 17:04:39 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:03:10 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -15,14 +15,17 @@
 #include	"client.h"
 #include	"game.h"
 
-t_string	*add_string(t_string * const list, char *str)
+bool		add_string(t_client *client, char *str)
 {
   t_string	*new;
 
+  if (client == NULL || str == NULL)
+    return (true);
   if ((new = malloc(sizeof(*new))) == NULL)
-    return (NULL);
+    return (true);
   new->str = strdup(str);
-  return (put_node(&list->node, &new->node));
+  client->to_write = put_node(&client->to_write->node, &new->node);
+  return (false);
 }
 
 t_client	*add_client(t_client * const list, int const sfd)
@@ -42,7 +45,7 @@ t_client	*add_client(t_client * const list, int const sfd)
       free(new);
       return (NULL);
     }
-  new->to_write = add_string(NULL, "BIENVENUE\n");
+  add_string(new, "BIENVENUE\n");
   new->player = NULL;
   new->to_kill = false;
   init_cbuf(&new->cbuf);
@@ -65,7 +68,7 @@ bool		write_pos_player(t_client * const client)
   if (snprintf(str, (size_t)len + 1, "%lu %lu\n",
 	       client->player->coord.x, client->player->coord.y) != len)
     return (true);
-  client->to_write = add_string(client->to_write, str);
+  add_string(client, str);
   free(str);
   return (false);
 }

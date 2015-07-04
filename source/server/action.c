@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Sat Jul  4 18:56:54 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:01:49 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -13,6 +13,7 @@
 #include	"player.h"
 #include	"utils.h"
 #include	"action.h"
+#include	"message.h"
 #include	"food.h"
 
 bool		show_action(t_action *action)
@@ -27,6 +28,15 @@ bool		show_action(t_action *action)
   return (false);
 }
 
+static void	exec_action(t_game *game, t_player *player, t_action *action)
+{
+  if (action->arg == NULL || action->cmd == NULL)
+    {
+      add_string(player->client, KO);
+      return;
+    }
+}
+
 static bool	aux(t_game *game, t_player *player, t_time act, bool ret)
 {
   t_time	cpy_action;
@@ -38,7 +48,7 @@ static bool	aux(t_game *game, t_player *player, t_time act, bool ret)
     return (true);
   while (time_small(&player->action->time, &act) == true)
     {
-      /* exec_action(game, player); */
+      exec_action(game, player, player->action);
       time_add(&player->act, &player->action->time);
       time_sub(&act, &player->action->time);
       player->action = player->action->node.next;

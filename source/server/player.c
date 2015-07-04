@@ -5,12 +5,13 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Sat Jul  4 18:29:32 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:00:49 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
 #include	<stdio.h>
 #include	"player.h"
+#include	"message.h"
 
 t_player	*find_free_player(t_player *player, char * const team)
 {
@@ -76,7 +77,7 @@ t_player	*delete_player(t_player *player)
     player->action = delete_action(player->action);
   if (player->client != NULL)
     {
-      player->client->to_write = add_string(player->client->to_write, "mort\n");
+      add_string(player->client, MORT);
       player->client->to_kill = true;
       player->client->player = NULL;
     }

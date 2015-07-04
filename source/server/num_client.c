@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 05:36:20 2015 Antoine Plaskowski
-** Last update Thu Jul  2 16:43:20 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:01:33 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -28,7 +28,7 @@ bool		write_num_client(t_client * const client, size_t const num)
     return (true);
   if (snprintf(str, (size_t)len + 1, "%lu\n", num) != len)
     return (true);
-  client->to_write = add_string(client->to_write, str);
+  add_string(client, str);
   free(str);
   return (false);
 }

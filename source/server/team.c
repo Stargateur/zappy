@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 05:33:47 2015 Antoine Plaskowski
-** Last update Fri Jul  3 16:32:34 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:02:19 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -17,6 +17,7 @@
 #include	"game.h"
 #include	"team.h"
 #include	"num_client.h"
+#include	"message.h"
 #include	"error_message.h"
 
 static bool     set_client_player(t_client * const client, t_game * const game,
@@ -28,7 +29,7 @@ static bool     set_client_player(t_client * const client, t_game * const game,
   connect_nbr = player_team_online(game->player, team->team);
   if (connect_nbr >= team->connect_max)
     {
-      client->to_write = add_string(client->to_write, E_TEAM_2);
+      add_string(client, E_TEAM_2);
       return (true);
     }
   if ((player = find_free_player(game->player, team->team)) == NULL)
@@ -58,6 +59,6 @@ bool		set_team(t_client * const client, t_game * const game,
   for (team = 0; team < game->size_team; team++)
     if (strncmp(game->team[team].team, str, game->team[team].len_team) == 0)
       return (set_client_player(client, game, game->team + team));
-  client->to_write = add_string(client->to_write, E_TEAM_1);
+  add_string(client, E_TEAM_1);
   return (true);
 }
