@@ -58,7 +58,6 @@ int			*Perso::find_obj_in_map(t_case obj)
   pos_obj[0] = -42;
   pos_obj[1] = -42;
 
-  std::cout << "Joueur x : " << this->_posx << " y : " << this->_posy << std::endl;
   while (y < 3)
     {
       posy = this->_posy + y;
@@ -74,16 +73,21 @@ int			*Perso::find_obj_in_map(t_case obj)
 	    posx = (this->_maplength) + posx;
 	  else if (posx > (this->_maplength - 1))
 	    posx = posx - (this->_maplength - 1);
-	  std::cout << "x : " << posx << " y : " << posy << std::endl;
 	  if (this->_sav->map[posy][posx].back() != NONE)
 	    {
-	      std::cout << "Nb objets dans la case : " << this->_sav->map[posy][posx].size() << std::endl;
 	      for (it = this->_sav->map[posy][posx].begin(); it != this->_sav->map[posy][posx].end(); ++it)
 		{
-		  //std::cout << "Objets de la case : " << *it << std::endl; 
+		  std::cout << "Objet " << *it << " aux coords " <<  posx << "/" << posy << std::endl;
+		  if (*it == obj)
+		    {
+		      std::cout << "x : " << posx << " y : " << posy << std::endl;
+		      std::cout << "L'objet " << obj << " a ete trouve !" << std::endl;
+		      pos_obj[0] = x;
+		      pos_obj[1] = y;
+		      return (pos_obj);
+		    }
 		}
 	    }
-	  //it = std::find(this->_sav->map[posy][posx].begin(), this->_sav->map[posy][posx].end(), obj);
 	  x++;
 	}
       y++;
