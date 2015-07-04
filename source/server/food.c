@@ -5,11 +5,12 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 11:34:29 2015 Antoine Plaskowski
-** Last update Sat Jul  4 18:38:43 2015 Antoine Plaskowski
+** Last update Sat Jul  4 19:06:05 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
 #include	"player.h"
+#include	"food.h"
 
 t_player	*food(t_player *player, t_time const *food, t_time act)
 {
