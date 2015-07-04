@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:37:14 2015 Antoine Plaskowski
-** Last update Fri Jul  3 21:03:02 2015 Antoine Plaskowski
+** Last update Sat Jul  4 23:00:16 2015 Antoine Plaskowski
 */
 
 #ifndef		PARSER_H_
@@ -30,11 +30,14 @@ typedef	enum	e_tcmd
     CONNECT_NBR
   }		t_tcmd;
 
+# include	"game.h"
+# include	"player.h"
 # include	"action.h"
 
 struct		s_cmd
 {
   char const	*cmd;
+  bool		(*fct)(t_game *game, t_player *player, char *arg);
   t_tcmd	type;
   size_t	time;
   size_t	len_cmd;

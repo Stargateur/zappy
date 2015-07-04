@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Sat Jul  4 19:07:37 2015 Antoine Plaskowski
+** Last update Sat Jul  4 23:31:50 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -65,7 +65,7 @@ static t_sound	minmax(t_v2d *vector)
   return (S_HERE);
 }
 
-t_sound		broadcast(t_map *map, t_player *a, t_player *b)
+t_sound		sound(t_map *map, t_player *a, t_player *b)
 {
   t_v2d		vector;
 
@@ -79,4 +79,8 @@ t_sound		broadcast(t_map *map, t_player *a, t_player *b)
   if (vector.y == 0)
     return (vector.x < 0 ? S_WEST : S_EAST);
   return (minmax(&vector));
+}
+
+bool		broadcast(t_game *game, t_player *player, char *str)
+{
 }

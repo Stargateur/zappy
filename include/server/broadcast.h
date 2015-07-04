@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 07:45:51 2015 Antoine Plaskowski
-** Last update Fri Jul  3 15:52:27 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:59:37 2015 Antoine Plaskowski
 */
 
 #ifndef		BROADCAST_H_
@@ -49,6 +49,7 @@ struct		s_minmax
   t_sound	sound;
 };
 
-t_sound		broadcast(t_map *map, t_player *player_a, t_player *player_b);
+bool		broadcast(t_game *game, t_player *player, char *str);
+t_sound		sound(t_map *map, t_player *player_a, t_player *player_b);
 
 #endif		/* !BROADCAST_H_ */

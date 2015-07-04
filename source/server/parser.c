@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Sat Jul  4 20:58:22 2015 Antoine Plaskowski
+** Last update Sat Jul  4 22:57:57 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -13,21 +13,33 @@
 #include	<stdlib.h>
 #include	"parser.h"
 #include	"action.h"
+#include	"avance.h"
+#include	"droite.h"
+#include	"gauche.h"
+#include	"voir.h"
+#include	"inventaire.h"
+#include	"prend.h"
+#include	"pose.h"
+#include	"expulse.h"
+#include	"broadcast.h"
+#include	"incantation.h"
+#include	"egg.h"
+#include	"connect_nbr.h"
 
 static t_cmd	g_cmd[] =
   {
-    {"avance", AVANCE, 7, sizeof("avance") - 1},
-    {"droite", DROITE, 7, sizeof("droite") - 1},
-    {"gauche", GAUCHE, 7, sizeof("gauche") - 1},
-    {"voir", VOIR, 7, sizeof("voir") - 1},
-    {"inventaire", INVENTAIRE, 1, sizeof("inventaire") - 1},
-    {"prend", PREND, 7, sizeof("prend") - 1},
-    {"pose", POSE, 7, sizeof("pose") - 1},
-    {"expulse", EXPULSE, 7, sizeof("expulse") - 1},
-    {"broadcast", BROADCAST, 7, sizeof("broadcast") - 1},
-    {"incantation", INCANTATION, 300, sizeof("incantation") - 1},
-    {"fork", FORK, 42, sizeof("fork") - 1},
-    {"connect_nbr", CONNECT_NBR, 0, sizeof("connect_nbr") - 1}
+    {"avance", &avance, AVANCE, 7, sizeof("avance") - 1},
+    {"droite", &droite, DROITE, 7, sizeof("droite") - 1},
+    {"gauche", &gauche, GAUCHE, 7, sizeof("gauche") - 1},
+    {"voir", &voir, VOIR, 7, sizeof("voir") - 1},
+    {"inventaire", &inventaire, INVENTAIRE, 1, sizeof("inventaire") - 1},
+    {"prend", &prend, PREND, 7, sizeof("prend") - 1},
+    {"pose", &pose, POSE, 7, sizeof("pose") - 1},
+    {"expulse", &expulse, EXPULSE, 7, sizeof("expulse") - 1},
+    {"broadcast", &broadcast, BROADCAST, 7, sizeof("broadcast") - 1},
+    {"incantation", &incantation, INCANTATION, 300, sizeof("incantation") - 1},
+    {"fork", &egg, FORK, 42, sizeof("fork") - 1},
+    {"connect_nbr", &connect_nbr, CONNECT_NBR, 0, sizeof("connect_nbr") - 1}
   };
 
 static const size_t	g_size = sizeof(g_cmd) / sizeof(*g_cmd);

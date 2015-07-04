@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Sat Jul  4 18:53:47 2015 Antoine Plaskowski
+## Last update Sat Jul  4 23:35:08 2015 Antoine Plaskowski
 ##
 
 PATH_SRC	=	source/
@@ -31,10 +31,21 @@ SRC_SERVER	+=	$(PATH_SERVER)action.c
 SRC_SERVER	+=	$(PATH_SERVER)command.c
 SRC_SERVER	+=	$(PATH_SERVER)team.c
 SRC_SERVER	+=	$(PATH_SERVER)num_client.c
-SRC_SERVER	+=	$(PATH_SERVER)broadcast.c
 SRC_SERVER	+=	$(PATH_SERVER)kill_client.c
 SRC_SERVER	+=	$(PATH_SERVER)food.c
 SRC_SERVER	+=	$(PATH_SERVER)time_utils.c
+SRC_SERVER	+=	$(PATH_SERVER)avance.c
+SRC_SERVER	+=	$(PATH_SERVER)droite.c
+SRC_SERVER	+=	$(PATH_SERVER)gauche.c
+SRC_SERVER	+=	$(PATH_SERVER)voir.c
+SRC_SERVER	+=	$(PATH_SERVER)inventaire.c
+SRC_SERVER	+=	$(PATH_SERVER)prend.c
+SRC_SERVER	+=	$(PATH_SERVER)pose.c
+SRC_SERVER	+=	$(PATH_SERVER)expulse.c
+SRC_SERVER	+=	$(PATH_SERVER)broadcast.c
+SRC_SERVER	+=	$(PATH_SERVER)incantation.c
+SRC_SERVER	+=	$(PATH_SERVER)egg.c
+SRC_SERVER	+=	$(PATH_SERVER)connect_nbr.c
 
 SRC_SERVER	+=	$(PATH_NODE)first_node.c
 SRC_SERVER	+=	$(PATH_NODE)free_node.c
