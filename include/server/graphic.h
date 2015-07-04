@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Fri Jul  3 22:05:47 2015 Alaric
+** Last update Sat Jul  4 15:28:51 2015 Kevin Costa
 */
 
 #ifndef		GRAPHIC_H_
@@ -62,5 +62,8 @@ void		key_press(SDL_Event, t_map *, t_display *);
 int		input(t_display *, t_map *);
 void            select_pos(t_map *, t_square *, t_display *, SDL_Rect *);
 void            draw_inventory(t_map *, t_texture *, t_display *);
+void            draw_items(t_texture *, t_display *, t_square *, SDL_Rect);
+void            draw_bonus(t_texture *, t_display *, SDL_Rect);
+void            draw_items_next(t_texture *, t_display *, t_square *, SDL_Rect);
 
 #endif		/* !GRAPHIC_H_ */
