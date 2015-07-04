@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Fri Jul  3 13:54:53 2015 Kevin Costa
-** Last update Sat Jul  4 15:24:54 2015 Kevin Costa
+** Last update Sat Jul  4 19:46:45 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -90,6 +90,13 @@ void	draw_items_next(t_texture *img, t_display *disp, t_square *tmp, SDL_Rect De
   DestR.y = 420;
   SDL_SetRenderDrawColor(disp->renderer, 250, 250, 250, 250);
   SDL_RenderCopy(disp->renderer, ecr, NULL, &DestR);
+  sprintf(img->text, "Food : %lu", tmp->ressources.food);
+  img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);
+  ecr = SDL_CreateTextureFromSurface(disp->renderer, img->loader);
+  SDL_FreeSurface(img->loader);
+  DestR.y = 520;
+  SDL_SetRenderDrawColor(disp->renderer, 250, 250, 250, 250);
+  SDL_RenderCopy(disp->renderer, ecr, NULL, &DestR);
   draw_bonus(img, disp, DestR);
 }
 
@@ -108,4 +115,6 @@ void	draw_bonus(t_texture *img, t_display *disp, SDL_Rect DestR)
   SDL_RenderCopy(disp->renderer, img->phiras, NULL, &DestR);
   DestR.y = 415;
   SDL_RenderCopy(disp->renderer, img->thystame, NULL, &DestR);
+  DestR.y = 515;
+  SDL_RenderCopy(disp->renderer, img->food, NULL, &DestR);
 }
