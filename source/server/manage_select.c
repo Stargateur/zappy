@@ -31,7 +31,7 @@ static t_client	*read_client(fd_set const * const fd_read, t_client *list)
 	  if (write_cbuf(&client->cbuf, client->ca.cfd) <= 0)
 	    list = sup_client(client);
 	  else
-	    if (clock_gettime(CLOCK_MONOTONIC, &client->time) == -1)
+	    if (clock_gettime(CLOCK_MONOTONIC_RAW, &client->time) == -1)
 	      {
 		perror("clock_gettime :");
 		list = sup_client(client);

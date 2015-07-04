@@ -31,7 +31,7 @@ t_client	*add_client(t_client * const list, int const sfd)
 
   if ((new = malloc(sizeof(*new))) == NULL)
     return (NULL);
-  if (clock_gettime(CLOCK_MONOTONIC, &new->time) == -1)
+  if (clock_gettime(CLOCK_MONOTONIC_RAW, &new->time) == -1)
     {
       free(new);
       perror("clock_gettime : ");

@@ -92,7 +92,7 @@ t_player		*init_player(t_map *map, char * const team,
   player->coord.y = y % map->height;
   player->dir = random() % (EAST + 1);
   player->range = 1;
-  if (clock_gettime(CLOCK_MONOTONIC, &player->food) == -1)
+  if (clock_gettime(CLOCK_MONOTONIC_RAW, &player->food) == -1)
     {
       perror("clock_gettime :");
       free(player);

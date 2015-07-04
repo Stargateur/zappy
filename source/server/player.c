@@ -39,7 +39,7 @@ bool            add_action(t_player * const player, char * const str,
   if ((action = parser(str, t)) == NULL)
     return (true);
   if (player->action == NULL)
-    if (clock_gettime(CLOCK_MONOTONIC, &player->act) == -1)
+    if (clock_gettime(CLOCK_MONOTONIC_RAW, &player->act) == -1)
       {
 	perror("clock_gettime :");
 	return (true);

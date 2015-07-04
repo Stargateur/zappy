@@ -65,7 +65,7 @@ bool		do_action(t_game *game)
   if (game == NULL)
     return (true);
   ret = true;
-  if (clock_gettime(CLOCK_MONOTONIC, &actual_time) == -1)
+  if (clock_gettime(CLOCK_MONOTONIC_RAW, &actual_time) == -1)
     {
       perror("clock_gettime :");
       return (true);

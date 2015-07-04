@@ -20,7 +20,7 @@ static bool	kill_timeout(t_time *client, t_time const * const timeout)
 {
   t_time	time;
 
-  if (clock_gettime(CLOCK_MONOTONIC, &time) == -1)
+  if (clock_gettime(CLOCK_MONOTONIC_RAW, &time) == -1)
     {
       perror("clock_gettime :");
       return (true);
