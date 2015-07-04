@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 22:43:36 2015 Antoine Plaskowski
-** Last update Sat Jul  4 23:29:25 2015 Antoine Plaskowski
+** Last update Sun Jul  5 01:28:05 2015 Antoine Plaskowski
 */
 
 #include	"game.h"
@@ -14,4 +14,8 @@
 
 bool		avance(t_game *game, t_player *player, char *arg)
 {
+  if (game == NULL || player == NULL || arg == NULL)
+    return (true);
+  move(&game->map, player);
+  return (false);
 }

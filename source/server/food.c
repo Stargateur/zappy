@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 11:34:29 2015 Antoine Plaskowski
-** Last update Sat Jul  4 23:48:39 2015 Antoine Plaskowski
+** Last update Sun Jul  5 01:26:50 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -22,16 +22,12 @@ t_player	*food(t_player *player, t_time const *food, t_time act)
     {
       if (player->inv.food == 0)
 	return (delete_player(player));
-      printf("ok 1\n");
       if (add_ressource(&player->inv, FOOD, 1, false) == true)
 	return (delete_player(player));
-      printf("ok 2\n");
       if (time_sub(&act, food) == true)
 	return (delete_player(player));
-      printf("ok 3\n");
       if (time_add(&player->food, food) == true)
 	return (delete_player(player));
-      printf("ok 4\n");
     }
   return (player);
 }
