@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:12:11 2015 Antoine Plaskowski
-** Last update Fri Jul  3 17:59:47 2015 Alaric
+** Last update Sat Jul  4 14:57:55 2015 Antoine Plaskowski
 */
 
 #ifndef		GAME_H_
@@ -38,5 +38,6 @@ struct		s_game
 };
 
 t_game		*init_game(t_game * const game, char **argv, int const argc);
+void		delete_game(t_game * const game);
 
 #endif		/* !GAME_H_ */

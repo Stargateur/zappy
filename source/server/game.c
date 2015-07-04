@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Wed Jul  1 06:24:52 2015 Antoine Plaskowski
+** Last update Sat Jul  4 15:00:11 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -37,4 +37,12 @@ t_game		*init_game(t_game * const game, char **argv, int const argc)
       game->team[i].team = game->option.team[i];
     }
   return (game);
+}
+
+void		delete_game(t_game * const game)
+{
+  if (game == NULL)
+    return;
+  free(game->team);
+  free_map(&game->map);
 }

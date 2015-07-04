@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sat Jul  4 11:32:04 2015 Antoine Plaskowski
+** Last update Sat Jul  4 14:57:22 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -59,7 +59,7 @@ static t_client	*game_select(t_game *game, t_client *client, int sfd)
 {
   t_time	s_time;
 
-  set_s_time(game->player, &s_time);
+  do_action(game->player, &s_time);
   client = manage_select(client, &s_time, sfd);
   get_cmd(game, client);
   client = kill_client(client);
@@ -82,7 +82,7 @@ int		main(int argc, char **argv)
   t_client	*client;
   t_game	game;
 
-  init_graph(&display, &texture);
+  /* init_graph(&display, &texture); */
   srandom((unsigned int)time(NULL));
   client = NULL;
   if (init_game(&game, argv, argc) == NULL)
@@ -93,11 +93,12 @@ int		main(int argc, char **argv)
   while (g_keep_running == true)
     {
       client = game_select(&game, client, sfd);
-      graphic(&display, &texture, &game);
+      /* graphic(&display, &texture, &game); */
     }
   while (client != NULL)
     client = sup_client(client);
   printf("Bye\n");
   close(sfd);
+  delete_game(&game);
   return (0);
 }

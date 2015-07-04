@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 13:23:18 2015 Antoine Plaskowski
-** Last update Sat Jul  4 13:25:07 2015 Antoine Plaskowski
+** Last update Sat Jul  4 13:51:40 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -27,6 +27,20 @@ bool		time_sub(t_time * const a, t_time const * const b)
       a->tv_sec -= 1;
     }
   a->tv_nsec -= b->tv_nsec;
+  return (false);
+}
+
+bool		time_abb(t_time * const a, t_time const * const b)
+{
+  if (a == NULL || b == NULL)
+    return (true);
+  a->tv_sec += b->tv_sec;
+  if (a->tv_nsec + b->tv_nsec >= NANO_BY_SEC)
+    {
+      a->tv_nsec -= NANO_BY_SEC;
+      a->tv_sec += 1;
+    }
+  a->tv_nsec += b->tv_nsec;
   return (false);
 }
 

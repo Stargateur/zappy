@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:24 2015 Antoine Plaskowski
-** Last update Sat Jul  4 13:33:15 2015 Antoine Plaskowski
+** Last update Sat Jul  4 14:45:58 2015 Antoine Plaskowski
 */
 
 #ifndef		ACTION_H_
@@ -17,6 +17,7 @@ typedef	struct	s_action	t_action;
 
 # include	"node.h"
 # include	"parser.h"
+# include	"player.h"
 # include	"time_utils.h"
 
 struct		s_action
@@ -29,5 +30,6 @@ struct		s_action
 };
 
 bool		show_action(t_action *action);
+bool		do_player(t_player *player, t_time *s_time);
 
 #endif		/* !ACTION_H_ */
