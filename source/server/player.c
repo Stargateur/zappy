@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Sun Jul  5 17:56:42 2015 Antoine Plaskowski
+** Last update Sun Jul  5 21:45:22 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -84,7 +84,6 @@ t_player	*delete_player(t_player *player)
   if (player->client != NULL)
     {
       add_string(player->client, MORT);
-      player->client->to_kill = true;
       player->client->player = NULL;
     }
   return (sup_node(&player->node));
