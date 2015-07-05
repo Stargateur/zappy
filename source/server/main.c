@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sun Jul  5 06:31:53 2015 Antoine Plaskowski
+** Last update Sun Jul  5 14:55:02 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -102,7 +102,6 @@ int		main(int argc, char **argv)
   srandom((unsigned int)time(NULL));
   if (init_game(&game, argv, argc) == NULL)
     return (1);
-  show_option(&game.option);
   if (pthread_create(&pthread, NULL, (void *(*)(void *))&graphic, &game) != 0)
     return (false);
   if (game_select(&game) == true)

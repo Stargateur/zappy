@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Sun Jul  5 10:53:13 2015 Antoine Plaskowski
+** Last update Sun Jul  5 14:54:48 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -54,7 +54,6 @@ static void	short_vector(t_v2d *v, t_map *map)
   diff_vector(v, origin.x - m.x, origin.y);
   diff_vector(v, origin.x, origin.y + m.y);
   diff_vector(v, origin.x, origin.y - m.y);
-  printf("%ld, %ld\n", v->x, v->y);
 }
 
 static t_sound	true_sound(t_sound s, t_dir dir)
@@ -79,8 +78,6 @@ static t_sound	get_sound(t_map *map, t_player *dest, t_player *origin)
   double	angle;
   size_t	i;
 
-  printf("%lu et %lu et %d\n", dest->coord.x, dest->coord.y, dest->dir);
-  printf("%lu et %lu et %d\n", origin->coord.x, origin->coord.y, origin->dir);
   if (map == NULL || dest == NULL || origin == NULL)
     return (S_HERE);
   vector.x = (intmax_t)origin->coord.x - (intmax_t)dest->coord.x;
