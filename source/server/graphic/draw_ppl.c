@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jul  3 14:48:57 2015 Alaric
-** Last update Sun Jul  5 19:53:05 2015 Kevin Costa
+** Last update Sun Jul  5 20:50:44 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -24,13 +24,13 @@ void		select_aff_ppl(t_display *d, t_texture *img, t_player *tmp,
   SrcR.h = 24;
   SrcR.y = 0;
   if (tmp->dir == 0)
-    SrcR.x = 24;
-  else if (tmp->dir == 1)
     SrcR.x = 72;
+  else if (tmp->dir == 1)
+    SrcR.x = 24;
   else if (tmp->dir == 2)
-    SrcR.x = 0;
-  else if (tmp->dir == 3)
     SrcR.x = 48;
+  else if (tmp->dir == 3)
+    SrcR.x = 0;
   SDL_RenderCopy(d->renderer, img->cursor, &SrcR, &DestR);
 }
 
