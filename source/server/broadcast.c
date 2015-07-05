@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Sun Jul  5 03:45:35 2015 Antoine Plaskowski
+** Last update Sun Jul  5 04:07:50 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -58,7 +58,7 @@ static void	short_vector(t_v2d *v, t_map *map)
   printf("%ld, %ld\n", v->y, v->x);
 }
 
-static t_sound	minmax(t_v2d *vector)
+static t_sound	minmax(t_v2d *vector, t_dir dir)
 {
   double	angle;
   size_t	i;
@@ -66,7 +66,19 @@ static t_sound	minmax(t_v2d *vector)
   angle = atan2(vector->y, vector->x);
   for (i = 0; i < g_s_minmax; i++)
     if (angle >= g_minmax[i].min && angle <= g_minmax[i].max)
-      return (g_minmax[i].sound);
+      {
+	switch (dir)
+	  {
+	  case NORTH:
+	    return (g_minmax[i].sound);
+	  case WEST:
+	    return ((g_minmax[i].sound + 2) % (S_NORTH_EAST + 1));
+	  case SOUTH:
+	    return ((g_minmax[i].sound + 4) % (S_NORTH_EAST + 1));
+	  case EAST:
+	    return ((g_minmax[i].sound + 6) % (S_NORTH_EAST + 1));
+	  }
+      }
     else
       printf("%f, %f, %f\n", angle, g_minmax[i].min, g_minmax[i].max);
   return (S_HERE);
@@ -87,7 +99,7 @@ static t_sound	get_sound(t_map *map, t_player *dest, t_player *origin)
     return (vector.y < 0 ? S_SOUTH : S_NORTH);
   if (vector.y == 0)
     return (vector.x < 0 ? S_WEST : S_EAST);
-  return (minmax(&vector));
+  return (minmax(&vector, dest->dir));
 }
 
 bool		broadcast(t_game *game, t_player *player, char *arg)
@@ -103,7 +115,7 @@ bool		broadcast(t_game *game, t_player *player, char *arg)
     {
       if (tmp != player && tmp->client != NULL)
 	{
-	  sound = get_sound(&game->map, player, tmp);
+	  sound = get_sound(&game->map, tmp, player);
 	  str = malloc_vsnprintf("message %d,%s", sound, arg);
 	  add_string(tmp->client, str);
 	  free(str);

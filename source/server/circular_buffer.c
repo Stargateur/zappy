@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 19:39:37 2015 zwertv_e
-** Last update Thu Jul  2 15:09:29 2015 Antoine Plaskowski
+** Last update Sun Jul  5 04:11:16 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -87,7 +87,8 @@ ssize_t		write_cbuf(t_cbuf * const cbuf, int const fd)
 
   if ((i = read(fd, buffer, CBUF_LEN)) <= 0)
     {
-      perror("read");
+      if (i < 0)
+	perror("read");
       return (i);
     }
   if (cbuf->w == cbuf->r && cbuf->has_read == false)

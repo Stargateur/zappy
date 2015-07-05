@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Sun Jul  5 03:46:11 2015 Antoine Plaskowski
+** Last update Sun Jul  5 03:59:53 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H_
@@ -14,7 +14,7 @@
 typedef	struct	s_lvlup	t_lvlup;
 typedef	struct	s_player	t_player;
 
-typedef	enum
+typedef	enum	e_dir
   {
     NORTH = 0,
     SOUTH = 1,
