@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Sun Jul  5 22:51:06 2015 Alaric
+** Last update Sun Jul  5 23:42:18 2015 Alaric
 */
 
 #ifndef		GRAPHIC_H_
@@ -58,7 +58,7 @@ typedef struct s_display
 void		draw_grid(t_map *, t_display *);
 SDL_Surface	*Bmp_Loader(char *);
 SDL_Window	*init_video(void);
-t_display	*init_renderer(SDL_Window *, t_display *);
+void		init_renderer(SDL_Window *, t_display *);
 void		init_texture(t_texture *, SDL_Renderer *);
 void		init_food_text(t_texture *, SDL_Renderer *);
 void		draw_stone(t_map *, t_texture *, t_display *);

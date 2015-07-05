@@ -5,11 +5,11 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:08:40 2015 Alaric
-** Last update Sun Jul  5 21:53:13 2015 Antoine Plaskowski
+** Last update Sun Jul  5 23:43:45 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
-#include	<SDL2/SDL_image.h>
+#include	<SDL/SDL_image.h>
 #include	<unistd.h>
 #include	"graphic.h"
 
