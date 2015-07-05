@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Thu Jun 18 16:44:37 2015 Alaric
-** Last update Thu Jul  2 19:12:23 2015 Antoine Plaskowski
+** Last update Sun Jul  5 19:49:00 2015 Kevin Costa
 */
 
 #include	<SDL/SDL_ttf.h>
@@ -13,11 +13,11 @@
 #include	<SDL/SDL_image.h>
 #include	"color.h"
 
-void            colorPixel(SDL_Surface *grid, RGBcolor col)
+void		colorPixel(SDL_Surface *grid, RGBcolor col)
 {
-  Uint32        color;
-  int           bpp;
-  Uint8         *p;
+  Uint32	color;
+  int		bpp;
+  Uint8		*p;
 
   color = SDL_MapRGB(grid->format, col.r, col.g, col.b);
   SDL_LockSurface(grid);

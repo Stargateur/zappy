@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Fri Jul  3 13:54:53 2015 Kevin Costa
-** Last update Sun Jul  5 17:58:48 2015 Kevin Costa
+** Last update Sun Jul  5 19:51:19 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -40,8 +40,8 @@ void		draw_inventory(t_map *map, t_texture *img, t_display *disp)
     }
 }
 
-void	draw_items(t_texture *img, t_display *disp,
-		   t_square *tmp, SDL_Rect DestR)
+void		draw_items(t_texture *img, t_display *disp,
+			   t_square *tmp, SDL_Rect DestR)
 {
   SDL_Texture	*ecr;
   SDL_Color	textColor = {250, 250, 250, 0};
@@ -70,8 +70,8 @@ void	draw_items(t_texture *img, t_display *disp,
   draw_items_next(img, disp, tmp, DestR);
 }
 
-void	draw_items_next(t_texture *img, t_display *disp,
-			t_square *tmp, SDL_Rect DestR)
+void		draw_items_next(t_texture *img, t_display *disp,
+				t_square *tmp, SDL_Rect DestR)
 {
   SDL_Texture	*ecr;
   SDL_Color	textColor = {250, 250, 250, 0};
@@ -100,7 +100,7 @@ void	draw_items_next(t_texture *img, t_display *disp,
   draw_bonus(img, disp, DestR);
 }
 
-void	draw_bonus(t_texture *img, t_display *disp, SDL_Rect DestR)
+void		draw_bonus(t_texture *img, t_display *disp, SDL_Rect DestR)
 {
   DestR.w = (int)disp->_shape_max;
   DestR.h = (int)disp->_shape_max;

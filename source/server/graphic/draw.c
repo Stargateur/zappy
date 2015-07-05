@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Sun Jul  5 17:45:38 2015 Kevin Costa
+** Last update Sun Jul  5 19:51:05 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -34,7 +34,7 @@ void		draw_grid(t_map *map, t_display *d)
     }
 }
 
-void            select_pos(t_map *m, t_square *t, t_display *d,
+void		select_pos(t_map *m, t_square *t, t_display *d,
 			   SDL_Rect *DestR)
 {
   if (t->coord.x < (d->_nb_case + d->_horiz) - m->width
