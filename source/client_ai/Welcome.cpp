@@ -52,8 +52,7 @@ void    Perso::welcome()
   if (res != -1)
     {
       std::cout << welcome;
-      res = write(this->getClient(), this->getTeamName(), (size_t)this->getTeam().size\
-		  () + 1);
+      res = write(this->getClient(), this->getTeamName(), (size_t)this->getTeam().size() + 1);
       if (res != -1)
         {
           num_client.resize(20);

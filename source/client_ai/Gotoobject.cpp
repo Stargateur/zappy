@@ -1,6 +1,6 @@
 #include	"Perso.hpp"
 
-void			Perso::go_up(int *objx, int *objy, t_way *tmpway)
+void			Perso::go_up(int *objy, t_way *tmpway)
 {
   //std::cout << "On va en haut !" << std::endl;
   if (*tmpway == LEFT)
@@ -50,7 +50,7 @@ void			Perso::go_up(int *objx, int *objy, t_way *tmpway)
   *tmpway = UP;
 }
 
-void			Perso::go_down(int *objx, int *objy, t_way *tmpway)
+void			Perso::go_down(int *objy, t_way *tmpway)
 {
   //std::cout << "On va en bas !" << std::endl;
   if (*tmpway == LEFT)
@@ -100,7 +100,7 @@ void			Perso::go_down(int *objx, int *objy, t_way *tmpway)
   *tmpway = DOWN;
 }
 
-void			Perso::go_left(int *objx, int *objy, t_way *tmpway)
+void			Perso::go_left(int *objx, t_way *tmpway)
 {
   //std::cout << "On va a gauche !" << std::endl;
   if (*tmpway == UP)
@@ -150,7 +150,7 @@ void			Perso::go_left(int *objx, int *objy, t_way *tmpway)
   *tmpway = LEFT;
 }
 
-void			Perso::go_right(int *objx, int *objy, t_way *tmpway)
+void			Perso::go_right(int *objx, t_way *tmpway)
 {
   //std::cout << "On va a droite !" << std::endl;
   if (*tmpway == UP)
@@ -207,21 +207,17 @@ void                    Perso::go_to_obj(int *coord_obj)
   int                   objy = coord_obj[1];
   t_way			tmpway = this->_way;
 
-  std::cout << "IA a obj : x = " << objx << " y = " << objy << std::endl;
   while (find == false)
     {
       if (objx > 0)
-	this->go_right(&objx, &objy, &tmpway);
+	this->go_right(&objx, &tmpway);
       else if (objx < 0)
-	this->go_left(&objx, &objy, &tmpway);
+	this->go_left(&objx, &tmpway);
       else if (objy > 0)
-	this->go_up(&objx, &objy, &tmpway);
+	this->go_up(&objy, &tmpway);
       else if (objy < 0)
-	this->go_down(&objx, &objy, &tmpway);
+	this->go_down(&objy, &tmpway);
       if ((objx == 0) && (objy == 0))
-	{
-	  std::cout << "Fini !" << std::endl;
-	  find = true;
-	}
+	find = true;
     }
 }

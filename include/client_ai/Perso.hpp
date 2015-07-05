@@ -74,10 +74,10 @@ public:
   void		put_objects_in_case(int x, int y, std::string answer, int);
   int		*find_obj_in_map(t_case obj);
   void		go_to_obj(int *coords_obj);
-  void		go_up(int *, int *, t_way *);
-  void		go_down(int *, int *, t_way *);
-  void		go_left(int *, int *, t_way *);
-  void		go_right(int *, int *, t_way *);
+  void		go_up(int *, t_way *);
+  void		go_down(int *, t_way *);
+  void		go_left(int *, t_way *);
+  void		go_right(int *, t_way *);
   int		count_obj_by_case(const std::string &, const::std::string);
   void		search_food();
   void		search_linemate();
