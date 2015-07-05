@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sun Jul  5 18:28:49 2015 Antoine Plaskowski
+** Last update Sun Jul  5 19:35:18 2015 Kevin Costa
 */
 
 #include        <unistd.h>
@@ -55,6 +55,7 @@ static void	*graphic(t_game *game)
       pthread_mutex_lock(&game->mutex);
       input(&display, &game->map);
       draw_stone(&game->map, &texture, &display);
+      draw_egg(game, &texture, &display);
       draw_ppl(game, &texture, &display);
       draw_grid(&game->map, &display);
       draw_select(&display, &game->map, &texture);
