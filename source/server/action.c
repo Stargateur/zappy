@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Sat Jul  4 23:40:42 2015 Antoine Plaskowski
+** Last update Sun Jul  5 02:59:48 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -56,7 +56,7 @@ static bool	aux(t_game *game, t_player *player, t_time act, bool ret)
       exec_action(game, player, player->action);
       time_add(&player->act, &player->action->time);
       time_sub(&act, &player->action->time);
-      player->action = player->action->node.next;
+      player->action = delete_action(player->action);
       if (player->action == NULL)
 	return (true);
     }

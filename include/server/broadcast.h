@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 07:45:51 2015 Antoine Plaskowski
-** Last update Sat Jul  4 22:59:37 2015 Antoine Plaskowski
+** Last update Sun Jul  5 03:40:27 2015 Antoine Plaskowski
 */
 
 #ifndef		BROADCAST_H_
@@ -20,6 +20,7 @@ typedef	struct	s_minmax	t_minmax;
 
 typedef	enum	e_sound
   {
+    S_HERE = 0,
     S_EAST = 1,
     S_NORTH_EAST = 2,
     S_NORTH = 3,
@@ -27,8 +28,7 @@ typedef	enum	e_sound
     S_WEST = 5,
     S_SOUTH_WEST = 6,
     S_SOUTH = 7,
-    S_SOUTH_EAST = 8,
-    S_HERE
+    S_SOUTH_EAST = 8
   }		t_sound;
 
 typedef	struct	s_v2d	t_v2d;
@@ -50,6 +50,5 @@ struct		s_minmax
 };
 
 bool		broadcast(t_game *game, t_player *player, char *str);
-t_sound		sound(t_map *map, t_player *player_a, t_player *player_b);
 
 #endif		/* !BROADCAST_H_ */

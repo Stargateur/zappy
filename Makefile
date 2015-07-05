@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Sun Jul  5 02:09:42 2015 Antoine Plaskowski
+## Last update Sun Jul  5 03:03:44 2015 Antoine Plaskowski
 ##
 
 SERVER		=	zappy_server
@@ -29,7 +29,7 @@ LIB		=	-l m -l pthread -l SDL2 -l SDL2_ttf
 INCLUDE		=	-I include -I include/server -I include/client_ai
 
 CFLAGS		+=	-Wall -Wextra -O$(LEVEL)
-#CFLAGS		+=	-ansi -pedantic
+CFLAGS		+=	-ansi -pedantic
 CFLAGS		+=	$(INCLUDE)
 CFLAGS          +=      -D _POSIX_SOURCE -D _GNU_SOURCE -D _XOPEN_SOURCE
 

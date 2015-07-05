@@ -5,11 +5,11 @@
 ** Login   <alix amoureux@epitech.net>
 ** 
 ** Started on  Fri Jun 19 19:01:23 2015 amoure_a
-** Last update Tue Jun 30 16:12:46 2015 Jérémy MATHON
+** Last update Sun Jul  5 03:46:54 2015 Antoine Plaskowski
 */
 
-#ifndef			SAVE_H
-# define		SAVE_H
+#ifndef			SAVE_H_
+# define		SAVE_H_
 
 # include		<list>
 # include		<iostream>

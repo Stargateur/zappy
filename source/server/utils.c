@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 15:38:21 2015 Antoine Plaskowski
-** Last update Sat Jul  4 22:20:52 2015 Antoine Plaskowski
+** Last update Sun Jul  5 03:52:51 2015 Antoine Plaskowski
 */
 
 #include	<stddef.h>
@@ -46,17 +46,17 @@ bool		write_fd(char const * const str, int const fd)
 char		*malloc_vsnprintf(char *format, ...)
 {
   va_list	ap;
-  va_list	cpy;
   char		*str;
   int		len;
 
   va_start(ap, format);
-  va_copy(cpy, ap);
   if ((len = vsnprintf(NULL, 0, format, ap)) < 0)
     return (NULL);
+  va_end(ap);
   if ((str = malloc(sizeof(*str) * ((size_t)len + 1))) == NULL)
     return (NULL);
-  if (snprintf(str, (size_t)len + 1, format, cpy) != len)
+  va_start(ap, format);
+  if (vsnprintf(str, (size_t)len + 1, format, ap) != len)
     {
       free(str);
       return (NULL);

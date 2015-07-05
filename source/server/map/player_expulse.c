@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 17:19:17 2015 zwertv_e
-** Last update Sat Jul  4 23:55:21 2015 Antoine Plaskowski
+** Last update Sun Jul  5 02:25:24 2015 Antoine Plaskowski
 */
 
 #include	"map.h"
@@ -37,16 +37,21 @@ bool		expulse_players(t_game * const game,
 				t_player const * const player)
 {
   t_player	*tmp;
+  bool		ret;
 
   if (map == NULL || player == NULL)
     return (true);
+  ret = true;
   tmp = first_node(&game->player->node);
   while (tmp != NULL)
     {
       if (tmp != player && tmp->coord.x == player->coord.x &&
 	  tmp->coord.y == player->coord.y)
-	expulse_player(map, player, tmp);
+	{
+	  ret = false;
+	  expulse_player(map, player, tmp);
+	}
       tmp = tmp->node.next;
     }
-  return (false);
+  return (ret);
 }

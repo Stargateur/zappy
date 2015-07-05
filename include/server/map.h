@@ -5,11 +5,11 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:12:07 2015 zwertv_e
-** Last update Fri Jul  3 18:05:00 2015 Alaric
+** Last update Sun Jul  5 03:46:01 2015 Antoine Plaskowski
 */
 
-#ifndef		MAP_H__
-# define	MAP_H__
+#ifndef		MAP_H_
+# define	MAP_H_
 
 # include	<stdbool.h>
 # include	<stddef.h>
@@ -63,4 +63,4 @@ size_t		prev_y(t_map const * const map, size_t y);
 size_t	        next_y(t_map const * const map, size_t y);
 t_square	*find_square(t_square *square, size_t const x, size_t const y);
 
-#endif		/* MAP_H__ */
+#endif		/* MAP_H_ */
