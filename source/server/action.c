@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Mon Jun 29 18:18:56 2015 Antoine Plaskowski
-** Last update Sun Jul  5 06:04:56 2015 Antoine Plaskowski
+** Last update Sun Jul  5 17:54:53 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -15,6 +15,7 @@
 #include	"action.h"
 #include	"message.h"
 #include	"food.h"
+#include	"incantation.h"
 
 bool		show_action(t_action *action)
 {
@@ -59,6 +60,7 @@ static bool	aux(t_game *game, t_player *player, t_time act, bool ret)
       player->action = delete_action(player->action);
       if (player->action == NULL)
 	return (true);
+      incantation_en_cours(player);
     }
   cpy_action = player->action->time;
   time_sub(&cpy_action, &act);

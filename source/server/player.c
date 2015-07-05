@@ -5,13 +5,14 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Sun Jul  5 04:29:19 2015 Antoine Plaskowski
+** Last update Sun Jul  5 17:56:42 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
 #include	<stdio.h>
 #include	"player.h"
 #include	"message.h"
+#include	"incantation.h"
 
 t_player	*find_free_player(t_player *player, char * const team)
 {
@@ -40,12 +41,17 @@ bool            add_action(t_player * const player, char * const str,
   if ((action = parser(str, t)) == NULL)
     return (true);
   if (player->action == NULL)
-    if (clock_gettime(CLOCK_MONOTONIC_RAW, &player->act) == -1)
-      {
-	perror("clock_gettime :");
-	return (true);
-      }
-  player->action = put_node(&player->action->node, &action->node);
+    {
+      if (clock_gettime(CLOCK_MONOTONIC_RAW, &player->act) == -1)
+	{
+	  perror("clock_gettime :");
+	  return (true);
+	}
+      player->action = put_node(&player->action->node, &action->node);
+      incantation_en_cours(player);
+    }
+  else
+    player->action = put_node(&player->action->node, &action->node);
   if (player->action == NULL)
     return (true);
   return (false);
