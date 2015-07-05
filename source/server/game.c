@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:16:27 2015 Antoine Plaskowski
-** Last update Sun Jul  5 14:25:53 2015 Antoine Plaskowski
+** Last update Sun Jul  5 19:41:42 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -65,6 +65,10 @@ void		delete_game(t_game * const game)
 {
   if (game == NULL)
     return;
+  while (game->player != NULL)
+    game->player = delete_player(game->player);
+  while (game->egg != NULL)
+    game->egg = sup_node(&game->egg->node);
   free(game->team);
   free_map(&game->map);
 }

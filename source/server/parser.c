@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Sun Jul  5 06:16:21 2015 Antoine Plaskowski
+** Last update Sun Jul  5 19:45:03 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -78,5 +78,6 @@ t_action	*parser(char *str, size_t const t)
   for (i = 0; i < g_size; i++)
     if (strncmp(str, g_cmd[i].cmd, g_cmd[i].len_cmd) == 0)
       return (create_action(str, str + j, g_cmd + i, t));
+  free(str);
   return (create_action(NULL, NULL, NULL, 0));
 }
