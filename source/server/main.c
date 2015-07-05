@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sun Jul  5 05:51:31 2015 Antoine Plaskowski
+** Last update Sun Jul  5 06:31:53 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -67,45 +67,49 @@ static void	*graphic(t_game *game)
   return (game);
 }
 
-static t_client	*game_select(t_game *game, t_client *client, int sfd)
+static bool	game_select(t_game *game)
 {
-  pthread_mutex_lock(&game->mutex);
-  get_cmd(game, client);
-  client = kill_client(client);
-  hatches_egg(game);
-  map_generate(&game->map);
-  pthread_mutex_unlock(&game->mutex);
-  if (do_action(game) == true)
-    client = manage_select(client, NULL, sfd);
-  else
-    client = manage_select(client, &game->s_time, sfd);
-  return (client);
+  int		sfd;
+  t_client	*client;
+
+  if ((sfd = init_socket(game->option.p)) == -1)
+    return (true);
+  client = NULL;
+  while (g_keep_running == true)
+    {
+      pthread_mutex_lock(&game->mutex);
+      get_cmd(game, client);
+      client = kill_client(client);
+      hatches_egg(game);
+      map_generate(&game->map);
+      pthread_mutex_unlock(&game->mutex);
+      if (do_action(game) == true)
+	client = manage_select(client, NULL, sfd);
+      else
+	client = manage_select(client, &game->s_time, sfd);
+    }
+  while (client != NULL)
+    client = sup_client(client);
+  close(sfd);
+  return (false);
 }
 
 int		main(int argc, char **argv)
 {
   pthread_t	pthread;
-  int		sfd;
-  t_client	*client;
   t_game	game;
 
   srandom((unsigned int)time(NULL));
-  client = NULL;
   if (init_game(&game, argv, argc) == NULL)
     return (1);
   show_option(&game.option);
   if (pthread_create(&pthread, NULL, (void *(*)(void *))&graphic, &game) != 0)
     return (false);
-  if ((sfd = init_socket(game.option.p)) == -1)
-    return (1);
-  while (g_keep_running == true)
-    client = game_select(&game, client, sfd);
+  if (game_select(&game) == true)
+    g_keep_running = false;
   if (pthread_join(pthread, NULL) != 0)
     return (false);
-  while (client != NULL)
-    client = sup_client(client);
   printf("Bye\n");
-  close(sfd);
   delete_game(&game);
   return (0);
 }

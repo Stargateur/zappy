@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Sun Jul  5 04:07:50 2015 Antoine Plaskowski
+** Last update Sun Jul  5 06:23:51 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -116,7 +116,7 @@ bool		broadcast(t_game *game, t_player *player, char *arg)
       if (tmp != player && tmp->client != NULL)
 	{
 	  sound = get_sound(&game->map, tmp, player);
-	  str = malloc_vsnprintf("message %d,%s", sound, arg);
+	  str = malloc_vsnprintf("message %d,%s\n", sound, arg);
 	  add_string(tmp->client, str);
 	  free(str);
 	}

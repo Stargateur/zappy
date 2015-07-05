@@ -5,13 +5,14 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 22:43:36 2015 Antoine Plaskowski
-** Last update Sun Jul  5 05:50:49 2015 Antoine Plaskowski
+** Last update Sun Jul  5 06:18:34 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
 #include	<stdio.h>
 #include	"game.h"
 #include	"player.h"
+#include	"message.h"
 #include	"egg.h"
 
 t_egg		*add_egg(t_egg *list, t_coord *coord, t_team *team, size_t t)
@@ -83,5 +84,6 @@ bool		egg(t_game *game, t_player *player, char *arg)
   if (game == NULL || player == NULL || arg == NULL)
     return (true);
   game->egg = add_egg(game->egg, &player->coord, player->team, game->option.t);
+  add_string(player->client, OK);
   return (false);
 }
