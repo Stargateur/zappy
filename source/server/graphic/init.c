@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Sun Jul  5 21:14:30 2015 Antoine Plaskowski
+** Last update Sun Jul  5 23:41:53 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -32,7 +32,7 @@ SDL_Window	*init_video(void)
   return (fenetre);
 }
 
-t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
+void		init_renderer(SDL_Window *fenetre, t_display *display)
 {
   int		w;
   int		h;
@@ -54,7 +54,6 @@ t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
       printf("%s\n", SDL_GetError());
       exit(1);
     }
-  return (display);
 }
 
 void		init_texture(t_texture *text, SDL_Renderer *renderer)
