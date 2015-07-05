@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Apr  9 16:43:00 2015 zwertv_e
-** Last update Sat Jul  4 22:03:10 2015 Antoine Plaskowski
+** Last update Sun Jul  5 02:18:17 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -68,6 +68,7 @@ bool		write_pos_player(t_client * const client)
   if (snprintf(str, (size_t)len + 1, "%lu %lu\n",
 	       client->player->coord.x, client->player->coord.y) != len)
     return (true);
+  client->to_write = NULL;
   add_string(client, str);
   free(str);
   return (false);
