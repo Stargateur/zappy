@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 22:43:36 2015 Antoine Plaskowski
-** Last update Sun Jul  5 14:25:33 2015 Antoine Plaskowski
+** Last update Sun Jul  5 19:35:04 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -84,3 +84,4 @@ bool		egg(t_game *game, t_player *player, char *arg)
   add_string(player->client, OK);
   return (false);
 }
+
