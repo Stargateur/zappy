@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Sun Jul  5 07:19:45 2015 Antoine Plaskowski
+** Last update Sun Jul  5 10:53:13 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -22,7 +22,6 @@ static t_minmax	g_minmax[] =
     {M_PI_4 - M_PI_8, M_PI_4 + M_PI_8, S_NORTH_EAST},
     {M_PI_2 - M_PI_8, M_PI_2 + M_PI_8, S_NORTH},
     {M_PI_4 * 3 - M_PI_8, M_PI_4 * 3 + M_PI_8, S_NORTH_WEST},
-    {-M_PI - M_PI_8, M_PI + M_PI_8, S_WEST},
     {-M_PI_4 * 3 - M_PI_8, -M_PI_4 * 3 + M_PI_8, S_SOUTH_WEST},
     {-M_PI_2 - M_PI_8, -M_PI_2 + M_PI_8, S_SOUTH},
     {-M_PI_4 - M_PI_8, -M_PI_4 + M_PI_8, S_SOUTH_EAST},
@@ -55,21 +54,21 @@ static void	short_vector(t_v2d *v, t_map *map)
   diff_vector(v, origin.x - m.x, origin.y);
   diff_vector(v, origin.x, origin.y + m.y);
   diff_vector(v, origin.x, origin.y - m.y);
-  printf("%ld, %ld\n", v->y, v->x);
+  printf("%ld, %ld\n", v->x, v->y);
 }
 
-static t_sound	true_sound(t_sound sound, t_dir dir)
+static t_sound	true_sound(t_sound s, t_dir dir)
 {
   switch (dir)
     {
     case NORTH:
-      return (sound);
-    case WEST:
-      return ((sound + 2) % (S_NORTH_EAST + 1));
-    case SOUTH:
-      return ((sound + 4) % (S_NORTH_EAST + 1));
+      return (s);
     case EAST:
-      return ((sound + 6) % (S_NORTH_EAST + 1));
+      return (s + 2 > S_NORTH_EAST ? (s + 2) % S_NORTH_EAST : s + 2);
+    case SOUTH:
+      return (s + 4 > S_NORTH_EAST ? (s + 4) % S_NORTH_EAST : s + 4);
+    case WEST:
+      return (s + 6 > S_NORTH_EAST ? (s + 6) % S_NORTH_EAST : s + 6);
     }
   return (S_HERE);
 }
@@ -80,8 +79,8 @@ static t_sound	get_sound(t_map *map, t_player *dest, t_player *origin)
   double	angle;
   size_t	i;
 
-  printf("%lu et %lu\n", dest->coord.x, dest->coord.y);
-  printf("%lu et %lu\n", origin->coord.x, origin->coord.y);
+  printf("%lu et %lu et %d\n", dest->coord.x, dest->coord.y, dest->dir);
+  printf("%lu et %lu et %d\n", origin->coord.x, origin->coord.y, origin->dir);
   if (map == NULL || dest == NULL || origin == NULL)
     return (S_HERE);
   vector.x = (intmax_t)origin->coord.x - (intmax_t)dest->coord.x;
@@ -90,14 +89,14 @@ static t_sound	get_sound(t_map *map, t_player *dest, t_player *origin)
   if (vector.x == 0 && vector.y == 0)
     return (S_HERE);
   if (vector.x == 0)
-    return (vector.y < 0 ? S_SOUTH : S_NORTH);
+    return (true_sound(vector.y < 0 ? S_SOUTH : S_NORTH, dest->dir));
   if (vector.y == 0)
-    return (vector.x < 0 ? S_WEST : S_EAST);
+    return (true_sound(vector.x < 0 ? S_WEST : S_EAST, dest->dir));
   angle = atan2(vector.y, vector.x);
   for (i = 0; i < g_s_minmax; i++)
     if (angle >= g_minmax[i].min && angle <= g_minmax[i].max)
       return (true_sound(g_minmax[i].sound, dest->dir));
-  return (S_HERE);
+  return (true_sound(S_WEST, dest->dir));
 }
 
 bool		broadcast(t_game *game, t_player *player, char *arg)
