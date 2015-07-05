@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:44:00 2015 Antoine Plaskowski
-** Last update Wed Jul  1 05:57:10 2015 Antoine Plaskowski
+** Last update Sun Jul  5 14:08:02 2015 Antoine Plaskowski
 */
 
 #ifndef		OPTION_H_
@@ -17,6 +17,7 @@ typedef	struct	s_option	t_option;
 struct		s_option
 {
   char		*p;
+  char		*n;
   size_t	x;
   size_t	y;
   size_t	c;

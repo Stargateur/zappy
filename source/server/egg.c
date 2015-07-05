@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 22:43:36 2015 Antoine Plaskowski
-** Last update Sun Jul  5 06:18:34 2015 Antoine Plaskowski
+** Last update Sun Jul  5 14:25:33 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -70,10 +70,7 @@ bool		hatches_egg(t_game *game)
     {
       egg2 = egg->node.next;
       if (pop_egg(game, egg, act, &egg->timeout) == true)
-	{
-	  game->egg = sup_node(&egg->node);
-	  printf("je timeout un egg\n");
-	}
+	game->egg = sup_node(&egg->node);
       egg = egg2;
     }
   return (false);

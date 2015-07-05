@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Sat Jul  4 17:53:58 2015 Antoine Plaskowski
+** Last update Sun Jul  5 14:21:24 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -22,6 +22,7 @@ static t_option	*init_option(t_option * const option)
   if (option == NULL)
     return (NULL);
   option->p = "4242";
+  option->n = NULL;
   option->x = 42;
   option->y = 42;
   option->c = 1;
@@ -42,37 +43,36 @@ bool		show_option(t_option * const option)
   printf("population : %lu\n", option->c);
   printf("t : %lu\n", option->t);
   if (option->team != NULL)
-    for (i = 0; option->team[i] != NULL; i++)
-      printf("%lu : %s\n", i, option->team[i]);
+    {
+      for (i = 0; option->team[i] != NULL; i++)
+	printf("team = %lu : %s\n", i, option->team[i]);
+      if (option->n != NULL)
+	printf("team = %lu : %s\n", i, option->n);
+    }
   return (false);
 }
 
 static char	*set_option(t_option * const option, char **argv,
 			    int const c)
 {
-  switch (c)
-    {
-    case 'p':
-      option->p = optarg;
-      return (optarg);
-    case 'x':
-      option->x = strtoul(optarg, NULL, 10);
-      return (optarg);
-    case 'y':
-      option->y = strtoul(optarg, NULL, 10);
-      return (optarg);
-    case 'c':
-      option->c = strtoul(optarg, NULL, 10);
-      return (optarg);
-    case 't':
-      option->t = strtoul(optarg, NULL, 10);
-      return (optarg);
-    case 'h':
-      fprintf(stderr, "%s: [-p 4242] [-x 42] [-y 42] [-c 1] [-t 100]", *argv);
-      fprintf(stderr, " Team1 Team2 etc\n");
-      return (NULL);
-    }
-  return (NULL);
+  if (c == 'p')
+    option->p = optarg;
+  else if (c == 'n')
+    option->n = optarg;
+  else if (c == 'x')
+    option->x = strtoul(optarg, NULL, 10);
+  else if (c == 'y')
+    option->y = strtoul(optarg, NULL, 10);
+  else if (c == 'c')
+    option->c = strtoul(optarg, NULL, 10);
+  else if (c == 't')
+    option->t = strtoul(optarg, NULL, 10);
+  else if (c == 'h')
+    fprintf(stderr, "%s: [-p 4242] [-x 42] [-y 42] [-c 1] [-t 100]"
+	    " [-n team1 team2 etc}\n", *argv);
+  else
+    return (NULL);
+  return (optarg);
 }
 
 bool		get_option(t_option * const option, char **argv, int const argc)
@@ -84,10 +84,10 @@ bool		get_option(t_option * const option, char **argv, int const argc)
     return (true);
   ret = false;
   init_option(option);
-  while ((c = getopt(argc, argv, "hp:x:y:c:t:")) != -1)
+  while ((c = getopt(argc, argv, "hp:x:y:c:t:n:")) != -1)
     if (set_option(option, argv, c) == NULL)
       ret = true;
-  if (argv[optind] != NULL)
+  if (argv[optind] != NULL || option->n != NULL)
     option->team = argv + optind;
   return (ret);
 }
