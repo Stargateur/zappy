@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jun 18 18:34:46 2015 Antoine Plaskowski
-** Last update Sat Jul  4 22:57:57 2015 Antoine Plaskowski
+** Last update Sun Jul  5 06:16:21 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -53,12 +53,11 @@ static t_action	*create_action(char *str, char *arg, t_cmd *cmd, size_t t)
   action->str = str;
   action->arg = arg;
   action->cmd = cmd;
-  if (cmd != NULL)
-    if (time_div(&action->time, cmd->time, t) == true)
-      {
-	free(action);
-	return (NULL);
-      }
+  if (time_div(&action->time, cmd != NULL ? cmd->time : 0, t) == true)
+    {
+      free(action);
+      return (NULL);
+    }
   return (action);
 }
 
