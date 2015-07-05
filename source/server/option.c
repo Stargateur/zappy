@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:46:23 2015 Antoine Plaskowski
-** Last update Sun Jul  5 14:21:24 2015 Antoine Plaskowski
+** Last update Sun Jul  5 18:34:31 2015 Antoine Plaskowski
 */
 
 #include	<stdbool.h>
@@ -26,6 +26,7 @@ static t_option	*init_option(t_option * const option)
   option->x = 42;
   option->y = 42;
   option->c = 1;
+  option->g = false;
   option->t = 100;
   option->team = team;
   return (option);
@@ -52,13 +53,15 @@ bool		show_option(t_option * const option)
   return (false);
 }
 
-static char	*set_option(t_option * const option, char **argv,
-			    int const c)
+static bool	set_option(t_option * const option, char **argv,
+			   int const c)
 {
   if (c == 'p')
     option->p = optarg;
   else if (c == 'n')
     option->n = optarg;
+  else if (c == 'g')
+    option->g = true;
   else if (c == 'x')
     option->x = strtoul(optarg, NULL, 10);
   else if (c == 'y')
@@ -68,11 +71,14 @@ static char	*set_option(t_option * const option, char **argv,
   else if (c == 't')
     option->t = strtoul(optarg, NULL, 10);
   else if (c == 'h')
-    fprintf(stderr, "%s: [-p 4242] [-x 42] [-y 42] [-c 1] [-t 100]"
-	    " [-n team1 team2 etc}\n", *argv);
+    {
+      fprintf(stderr, "%s: [-p 4242] [-x 42] [-y 42] [-c 1] [-t 100]"
+	      " [-n team1 team2 etc] [-g]\n", *argv);
+      return (true);
+    }
   else
-    return (NULL);
-  return (optarg);
+    return (true);
+  return (false);
 }
 
 bool		get_option(t_option * const option, char **argv, int const argc)
@@ -84,8 +90,8 @@ bool		get_option(t_option * const option, char **argv, int const argc)
     return (true);
   ret = false;
   init_option(option);
-  while ((c = getopt(argc, argv, "hp:x:y:c:t:n:")) != -1)
-    if (set_option(option, argv, c) == NULL)
+  while ((c = getopt(argc, argv, "ghp:x:y:c:t:n:")) != -1)
+    if (set_option(option, argv, c) == true)
       ret = true;
   if (argv[optind] != NULL || option->n != NULL)
     option->team = argv + optind;

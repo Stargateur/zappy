@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sun Mar 15 07:44:00 2015 Antoine Plaskowski
-** Last update Sun Jul  5 14:08:02 2015 Antoine Plaskowski
+** Last update Sun Jul  5 18:27:25 2015 Antoine Plaskowski
 */
 
 #ifndef		OPTION_H_
@@ -22,6 +22,7 @@ struct		s_option
   size_t	y;
   size_t	c;
   size_t	t;
+  bool		g;
   char		**team;
 };
 
