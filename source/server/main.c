@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sun Jul  5 19:53:39 2015 Antoine Plaskowski
+** Last update Sun Jul  5 20:07:30 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -107,7 +107,7 @@ int		main(int argc, char **argv)
     return (true);
   if (game.option.g == true)
     {
-      if (pthread_create(&pthread, NULL, (void *(*)(void *))&graphic, &game) != 0)
+      if (pthread_create(&pthread, NULL, (void *(*)())&graphic, &game) != 0)
 	return (true);
       if (game_select(&game) == true)
 	g_keep_running = false;
@@ -116,7 +116,7 @@ int		main(int argc, char **argv)
     }
   else
     if (game_select(&game) == true)
-      g_keep_running = false;    
+      g_keep_running = false;
   delete_game(&game);
   return (false);
 }
