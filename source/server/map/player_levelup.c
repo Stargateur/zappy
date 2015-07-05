@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 17:51:47 2015 zwertv_e
-** Last update Sun Jul  5 06:49:06 2015 Antoine Plaskowski
+** Last update Sun Jul  5 07:10:36 2015 Antoine Plaskowski
 */
 
 #include	"map.h"
@@ -89,7 +89,7 @@ static bool	do_levelup(t_game * const game,
 		    g_needs[i].ressources.phiras, false) == true ||
       add_ressource(&sq->ressources, THYSTAME,
 		    g_needs[i].ressources.thystame, false) == true)
-    return (false);
+    return (true);
   tmp = first_node(&game->player->node);
   while (tmp != NULL)
     {
@@ -98,7 +98,7 @@ static bool	do_levelup(t_game * const game,
 	tmp->range++;
       tmp = tmp->node.next;
     }
-  return (true);
+  return (false);
 }
 
 bool		player_levelup(t_game * const game,
