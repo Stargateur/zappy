@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Sun Jul  5 23:47:38 2015 Antoine Plaskowski
+** Last update Sun Jul  5 23:48:35 2015 Antoine Plaskowski
 */
 
 #ifndef		GRAPHIC_H_
@@ -68,15 +68,15 @@ void		key_move(SDL_Event *, t_map *, t_display *);
 void		key_option(SDL_Event *, t_map *, t_display *);
 void		key_press(SDL_Event *, t_map *, t_display *);
 int		input(t_display *, t_map *);
-void            select_pos(t_map *, t_square *, t_display *, SDL_Rect *);
-void            draw_inventory(t_map *, t_texture *, t_display *);
-void            draw_items(t_texture *, t_display *, t_square *, SDL_Rect *);
-void            draw_bonus(t_texture *, t_display *, SDL_Rect *);
-void            draw_items_next(t_texture *, t_display *, t_square *,
+void		select_pos(t_map *, t_square *, t_display *, SDL_Rect *);
+void		draw_inventory(t_map *, t_texture *, t_display *);
+void		draw_items(t_texture *, t_display *, t_square *, SDL_Rect *);
+void		draw_bonus(t_texture *, t_display *, SDL_Rect *);
+void		draw_items_next(t_texture *, t_display *, t_square *,
 				SDL_Rect *);
 void		select_aff_ppl(t_display *, t_texture *, t_player *,
 			       SDL_Rect *);
-void            select_pos_ppl(t_map *, t_player *, t_display *, SDL_Rect *);
+void		select_pos_ppl(t_map *, t_player *, t_display *, SDL_Rect *);
 void		draw_more_ppl(t_game *, t_texture *, t_display *, SDL_Rect *);
 void		draw_ppl(t_game *, t_texture *, t_display *);
 void		select_pos_egg(t_map *, t_egg *, t_display *, SDL_Rect *);
