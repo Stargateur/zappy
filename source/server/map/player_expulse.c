@@ -5,53 +5,48 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 17:19:17 2015 zwertv_e
-** Last update Sun Jul  5 02:25:24 2015 Antoine Plaskowski
+** Last update Sun Jul  5 17:02:36 2015 Antoine Plaskowski
 */
 
+#include	<stdlib.h>
 #include	"map.h"
 #include	"player.h"
+#include	"expulse.h"
 
-static void	expulse_player(t_map * const map,
+static t_expulse	true_exp(t_dir target, t_expulse exp)
+{
+  switch (target)
+    {
+    case NORTH:
+      return (exp);
+    case EAST:
+      return (exp + 2 > E_EAST + 1 ? (exp + 2) % (E_EAST + 1) : exp + 2);
+    case SOUTH:
+      return (exp + 4 > E_EAST + 1 ? (exp + 4) % (E_EAST + 1) : exp + 4);
+    case WEST:
+      return (exp + 6 > E_EAST + 1 ? (exp + 6) % (E_EAST + 1) : exp + 6);
+    }
+  return (E_HERE);
+}
+
+t_expulse	expulse_player(t_map * const map,
 			       t_player const * const player,
 			       t_player * const target)
 {
   switch (player->dir)
     {
     case NORTH:
-      target->coord.y = prev_y(map, target->coord.y);
-      break;
-    case SOUTH:
       target->coord.y = next_y(map, target->coord.y);
-      break;
+      return (true_exp(target->dir, E_SOUTH));
+    case SOUTH:
+      target->coord.y = prev_y(map, target->coord.y);
+      return (true_exp(target->dir, E_NORTH));
     case WEST:
       target->coord.x = prev_x(map, target->coord.x);
-      break;
+      return (true_exp(target->dir, E_EAST));
     case EAST:
       target->coord.x = next_x(map, target->coord.x);
-      break;
+      return (true_exp(target->dir, E_WEST));
     };
-}
-
-bool		expulse_players(t_game * const game,
-				t_map * const map,
-				t_player const * const player)
-{
-  t_player	*tmp;
-  bool		ret;
-
-  if (map == NULL || player == NULL)
-    return (true);
-  ret = true;
-  tmp = first_node(&game->player->node);
-  while (tmp != NULL)
-    {
-      if (tmp != player && tmp->coord.x == player->coord.x &&
-	  tmp->coord.y == player->coord.y)
-	{
-	  ret = false;
-	  expulse_player(map, player, tmp);
-	}
-      tmp = tmp->node.next;
-    }
-  return (ret);
+  return (E_HERE);
 }
