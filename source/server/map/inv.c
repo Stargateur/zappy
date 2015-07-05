@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jul  2 18:59:57 2015 zwertv_e
-** Last update Sun Jul  5 02:02:37 2015 Antoine Plaskowski
+** Last update Sun Jul  5 02:14:18 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -93,12 +93,12 @@ char		*get_inventory(t_inv const * const inv)
   int		to_malloc;
 
   to_malloc = snprintf(NULL, 0, "{linemate %lu, deraumere %lu, \
-sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu}", inv->linemate,
+sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu}\n", inv->linemate,
 		       inv->deraumere, inv->sibur, inv->mendiane, inv->phiras,
 		       inv->thystame, inv->food);
   res = malloc(sizeof(char) * (to_malloc + 1));
   snprintf(res, to_malloc + 1, "{linemate %lu, deraumere %lu, \
-sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu}", inv->linemate,
+sibur %lu, mendiane %lu, phiras %lu, thystame %lu, food %lu}\n", inv->linemate,
 		       inv->deraumere, inv->sibur, inv->mendiane, inv->phiras,
 		       inv->thystame, inv->food);
   return (res);

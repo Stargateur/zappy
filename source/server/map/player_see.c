@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 30 22:40:36 2015 zwertv_e
-** Last update Sun Jul  5 00:09:29 2015 Antoine Plaskowski
+** Last update Sun Jul  5 02:13:48 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -90,7 +90,7 @@ char		*player_view(t_game const * const game,
         print_inv(&res, &tmp_square->ressources);
       res = print_players(game, player, &(list[i]), res);
     }
-  res = concat(res, "}", true);
+  res = concat(res, "}\n", true);
   free(list);
   return (res);
 }
