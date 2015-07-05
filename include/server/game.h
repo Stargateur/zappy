@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Fri Jun 26 15:12:11 2015 Antoine Plaskowski
-** Last update Sun Jul  5 10:00:56 2015 Antoine Plaskowski
+** Last update Sun Jul  5 15:07:41 2015 Antoine Plaskowski
 */
 
 #ifndef		GAME_H_
@@ -22,7 +22,7 @@ typedef	struct	s_game	t_game;
 # include	"option.h"
 
 # define	MUTEX	pthread_mutex_t
-# define	FOOD_BY_TIME	1260000
+# define	FOOD_BY_TIME	126
 
 struct		s_team
 {
