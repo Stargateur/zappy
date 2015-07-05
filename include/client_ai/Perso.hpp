@@ -42,6 +42,7 @@ private:
   int				_numclient;
   int				_nbunusedslots;
   int				_level;
+  bool				_see;
 
 public:
   Perso(std::string team, int port, std::string ip);
@@ -73,10 +74,10 @@ public:
   void		put_objects_in_case(int x, int y, std::string answer, int);
   int		*find_obj_in_map(t_case obj);
   void		go_to_obj(int *coords_obj);
-  void		go_up(int *, int *);
-  void		go_down(int *, int *);
-  void		go_left(int *, int *);
-  void		go_right(int *, int *);
+  void		go_up(int *, int *, t_way *);
+  void		go_down(int *, int *, t_way *);
+  void		go_left(int *, int *, t_way *);
+  void		go_right(int *, int *, t_way *);
   int		count_obj_by_case(const std::string &, const::std::string);
   void		search_food();
   void		search_linemate();

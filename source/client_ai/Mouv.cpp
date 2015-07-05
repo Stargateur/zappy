@@ -16,13 +16,34 @@ void                    Perso::avance()
   this->_sav->mouv.push_back("avance");
   this->_sav->cpt++;
   if (this->_way == RIGHT)
-    this->_posx++;
+    {
+      std::cout << "DROITE\n";
+      this->_posx++;
+    }
   else if (this->_way == DOWN)
-    this->_posy++;
+    {
+      std::cout << "BAS\n";
+      this->_posy++;
+    }
   else if (this->_way == LEFT)
-    this->_posx--;
+    {
+      std::cout << "GAUCHE\n";
+      this->_posx--;
+    }
   else if (this->_way == UP)
-    this->_posy--;
+    {
+      std::cout << "HAUT\n";
+      this->_posy--;
+    }
+
+  if (this->_posx < 0)
+    this->_posx = this->_maplength - 1;
+  else if (this->_posx == this->_maplength)
+    this->_posx = 0;
+  else if (this->_posy < 0)
+    this->_posy = this->_mapheight - 1;
+  else if (this->_posy == this->_mapheight)
+    this->_posy = 0;
 }
 
 void                    Perso::droite()
