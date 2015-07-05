@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Sun Jul  5 16:40:57 2015 Alaric
+** Last update Sun Jul  5 17:45:38 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -47,8 +47,7 @@ void            select_pos(t_map *m, t_square *t, t_display *d,
 		      * (d->_shape_size2 + 1));
     }
   else if (t->coord.y < (d->_nb_case + d->_verti) - m->height
-	   && t->coord.x < d->_horiz + d->_nb_case
-	   && t->coord.x >= d->_horiz)
+	   && t->coord.x < d->_horiz + d->_nb_case && t->coord.x >= d->_horiz)
     {
       DestR->y = (int)((t->coord.y + (m->height - d->_verti))
 		      * (d->_shape_size2 + 1));

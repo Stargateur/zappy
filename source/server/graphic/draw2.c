@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Fri Jul  3 13:54:53 2015 Kevin Costa
-** Last update Sun Jul  5 16:30:56 2015 Alaric
+** Last update Sun Jul  5 17:44:23 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -42,7 +42,8 @@ void		draw_inventory(t_map *map, t_texture *img, t_display *disp)
     }
 }
 
-void	draw_items(t_texture *img, t_display *disp, t_square *tmp, SDL_Rect DestR)
+void	draw_items(t_texture *img, t_display *disp,
+		   t_square *tmp, SDL_Rect DestR)
 {
   SDL_Texture	*ecr;
   SDL_Color	textColor = {250, 250, 250, 0};
@@ -71,7 +72,8 @@ void	draw_items(t_texture *img, t_display *disp, t_square *tmp, SDL_Rect DestR)
   draw_items_next(img, disp, tmp, DestR);
 }
 
-void	draw_items_next(t_texture *img, t_display *disp, t_square *tmp, SDL_Rect DestR)
+void	draw_items_next(t_texture *img, t_display *disp,
+			t_square *tmp, SDL_Rect DestR)
 {
   SDL_Texture	*ecr;
   SDL_Color	textColor = {250, 250, 250, 0};
