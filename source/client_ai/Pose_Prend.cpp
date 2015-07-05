@@ -1,3 +1,13 @@
+//
+// Pose_Prend.cpp for Pose_Prend in /home/xila/PSU_2014_zappy
+// 
+// Made by amoure_a
+// Login   <alix amoureux@epitech.net>
+// 
+// Started on  Sun Jul  5 22:50:25 2015 amoure_a
+// Last update Sun Jul  5 22:50:26 2015 amoure_a
+//
+
 #include		"Perso.hpp"
 
 void                    Perso::prend(std::string const &obj)

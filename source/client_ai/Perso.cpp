@@ -14,7 +14,7 @@ Perso::Perso(std::string team, int port, std::string ip) : Client(team, port, ip
 {
   this->_sav = new Save();
   this->_time = 0;
-  this->_way = UP;
+  this->_way = LEFT;
   this->_level = 1;
   this->_see = false;
 }
@@ -23,7 +23,7 @@ Perso::~Perso()
 {
 }
 
-int			*Perso::find_obj_in_map(t_case obj)
+int			*Perso::find_obj_in_map(const t_case &obj)
 {
   int			*pos_obj = new (int [2]);
   int			x = -2;
@@ -34,7 +34,6 @@ int			*Perso::find_obj_in_map(t_case obj)
 
   pos_obj[0] = -42;
   pos_obj[1] = -42;
-
   for (it = this->_sav->map[this->_posy][this->_posx].begin(); it != this->_sav->map[this->_posy][this->_posx].end(); ++it)
     {
       if (*it == obj)
@@ -143,11 +142,10 @@ void			Perso::find_actions()
     {
       std::cout << "On est au level 2 !" << std::endl;
       this->_action.push_back("avance\n");
-      //exit(0);
     }
 }
 
-std::string		Perso::server_answer(std::string action)
+std::string		Perso::server_answer(const std::string& action)
 {
   std::string		answer;
   ssize_t		ret;
@@ -172,7 +170,7 @@ std::string		Perso::server_answer(std::string action)
   return (answer);
 }
 
-void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
+void	Perso::execute_commands(std::string &answer, bool *death, std::string &action)
 {
   std::list<std::string>::iterator	it;
 
@@ -250,6 +248,7 @@ void	Perso::main_loop()
 	      answer = this->server_answer(*it);
 	      this->execute_commands(answer, &death, *it);
 	      it = this->_action.begin();
+	      std::cout << "Nb items dans liste : " << this->_action.size() << std::endl;
 	      num_item++;
 	    }
 	  this->_action.clear();

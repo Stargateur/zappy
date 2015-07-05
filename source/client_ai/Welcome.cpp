@@ -1,3 +1,12 @@
+//
+// Welcome.cpp for Welcome in /home/xila/PSU_2014_zappy
+// 
+// Made by amoure_a
+// Login   <alix amoureux@epitech.net>
+// 
+// Started on  Sun Jul  5 22:50:43 2015 amoure_a
+// Last update Sun Jul  5 22:50:44 2015 amoure_a
+//
 
 #include	"Perso.hpp"
 
@@ -9,7 +18,7 @@ const void      *Perso::getTeamName()
   return ((const void *)team_name.c_str());
 }
 
-void            Perso::size_map_pos_ia(std::string coords)
+void            Perso::size_map_pos_ia(std::string& coords)
 {
   std::string   x;
   std::string   y;
@@ -61,7 +70,7 @@ int	    Perso::welcome()
               coords.resize(100);
 	      std::cout << "NUM_CLIENT = " << num_client;
               res = read(this->getClient(), (void *)coords.c_str(), 100);
-              if (res != -1)
+              if (res != -1 && this->count_obj_by_case(coords, "mort") == 0 && this->count_obj_by_case(coords, "MORT") == 0)
                 this->size_map_pos_ia(coords);
 	      else
 		{

@@ -38,7 +38,7 @@ std::string		get_ip(std::string ip)
   return (ip);
 }
 
-void			connect_to_server(std::string team, int port, std::string ip)
+void			connect_to_server(std::string& team, int& port, std::string& ip)
 {
   Perso			perso(team, port, ip);
 
@@ -52,39 +52,62 @@ void			connect_to_server(std::string team, int port, std::string ip)
     }
 }
 
-void			parse_arguments(int ac, char **av)
+int			parse_arguments(int ac, char **av)
 {
   int		i;
   std::string	value;
   std::string	team;
   int		port = 4242;
-  std::string	ip("localhost");
+  std::string	ip("0");
 
   i = 1;
   while (i < ac)
     {
       value = av[i];
       if (value.compare("-n") == 0)
-	team = av[++i];
+	{
+	  if (av[i + 1] != NULL)
+	    team = av[++i];
+	  else
+	    {
+	      std::cerr << "An argument afther -n option is missing" << std::endl;
+	      return (-1);
+	    }
+	}
       else if (value.compare("-p") == 0)
-	port = get_port(av[++i]);
+	{
+	  if (av[i + 1] != NULL)
+	    port = get_port(av[++i]);
+	  else
+	    {
+	      std::cerr << "An argument afther -p option is missing" << std::endl;
+	      return (-1);
+	    }
+	}
       else if (value.compare("-h") == 0)
-	ip = get_ip(av[++i]);
+	{
+	  if (av[i + 1] != NULL)
+	    ip = get_ip(av[++i]);
+	  else
+	    {
+	      std::cerr << "An argument afther -h option is missing" << std::endl;
+	      return (-1);
+	    }
+	}
       else
-	std::cerr << "The option " << value << " does not exist" << std::endl;
+	{
+	  std::cerr << "The option " << value << " does not exist" << std::endl;
+	  return (-1);
+	}
       i++;
     }
   if (port != -1 && ip.compare("KO") != 0)
     connect_to_server(team, port, ip);
+  return (0);
 }
 
 int		main(int ac, char **av)
 {
-  if (ac == 7)
-    {
-      parse_arguments(ac, av);
-    }
-  else
-    std::cerr << "Bad number of arguments : ./client -n name_team -p port -h ip" << std::endl;
+  parse_arguments(ac, av);
   return (0);
 }
