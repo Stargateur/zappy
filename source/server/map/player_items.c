@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 15:12:00 2015 zwertv_e
-** Last update Sat Jul  4 23:57:39 2015 Antoine Plaskowski
+** Last update Sun Jul  5 02:05:54 2015 Antoine Plaskowski
 */
 
 #include	"map.h"
@@ -19,7 +19,7 @@ bool		take_item(t_map * const map,
     return (true);
   if (delete_item(map, player->coord.x, player->coord.y, type) == true)
     return (true);
-  if (add_ressource(&player->inv, type, 1, false) == true)
+  if (add_ressource(&player->inv, type, 1, true) == true)
     return (true);
   return (false);
 }

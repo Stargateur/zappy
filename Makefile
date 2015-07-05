@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:09 2015 Antoine Plaskowski
-## Last update Sat Jul  4 21:27:45 2015 Antoine Plaskowski
+## Last update Sun Jul  5 02:09:42 2015 Antoine Plaskowski
 ##
 
 SERVER		=	zappy_server
@@ -24,7 +24,7 @@ LEVEL		?=	3
 
 COLOR		?=	no
 
-LIB		=	-l m -l pthread
+LIB		=	-l m -l pthread -l SDL2 -l SDL2_ttf
 
 INCLUDE		=	-I include -I include/server -I include/client_ai
 
@@ -55,7 +55,7 @@ CFLAGS		+=	-fdiagnostics-color
 CXXFLAGS	+=	-fdiagnostics-color
 endif
 
-LDFLAGS		=	-lSDL2 -lSDL2_ttf $(LIB)
+LDFLAGS		=	$(LIB)
 
 ifeq ($(DEBUG), no)
 LDFLAGS		+=	-s
