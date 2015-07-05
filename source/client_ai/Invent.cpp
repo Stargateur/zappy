@@ -10,7 +10,7 @@
 
 #include	"Invent.hpp"
 
-Invent::Invent() : _nourriture(9), _linemate(0), _deraumere(0), _sibur(0), _mendiane(0), _phiras(0), _thystame(0)
+Invent::Invent() : _nourriture(10), _linemate(0), _deraumere(0), _sibur(0), _mendiane(0), _phiras(0), _thystame(0)
 {
 }
 

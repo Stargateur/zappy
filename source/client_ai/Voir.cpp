@@ -150,7 +150,7 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
 	}
     }
   line = 0;
-  column = 1;
+  column = 0;
   cpt = 0;
   if (this->_way == LEFT || this->_way == RIGHT)
     {
@@ -158,7 +158,7 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
 	coef_hor = -1;
       if (this->_way == RIGHT)
 	coef_hor = 1;
-      while (column <= (this->_level + 1))
+      while (column <= (this->_level))
 	{
 	  cur_num_col = this->_posx + (column * coef_hor);
 	  tmpline = 0;
