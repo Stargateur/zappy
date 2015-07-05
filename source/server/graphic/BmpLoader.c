@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:08:40 2015 Alaric
-** Last update Fri Jun 19 15:20:02 2015 Alaric
+** Last update Sun Jul  5 02:11:52 2015 Antoine Plaskowski
 */
 
 #include	<SDL/SDL.h>
@@ -20,7 +20,7 @@ SDL_Surface	*Bmp_Loader(char *path)
   if (ret == NULL)
     {
       printf("Fail load bmp : %s\n", path);
-      exit(0);
+      exit(1);
     }
   return (ret);
 }

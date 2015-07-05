@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Sun Jul  5 00:49:40 2015 Antoine Plaskowski
+** Last update Sun Jul  5 02:13:02 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -50,11 +50,14 @@ t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
   display->_verti = 0;
   display->font = TTF_OpenFont("TTF/arial.ttf", 18);
   if (display->font == NULL)
-    printf("TTF_OpenFont: %s\n", TTF_GetError());
+    {
+      printf("TTF_OpenFont: %s\n", TTF_GetError());
+      exit(1);
+    }
   if (display->renderer == NULL)
     {
       printf("%s\n", SDL_GetError());
-      exit(-1);
+      exit(1);
     }
   return (display);
 }
