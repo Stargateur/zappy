@@ -5,12 +5,40 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jul  2 18:59:57 2015 zwertv_e
-** Last update Sat Jul  4 23:50:17 2015 Antoine Plaskowski
+** Last update Sun Jul  5 02:02:37 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
 #include	<stdio.h>
+#include	<string.h>
 #include	"inv.h"
+
+static t_str_type_inv	g_str_type[] =
+  {
+    {"linemate", LINEMATE, sizeof("linemate") - 1},
+    {"deraumere", DERAUMERE, sizeof("deraumere") - 1},
+    {"sibur", SIBUR, sizeof("sibur") - 1},
+    {"mendiane", MENDIANE, sizeof("mendiane") - 1},
+    {"phiras", PHIRAS, sizeof("phiras") - 1},
+    {"thystame", THYSTAME, sizeof("thystame") - 1},
+    {"food", FOOD, sizeof("food") - 1}
+  };
+
+static size_t	g_s_str_type = sizeof(g_str_type) / sizeof(*g_str_type);
+
+t_t_inv		get_type_inv(char const * const str)
+{
+  size_t	i;
+
+  if (str == NULL)
+    return (NONE);
+  for (i = 0; i < g_s_str_type; i++)
+    {
+      if (strncasecmp(str, g_str_type[i].str, g_str_type[i].len) == 0)
+	return (g_str_type[i].type);
+    }
+  return (NONE);
+}
 
 t_inv		*init_inv(t_inv *inv)
 {

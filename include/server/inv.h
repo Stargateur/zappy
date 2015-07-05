@@ -5,20 +5,21 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:43:00 2015 zwertv_e
-** Last update Thu Jul  2 16:32:45 2015 Antoine Plaskowski
+** Last update Sun Jul  5 01:59:51 2015 Antoine Plaskowski
 */
 
 #ifndef		INV_H__
 # define	INV_H__
 
 typedef	struct	s_inv		t_inv;
+typedef	enum	e_t_inv		t_t_inv;
 
 # include	<stdbool.h>
 # include	"node.h"
 
 # define        RESC_COUNT	(7)
 
-enum
+enum		e_t_inv
   {
     LINEMATE = 0,
     DERAUMERE = 1,
@@ -26,8 +27,18 @@ enum
     MENDIANE = 3,
     PHIRAS = 4,
     THYSTAME = 5,
-    FOOD = 6
+    FOOD = 6,
+    NONE
   };
+
+typedef	struct	s_str_type_inv t_str_type_inv;
+
+struct		s_str_type_inv
+{
+  char		*str;
+  t_t_inv	type;
+  size_t	len;
+};
 
 struct		s_inv
 {
@@ -40,6 +51,7 @@ struct		s_inv
   size_t	food;
 };
 
+t_t_inv		get_type_inv(char const * const str);
 t_inv		*init_inv(t_inv *inv);
 bool		add_ressource(t_inv * const inv, int const type,
 			      size_t const quantity, bool add);
