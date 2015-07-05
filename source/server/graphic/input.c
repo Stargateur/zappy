@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Sun Jul  5 19:54:13 2015 Kevin Costa
+** Last update Sun Jul  5 19:58:22 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -73,7 +73,7 @@ void		key_press(SDL_Event event, t_map *map, t_display *display)
   key_move(event, map, display);
   key_option(event, map, display);
   if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-    exit(1);
+    g_keep_running = false;
  }
 
 int		input(t_display *display, t_map *map)
@@ -86,14 +86,16 @@ int		input(t_display *display, t_map *map)
 	{
 	case SDL_QUIT:
 	  g_keep_running = false;
-	  return (1);
+	  break;
 	case SDL_MOUSEBUTTONDOWN:
 	  display->_click_x = display->_horiz + (size_t)event.button.x
 	    / (display->_shape_size + 1);
 	  display->_click_y = display->_verti + (size_t)event.button.y
 	    / (display->_shape_size2 + 1);
+	  break;
 	case SDL_KEYDOWN:
 	  key_press(event, map, display);
+	  break;
 	}
     }
   return (0);
