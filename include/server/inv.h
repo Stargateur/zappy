@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:43:00 2015 zwertv_e
-** Last update Sun Jul  5 03:46:22 2015 Antoine Plaskowski
+** Last update Sun Jul  5 23:52:54 2015 Antoine Plaskowski
 */
 
 #ifndef		INV_H_
@@ -27,9 +27,9 @@ typedef	enum	e_t_inv
 # include	<stdbool.h>
 # include	"node.h"
 
-# define        RESC_COUNT	(7)
+# define	RESC_COUNT	(7)
 
-typedef	struct	s_str_type_inv t_str_type_inv;
+typedef	struct	s_str_type_inv	t_str_type_inv;
 
 struct		s_str_type_inv
 {
