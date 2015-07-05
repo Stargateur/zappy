@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Sun Jul  5 17:57:03 2015 Kevin Costa
+** Last update Sun Jul  5 19:54:13 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -78,7 +78,7 @@ void		key_press(SDL_Event event, t_map *map, t_display *display)
 
 int		input(t_display *display, t_map *map)
 {
-  SDL_Event event;
+  SDL_Event	event;
 
   while (SDL_PollEvent(&event))
     {

@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:37:38 2015 Alaric
-** Last update Sun Jul  5 03:49:11 2015 Antoine Plaskowski
+** Last update Sun Jul  5 19:53:50 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -57,7 +57,7 @@ t_display	*init_renderer(SDL_Window *fenetre, t_display *display)
   return (display);
 }
 
-void      	init_texture(t_texture *text, SDL_Renderer *renderer)
+void		init_texture(t_texture *text, SDL_Renderer *renderer)
 {
   text->loader = Bmp_Loader("BMP/Linemate.bmp");
   text->linemate = SDL_CreateTextureFromSurface(renderer, text->loader);

@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Sat Jul  4 19:58:41 2015 Kevin Costa
-** Last update Sun Jul  5 19:28:47 2015 Kevin Costa
+** Last update Sun Jul  5 19:52:21 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -15,8 +15,8 @@
 #include	"game.h"
 #include	"node.h"
 
-void            select_pos_egg(t_map *m, t_egg *t, t_display *d,
-			   SDL_Rect *DestR)
+void		select_pos_egg(t_map *m, t_egg *t, t_display *d,
+			       SDL_Rect *DestR)
 {
   if (t->coord.x < (d->_nb_case + d->_horiz) - m->width
       && t->coord.y < d->_verti + d->_nb_case
@@ -46,7 +46,7 @@ void            select_pos_egg(t_map *m, t_egg *t, t_display *d,
 }
 
 void		draw_more_egg(t_game *game, t_texture *img, t_display *disp,
-				SDL_Rect DestR)
+			      SDL_Rect DestR)
 {
   t_egg		*tmp;
 

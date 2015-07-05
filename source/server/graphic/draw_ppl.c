@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jul  3 14:48:57 2015 Alaric
-** Last update Sun Jul  5 18:01:57 2015 Kevin Costa
+** Last update Sun Jul  5 19:53:05 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -34,8 +34,8 @@ void		select_aff_ppl(t_display *d, t_texture *img, t_player *tmp,
   SDL_RenderCopy(d->renderer, img->cursor, &SrcR, &DestR);
 }
 
-void            select_pos_ppl(t_map *m, t_player *t, t_display *d,
-			   SDL_Rect *DestR)
+void		select_pos_ppl(t_map *m, t_player *t, t_display *d,
+			       SDL_Rect *DestR)
 {
   if (t->coord.x < (d->_nb_case + d->_horiz) - m->width
       && t->coord.y < d->_verti + d->_nb_case
@@ -65,7 +65,7 @@ void            select_pos_ppl(t_map *m, t_player *t, t_display *d,
 }
 
 void		draw_more_ppl(t_game *game, t_texture *img, t_display *disp,
-				SDL_Rect DestR)
+			      SDL_Rect DestR)
 {
   t_player	*tmp;
 
