@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Fri Jul  3 13:54:53 2015 Kevin Costa
-** Last update Sun Jul  5 17:44:23 2015 Kevin Costa
+** Last update Sun Jul  5 17:58:48 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>
@@ -17,8 +17,6 @@
 void		draw_inventory(t_map *map, t_texture *img, t_display *disp)
 {
   SDL_Rect	DestR;
-  SDL_Texture	*ecr;
-  SDL_Color	textColor = {250, 250, 250, 0};
   size_t	i;
   size_t	j;
   t_square	*tmp;

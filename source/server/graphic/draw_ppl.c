@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jul  3 14:48:57 2015 Alaric
-** Last update Sun Jul  5 17:46:12 2015 Kevin Costa
+** Last update Sun Jul  5 18:01:57 2015 Kevin Costa
 */
 
 #include	<SDL2/SDL.h>

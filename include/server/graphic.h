@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Sun Jul  5 00:46:37 2015 Antoine Plaskowski
+** Last update Sun Jul  5 18:02:23 2015 Kevin Costa
 */
 
 #ifndef		GRAPHIC_H_
@@ -14,6 +14,9 @@
 #include	<SDL2/SDL.h>
 #include	<SDL2/SDL_ttf.h>
 #include        "map.h"
+#include	"game.h"
+#include	"player.h"
+#include	"node.h"
 
 #define		SIZE_X 1000
 #define		SIZE_Y 1000
@@ -45,6 +48,8 @@ typedef struct s_display
   size_t	_nb_case;
   size_t	_verti;
   size_t	_horiz;
+  int		w;
+  int		h;
   SDL_Renderer	*renderer;
   SDL_Window	*fenetre;
   TTF_Font	*font;
@@ -68,5 +73,9 @@ void            draw_inventory(t_map *, t_texture *, t_display *);
 void            draw_items(t_texture *, t_display *, t_square *, SDL_Rect);
 void            draw_bonus(t_texture *, t_display *, SDL_Rect);
 void            draw_items_next(t_texture *, t_display *, t_square *, SDL_Rect);
+void		select_aff_ppl(t_display *, t_texture *, t_player *, SDL_Rect);
+void            select_pos_ppl(t_map *, t_player *, t_display *, SDL_Rect *);
+void		draw_more_ppl(t_game *, t_texture *, t_display *, SDL_Rect);
+void		draw_ppl(t_game *, t_texture *, t_display *);
 
 #endif		/* !GRAPHIC_H_ */
