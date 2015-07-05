@@ -142,7 +142,8 @@ void			Perso::find_actions()
   else if (this->_level == 2)
     {
       std::cout << "On est au level 2 !" << std::endl;
-      exit(0);
+      this->_action.push_back("avance\n");
+      //exit(0);
     }
 }
 
@@ -241,8 +242,7 @@ void	Perso::main_loop()
 	{
 	  find_actions();
 	  num_item = 0;
-	  it = this->_action.begin();
-	  for (it; (it != this->_action.end() || this->_action.size() > 0); ++it)
+	  for (it = this->_action.begin(); (it != this->_action.end() || this->_action.size() > 0); ++it)
 	    {
 	      if (num_item > 0)
 		--it;
