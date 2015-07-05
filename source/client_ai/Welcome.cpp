@@ -21,10 +21,8 @@ void            Perso::size_map_pos_ia(std::string coords)
   y = coords.substr(coords.find_first_of(" ") + 1, coords.length());
   this->_mapheight = atoi(y.c_str());
   this->_maplength = atoi(x.c_str());
-  //this->_posx = this->_maplength / 2;
-  //this->_posy = this->_mapheight / 2;
-  this->_posx = 5;
-  this->_posy = 0;
+  this->_posx = this->_maplength / 2;
+  this->_posy = this->_mapheight / 2;
   this->_sav->map = std::vector< std::vector< std::list <t_case> > > (this->_mapheight);
   while (i < this->_mapheight)
     {
@@ -40,7 +38,7 @@ void            Perso::size_map_pos_ia(std::string coords)
 }
 
 
-void    Perso::welcome()
+int	    Perso::welcome()
 {
   ssize_t       res;
   std::string   welcome;
@@ -57,7 +55,7 @@ void    Perso::welcome()
         {
           num_client.resize(20);
           res = read(this->getClient(), (void *)num_client.c_str(), 20);
-          if (res != -1)
+          if (res != -1  && this->count_obj_by_case(num_client, "KO") == 0 && this->count_obj_by_case(num_client, "ko") == 0)
             {
               this->_numclient = atoi(num_client.c_str());
               coords.resize(100);
@@ -65,16 +63,29 @@ void    Perso::welcome()
               res = read(this->getClient(), (void *)coords.c_str(), 100);
               if (res != -1)
                 this->size_map_pos_ia(coords);
-              else
-		std::cerr << "Error son X Y" << std::endl;
+	      else
+		{
+		  std::cerr << "Error son X Y" << std::endl;
+		  return (-1);
+		}
             }
           else
-	    std::cerr << "Error on NUM_CLIENT" << std::endl;
+	    {
+	      std::cerr << "Error on num client" << std::endl;
+	      return (-1);
+	    }
         }
       else
-	std::cerr << "Error on TEAL_NAME" << std::endl;
+	{
+	  std::cerr << "Error on team name" << std::endl;
+	  return (-1);
+	}
     }
   else
-    std::cerr << "Error on BIENVENUE" << std::endl;
+    {
+      std::cerr << "Error on BIENVENUE" << std::endl;
+      return (1);
+    }
   std::cout << std::endl;
+  return (1);
 }

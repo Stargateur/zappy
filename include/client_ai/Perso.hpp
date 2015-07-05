@@ -64,7 +64,7 @@ public:
   void		find_actions();
   std::string	server_answer(std::string action);
   void		execute_commands(std::string &answer, bool *death, std::string action);
-  void		welcome();
+  int		welcome();
   const void	*getTeamName();
   void		size_map_pos_ia(std::string coords);
   void		get_numclient(std::string num_client);

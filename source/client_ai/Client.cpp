@@ -28,14 +28,23 @@ int			Client::init_client()
   int                   c;
 
   if ((pe = getprotobyname("TCP")) == NULL)
-    std::cerr << "Error on getproto" << std::endl;
+    {
+      std::cerr << "Error on getproto" << std::endl;
+      return (-1);
+    }
   if ((this->client = socket(AF_INET, SOCK_STREAM, pe->p_proto)) == -1)
-    std::cerr << "Error on socket" << std::endl;
+    {
+      std::cerr << "Error on socket" << std::endl;
+      return (-1);
+    }
   addr.sin_family = AF_INET;
   addr.sin_port = htons(this->port);
   addr.sin_addr.s_addr = inet_addr(this->ip.c_str());
   if ((c = connect(this->client, (const struct sockaddr *)&addr, sizeof(addr))) == -1)
-    std::cerr << "Error on connect" << std::endl;
+    {
+      std::cerr << "Error on connect" << std::endl;
+      return (-1);
+    }
   return (1);
 }
 

@@ -42,10 +42,14 @@ void			connect_to_server(std::string team, int port, std::string ip)
 {
   Perso			perso(team, port, ip);
 
-  perso.init_client();
-  perso.welcome();
-  perso.main_loop();
-  close(perso.getClient());
+  if (perso.init_client() != -1)
+    {
+      if (perso.welcome() != -1)
+	{
+	  perso.main_loop();
+	  close(perso.getClient());
+	}
+    }
 }
 
 void			parse_arguments(int ac, char **av)
