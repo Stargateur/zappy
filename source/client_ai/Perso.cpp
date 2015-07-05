@@ -241,8 +241,7 @@ void	Perso::main_loop()
 	{
 	  find_actions();
 	  num_item = 0;
-	  it = this->_action.begin();
-	  for (it; (it != this->_action.end() || this->_action.size() > 0); ++it)
+	  for (it = this->_action.begin(); (it != this->_action.end() || this->_action.size() > 0); ++it)
 	    {
 	      if (num_item > 0)
 		--it;
