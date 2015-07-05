@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Wed Jul  1 17:51:47 2015 zwertv_e
-** Last update Sun Jul  5 00:08:29 2015 Antoine Plaskowski
+** Last update Sun Jul  5 06:49:06 2015 Antoine Plaskowski
 */
 
 #include	"map.h"
@@ -24,7 +24,7 @@ static t_lvlup	g_needs[7] = {
 
 static size_t	g_s_needs = sizeof(g_needs) / sizeof(*g_needs);
 
-static size_t	get_nb_players(t_game const * const game,
+static size_t	get_nb_players(t_game const * const game, size_t const range,
 			       size_t const x, size_t const y)
 {
   t_player	*tmp;
@@ -34,6 +34,8 @@ static size_t	get_nb_players(t_game const * const game,
   tmp = first_node(&game->player->node);
   while (tmp != NULL)
     {
+      if (range != tmp->range)
+	return (0);
       if (tmp->coord.x == x && tmp->coord.y == y)
 	res++;
       tmp = tmp->node.next;
@@ -106,13 +108,14 @@ bool		player_levelup(t_game * const game,
   t_square	*square;
   size_t	nb_players;
 
-  if (g_s_needs > player->range)
+  if (player->range - 1 >= g_s_needs)
     return (true);
   square = find_square(first_node(&map->items->node),
 		       player->coord.x, player->coord.y);
   if (square == NULL)
     return (true);
-  nb_players = get_nb_players(game, player->coord.x, player->coord.y);
+  nb_players = get_nb_players(game, player->range,
+			      player->coord.x, player->coord.y);
   if (nb_players == 0)
     return (true);
   if (can_levelup(square, player, nb_players) == true)
