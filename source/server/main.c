@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sun Jul  5 16:26:51 2015 Alaric
+** Last update Sun Jul  5 17:17:05 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -65,6 +65,7 @@ static void	*graphic(t_game *game)
       pthread_mutex_unlock(&game->mutex);
       SDL_WaitEvent(NULL);
     }
+  SDL_Quit();
   return (game);
 }
 
