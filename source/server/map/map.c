@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jun 18 21:15:02 2015 zwertv_e
-** Last update Sat Jul  4 23:52:11 2015 Antoine Plaskowski
+** Last update Sun Jul  5 05:15:24 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -18,6 +18,7 @@ t_map		*init_map(t_map *map, size_t height, size_t width)
   map->height = height;
   map->width = width;
   map->items = NULL;
+  map->nbr_item = 0;
   return (map);
 }
 
@@ -44,10 +45,12 @@ bool		add_item(t_map *map, size_t const x, size_t const y,
   if ((square = find_square(first_node(&map->items->node), x, y)) != NULL)
     {
       add_ressource(&square->ressources, type, 1, true);
+      map->nbr_item++;
       return (false);
     }
   if ((square = malloc(sizeof(t_square))) == NULL)
     return (true);
+  map->nbr_item++;
   square->coord.x = x;
   square->coord.y = y;
   init_inv(&square->ressources);
@@ -63,7 +66,8 @@ bool		delete_item(t_map *map, size_t const x, size_t const y,
 
   if ((square = find_square(first_node(&map->items->node), x, y)) == NULL)
     return (true);
-  add_ressource(&square->ressources, type, 1, false);
+  if (add_ressource(&square->ressources, type, 1, false) == false)
+    map->nbr_item--;
   if (count_ressources(&square->ressources) == 0)
     map->items = sup_node(&square->node);
   return (false);

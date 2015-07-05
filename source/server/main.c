@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sun Jul  5 00:36:11 2015 Antoine Plaskowski
+** Last update Sun Jul  5 05:20:37 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -72,6 +72,7 @@ static t_client	*game_select(t_game *game, t_client *client, int sfd)
   pthread_mutex_lock(&game->mutex);
   get_cmd(game, client);
   client = kill_client(client);
+  map_generate(&game->map);
   pthread_mutex_unlock(&game->mutex);
   if (do_action(game) == true)
     client = manage_select(client, NULL, sfd);

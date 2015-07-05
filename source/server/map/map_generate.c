@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 15:51:14 2015 zwertv_e
-** Last update Sat Jul  4 23:53:58 2015 Antoine Plaskowski
+** Last update Sun Jul  5 05:17:54 2015 Antoine Plaskowski
 */
 
 #include	<time.h>
@@ -60,22 +60,13 @@ static void	generate_ressources(t_map * const map, size_t const to_generate)
 
 static size_t	need_to_generate(t_map const * const map)
 {
-  double	total_ressources;
   double	available_size;
-  t_square	*tmp;
 
-  total_ressources = 0;
-  tmp = first_node(&map->items->node);
-  while (tmp != NULL)
-    {
-      total_ressources += count_ressources(&tmp->ressources);
-      tmp = tmp->node.next;
-    }
-  available_size = (map->height * map->width) / 8;
+  available_size = (map->height * map->width);
   available_size *= DENSITY;
-  if (total_ressources > available_size)
+  if (map->nbr_item > (size_t)available_size)
     return (0);
-  return ((size_t)(available_size - total_ressources));
+  return ((size_t)(available_size - map->nbr_item));
 }
 
 bool		map_generate(t_map * const map)

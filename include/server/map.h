@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:12:07 2015 zwertv_e
-** Last update Sun Jul  5 03:46:01 2015 Antoine Plaskowski
+** Last update Sun Jul  5 05:20:04 2015 Antoine Plaskowski
 */
 
 #ifndef		MAP_H_
@@ -25,7 +25,7 @@ typedef	struct	s_coord		t_coord;
 # define	DENSITY_MEN	(1.0)
 # define	DENSITY_PHI	(1.0)
 # define	DENSITY_THY	(1.0)
-# define	DENSITY_FOOD	(5.0)
+# define	DENSITY_FOOD	(10.0)
 
 # include	"inv.h"
 # include	"node.h"
@@ -40,6 +40,7 @@ struct		s_map
 {
   size_t	height;
   size_t	width;
+  size_t	nbr_item;
   t_square	*items;
 };
 
