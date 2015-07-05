@@ -78,6 +78,8 @@ public:
   void		go_left(int *, int *);
   void		go_right(int *, int *);
   int		count_obj_by_case(const std::string &, const::std::string);
+  void		search_food();
+  void		search_linemate();
 };
 
 #endif /* !PERSO_HPP_ */

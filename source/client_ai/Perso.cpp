@@ -34,8 +34,8 @@ void			Perso::see_map()
 	{
 	  if (this->_sav->map[y][x].back() != NONE)
 	    {
-	      std::cout << "x : " << x << " y : " << y << std::endl;
-	      std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
+	      //std::cout << "x : " << x << " y : " << y << std::endl;
+	      //std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
 	    }
 	  x++;
 	}
@@ -206,67 +206,73 @@ int			*Perso::find_obj_in_map(t_case obj)
   return (pos_obj);
 }
 
-void			Perso::find_actions()
+void			Perso::search_food()
 {
   int			*coords_obj_in_map;
 
+  // chercher de la nourriture sur un carre de 5 * 5
+  coords_obj_in_map = this->find_obj_in_map(FOOD);
+  if (coords_obj_in_map[0] == -42)
+    {
+      //std::cout << "Avance\n";
+      //std::cout << "voir\n";
+      //this->_action.push_back("avance\n");
+      this->_action.push_back("voir\n");
+    }
+  else
+    {
+      // 1) on est deja dessus
+      // 2) on se dirige vers avec gauche droite avance
+      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
+	this->_action.push_back("prend nourriture\n");
+      else
+	{
+	  this->go_to_obj(coords_obj_in_map);
+	  //this->_action.push_back("voir\n");
+	  this->_action.push_back("prend nourriture\n");
+	  //std::cout << "prend nourriture\n";
+	}
+    }  
+}
+
+void			Perso::search_linemate()
+{
+  int			*coords_obj_in_map;
+
+  // chercher linemate sur un carre de 5 * 5
+  coords_obj_in_map = this->find_obj_in_map(LINEMATE);
+  if (coords_obj_in_map[0] == -42)
+    {
+      //std::cout << "Avance\n";
+      //std::cout << "voir\n";
+      //this->_action.push_back("avance\n");
+      this->_action.push_back("voir\n");
+    }
+  else
+    {
+      // 1) on est deja dessus
+      // 2) on se dirige vers avec gauche droite avance
+      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
+	{
+	  //this->_action.push_back("prend linemate\n");
+	}
+      else
+	{
+	  this->go_to_obj(coords_obj_in_map);
+	  this->_action.push_back("incantation\n");
+	  //this->_action.push_back("prend linemate\n");
+	}
+    }
+}
+
+void			Perso::find_actions()
+{
   if (this->_level == 1)
     {
-      // chercher FOOD
       if (this->_invent._nourriture < 10)
-	{
-	  // chercher de la nourriture sur un carre de 5 * 5
-	  coords_obj_in_map = this->find_obj_in_map(FOOD);
-	  if (coords_obj_in_map[0] == -42)
-	    {
-	      //std::cout << "Avance\n";
-	      //std::cout << "voir\n";
-	      //this->_action.push_back("avance\n");
-	      this->_action.push_back("voir\n");
-	    }
-	  else
-	    {
-	      // 1) on est deja dessus
-	      // 2) on se dirige vers avec gauche droite avance
-	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
-		this->_action.push_back("prend nourriture\n");
-	      else
-		{
-		  this->go_to_obj(coords_obj_in_map);
-		  //this->_action.push_back("voir\n");
-		  this->_action.push_back("prend nourriture\n");
-		  //std::cout << "prend nourriture\n";
-		}
-	    }
-	  
-	}
+	this->search_food();
       else if (this->_invent._linemate == 0)
-	{
-	  // chercher linemate sur un carre de 5 * 5
-	  coords_obj_in_map = this->find_obj_in_map(LINEMATE);
-	  if (coords_obj_in_map[0] == -42)
-	    {
-	      //std::cout << "Avance\n";
-	      //std::cout << "voir\n";
-	      //this->_action.push_back("avance\n");
-	      this->_action.push_back("voir\n");
-	    }
-	  else
-	    {
-	      // 1) on est deja dessus
-	      // 2) on se dirige vers avec gauche droite avance
-	      if (this->_posx == coords_obj_in_map[0] && this->_posy == coords_obj_in_map[1])
-		this->_action.push_back("prend linemate");
-	      else
-		{
-		  this->go_to_obj(coords_obj_in_map);
-		  //this->_action.push_back("voir\n");
-		  this->_action.push_back("prend linemate");
-		  //std::cout << "prend nourriture\n";
-		}
-	    }
-	  
-	}
+	this->search_linemate();
     }
 }
 
@@ -390,7 +396,6 @@ void			Perso::find_actions()
 		answer = this->server_answer(*it);
 		//answer = "{ joueur, , linemate, nourriture}";
 		//answer = "{ joueur,nourriture , linemate,}";
-		//std::cout << "Reponse du serveur : " << answer;
 		this->execute_commands(answer, &death, *it);
 		it = this->_action.begin();
 		num_item++;

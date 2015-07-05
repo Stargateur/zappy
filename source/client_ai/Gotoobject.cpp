@@ -2,7 +2,7 @@
 
 void			Perso::go_up(int *objx, int *objy)
 {
-  std::cout << "On va en haut !" << std::endl;
+  //std::cout << "On va en haut !" << std::endl;
   if (this->_way == LEFT)
     {
       //std::cout << "A droite !" << std::endl;
@@ -50,7 +50,7 @@ void			Perso::go_up(int *objx, int *objy)
 
 void			Perso::go_down(int *objx, int *objy)
 {
-  std::cout << "On va en bas !" << std::endl;
+  //std::cout << "On va en bas !" << std::endl;
   if (this->_way == LEFT)
     {
       //std::cout << "A gauche !" << std::endl;
@@ -98,7 +98,7 @@ void			Perso::go_down(int *objx, int *objy)
 
 void			Perso::go_left(int *objx, int *objy)
 {
-  std::cout << "On va a gauche !" << std::endl;
+  //std::cout << "On va a gauche !" << std::endl;
   if (this->_way == UP)
     {
       //std::cout << "A gauche !" << std::endl;
@@ -146,7 +146,7 @@ void			Perso::go_left(int *objx, int *objy)
 
 void			Perso::go_right(int *objx, int *objy)
 {
-  std::cout << "On va a droite !" << std::endl;
+  //std::cout << "On va a droite !" << std::endl;
   if (this->_way == UP)
     {
       //std::cout << "A droite !" << std::endl;
