@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Fri Jul  3 13:54:53 2015 Kevin Costa
-** Last update Sun Jul  5 00:16:53 2015 Antoine Plaskowski
+** Last update Sun Jul  5 16:30:56 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -30,9 +30,9 @@ void		draw_inventory(t_map *map, t_texture *img, t_display *disp)
   tmp = first_node(&map->items->node);
   i = disp->_click_x;
   j = disp->_click_y;
-  if (i > map->width)
+  if (i >= map->width)
     i -= map->width;
-  if (j > map->height)
+  if (j >= map->height)
     j -= map->height;
   while (tmp != NULL)
     {
@@ -104,7 +104,6 @@ void	draw_bonus(t_texture *img, t_display *disp, SDL_Rect DestR)
 {
   DestR.w = (int)disp->_shape_max;
   DestR.h = (int)disp->_shape_max;
-  DestR.x = 1050;
   DestR.y = 15;
   SDL_RenderCopy(disp->renderer, img->linemate, NULL, &DestR);
   DestR.y = 115;
