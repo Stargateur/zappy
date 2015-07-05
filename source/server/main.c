@@ -5,16 +5,16 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sun Jul  5 20:07:30 2015 Antoine Plaskowski
+** Last update Sun Jul  5 23:50:13 2015 Antoine Plaskowski
 */
 
-#include        <unistd.h>
-#include        <signal.h>
-#include        <stdio.h>
+#include	<unistd.h>
+#include	<signal.h>
+#include	<stdio.h>
 #include	<sys/socket.h>
-#include        <SDL2/SDL.h>
+#include	<SDL2/SDL.h>
 #include	<pthread.h>
-#include        "graphic.h"
+#include	"graphic.h"
 #include	"create_binded_socket.h"
 #include	"manage_select.h"
 #include	"int_handler.h"
