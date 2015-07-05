@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 22:43:36 2015 Antoine Plaskowski
-** Last update Sun Jul  5 01:43:10 2015 Antoine Plaskowski
+** Last update Sun Jul  5 14:43:26 2015 Antoine Plaskowski
 */
 
 #include	"game.h"
@@ -18,6 +18,7 @@ bool		avance(t_game *game, t_player *player, char *arg)
   if (game == NULL || player == NULL || arg == NULL)
     return (true);
   move(&game->map, player);
+  printf("x = %lu, y = %lu\n", player->coord.x, player->coord.y);
   add_string(player->client, OK);
   return (false);
 }
