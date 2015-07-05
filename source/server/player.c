@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Tue Jun 30 17:27:25 2015 Antoine Plaskowski
-** Last update Sat Jul  4 22:00:49 2015 Antoine Plaskowski
+** Last update Sun Jul  5 04:29:19 2015 Antoine Plaskowski
 */
 
 #include	<string.h>
@@ -21,7 +21,7 @@ t_player	*find_free_player(t_player *player, char * const team)
   while (player != NULL)
     {
       if (player->client == NULL && player->team != NULL &&
-	  strcmp(player->team, team) == 0)
+	  strcmp(player->team->team, team) == 0)
 	return (player);
       player = player->node.next;
     }
@@ -62,7 +62,7 @@ size_t		player_team_online(t_player *player, char *team)
   while (player != NULL)
     {
       if (player->client != NULL && player->team != NULL &&
-	  strcmp(player->team, team) == 0)
+	  strcmp(player->team->team, team) == 0)
 	i++;
       player = player->node.next;
     }

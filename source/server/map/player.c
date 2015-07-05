@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Sat Jul  4 23:43:12 2015 Antoine Plaskowski
+** Last update Sun Jul  5 04:30:19 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -79,7 +79,7 @@ void		move(t_map const * const map, t_player * const player)
     }
 }
 
-t_player		*init_player(t_map *map, char * const team,
+t_player		*init_player(t_map *map, t_team * const team,
 				     size_t const x, size_t const y)
 {
   t_player		*player;

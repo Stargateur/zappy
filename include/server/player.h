@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:52:23 2015 zwertv_e
-** Last update Sun Jul  5 03:59:53 2015 Antoine Plaskowski
+** Last update Sun Jul  5 04:32:54 2015 Antoine Plaskowski
 */
 
 #ifndef		PLAYER_H_
@@ -25,6 +25,7 @@ typedef	enum	e_dir
 # include	"time_utils.h"
 # include	"inv.h"
 # include	"node.h"
+# include	"game.h"
 # include	"map.h"
 # include	"action.h"
 # include	"client.h"
@@ -43,7 +44,7 @@ struct		s_player
   t_coord	coord;
   t_dir		dir;
   size_t	range;
-  char		*team;
+  t_team	*team;
   t_inv		inv;
   t_time	act;
   t_time	food;
@@ -51,7 +52,7 @@ struct		s_player
   t_client	*client;
 };
 
-t_player	*init_player(t_map * const map, char * const team,
+t_player	*init_player(t_map * const map, t_team * const team,
 			     size_t const x, size_t const y);
 void		move(t_map const * const map, t_player * const player);
 void		rotate_left(t_player * const player);
