@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Sun Jul  5 19:51:05 2015 Kevin Costa
+** Last update Sun Jul  5 22:48:54 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -73,7 +73,8 @@ void		draw_more_stone(t_map *map, t_texture *img, t_display *disp,
   while (tmp != NULL)
     {
       select_pos(map, tmp, disp, &DestR);
-      SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
+      if (valid_aff_stone(map, tmp, disp) == 1)
+	SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
       tmp = tmp->node.next;
     }
 }

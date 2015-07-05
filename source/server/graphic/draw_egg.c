@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Sat Jul  4 19:58:41 2015 Kevin Costa
-** Last update Sun Jul  5 19:52:21 2015 Kevin Costa
+** Last update Sun Jul  5 22:49:24 2015 Alaric
 */
 
 #include	<SDL2/SDL.h>
@@ -54,7 +54,8 @@ void		draw_more_egg(t_game *game, t_texture *img, t_display *disp,
   while (tmp != NULL)
     {
       select_pos_egg(&game->map, tmp, disp, &DestR);
-      SDL_RenderCopy(disp->renderer, img->egg, NULL, &DestR);
+      if (valid_aff_egg(&game->map, tmp, disp) == 1)
+	SDL_RenderCopy(disp->renderer, img->egg, NULL, &DestR);
       tmp = tmp->node.next;
     }
 }

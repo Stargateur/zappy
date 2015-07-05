@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jun 19 15:52:55 2015 Alaric
-** Last update Sun Jul  5 19:31:30 2015 Kevin Costa
+** Last update Sun Jul  5 22:51:06 2015 Alaric
 */
 
 #ifndef		GRAPHIC_H_
@@ -80,5 +80,8 @@ void		draw_ppl(t_game *, t_texture *, t_display *);
 void		select_pos_egg(t_map *, t_egg *, t_display *, SDL_Rect *);
 void		draw_more_egg(t_game *, t_texture *, t_display *, SDL_Rect);
 void		draw_egg(t_game *, t_texture *, t_display *);
+int		valid_aff_stone(t_map *, t_square *, t_display *);
+int		valid_aff_ppl(t_map *, t_player *, t_display *);
+int		valid_aff_egg(t_map *, t_egg *, t_display *);
 
 #endif		/* !GRAPHIC_H_ */
