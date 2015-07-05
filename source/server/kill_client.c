@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Thu Jul  2 17:04:08 2015 Antoine Plaskowski
-** Last update Sun Jul  5 04:51:05 2015 Antoine Plaskowski
+** Last update Sun Jul  5 05:26:31 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -35,7 +35,7 @@ t_client	*kill_client(t_client *list)
   if (clock_gettime(CLOCK_MONOTONIC_RAW, &act) == -1)
     {
       perror("clock_gettime :");
-      return (true);
+      return (NULL);
     }
   timeout.tv_sec = 5;
   timeout.tv_nsec = 0;

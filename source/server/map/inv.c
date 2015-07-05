@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Thu Jul  2 18:59:57 2015 zwertv_e
-** Last update Sun Jul  5 02:14:18 2015 Antoine Plaskowski
+** Last update Sun Jul  5 05:56:03 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
@@ -21,7 +21,7 @@ static t_str_type_inv	g_str_type[] =
     {"mendiane", MENDIANE, sizeof("mendiane") - 1},
     {"phiras", PHIRAS, sizeof("phiras") - 1},
     {"thystame", THYSTAME, sizeof("thystame") - 1},
-    {"food", FOOD, sizeof("food") - 1}
+    {"nourriture", FOOD, sizeof("nourriture") - 1}
   };
 
 static size_t	g_s_str_type = sizeof(g_str_type) / sizeof(*g_str_type);
@@ -59,7 +59,7 @@ bool		add_ressource(t_inv * const inv, int const type,
 {
   if (inv == NULL)
     return (true);
-  if (type > FOOD + 1)
+  if (type > FOOD)
     return (true);
   if (add == true)
     (&inv->linemate)[type] += quantity;
