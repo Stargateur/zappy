@@ -23,27 +23,6 @@ Perso::~Perso()
 {
 }
 
-void			Perso::see_map()
-{
-  int			x = 0;
-  int			y = 0;
-
-  while (y < this->_mapheight)
-    {
-      x = 0;
-      while (x < this->_maplength)
-	{
-	  if (this->_sav->map[y][x].back() != NONE)
-	    {
-	      //std::cout << "x : " << x << " y : " << y << std::endl;
-	      //std::cout << "nombre d'objets : " << this->_sav->map[y][x].size() << std::endl;
-	    }
-	  x++;
-	}
-      y++;
-    }
-}
-
 int			*Perso::find_obj_in_map(t_case obj)
 {
   int			*pos_obj = new (int [2]);
@@ -163,6 +142,8 @@ void			Perso::find_actions()
   else if (this->_level == 2)
     {
       std::cout << "On est au level 2 !" << std::endl;
+      this->_action.push_back("avance\n");
+      //exit(0);
     }
 }
 
@@ -194,7 +175,6 @@ std::string		Perso::server_answer(std::string action)
 void	Perso::execute_commands(std::string &answer, bool *death, std::string action)
 {
   std::list<std::string>::iterator	it;
-  static int		count_ko = 0;
 
   this->_see = false;
   if (answer.compare("ok\n") == 0 || answer.compare("OK\n") == 0)
@@ -212,15 +192,12 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string actio
       if (action.compare("expulse\n") == 0)
 	this->expulse();
       if (action.compare("broadcast\n") == 0)
-	this->broadcast("ceci est un message code\n");
+	this->broadcast("ceci est un message code\n"); // faire broadcast !
       if (action.compare("fork\n") == 0)
 	this->fork();
     }
   else if (answer.compare("KO\n") == 0 || answer.compare("ko\n") == 0)
     {
-      /*count_ko++;
-	if (count_ko == 2)
-	exit(0);*/
       if (action.compare("incantation\n") == 0)
 	this->_see = true;
     }
@@ -237,10 +214,9 @@ void	Perso::execute_commands(std::string &answer, bool *death, std::string actio
 	this->inventaire(answer);
       else if (action.compare("incantation\n") == 0)
 	this->incantation();
-      else if (action.compare("connect_nbr\n") == 0)
+      else if (action.compare("connect_nbr\n") == 0) // faire connect_nbr !
 	{
 	  this->_nbunusedslots = atoi(answer.c_str());
-	  std::cout << "Nb slots non utilises : " << this->_nbunusedslots << std::endl;
 	}
     }
   it = std::find(this->_action.begin(), this->_action.end(), action);
@@ -251,11 +227,8 @@ void	Perso::main_loop()
 {
   std::string	answer;
   bool		death;
-  std::string	last_action;
   std::list<std::string>::iterator	it;
-  int		size_list;
   int		num_item;
-  int		nb_loop = 0;
 
   death = false;
   while (this->_invent._nourriture > 0 && death == false)
@@ -268,17 +241,12 @@ void	Perso::main_loop()
       if (this->_action.size() < 10)
 	{
 	  find_actions();
-	  size_list = this->_action.size();
 	  num_item = 0;
-	  it = this->_action.begin();
-	  for (it; (it != this->_action.end() || this->_action.size() > 0); ++it)
+	  for (it = this->_action.begin(); (it != this->_action.end() || this->_action.size() > 0); ++it)
 	    {
 	      if (num_item > 0)
 		--it;
-	      /*std::cout << "Nourriture : " << this->_invent._nourriture << std::endl;
 	      std::cout << "Action = " << *it;
-	      std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;*/
-	      //std::cout << "Posx : " << this->_posx << " Posy : " << this->_posy << std::endl;
 	      answer = this->server_answer(*it);
 	      this->execute_commands(answer, &death, *it);
 	      it = this->_action.begin();
@@ -293,6 +261,5 @@ void	Perso::main_loop()
 	{
 	  this->_sav->mouv.pop_front();
 	}
-      nb_loop++;
     }
 }

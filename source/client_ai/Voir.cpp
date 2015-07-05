@@ -29,14 +29,6 @@ void                    Perso::put_objects_in_case(int x, int y, std::string tmp
     {
       if (i == 0)
 	j--;
-      /*std::cout << "Food : " << f << std::endl;
-      std::cout << "l : " << l << std::endl;
-      std::cout << "s : " << s << std::endl;
-      std::cout << "m : " << m << std::endl;
-      std::cout << "p : " << p << std::endl;
-      std::cout << "t : " << t << std::endl;
-      std::cout << "j : " << j << std::endl;
-      std::cout << "d : " << d << std::endl;*/
       while (f > 0)
 	{
 	  this->_sav->map[y][x].push_back(FOOD);
@@ -93,7 +85,6 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
   int                   coef_vert = 0;
   int                   coef_hor = 0;
 
-  // map non circulaire
   if (this->_way == UP || this->_way == DOWN)
     {
       if (this->_way == UP)
@@ -233,6 +224,5 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
     pos_second_coma = answer.find_first_of("}");
     objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
     this->save_objects_in_map(objects_by_case, i);
-    this->see_map();
     this->_sav->cpt++;
   }

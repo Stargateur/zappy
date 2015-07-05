@@ -27,13 +27,6 @@ void                    Perso::inventaire(std::string answer)
   this->_invent._mendiane = this->find_number(answer, ',');
   this->_invent._phiras = this->find_number(answer, ',');
   this->_invent._thystame = this->find_number(answer, '}');
-  std::cout << "Nourriture : " << this->_invent._nourriture << std::endl;
-  std::cout << "linemate : " << this->_invent._linemate << std::endl;
-  std::cout << "deraumere : " << this->_invent._deraumere << std::endl;
-  std::cout << "sibur : " << this->_invent._sibur << std::endl;
-  std::cout << "mendiane : " << this->_invent._mendiane << std::endl;
-  std::cout << "phyras : " << this->_invent._phiras << std::endl;
-  std::cout << "thystame : " << this->_invent._thystame << std::endl;
 }
 
 void                    Perso::expulse()

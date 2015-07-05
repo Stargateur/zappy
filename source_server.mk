@@ -5,7 +5,7 @@
 ## Login   <plasko_a@epitech.eu>
 ## 
 ## Started on  Tue Jun 16 16:38:34 2015 Antoine Plaskowski
-## Last update Sun Jul  5 14:47:36 2015 Antoine Plaskowski
+## Last update Sun Jul  5 16:20:38 2015 Alaric
 ##
 
 PATH_SRC	=	source/
@@ -73,4 +73,5 @@ SRC_SERVER	+=	$(PATH_GRAPHIC)BmpLoader.c
 SRC_SERVER	+=	$(PATH_GRAPHIC)init.c
 SRC_SERVER	+=	$(PATH_GRAPHIC)draw.c
 SRC_SERVER	+=	$(PATH_GRAPHIC)draw2.c
+SRC_SERVER	+=	$(PATH_GRAPHIC)draw_ppl.c
 SRC_SERVER	+=	$(PATH_GRAPHIC)input.c

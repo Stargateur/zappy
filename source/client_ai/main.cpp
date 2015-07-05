@@ -19,7 +19,7 @@ int			get_port(std::string port)
   if (res != (size_t)-1)
     {
       std::cerr << "The port is not correct" << std::endl;
-      exit(-1);
+      return (-1);
     }
   value = atoi(port.c_str());
   return (value);
@@ -33,7 +33,7 @@ std::string		get_ip(std::string ip)
   if (res != (size_t)-1)
     {
       std::cerr << "The ip is not correct" << std::endl;
-      exit(-1);
+      return ("KO");
     }
   return (ip);
 }
@@ -74,7 +74,8 @@ void			parse_arguments(int ac, char **av)
 	std::cerr << "The option " << value << " does not exist" << std::endl;
       i++;
     }
-  connect_to_server(team, port, ip);
+  if (port != -1 && ip.compare("KO") != 0)
+    connect_to_server(team, port, ip);
 }
 
 int		main(int ac, char **av)

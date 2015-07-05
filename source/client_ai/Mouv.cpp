@@ -17,22 +17,18 @@ void                    Perso::avance()
   this->_sav->cpt++;
   if (this->_way == RIGHT)
     {
-      std::cout << "DROITE\n";
       this->_posx++;
     }
   else if (this->_way == DOWN)
     {
-      std::cout << "BAS\n";
       this->_posy++;
     }
   else if (this->_way == LEFT)
     {
-      std::cout << "GAUCHE\n";
       this->_posx--;
     }
   else if (this->_way == UP)
     {
-      std::cout << "HAUT\n";
       this->_posy--;
     }
 

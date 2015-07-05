@@ -2,47 +2,37 @@
 
 void			Perso::go_up(int *objy, t_way *tmpway)
 {
-  //std::cout << "On va en haut !" << std::endl;
   if (*tmpway == LEFT)
     {
-      //std::cout << "A droite !" << std::endl;
       this->_action.push_back("droite\n");
       this->_action.push_back("avance\n");
       *objy -= 1;
       while (*objy > 0)
 	{
 	  this->_action.push_back("avance\n");
-	  //std::cout << "Devant !" << std::endl;
 	  *objy -= 1;
 	}
     }
   else if (*tmpway == RIGHT)
     {
-      //std::cout << "A gauche !" << std::endl;
       this->_action.push_back("gauche\n");
       this->_action.push_back("avance\n");
       *objy -=1;
       while (*objy > 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objy -=1;
 	}
     }
   else if (*tmpway == DOWN)
     {
-      /*std::cout << "A gauche !" << std::endl;
-      std::cout << "A gauche !" << std::endl;*/
       this->_action.push_back("gauche\n");
       this->_action.push_back("gauche\n");
-      //*objy -=1;
-      //*objx +=1;
     }
   else if (*tmpway == UP)
     {
       while (*objy > 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objy -=1;
 	}
@@ -52,47 +42,37 @@ void			Perso::go_up(int *objy, t_way *tmpway)
 
 void			Perso::go_down(int *objy, t_way *tmpway)
 {
-  //std::cout << "On va en bas !" << std::endl;
   if (*tmpway == LEFT)
     {
-      //std::cout << "A gauche !" << std::endl;
       this->_action.push_back("gauche\n");
       this->_action.push_back("avance\n");
       *objy += 1;
       while (*objy < 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objy += 1;
 	}
     }
   else if (*tmpway == RIGHT)
     {
-      //std::cout << "A droite !" << std::endl;
       this->_action.push_back("droite\n");
       this->_action.push_back("avance\n");
       *objy += 1;
       while (*objy < 0)
 	{
-	  //std::cout << "Avance !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objy += 1;
 	}
     }
   else if (*tmpway == UP)
     {
-      /*std::cout << "A gauche !" << std::endl;
-	std::cout << "A gauche !" << std::endl;*/
       this->_action.push_back("gauche\n");
       this->_action.push_back("gauche\n");
-      //*objy += 1;
-      //*objx -= 1;
     }
   else if (*tmpway == DOWN)
     {
       while (*objy < 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objy += 1;
 	}
@@ -102,47 +82,37 @@ void			Perso::go_down(int *objy, t_way *tmpway)
 
 void			Perso::go_left(int *objx, t_way *tmpway)
 {
-  //std::cout << "On va a gauche !" << std::endl;
   if (*tmpway == UP)
     {
-      //std::cout << "A gauche !" << std::endl;
       this->_action.push_back("gauche\n");
       this->_action.push_back("avance\n");
       *objx += 1;
       while (*objx < 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objx += 1;
 	}
     }
   else if (*tmpway == DOWN)
     {
-      //std::cout << "A droite !" << std::endl;
       this->_action.push_back("droite\n");
       this->_action.push_back("avance\n");
       *objx += 1;
       while (*objx < 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objx += 1;
 	}
     }
   else if (*tmpway == RIGHT)
     {
-      /*std::cout << "A gauche !" << std::endl;
-      std::cout << "A gauche !" << std::endl;*/
       this->_action.push_back("gauche\n");
       this->_action.push_back("gauche\n");
-      //*objx += 1;
-      //*objy -= 1;
     }
   else if (*tmpway == LEFT)
     {
       while (*objx < 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objx += 1;
 	}
@@ -152,47 +122,37 @@ void			Perso::go_left(int *objx, t_way *tmpway)
 
 void			Perso::go_right(int *objx, t_way *tmpway)
 {
-  //std::cout << "On va a droite !" << std::endl;
   if (*tmpway == UP)
     {
-      //std::cout << "A droite !" << std::endl;
       this->_action.push_back("droite\n");
       this->_action.push_back("avance\n");
       *objx -= 1;
       while (*objx > 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objx -= 1;
 	}
     }
   else if (*tmpway == DOWN)
     {
-      //std::cout << "A gauche !" << std::endl;
       this->_action.push_back("gauche\n");
       this->_action.push_back("avance\n");
       *objx -= 1;
       while (*objx > 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objx -= 1;
 	}
     }
   else if (*tmpway == LEFT)
     {
-      /*std::cout << "A gauche !" << std::endl;
-      std::cout << "A gauche !" << std::endl;*/
       this->_action.push_back("gauche\n");
       this->_action.push_back("gauche\n");
-      //*objx -= 1;
-      //*objy += 1;
     }
   else if (*tmpway == RIGHT)
     {
       while (*objx > 0)
 	{
-	  //std::cout << "Devant !" << std::endl;
 	  this->_action.push_back("avance\n");
 	  *objx -= 1;
 	}
