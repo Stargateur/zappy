@@ -5,34 +5,34 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Mon Jun 22 15:34:38 2015 Kevin Costa
-** Last update Sun Jul  5 19:58:22 2015 Antoine Plaskowski
+** Last update Sun Jul  5 23:33:22 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
 #include	"graphic.h"
 #include	"int_handler.h"
 
-void		key_move(SDL_Event event, t_map *map, t_display *display)
+void		key_move(SDL_Event *event, t_map *map, t_display *display)
 {
-  if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
+  if (event->key.keysym.scancode == SDL_SCANCODE_LEFT)
     {
       if (display->_horiz == 0)
 	display->_horiz = map->width;
       display->_horiz -= 1;
     }
-  if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+  if (event->key.keysym.scancode == SDL_SCANCODE_RIGHT)
     {
       display->_horiz += 1;
       if (display->_horiz > map->width)
 	display->_horiz = 0;
     }
-  if (event.key.keysym.scancode == SDL_SCANCODE_UP)
+  if (event->key.keysym.scancode == SDL_SCANCODE_UP)
     {
       if (display->_verti == 0)
 	display->_verti = map->height;
       display->_verti -= 1;
     }
-  if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
+  if (event->key.keysym.scancode == SDL_SCANCODE_DOWN)
     {
       display->_verti += 1;
       if (display->_verti > map->height)
@@ -40,17 +40,17 @@ void		key_move(SDL_Event event, t_map *map, t_display *display)
     }
 }
 
-void		key_option(SDL_Event event, t_map *map, t_display *display)
+void		key_option(SDL_Event *event, t_map *map, t_display *display)
 {
   SDL_GetWindowSize(display->fenetre, &display->w, &display->h);
-  if (event.key.keysym.scancode == SDL_SCANCODE_KP_PLUS)
+  if (event->key.keysym.scancode == SDL_SCANCODE_KP_PLUS)
     {
       if (display->_nb_case != 1)
 	display->_nb_case--;
       display->_shape_size = (display->w - 150) / display->_nb_case - 1;
       display->_shape_size2 = display->h / display->_nb_case - 1;
     }
-  if (event.key.keysym.scancode == SDL_SCANCODE_KP_MINUS)
+  if (event->key.keysym.scancode == SDL_SCANCODE_KP_MINUS)
     {
       if (display->_nb_case != map->height &&
 	  display->_nb_case != map->width && display->_nb_case < 70)
@@ -58,7 +58,7 @@ void		key_option(SDL_Event event, t_map *map, t_display *display)
       display->_shape_size = (display->w - 150) / display->_nb_case - 1;
       display->_shape_size2 = display->h / display->_nb_case - 1;
     }
-  if (event.key.keysym.scancode == SDL_SCANCODE_R)
+  if (event->key.keysym.scancode == SDL_SCANCODE_R)
     {
       display->_nb_case = 40;
       display->_shape_size = (display->w - 150) / display->_nb_case - 1;
@@ -68,11 +68,11 @@ void		key_option(SDL_Event event, t_map *map, t_display *display)
     }
 }
 
-void		key_press(SDL_Event event, t_map *map, t_display *display)
+void		key_press(SDL_Event *event, t_map *map, t_display *display)
 {
   key_move(event, map, display);
   key_option(event, map, display);
-  if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+  if (event->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
     g_keep_running = false;
  }
 
@@ -94,7 +94,7 @@ int		input(t_display *display, t_map *map)
 	    / (display->_shape_size2 + 1);
 	  break;
 	case SDL_KEYDOWN:
-	  key_press(event, map, display);
+	  key_press(&event, map, display);
 	  break;
 	}
     }

@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Mon Jun 22 14:37:29 2015 Alaric
-** Last update Sun Jul  5 22:48:54 2015 Alaric
+** Last update Sun Jul  5 23:40:49 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -65,16 +65,16 @@ void		select_pos(t_map *m, t_square *t, t_display *d,
 }
 
 void		draw_more_stone(t_map *map, t_texture *img, t_display *disp,
-				SDL_Rect DestR)
+				SDL_Rect *DestR)
 {
   t_square	*tmp;
 
   tmp = first_node(&map->items->node);
   while (tmp != NULL)
     {
-      select_pos(map, tmp, disp, &DestR);
+      select_pos(map, tmp, disp, DestR);
       if (valid_aff_stone(map, tmp, disp) == 1)
-	SDL_RenderCopy(disp->renderer, img->mine, NULL, &DestR);
+	SDL_RenderCopy(disp->renderer, img->mine, NULL, DestR);
       tmp = tmp->node.next;
     }
 }
@@ -104,7 +104,7 @@ void		draw_stone(t_map *map, t_texture *img, t_display *disp)
     }
   if (disp->_horiz + disp->_nb_case > map->width ||
       disp->_verti + disp->_nb_case > map->height)
-    draw_more_stone(map, img, disp, DestR);
+    draw_more_stone(map, img, disp, &DestR);
 }
 
 void		draw_select(t_display *disp, t_map *map, t_texture *img)

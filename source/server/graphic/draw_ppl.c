@@ -5,7 +5,7 @@
 ** Login   <degand@epitech.net>
 ** 
 ** Started on  Fri Jul  3 14:48:57 2015 Alaric
-** Last update Sun Jul  5 22:49:07 2015 Alaric
+** Last update Sun Jul  5 23:46:20 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -16,7 +16,7 @@
 #include	"node.h"
 
 void		select_aff_ppl(t_display *d, t_texture *img, t_player *tmp,
-			       SDL_Rect DestR)
+			       SDL_Rect *DestR)
 {
   SDL_Rect	SrcR;
 
@@ -31,7 +31,7 @@ void		select_aff_ppl(t_display *d, t_texture *img, t_player *tmp,
     SrcR.x = 0;
   else if (tmp->dir == 3)
     SrcR.x = 48;
-  SDL_RenderCopy(d->renderer, img->cursor, &SrcR, &DestR);
+  SDL_RenderCopy(d->renderer, img->cursor, &SrcR, DestR);
 }
 
 void		select_pos_ppl(t_map *m, t_player *t, t_display *d,
@@ -65,14 +65,14 @@ void		select_pos_ppl(t_map *m, t_player *t, t_display *d,
 }
 
 void		draw_more_ppl(t_game *game, t_texture *img, t_display *disp,
-			      SDL_Rect DestR)
+			      SDL_Rect *DestR)
 {
   t_player	*tmp;
 
   tmp = first_node(&game->player->node);
   while (tmp != NULL)
     {
-      select_pos_ppl(&game->map, tmp, disp, &DestR);
+      select_pos_ppl(&game->map, tmp, disp, DestR);
       if (valid_aff_ppl(&game->map, tmp, disp) == 1)
 	select_aff_ppl(disp, img, tmp, DestR);
       tmp = tmp->node.next;
@@ -98,11 +98,11 @@ void		draw_ppl(t_game *game, t_texture *img, t_display *disp)
 			  * (disp->_shape_size + 1));
 	  DestR.y = (int)((tmp->coord.y - disp->_verti)
 			  * (disp->_shape_size2 + 1));
-	  select_aff_ppl(disp, img, tmp, DestR);
+	  select_aff_ppl(disp, img, tmp, &DestR);
 	}
       tmp = tmp->node.next;
     }
   if (disp->_horiz + disp->_nb_case > game->map.width ||
       disp->_verti + disp->_nb_case > game->map.height)
-    draw_more_ppl(game, img, disp, DestR);
+    draw_more_ppl(game, img, disp, &DestR);
 }

@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Fri Jul  3 13:54:53 2015 Kevin Costa
-** Last update Sun Jul  5 19:51:19 2015 Kevin Costa
+** Last update Sun Jul  5 23:45:57 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -35,13 +35,13 @@ void		draw_inventory(t_map *map, t_texture *img, t_display *disp)
   while (tmp != NULL)
     {
       if (tmp->coord.x == i && tmp->coord.y == j)
-	draw_items(img, disp, tmp, DestR);
+	draw_items(img, disp, tmp, &DestR);
       tmp = tmp->node.next;
     }
 }
 
 void		draw_items(t_texture *img, t_display *disp,
-			   t_square *tmp, SDL_Rect DestR)
+			   t_square *tmp, SDL_Rect *DestR)
 {
   SDL_Texture	*ecr;
   SDL_Color	textColor = {250, 250, 250, 0};
@@ -50,28 +50,28 @@ void		draw_items(t_texture *img, t_display *disp,
   img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);
   ecr = SDL_CreateTextureFromSurface(disp->renderer, img->loader);
   SDL_FreeSurface(img->loader);
-  DestR.y = 20;
+  DestR->y = 20;
   SDL_SetRenderDrawColor(disp->renderer, 250, 250, 250, 250);
-  SDL_RenderCopy(disp->renderer, ecr, NULL, &DestR);
+  SDL_RenderCopy(disp->renderer, ecr, NULL, DestR);
   sprintf(img->text, "Deraumere : %lu", tmp->ressources.deraumere);
   img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);
   ecr = SDL_CreateTextureFromSurface(disp->renderer, img->loader);
   SDL_FreeSurface(img->loader);
-  DestR.y = 120;
+  DestR->y = 120;
   SDL_SetRenderDrawColor(disp->renderer, 250, 250, 250, 250);
-  SDL_RenderCopy(disp->renderer, ecr, NULL, &DestR);
+  SDL_RenderCopy(disp->renderer, ecr, NULL, DestR);
   sprintf(img->text, "Sibur : %lu", tmp->ressources.sibur);
   img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);
   ecr = SDL_CreateTextureFromSurface(disp->renderer, img->loader);
   SDL_FreeSurface(img->loader);
-  DestR.y = 220;
+  DestR->y = 220;
   SDL_SetRenderDrawColor(disp->renderer, 250, 250, 250, 250);
-  SDL_RenderCopy(disp->renderer, ecr, NULL, &DestR);
+  SDL_RenderCopy(disp->renderer, ecr, NULL, DestR);
   draw_items_next(img, disp, tmp, DestR);
 }
 
 void		draw_items_next(t_texture *img, t_display *disp,
-				t_square *tmp, SDL_Rect DestR)
+				t_square *tmp, SDL_Rect *DestR)
 {
   SDL_Texture	*ecr;
   SDL_Color	textColor = {250, 250, 250, 0};
@@ -80,40 +80,40 @@ void		draw_items_next(t_texture *img, t_display *disp,
   img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);
   ecr = SDL_CreateTextureFromSurface(disp->renderer, img->loader);
   SDL_FreeSurface(img->loader);
-  DestR.y = 320;
+  DestR->y = 320;
   SDL_SetRenderDrawColor(disp->renderer, 250, 250, 250, 250);
-  SDL_RenderCopy(disp->renderer, ecr, NULL, &DestR);
+  SDL_RenderCopy(disp->renderer, ecr, NULL, DestR);
   sprintf(img->text, "Thystame : %lu", tmp->ressources.thystame);
   img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);
   ecr = SDL_CreateTextureFromSurface(disp->renderer, img->loader);
   SDL_FreeSurface(img->loader);
-  DestR.y = 420;
+  DestR->y = 420;
   SDL_SetRenderDrawColor(disp->renderer, 250, 250, 250, 250);
-  SDL_RenderCopy(disp->renderer, ecr, NULL, &DestR);
+  SDL_RenderCopy(disp->renderer, ecr, NULL, DestR);
   sprintf(img->text, "Food : %lu", tmp->ressources.food);
   img->loader = TTF_RenderText_Solid(disp->font, img->text, textColor);
   ecr = SDL_CreateTextureFromSurface(disp->renderer, img->loader);
   SDL_FreeSurface(img->loader);
-  DestR.y = 520;
+  DestR->y = 520;
   SDL_SetRenderDrawColor(disp->renderer, 250, 250, 250, 250);
-  SDL_RenderCopy(disp->renderer, ecr, NULL, &DestR);
+  SDL_RenderCopy(disp->renderer, ecr, NULL, DestR);
   draw_bonus(img, disp, DestR);
 }
 
-void		draw_bonus(t_texture *img, t_display *disp, SDL_Rect DestR)
+void		draw_bonus(t_texture *img, t_display *disp, SDL_Rect *DestR)
 {
-  DestR.w = (int)disp->_shape_max;
-  DestR.h = (int)disp->_shape_max;
-  DestR.y = 15;
-  SDL_RenderCopy(disp->renderer, img->linemate, NULL, &DestR);
-  DestR.y = 115;
-  SDL_RenderCopy(disp->renderer, img->deraumere, NULL, &DestR);
-  DestR.y = 215;
-  SDL_RenderCopy(disp->renderer, img->sibur, NULL, &DestR);
-  DestR.y = 315;
-  SDL_RenderCopy(disp->renderer, img->phiras, NULL, &DestR);
-  DestR.y = 415;
-  SDL_RenderCopy(disp->renderer, img->thystame, NULL, &DestR);
-  DestR.y = 515;
-  SDL_RenderCopy(disp->renderer, img->food, NULL, &DestR);
+  DestR->w = (int)disp->_shape_max;
+  DestR->h = (int)disp->_shape_max;
+  DestR->y = 15;
+  SDL_RenderCopy(disp->renderer, img->linemate, NULL, DestR);
+  DestR->y = 115;
+  SDL_RenderCopy(disp->renderer, img->deraumere, NULL, DestR);
+  DestR->y = 215;
+  SDL_RenderCopy(disp->renderer, img->sibur, NULL, DestR);
+  DestR->y = 315;
+  SDL_RenderCopy(disp->renderer, img->phiras, NULL, DestR);
+  DestR->y = 415;
+  SDL_RenderCopy(disp->renderer, img->thystame, NULL, DestR);
+  DestR->y = 515;
+  SDL_RenderCopy(disp->renderer, img->food, NULL, DestR);
 }

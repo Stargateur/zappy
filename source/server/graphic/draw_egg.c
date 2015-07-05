@@ -5,7 +5,7 @@
 ** Login   <costa_b@epitech.net>
 ** 
 ** Started on  Sat Jul  4 19:58:41 2015 Kevin Costa
-** Last update Sun Jul  5 22:49:24 2015 Alaric
+** Last update Sun Jul  5 23:42:53 2015 Antoine Plaskowski
 */
 
 #include	<SDL2/SDL.h>
@@ -46,16 +46,16 @@ void		select_pos_egg(t_map *m, t_egg *t, t_display *d,
 }
 
 void		draw_more_egg(t_game *game, t_texture *img, t_display *disp,
-			      SDL_Rect DestR)
+			      SDL_Rect *DestR)
 {
   t_egg		*tmp;
 
   tmp = first_node(&game->egg->node);
   while (tmp != NULL)
     {
-      select_pos_egg(&game->map, tmp, disp, &DestR);
+      select_pos_egg(&game->map, tmp, disp, DestR);
       if (valid_aff_egg(&game->map, tmp, disp) == 1)
-	SDL_RenderCopy(disp->renderer, img->egg, NULL, &DestR);
+	SDL_RenderCopy(disp->renderer, img->egg, NULL, DestR);
       tmp = tmp->node.next;
     }
 }
@@ -85,5 +85,5 @@ void		draw_egg(t_game *game, t_texture *img, t_display *disp)
     }
   if (disp->_horiz + disp->_nb_case > game->map.width ||
       disp->_verti + disp->_nb_case > game->map.height)
-    draw_more_egg(game, img, disp, DestR);
+    draw_more_egg(game, img, disp, &DestR);
 }
