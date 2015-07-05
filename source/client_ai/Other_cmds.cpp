@@ -1,3 +1,13 @@
+//
+// Other_cmds.cpp for Other_commands in /home/xila/PSU_2014_zappy
+// 
+// Made by amoure_a
+// Login   <alix amoureux@epitech.net>
+// 
+// Started on  Sun Jul  5 22:50:09 2015 amoure_a
+// Last update Sun Jul  5 22:50:10 2015 amoure_a
+//
+
 #include	"Perso.hpp"
 
 int     Perso::find_number(std::string &answer, const char &char_end)

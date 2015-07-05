@@ -1,3 +1,12 @@
+//
+// Welcome.cpp for Welcome in /home/xila/PSU_2014_zappy
+// 
+// Made by amoure_a
+// Login   <alix amoureux@epitech.net>
+// 
+// Started on  Sun Jul  5 22:50:43 2015 amoure_a
+// Last update Sun Jul  5 22:50:44 2015 amoure_a
+//
 
 #include	"Perso.hpp"
 

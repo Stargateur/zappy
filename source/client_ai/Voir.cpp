@@ -1,3 +1,13 @@
+//
+// Voir.cpp for Voir in /home/xila/PSU_2014_zappy
+// 
+// Made by amoure_a
+// Login   <alix amoureux@epitech.net>
+// 
+// Started on  Sun Jul  5 22:50:36 2015 amoure_a
+// Last update Sun Jul  5 22:50:37 2015 amoure_a
+//
+
 #include		"Perso.hpp"
 
 int			Perso::count_obj_by_case(const std::string &str, const std::string sub)

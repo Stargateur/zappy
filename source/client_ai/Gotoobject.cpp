@@ -1,3 +1,13 @@
+//
+// Gotoobject.cpp for Gotoobjet in /home/xila/PSU_2014_zappy
+// 
+// Made by amoure_a
+// Login   <alix amoureux@epitech.net>
+// 
+// Started on  Sun Jul  5 22:49:45 2015 amoure_a
+// Last update Sun Jul  5 22:49:46 2015 amoure_a
+//
+
 #include	"Perso.hpp"
 
 void			Perso::go_up(int *objy, t_way *tmpway)
