@@ -11,7 +11,7 @@ int			Perso::count_obj_by_case(const std::string &str, const std::string sub)
   return (count);
 }
 
-void                    Perso::put_objects_in_case(int x, int y, std::string tmp, int i)
+void                    Perso::put_objects_in_case(const int& x, const int& y, const std::string &tmp, const int& i)
 {
   int		       f = count_obj_by_case(tmp, "nourriture");
   int		       l = count_obj_by_case(tmp, "linemate");
@@ -72,7 +72,7 @@ void                    Perso::put_objects_in_case(int x, int y, std::string tmp
     }
 }
   
-void                    Perso::save_objects_in_map(std::string objects, int i)
+void                    Perso::save_objects_in_map(const std::string &objects, const int& i)
 {
   int                   line = 0;
   int                   column = 0;
@@ -121,7 +121,6 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
 		    }
 		  else
 		    cur_num_col = this->_posx;
-
 		  if (cur_num_col > (this->_maplength - 1))
 		    cur_num_col = cur_num_col - this->_maplength;
 		  if (cur_num_col < 0)
@@ -130,7 +129,6 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
 		    cur_num_line = cur_num_line - this->_mapheight;
 		  if (cur_num_line < 0)
 		    cur_num_line = this->_mapheight + cur_num_line;
-		  
 		  this->put_objects_in_case(cur_num_col, cur_num_line, objects, i);
 		}
 	      cpt++;
@@ -200,29 +198,29 @@ void                    Perso::save_objects_in_map(std::string objects, int i)
     }
 }
 
-  void                    Perso::voir(std::string answer)
-  {
-    int                   i = 0;
-    int                   nb_cases;
-    int                   pos_first_coma;
-    int                   pos_second_coma;
-    std::string           objects_by_case;
+void                    Perso::voir(std::string& answer)
+{
+  int                   i = 0;
+  int                   nb_cases;
+  int                   pos_first_coma;
+  int                   pos_second_coma;
+  std::string           objects_by_case;
 
-    this->_time += 7;
-    this->_sav->mouv.push_back("voir\n");
-    nb_cases = std::count(answer.begin(), answer.end(), ',');
-    pos_first_coma = answer.find_first_of("{") + 1;
-    while (i < nb_cases)
-      {
-	pos_second_coma = answer.find_first_of(",");
-	objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
-	this->save_objects_in_map(objects_by_case, i);
-	answer = answer.replace(pos_second_coma, 1, "");
-	pos_first_coma = pos_second_coma;
-	i++;
-      }
-    pos_second_coma = answer.find_first_of("}");
-    objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
-    this->save_objects_in_map(objects_by_case, i);
-    this->_sav->cpt++;
-  }
+  this->_time += 7;
+  this->_sav->mouv.push_back("voir\n");
+  nb_cases = std::count(answer.begin(), answer.end(), ',');
+  pos_first_coma = answer.find_first_of("{") + 1;
+  while (i < nb_cases)
+    {
+      pos_second_coma = answer.find_first_of(",");
+      objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
+      this->save_objects_in_map(objects_by_case, i);
+      answer = answer.replace(pos_second_coma, 1, "");
+      pos_first_coma = pos_second_coma;
+      i++;
+    }
+  pos_second_coma = answer.find_first_of("}");
+  objects_by_case = answer.substr(pos_first_coma, pos_second_coma - pos_first_coma);
+  this->save_objects_in_map(objects_by_case, i);
+  this->_sav->cpt++;
+}
