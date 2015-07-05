@@ -5,7 +5,7 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Wed Jul  1 06:56:53 2015 Antoine Plaskowski
-** Last update Sun Jul  5 06:23:51 2015 Antoine Plaskowski
+** Last update Sun Jul  5 07:19:45 2015 Antoine Plaskowski
 */
 
 #include	<math.h>
@@ -58,36 +58,30 @@ static void	short_vector(t_v2d *v, t_map *map)
   printf("%ld, %ld\n", v->y, v->x);
 }
 
-static t_sound	minmax(t_v2d *vector, t_dir dir)
+static t_sound	true_sound(t_sound sound, t_dir dir)
 {
-  double	angle;
-  size_t	i;
-
-  angle = atan2(vector->y, vector->x);
-  for (i = 0; i < g_s_minmax; i++)
-    if (angle >= g_minmax[i].min && angle <= g_minmax[i].max)
-      {
-	switch (dir)
-	  {
-	  case NORTH:
-	    return (g_minmax[i].sound);
-	  case WEST:
-	    return ((g_minmax[i].sound + 2) % (S_NORTH_EAST + 1));
-	  case SOUTH:
-	    return ((g_minmax[i].sound + 4) % (S_NORTH_EAST + 1));
-	  case EAST:
-	    return ((g_minmax[i].sound + 6) % (S_NORTH_EAST + 1));
-	  }
-      }
-    else
-      printf("%f, %f, %f\n", angle, g_minmax[i].min, g_minmax[i].max);
+  switch (dir)
+    {
+    case NORTH:
+      return (sound);
+    case WEST:
+      return ((sound + 2) % (S_NORTH_EAST + 1));
+    case SOUTH:
+      return ((sound + 4) % (S_NORTH_EAST + 1));
+    case EAST:
+      return ((sound + 6) % (S_NORTH_EAST + 1));
+    }
   return (S_HERE);
 }
 
 static t_sound	get_sound(t_map *map, t_player *dest, t_player *origin)
 {
   t_v2d		vector;
+  double	angle;
+  size_t	i;
 
+  printf("%lu et %lu\n", dest->coord.x, dest->coord.y);
+  printf("%lu et %lu\n", origin->coord.x, origin->coord.y);
   if (map == NULL || dest == NULL || origin == NULL)
     return (S_HERE);
   vector.x = (intmax_t)origin->coord.x - (intmax_t)dest->coord.x;
@@ -99,7 +93,11 @@ static t_sound	get_sound(t_map *map, t_player *dest, t_player *origin)
     return (vector.y < 0 ? S_SOUTH : S_NORTH);
   if (vector.y == 0)
     return (vector.x < 0 ? S_WEST : S_EAST);
-  return (minmax(&vector, dest->dir));
+  angle = atan2(vector.y, vector.x);
+  for (i = 0; i < g_s_minmax; i++)
+    if (angle >= g_minmax[i].min && angle <= g_minmax[i].max)
+      return (true_sound(g_minmax[i].sound, dest->dir));
+  return (S_HERE);
 }
 
 bool		broadcast(t_game *game, t_player *player, char *arg)
