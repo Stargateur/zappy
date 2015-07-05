@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Tue Jun 23 14:20:46 2015 zwertv_e
-** Last update Sun Jul  5 04:30:19 2015 Antoine Plaskowski
+** Last update Sun Jul  5 05:01:08 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -85,6 +85,8 @@ t_player		*init_player(t_map *map, t_team * const team,
   t_player		*player;
 
   if (team == NULL || map == NULL)
+    return (NULL);
+  if (map->width == 0 || map->height == 0)
     return (NULL);
   if ((player = malloc(sizeof(*player))) == NULL)
     return (NULL);
