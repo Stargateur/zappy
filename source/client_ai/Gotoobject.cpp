@@ -197,35 +197,10 @@ void                    Perso::go_to_obj(int *coord_obj)
   bool                  find = false;
   int                   objx = coord_obj[0];
   int                   objy = coord_obj[1];
-  int                   tmpx = this->_posx;
-  int                   tmpy = this->_posy;
-
-  std::cout << "Objx : " << coord_obj[0] << " Objy : " << coord_obj[1] << std::endl;
-  std::cout << "Dir = " << this->_way << std::endl;
-  /*if (this->_way == UP)
-    {
-      objx = this->_posx + coord_obj[0];
-      objy = this->_posy + coord_obj[1];
-    }
-  if (this->_way == DOWN)
-    {
-      objx = this->_posx - coord_obj[0];
-      objy = this->_posy - coord_obj[1];
-    }
-  /*if (this->_way == LEFT)
-    {
-    objx = this->_posx - coord_obj[1];
-    objy = this->_posy + coord_obj[0];
-    }
-    if (this->_way == RIGHT)
-    {
-    objx = this->_posx + coord_obj[0];
-    objy = this->_posy - coord_obj[1];
-    }*/
 
   while (find == false)
     {
-      if (objx > 0) // obj a droite 
+      if (objx > 0)
 	this->go_right(&objx, &objy);
       else if (objx < 0)
 	this->go_left(&objx, &objy);
@@ -235,8 +210,7 @@ void                    Perso::go_to_obj(int *coord_obj)
 	this->go_down(&objx, &objy);
       if ((objx == 0) && (objy == 0))
 	{
-	  //std::cout << "Fini !" << std::endl;
-	  //std::cout << "On est en " << tmpx << "/" << tmpy << std::endl;
+	  std::cout << "Fini !" << std::endl;
 	  find = true;
 	}
     }
