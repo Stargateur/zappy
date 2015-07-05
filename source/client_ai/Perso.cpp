@@ -5,7 +5,7 @@
 ** Login   <mathon_j@mathonj>
 ** 
 ** Started on  Fri Jun 19 18:57:30 2015 JÃ©rÃ©my MATHON
-// Last update Fri Jul  3 16:07:07 2015 amoure_a
+// Last update Sun Jul  5 23:10:41 2015 amoure_a
 */
 
 #include		"Perso.hpp"
@@ -96,7 +96,7 @@ void			Perso::search_food()
 	  this->go_to_obj(coords_obj_in_map);
 	  this->_action.push_back("prend nourriture\n");
 	}
-    }  
+    }
 }
 
 void			Perso::search_linemate()
@@ -248,7 +248,6 @@ void	Perso::main_loop()
 	      answer = this->server_answer(*it);
 	      this->execute_commands(answer, &death, *it);
 	      it = this->_action.begin();
-	      std::cout << "Nb items dans liste : " << this->_action.size() << std::endl;
 	      num_item++;
 	    }
 	  this->_action.clear();
