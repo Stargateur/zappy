@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 16:46:24 2015 zwertv_e
-** Last update Sun Jul  5 19:49:16 2015 Antoine Plaskowski
+** Last update Sun Jul  5 19:53:39 2015 Antoine Plaskowski
 */
 
 #include        <unistd.h>
@@ -64,7 +64,7 @@ static void	*graphic(t_game *game)
       SDL_RenderClear(display.renderer);
       SDL_SetRenderDrawColor(display.renderer, 255, 255, 255, 255);
       pthread_mutex_unlock(&game->mutex);
-      SDL_WaitEvent(NULL);
+      SDL_WaitEventTimeout(NULL, 1000);
     }
   SDL_Quit();
   return (game);
