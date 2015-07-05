@@ -5,13 +5,14 @@
 ** Login   <antoine.plaskowski@epitech.eu>
 ** 
 ** Started on  Sat Jul  4 22:43:36 2015 Antoine Plaskowski
-** Last update Sun Jul  5 06:25:39 2015 Antoine Plaskowski
+** Last update Sun Jul  5 11:03:12 2015 Antoine Plaskowski
 */
 
 #include	<stdlib.h>
 #include	"game.h"
 #include	"player.h"
 #include	"incantation.h"
+#include	"message.h"
 
 bool		incantation(t_game *game, t_player *player, char *arg)
 {
@@ -19,6 +20,7 @@ bool		incantation(t_game *game, t_player *player, char *arg)
 
   if (game == NULL || player == NULL || arg == NULL)
     return (true);
+  add_string(player->client, INCANTATION);
   if (player_levelup(game, &game->map, player, true) == true)
     return (true);
   str = malloc_vsnprintf("niveau actuel : %lu\n", player->range);

@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Fri Jul  3 14:57:08 2015 zwertv_e
-** Last update Sun Jul  5 00:11:18 2015 Antoine Plaskowski
+** Last update Sun Jul  5 11:16:05 2015 Antoine Plaskowski
 */
 
 #include	"map.h"
@@ -24,14 +24,14 @@ size_t		get_x(t_map const * const map, t_player const * const player,
   if (player->dir == NORTH || player->dir == SOUTH)
     quantity = (w < 0) ? ((size_t)(-w)) : ((size_t)w);
   if (player->dir == NORTH)
-    addition = (w < 0) ? (false) : (true);
-  else if (player->dir == SOUTH)
     addition = (w < 0) ? (true) : (false);
+  else if (player->dir == SOUTH)
+    addition = (w < 0) ? (false) : (true);
   else if (player->dir == WEST)
     addition = false;
   while (quantity > 0)
     {
-      if (addition)
+      if (addition == true)
 	pos = next_x(map, pos);
       else
 	pos = prev_x(map, pos);
