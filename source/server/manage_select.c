@@ -5,7 +5,7 @@
 ** Login   <zwertv_e@epitech.net>
 ** 
 ** Started on  Sun Apr 26 18:38:07 2015 zwertv_e
-** Last update Fri Jul  3 21:39:50 2015 Antoine Plaskowski
+** Last update Tue Jul  7 12:07:31 2015 Antoine Plaskowski
 */
 
 #include	<stdio.h>
@@ -64,7 +64,7 @@ static t_client	*write_client(fd_set const * const fd_write, t_client *list)
     {
       client2 = client->node.next;
       if (FD_ISSET(client->ca.cfd, fd_write))
-	client = write_to_write(client);
+	list = write_to_write(client);
       client = client2;
     }
   return (list);
